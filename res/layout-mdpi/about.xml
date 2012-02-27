@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent">
+    <LinearLayout android:layout_height="45dp" android:background="@drawable/bar" android:weightSum="1" android:id="@+id/barLinearLayout" android:baselineAligned="false" android:layout_width="fill_parent">
+        <Button android:layout_height="35dip" android:layout_margin="3dip" android:text="上一步" android:layout_weight="0.06" android:background="@drawable/button_short_background" android:layout_width="80dip" android:layout_gravity="center_vertical" android:id="@+id/back_button"></Button>
+        <TextView android:text="关于iMiss" android:layout_height="fill_parent" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:textStyle="bold" android:id="@+id/neverCallTextView" android:gravity="center" android:textSize="24dip" android:layout_weight="0.32"></TextView>
+    </LinearLayout>
+    	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="horizontal"
+	
+	    android:weightSum="1" 
+	    android:background="@drawable/button_background"
+	    android:clickable="true"
+	    android:baselineAligned="false"
+	    android:layout_width="match_parent" android:layout_height="50dip" android:id="@+id/introduce_chevron_button" android:layout_marginLeft="4dip" android:layout_marginRight="4dip" android:layout_marginTop="9dip">
+	    
+	    <TextView android:text="iMiss介绍" 
+		    android:textAppearance="?android:attr/textAppearanceLarge"
+		    android:layout_gravity="center_vertical"
+		    android:textColor="#000000"  
+		    android:textStyle="bold" 
+		    android:layout_height="wrap_content" 
+		    android:layout_marginLeft="15dip" 
+		    android:id="@+id/title_of_widget" android:layout_width="100dip" android:layout_weight="0.9" android:textSize="19dip">
+	    </TextView>
+	   
+	    <ImageView android:id="@+id/iv" 
+		    android:src="@drawable/black_chevron" 
+		    android:layout_height="match_parent" 
+		    android:layout_width="wrap_content" 
+		    android:layout_gravity="right" android:layout_marginRight="2dip">
+	    </ImageView>
+	</LinearLayout>
+	
+		<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:orientation="horizontal"
+	
+	    android:weightSum="1" 
+	    android:background="@drawable/button_background"
+	    android:clickable="true"
+	    android:baselineAligned="false"
+	    android:layout_width="match_parent" android:layout_height="50dip" android:layout_marginLeft="4dip" android:layout_marginRight="4dip" android:layout_marginTop="2dip" android:id="@+id/help_chevron_button">
+	    
+	    <TextView android:text="iMiss帮助" 
+		    android:textAppearance="?android:attr/textAppearanceLarge"
+		    android:layout_gravity="center_vertical"
+		    android:textColor="#000000"  
+		    android:textStyle="bold" 
+		    android:layout_height="wrap_content" 
+		    android:layout_marginLeft="15dip" 
+		    android:id="@+id/title_of_widget" android:layout_width="100dip" android:layout_weight="0.9" android:textSize="19dip">
+	    </TextView>
+	   
+	    <ImageView android:id="@+id/iv" 
+		    android:src="@drawable/black_chevron" 
+		    android:layout_height="match_parent" 
+		    android:layout_width="wrap_content" 
+		    android:layout_gravity="right" android:layout_marginRight="2dip">
+	    </ImageView>
+	</LinearLayout>
+    <TextView android:text="TextView" 
+    android:textColor="#000000"
+    android:lineSpacingExtra = "3dip"
+    android:textAppearance="?android:attr/textAppearanceLarge" 
+    android:layout_width="match_parent"
+     android:textStyle="bold" android:id="@+id/about_textView" android:textSize="22dip" android:autoLink="web|email" android:background="@drawable/white_background_small" android:layout_height="238dp" android:layout_marginLeft="8dip" android:layout_marginRight="8dip" android:layout_marginTop="28dip"></TextView>
+    
+</LinearLayout>
