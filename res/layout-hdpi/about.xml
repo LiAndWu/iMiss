@@ -20,7 +20,8 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="上一步" >
+            android:text="上一步"
+            android:textStyle="bold" >
         </Button>
 
         <TextView
@@ -115,7 +116,7 @@
     <TextView
         android:id="@+id/about_textView"
         android:layout_width="match_parent"
-        android:layout_height="280dip"
+        android:layout_height="302dp"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"
         android:layout_marginTop="24dip"

@@ -6,14 +6,18 @@
     android:layout_height="fill_parent"
     >
     <!-- 机主名字按钮 -->
-	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:orientation="horizontal"
-	
-	    android:weightSum="1" 
+
+	<LinearLayout
+	    xmlns:android="http://schemas.android.com/apk/res/android"
+	    android:id="@+id/ownername_chevron_button"
+	    android:layout_width="match_parent"
+	    android:layout_height="50dip"
+	    android:layout_marginTop="8dip"
 	    android:background="@drawable/button_background"
-	    android:clickable="true"
 	    android:baselineAligned="false"
-	    android:layout_width="match_parent" android:layout_height="50dip" android:layout_marginTop="3dip" android:id="@+id/ownername_chevron_button">
+	    android:clickable="true"
+	    android:orientation="horizontal"
+	    android:weightSum="1" >
 	    
 	    <TextView android:text="机主名" 
 		    android:textAppearance="?android:attr/textAppearanceLarge"

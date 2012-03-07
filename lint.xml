@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
     <issue id="ContentDescription">
+        <ignore path="res\layout-hdpi\about.xml" />
+        <ignore path="res\layout-hdpi\black_list.xml" />
+        <ignore path="res\layout-hdpi\main.xml" />
+        <ignore path="res\layout-hdpi\refuse_slot.xml" />
         <ignore path="res\layout-mdpi\about.xml" />
         <ignore path="res\layout-mdpi\black_list.xml" />
         <ignore path="res\layout-mdpi\main.xml" />
@@ -8,11 +12,25 @@
         <ignore path="res\layout-mdpi\set_reply.xml" />
     </issue>
     <issue id="DuplicateIds">
+        <ignore path="res\layout-hdpi\about.xml" />
+        <ignore path="res\layout-hdpi\main.xml" />
+        <ignore path="res\layout-hdpi\set_refuse_slot_time.xml" />
         <ignore path="res\layout-mdpi\about.xml" />
         <ignore path="res\layout-mdpi\main.xml" />
         <ignore path="res\layout-mdpi\set_refuse_slot_time.xml" />
     </issue>
     <issue id="HardcodedText">
+        <ignore path="res\layout-hdpi\about.xml" />
+        <ignore path="res\layout-hdpi\black_list.xml" />
+        <ignore path="res\layout-hdpi\edit_linkman.xml" />
+        <ignore path="res\layout-hdpi\edit_reply.xml" />
+        <ignore path="res\layout-hdpi\help.xml" />
+        <ignore path="res\layout-hdpi\introduce.xml" />
+        <ignore path="res\layout-hdpi\main.xml" />
+        <ignore path="res\layout-hdpi\owner_name.xml" />
+        <ignore path="res\layout-hdpi\refuse_slot.xml" />
+        <ignore path="res\layout-hdpi\select_linkman.xml" />
+        <ignore path="res\layout-hdpi\set_refuse_slot_time.xml" />
         <ignore path="res\layout-mdpi\about.xml" />
         <ignore path="res\layout-mdpi\black_list.xml" />
         <ignore path="res\layout-mdpi\edit_linkman.xml" />
@@ -27,6 +45,14 @@
         <ignore path="res\layout-mdpi\set_reply.xml" />
     </issue>
     <issue id="InefficientWeight">
+        <ignore path="res\layout-hdpi\about.xml" />
+        <ignore path="res\layout-hdpi\black_list.xml" />
+        <ignore path="res\layout-hdpi\edit_reply.xml" />
+        <ignore path="res\layout-hdpi\help.xml" />
+        <ignore path="res\layout-hdpi\main.xml" />
+        <ignore path="res\layout-hdpi\owner_name.xml" />
+        <ignore path="res\layout-hdpi\refuse_slot.xml" />
+        <ignore path="res\layout-hdpi\set_refuse_slot_time.xml" />
         <ignore path="res\layout-mdpi\about.xml" />
         <ignore path="res\layout-mdpi\black_list.xml" />
         <ignore path="res\layout-mdpi\edit_reply.xml" />
@@ -37,19 +63,28 @@
         <ignore path="res\layout-mdpi\set_reply.xml" />
     </issue>
     <issue id="MissingPrefix">
+        <ignore path="res\layout-hdpi\edit_reply.xml" />
         <ignore path="res\layout-mdpi\edit_reply.xml" />
     </issue>
     <issue id="NestedWeights">
+        <ignore path="res\layout-hdpi\black_list.xml" />
+        <ignore path="res\layout-hdpi\edit_reply.xml" />
+        <ignore path="res\layout-hdpi\owner_name.xml" />
+        <ignore path="res\layout-hdpi\refuse_slot.xml" />
         <ignore path="res\layout-mdpi\black_list.xml" />
         <ignore path="res\layout-mdpi\edit_reply.xml" />
         <ignore path="res\layout-mdpi\refuse_slot.xml" />
         <ignore path="res\layout-mdpi\set_reply.xml" />
     </issue>
     <issue id="TextFields">
+        <ignore path="res\layout-hdpi\edit_reply.xml" />
+        <ignore path="res\layout-hdpi\owner_name.xml" />
         <ignore path="res\layout-mdpi\edit_reply.xml" />
         <ignore path="res\layout-mdpi\owner_name.xml" />
     </issue>
     <issue id="UseCompoundDrawables">
+        <ignore path="res\layout-hdpi\about.xml" />
+        <ignore path="res\layout-hdpi\main.xml" />
         <ignore path="res\layout-mdpi\about.xml" />
         <ignore path="res\layout-mdpi\main.xml" />
     </issue>

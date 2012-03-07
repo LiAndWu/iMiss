@@ -5,8 +5,19 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent">
     <LinearLayout android:layout_height="50dip" android:background="@drawable/bar" android:weightSum="1" android:id="@+id/barLinearLayout" android:baselineAligned="false" android:layout_width="fill_parent">
-        <Button android:layout_height="40dip" android:layout_margin="3dip" android:text="上一步" android:layout_weight="0.06" android:background="@drawable/button_short_background" android:layout_width="85dip" android:layout_gravity="center_vertical" android:id="@+id/back_button"></Button>
-        <TextView android:text="iMiss介绍" android:layout_height="fill_parent" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:textStyle="bold" android:id="@+id/neverCallTextView" android:gravity="center" android:textSize="25dip" android:layout_weight="0.39"></TextView>
+        <Button android:layout_height="40dip" android:layout_margin="3dip" android:text="上一步" android:layout_weight="0.06" android:background="@drawable/button_short_background" android:layout_width="85dip" android:layout_gravity="center_vertical" android:id="@+id/back_button" android:textStyle="bold"></Button>
+
+        <TextView
+            android:id="@+id/neverCallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.29"
+            android:gravity="center"
+            android:text="iMiss介绍"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="25dip"
+            android:textStyle="bold" >
+</TextView>
     </LinearLayout>
     <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:orientation="vertical" android:weightSum="1" android:layout_height="match_parent" android:background="@drawable/white_background_big" android:layout_marginLeft="8dip" android:layout_marginRight="8dip" android:layout_marginTop="10dip" android:layout_marginBottom="10dip">
 
