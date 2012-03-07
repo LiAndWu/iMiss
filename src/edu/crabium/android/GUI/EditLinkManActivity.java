@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import edu.crabium.android.GlobalVariable;
@@ -17,6 +18,7 @@ public class EditLinkManActivity extends Activity {
 	EditText NameEditText, PhoneEditText;
 	
 	public void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);   
 		setContentView(R.layout.edit_linkman);
 		

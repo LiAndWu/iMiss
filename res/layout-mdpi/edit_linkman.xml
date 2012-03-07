@@ -5,9 +5,9 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent" android:weightSum="1" >
     <LinearLayout android:background="@drawable/bar" android:id="@+id/barLinearLayout" android:weightSum="1" android:layout_height="45dp" android:baselineAligned="false" android:layout_width="fill_parent">
-        <Button android:layout_gravity="center_vertical" android:layout_weight="0.06" android:background="@drawable/button_short_background" android:layout_width="80dip" android:text="取消" android:layout_height="35dip" android:layout_margin="3dip" android:textStyle="bold" android:id="@+id/cancel_button"></Button>
+        <Button android:layout_gravity="center_vertical" android:layout_weight="0.06" android:background="@drawable/button_short_background" android:layout_width="70dip" android:text="取消" android:layout_height="35dip" android:layout_margin="3dip" android:textStyle="bold" android:id="@+id/cancel_button"></Button>
         <TextView android:textAppearance="?android:attr/textAppearanceMedium" android:layout_width="wrap_content" android:gravity="center" android:textStyle="bold" android:layout_height="fill_parent" android:textSize="24dip" android:text="联系人" android:id="@+id/neverCallTextView" android:layout_weight="0.87"></TextView>
-        <Button android:layout_gravity="center_vertical" android:layout_width="80dip" android:layout_margin="3dip" android:layout_height="35dip" android:text="保存" android:background="@drawable/button_short_background" android:layout_weight="0.06" android:id="@+id/store_button"></Button>
+        <Button android:layout_gravity="center_vertical" android:layout_width="70dip" android:layout_margin="3dip" android:layout_height="35dip" android:text="保存" android:background="@drawable/button_short_background" android:layout_weight="0.06" android:id="@+id/store_button" android:textStyle="bold"></Button>
        
     </LinearLayout>
     <LinearLayout android:id="@+id/linearLayout3" android:layout_width="match_parent" android:weightSum="1" android:layout_height="wrap_content" android:layout_marginLeft="10dip" android:layout_marginRight="10dip" android:layout_marginTop="20dip" android:layout_marginBottom="10dip">

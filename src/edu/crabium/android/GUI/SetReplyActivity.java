@@ -22,6 +22,7 @@ import android.widget.Toast;
 import android.view.ContextMenu;   
 import android.view.Menu;
 import android.view.MenuItem;   
+import android.view.Window;
 import android.view.ContextMenu.ContextMenuInfo;   
 import android.view.View.OnCreateContextMenuListener;   
 
@@ -35,6 +36,7 @@ public class SetReplyActivity extends Activity {
 	SimpleAdapter adapter;
 	
 	public void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_reply);
 		

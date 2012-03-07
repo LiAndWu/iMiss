@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -29,6 +30,7 @@ public class RefuseSlotActivity extends Activity {
 	public String TargetRefuseSlot = GlobalVariable.TargetStartTimeHour + " : " + GlobalVariable.TargetStartTimeMins + " ~ "
 			+ GlobalVariable.TargetEndTimeHour + " : " + GlobalVariable.TargetEndTimeMins;
 	public void onCreate(Bundle savedInstanceState) {
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.refuse_slot);
 		
