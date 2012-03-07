@@ -21,6 +21,7 @@ public class MyListAdapter extends BaseAdapter{
 	private String [][] arr;
 	
 	public MyListAdapter(Context context,int count,String [][] arr) {
+		
 		mInflater = LayoutInflater.from(context);
 		this.count = count;
 		this.arr = arr;

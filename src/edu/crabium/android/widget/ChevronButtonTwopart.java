@@ -16,7 +16,7 @@ public class ChevronButtonTwopart extends LinearLayout {
 
     
     public ChevronButtonTwopart(Context context) {
-        this(context, null);
+        this(context, null);  
     }
 
     public ChevronButtonTwopart(Context context, AttributeSet attrs) {

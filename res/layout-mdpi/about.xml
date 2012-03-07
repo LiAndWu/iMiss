@@ -66,6 +66,6 @@
     android:lineSpacingExtra = "3dip"
     android:textAppearance="?android:attr/textAppearanceLarge" 
     android:layout_width="match_parent"
-     android:textStyle="bold" android:id="@+id/about_textView" android:textSize="22dip" android:autoLink="web|email" android:background="@drawable/white_background_small" android:layout_height="238dp" android:layout_marginLeft="8dip" android:layout_marginRight="8dip" android:layout_marginTop="28dip"></TextView>
+     android:textStyle="bold" android:id="@+id/about_textView" android:textSize="15dip" android:autoLink="web|email" android:background="@drawable/white_background_small" android:layout_height="238dp" android:layout_marginLeft="8dip" android:layout_marginRight="8dip" android:layout_marginTop="28dip"></TextView>
     
 </LinearLayout>

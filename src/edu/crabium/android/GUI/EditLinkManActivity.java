@@ -17,15 +17,15 @@ public class EditLinkManActivity extends Activity {
 	EditText NameEditText, PhoneEditText;
 	
 	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+		super.onCreate(savedInstanceState);   
 		setContentView(R.layout.edit_linkman);
 		
 		NameEditText = (EditText) findViewById(R.id.name_editText);
-		PhoneEditText = (EditText) findViewById(R.id.phone_editText);		
+		PhoneEditText = (EditText) findViewById(R.id.phone_editText);	
 		NameEditText.setFocusable(true);
 		NameEditText.setFocusableInTouchMode(true);
 		PhoneEditText.setFocusable(true);
-		PhoneEditText.setFocusableInTouchMode(true);
+		PhoneEditText.setFocusableInTouchMode(true);  
 
 		NameEditText.setText(GlobalVariable.TargetBlackListName);
 		PhoneEditText.setText(GlobalVariable.TargetBlackListNumber);
