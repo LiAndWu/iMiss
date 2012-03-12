@@ -71,9 +71,9 @@ public class AboutActivity extends Activity {
 	        "\tiMiss\n" +
 	        "\tVersion 1.0\n" +
 	        
-	      	  "\tÎâÐñ¶«:\n\t\t\t  http://tikiet.blog.163.com\n" +
+	      	  "\tï¿½ï¿½ï¿½ï¿½:\n\t\t\t  http://tikiet.blog.163.com\n" +
 	          "\t\t\t  wuxd@me.com\n" +
-    		  "\tÀîÎ°:\n\t\t\t  http://mindlee.net\n" +
+    		  "\tï¿½ï¿½Î°:\n\t\t\t  http://mindlee.net\n" +
     		  "\t\t\t  chinawelon@gmail.com\n" +
     		 
 	         "\t\t     Crabium & Mabbage Workshop\n\t\t\t\t  LiWei and WuXudong\n\t\t\t\t\t Copyleft 2011.";  

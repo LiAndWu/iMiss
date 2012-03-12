@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.jdom.Element;
-
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
 import edu.crabium.android.IMissActivity;
@@ -58,7 +55,7 @@ public class BlackListActivity extends Activity {
 		BlackListListView.setItemsCanFocus(true); 
 		BlackListListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
 		
-		//¼àÌýOnClickÊÂ¼þ
+		//ï¿½ï¿½ï¿½ï¿½OnClickï¿½Â¼ï¿½
 		BlackListListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
 				Log.d("TAG","Position:" + String.valueOf(position));
@@ -80,7 +77,7 @@ public class BlackListActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "É¾³ý");
+                menu.add(0, Menu.FIRST, 0, "É¾ï¿½ï¿½");
             }   
         });  
 		
@@ -107,7 +104,7 @@ public class BlackListActivity extends Activity {
 	
 	public boolean onContextItemSelected(MenuItem item) {  
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo();  
-    	if (item.getItemId() == Menu.FIRST) {//É¾³ý
+    	if (item.getItemId() == Menu.FIRST) {//É¾ï¿½ï¿½
     		int pos = (int) BlackListListView.getAdapter().getItemId(menuInfo.position);
             BlackListDisplay.remove(pos);
             SaveListToDataBase();
@@ -116,7 +113,7 @@ public class BlackListActivity extends Activity {
         return super.onContextItemSelected(item);   
     }  
     
-	//Ä¬ÈÏ»Ø¸´
+	//Ä¬ï¿½Ï»Ø¸ï¿½
     public List<Map<String, String>> addValue(){
     	List<Map<String, String>> value = new ArrayList<Map<String, String>>();
     	

@@ -145,6 +145,16 @@ public class IMissData{
 		setTableValues(BLACKLIST_TABLE_NAME, key, value);
 	}
 	
+	/** insert key-value pairs
+	 * 
+	 * @param pairs
+	 */
+	public static void setBlackList(String[][] pairs){
+		for(String[] pair : pairs){
+			setTableValues(BLACKLIST_TABLE_NAME, pair[0],pair[1]);
+		}
+	}
+	
 	/** insert a column into ignore list
 	 * 
 	 * @param key
