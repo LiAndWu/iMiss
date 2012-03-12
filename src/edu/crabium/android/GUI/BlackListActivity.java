@@ -132,7 +132,7 @@ public class BlackListActivity extends Activity {
     	return value;
     }
     
-    private boolean SaveListToDataBase()
+    private boolean SaveListToDataBase() 
     {
     	Iterator<Map<String,String>> it = BlackListDisplay.iterator();
     	List<Element> list = new ArrayList<Element>();
