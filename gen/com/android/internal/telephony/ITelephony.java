@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: D:\\JAVA\\iMiss\\src\\com\\android\\internal\\telephony\\ITelephony.aidl
+ * Original file: F:\\My DBank\\Projects\\iMiss\\src\\com\\android\\internal\\telephony\\ITelephony.aidl
  */
 package com.android.internal.telephony;
 public interface ITelephony extends android.os.IInterface
