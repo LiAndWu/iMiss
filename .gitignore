@@ -1,16 +1,3 @@
-<<<<<<< HEAD
 bin/
 gen/
 .classpath
-=======
-<<<<<<< HEAD
-.classpath
-bin/
-gen/
-
-=======
-bin/
-gen/
-.classpath
->>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
->>>>>>> upstream/master
