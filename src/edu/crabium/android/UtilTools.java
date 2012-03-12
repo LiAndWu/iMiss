@@ -2,6 +2,7 @@ package edu.crabium.android;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import edu.crabium.android.R;
 import android.app.Activity;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
@@ -11,15 +12,15 @@ public class UtilTools {
 
 	public static void showList(Activity activity, ArrayList<String[]> my_list)
 	{
-		// ÁÐ±íÖÐ  Ãû³Æ
+		// ï¿½Ð±ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½
 		String [] list_name = null;
-		// ÁÐ±íÖÐ 
+		// ï¿½Ð±ï¿½ï¿½ï¿½ 
 		String [] list_desc = null;
 		String [][] my_arr = null;
-		// ´´½¨ View ÁÐ±í
+		// ï¿½ï¿½ï¿½ï¿½ View ï¿½Ð±ï¿½
 		SimpleAdapter listItemAdapter;
 		
-		//°ó¶¨LayoutÀïÃæµÄListView
+		//ï¿½ï¿½Layoutï¿½ï¿½ï¿½ï¿½ï¿½ListView
         ListView listV = (ListView) activity.findViewById(R.id.select_linkman_listView);
 		int list_len =0;
 		my_arr = my_list.toArray(new String[][]{});
@@ -38,16 +39,16 @@ public class UtilTools {
 				
 		 ArrayList<HashMap<String, Object>> list = titleAdesc(list_name, list_desc, null);
 		  
-		 //Éú³ÉÊÊÅäÆ÷µÄItemºÍ¶¯Ì¬Êý×é¶ÔÓ¦µÄÔªËØ
-	     listItemAdapter = new SimpleAdapter(activity,list,//Êý¾ÝÔ´ 
-	            R.layout.dispatch_select_user_item,//ListItemµÄXMLÊµÏÖ
-	            //¶¯Ì¬Êý×éÓëImageItem¶ÔÓ¦µÄ×ÓÏî        
+		 //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Itemï¿½Í¶ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½Ôªï¿½ï¿½
+	     listItemAdapter = new SimpleAdapter(activity,list,//ï¿½ï¿½ï¿½Ô´ 
+	            R.layout.dispatch_select_user_item,//ListItemï¿½ï¿½XMLÊµï¿½ï¿½
+	            //ï¿½ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ImageItemï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½        
 	            new String[] {"ItemTitle", "ItemText"}, 
-	            //ImageItµÄXMLÎÄ¼þÀïÃæµÄÒ»¸öImageView,Á½¸öTextView ID
+	            //ImageItï¿½ï¿½XMLï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ImageView,ï¿½ï¿½ï¿½ï¿½TextView ID
 	            new int[] {R.id.dispatch_item_select_user_name, R.id.dispatch_item_select_user_phone}
 	        );
 		
-	    //Ìí¼Ó²¢ÇÒÏÔÊ¾
+	    //ï¿½ï¿½Ó²ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
 	    listV.setAdapter(listItemAdapter);
 	}
 	
@@ -71,7 +72,7 @@ public class UtilTools {
 		 }
 		 else {
 	         HashMap<String, Object> map = new HashMap<String, Object>();
-			 map.put(params[0], "ÔÝÊ±Ã»ÓÐÊý¾Ý");
+			 map.put(params[0], "ï¿½ï¿½Ê±Ã»ï¿½ï¿½ï¿½ï¿½ï¿½");
 	         map.put(params[1], "");
 	         list.add(map);
 		}
