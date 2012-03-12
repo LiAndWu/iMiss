@@ -1,7 +1,5 @@
 package edu.crabium.android.GUI;
 
-
-import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
 import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
@@ -33,27 +31,25 @@ public class OwnerNameActivity extends Activity {
 		OwnerEditText = (EditText) findViewById(R.id.ownername_editview);
 		OwnerEditText.setFocusable(true);
 		OwnerEditText.setFocusableInTouchMode(true);
-		OwnerEditText.setHint("ÊäÈë»úÖ÷Ãû");
-		OwnerEditText.setText(IMissData.ReadNode("Owner"));
+		OwnerEditText.setHint("è¾“å…¥æœºä¸»å");
+		OwnerEditText.setText(IMissData.getValue("Owner"));
 		Log.d("TAG", "O2");
-		DisplayToast("ÏÖÔÚµÄ»úÖ÷ÃûÊÇ£º" + IMissData.ReadNode("Owner"));
-
+		DisplayToast("ç°åœ¨çš„æœºä¸»åæ˜¯" + IMissData.getValue("Owner"));
 		Log.d("TAG", "O3");
 		ToggleButtonTextView = (TextView) findViewById(R.id.togglebutton_textview);
 		
 		OwnerNameToggleButton = (ToggleButton) findViewById(R.id.ownername_togglebutton);
-		OwnerNameToggleButton.setChecked(IMissData.ReadNode("ShowOwnerNameToStranger").equals("true"));
+		OwnerNameToggleButton.setChecked(IMissData.getValue("ShowOwnerNameToStranger").equals("true"));
 		Log.d("TAG", "O4");
 		OwnerNameToggleButton.setOnClickListener(new Button.OnClickListener(){ 
             public void onClick(View v) { 
             	if (OwnerNameToggleButton.isChecked()) {
-            		IMissData.WriteNode("ShowOwnerNameToStranger", "true");
-            		ToggleButtonTextView.setText("¶ÔÄ°ÉúÈË¿ªÆô");
+            		IMissData.setValue("ShowOwnerNameToStranger", "true");
+            		ToggleButtonTextView.setText("å¯¹é™Œç”Ÿäººå¼€å¯");
             		Log.d("TAG", "O5");
             	} else {
-            		IMissData.WriteNode("ShowOwnerNameToStranger", "false");
-            		ToggleButtonTextView.setText("¶ÔÄ°ÉúÈË¹Ø±Õ");
-            		Log.d("TAG", "O6");
+            		IMissData.setValue("ShowOwnerNameToStranger", "false");
+            		ToggleButtonTextView.setText("å¯¹é™Œç”Ÿäººå…³é—­");
             	}
             } 
 		});
@@ -72,9 +68,10 @@ public class OwnerNameActivity extends Activity {
 			public void onClick(View v) {
 				OwnerEditText.setFocusable(false);
 				OwnerEditText.setFocusableInTouchMode(false);
-				IMissData.WriteNode("Owner",OwnerEditText.getText().toString());
-				DisplayToast("ÏÖÔÚµÄ»úÖ÷ÃûÊÇ" + IMissData.ReadNode("Owner") + "\n" +
-						(IMissData.ReadNode("ShowOwnerNameToStranger").equals("true") ? "\t¶ÔÄ°ÉúÈË¿ªÆô" : "\t¶ÔÄ°ÉúÈË¹Ø±Õ"));	
+				IMissData.setValue("Owner",OwnerEditText.getText().toString());
+
+				DisplayToast("ç°åœ¨çš„æœºä¸»åæ˜¯" + IMissData.getValue("Owner") + "\n" +
+						(IMissData.getValue("ShowOwnerNameToStranger").equals("true") ? "\tå¯¹é™Œç”Ÿäººå¼€å¯" : "\tå¯¹é™Œç”Ÿäººå…³é—­"));	
 				
 				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);

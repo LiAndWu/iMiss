@@ -8,7 +8,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import edu.crabium.android.GlobalVariable;
-import edu.crabium.android.IMissData;
 import edu.crabium.android.R;
 
 public class EditLinkManActivity extends Activity {
@@ -39,26 +38,14 @@ public class EditLinkManActivity extends Activity {
 			}
 		});		
 		
-		
 		SaveButton = (Button)findViewById(R.id.store_button);
 		SaveButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Element e = new Element("Item");
-				Element name = new Element("Name");
-				Element num = new Element("Number");
-				name.setText(NameEditText.getText().toString());
-				num.setText(PhoneEditText.getText().toString());
-				
-				e.addContent(name);
-				e.addContent(num);
-				IMissData.InsertChild("BlackList", e);
 				
 				Intent intent = new Intent(EditLinkManActivity.this, BlackListActivity.class);
 				startActivity(intent);
 				EditLinkManActivity.this.finish();
 			}
 		});
-		
 	}
-
 }

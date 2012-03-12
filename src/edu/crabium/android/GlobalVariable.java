@@ -1,18 +1,17 @@
 package edu.crabium.android;
 
 public class GlobalVariable {
-	
-	//»Ø¸´ÄÚÈÝ
-	public static String TargetReplyTitle = "Î´·ÖÀà";
+	//ï¿½Ø¸ï¿½ï¿½ï¿½ï¿½ï¿½
+	public static String TargetReplyTitle = "Î´ï¿½ï¿½ï¿½ï¿½";
 	public static String TargetReplyContent = null;
 	public static int TargetReplyPosition;
 	
-	//ºÚÃûµ¥
+	//ï¿½ï¿½ï¿½ï¿½
 	public static String TargetBlackListName = null;
 	public static String TargetBlackListNumber = null;
 	public static int TargetBlackListPosition;
 	
-	//¾Ü½ÓÊ±¼ä
+	//ï¿½Ü½ï¿½Ê±ï¿½ï¿½
 	public static int TargetStartTimeHour = 00;
 	public static int TargetStartTimeMins = 00;
 	public static int TargetEndTimeHour = 00;
