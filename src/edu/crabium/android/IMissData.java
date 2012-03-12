@@ -1,6 +1,9 @@
 package edu.crabium.android;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
 import android.content.res.AssetManager;
@@ -13,6 +16,8 @@ public class IMissData{
 	
 	private final static String BLACKLIST_TABLE_NAME = "black_list";
 	private final static String BLACKLIST_TABLE_SPEC = "(name TEXT, number TEXT)";
+	private final static String BLACKLIST_GET = "SELECT * FROM " + BLACKLIST_TABLE_NAME;
+	private final static String BLACKLIST_SET = "INSERT INTO " + BLACKLIST_TABLE_NAME + " VALUES ";
 	
 	private final static String IGNORELIST_TABLE_NAME = "ignore_list";
 	private final static String IGNORELIST_TABLE_SPEC = "(name TEXT, number TEXT)";
@@ -83,6 +88,39 @@ public class IMissData{
 		DB.close();
 	}
 	
+	/** return black list information, packed in a Map
+	 * 
+	 * @return Map<String name, String number> 
+	 */
+	public static Map<String, String> getBlackList()
+	{
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		Cursor cursor = DB.rawQuery(BLACKLIST_GET, null);
+		
+		Map<String, String> blacklist = new HashMap<String, String>();
+		if(cursor.getCount() > 0){
+			while(cursor.moveToNext()){
+				blacklist.put(cursor.getString(0), cursor.getString(1));
+			}
+		}
+		DB.close();
+		return new HashMap<String, String>(blacklist);
+	}
+	
+	/** insert a column into blacklist.
+	 * 
+	 */
+	public static void setBlackList(String key, String value){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+
+		String[] pair = new String[2];
+		pair[0] = key;
+		pair[1] = value;
+		DB.execSQL(BLACKLIST_SET + "(\"" + key + "\", \"" + value + "\")");
+		DB.close();
+	}
 	/** get activity and create necessary tables
 	 * 
 	 * @param activity

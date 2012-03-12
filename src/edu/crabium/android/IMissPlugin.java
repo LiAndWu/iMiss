@@ -4,8 +4,6 @@ import android.telephony.SmsManager;
 
 public class IMissPlugin {
 	public class SendSMS implements Runnable{
-		public final static int IN_REST_TIME = 1;
-		public final static int NORMAL = 0;
 
 		public void Send(String text, String RingingNumber) {
 			SmsManager sm = SmsManager.getDefault();
