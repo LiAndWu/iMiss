@@ -6,6 +6,7 @@ import edu.crabium.android.GUI.BlackListActivity;
 import edu.crabium.android.GUI.OwnerNameActivity;
 import edu.crabium.android.GUI.RefuseSlotActivity;
 import edu.crabium.android.GUI.SetReplyActivity;
+import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

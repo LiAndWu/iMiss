@@ -61,7 +61,6 @@ public class AboutActivity extends Activity {
     		"\t李伟:\n\t\t\t  http://mindlee.net\n" +
     		"\t\t\t  chinawelon@gmail.com\n" +	 
 	        "\t\t     Crabium & Mabbage Workshop\n\t\t\t\t  LiWei and WuXudong\n\t\t\t\t\t Copyleft 2011.";  
-
 	        AboutTextView.setText(introduce); 
 	}
 	

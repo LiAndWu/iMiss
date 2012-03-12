@@ -2,6 +2,7 @@ package edu.crabium.android;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.crabium.android.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,13 +26,14 @@ public class MyListAdapter extends BaseAdapter{
 		this.arr = arr;
 		init();
 	}
-	
+
 	private void init() {
 		myData = new HashMap<String, String>();
 		for(int i = 0 ; i < count;i++) {
 			myData.put(Column1, arr[i][0]);
 			myData.put(Column2, arr[i][1]);
 		}
+
 		isSelected = new HashMap<Integer, Boolean>();
 		for (int i = 0; i < count; i++) {
 			isSelected.put(i, false);

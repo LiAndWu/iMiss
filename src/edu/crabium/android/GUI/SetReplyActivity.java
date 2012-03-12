@@ -29,8 +29,8 @@ import android.view.View.OnCreateContextMenuListener;
 public class SetReplyActivity extends Activity {
 	LinearLayout	SetReplyLinearLayout, NewReplyLinearLayout;
 	ListView		SetReplyListView;
-	private final static String SetReplyColumn1 = "title";
-	private final static String SetReplyColumn2 = "content";
+	private static final String SetReplyColumn1 = "title";
+	private static final String SetReplyColumn2 = "content";
 	List<Map<String,String>> SetReplyDisplay;
 	private Button BackButton;
 	SimpleAdapter adapter;
@@ -43,12 +43,13 @@ public class SetReplyActivity extends Activity {
 		SetReplyLinearLayout = (LinearLayout) findViewById(R.id.set_reply_linearlayout);
 		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
 		setContentView(SetReplyLinearLayout);
-
-		SetReplyDisplay = new ArrayList<Map<String,String>>();
+		
+		SetReplyDisplay = new ArrayList<Map<String, String>>();
 		addValue();
-		final String[] from = {SetReplyColumn1,SetReplyColumn2};
+		
+		final String[] from = {SetReplyColumn1, SetReplyColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
-		adapter = new SimpleAdapter(this, SetReplyDisplay,android.R.layout.simple_list_item_2, from,to);
+		adapter = new SimpleAdapter(this, SetReplyDisplay,android.R.layout.simple_list_item_2, from, to);
 		SetReplyListView.setAdapter(adapter);
 		SetReplyListView.setItemsCanFocus(true); 
 		SetReplyListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 

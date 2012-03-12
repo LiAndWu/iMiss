@@ -1,6 +1,5 @@
 package edu.crabium.android.widget;
 
-
 import edu.crabium.android.R;
 import android.content.Context;
 import android.util.AttributeSet;
@@ -21,23 +20,22 @@ public class ChevronButtonTwopart extends LinearLayout {
 
     public ChevronButtonTwopart(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // µ¼Èë²¼¾Ö
+        // ï¿½ï¿½ï¿½ë²¼ï¿½ï¿½
         LayoutInflater.from(context).inflate(R.layout.chevron_button_twopart, this, true);
         iv = (ImageView) findViewById(R.id.iv);
         TitleWidget = (TextView) findViewById(R.id.title_of_widget);
 
     }
-
     
     /**
-     * ÉèÖÃÍ¼Æ¬×ÊÔ´
+     * ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ô´
      */
     public void setImageResource(int resId) {
         iv.setImageResource(resId);
     }
 
     /**
-     * ÉèÖÃ°´Å¥±êÌâµÄÎÄ×Ö
+     * ï¿½ï¿½ï¿½Ã°ï¿½Å¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
      */
     public void setTitleTextViewText(String text) {
         TitleWidget.setText(text);

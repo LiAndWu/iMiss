@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import edu.crabium.android.GlobalVariable;
-import edu.crabium.android.IMissData;
 import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
@@ -45,11 +44,13 @@ public class BlackListActivity extends Activity {
 		BlackListListView = (ListView) findViewById(R.id.blacklist_listview);
 		setContentView(BlackListLinearLayout);
 		
+
 	    BlackListDisplay = new ArrayList<Map<String,String>>();
 	     final String[] from = {BlackListColumn1, BlackListColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
 		adapter = new SimpleAdapter(this, BlackListDisplay,
 				android.R.layout.simple_list_item_2, from, to);
+
 		BlackListListView.setAdapter(adapter);
 		BlackListListView.setItemsCanFocus(true); 
 		BlackListListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
@@ -100,7 +101,7 @@ public class BlackListActivity extends Activity {
 	}
 	
 	public boolean onContextItemSelected(MenuItem item) {  
-    	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo();  
+    	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	if (item.getItemId() == Menu.FIRST) {//刪除
     		int pos = (int) BlackListListView.getAdapter().getItemId(menuInfo.position);
             BlackListDisplay.remove(pos);
@@ -108,5 +109,6 @@ public class BlackListActivity extends Activity {
     	adapter.notifyDataSetChanged();  
         return super.onContextItemSelected(item);   
     }  
+
 }
 

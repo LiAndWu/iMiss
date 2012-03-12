@@ -31,11 +31,10 @@ public class OwnerNameActivity extends Activity {
 		OwnerEditText = (EditText) findViewById(R.id.ownername_editview);
 		OwnerEditText.setFocusable(true);
 		OwnerEditText.setFocusableInTouchMode(true);
-		OwnerEditText.setHint("���������");
+		OwnerEditText.setHint("输入机主名");
 		OwnerEditText.setText(IMissData.getValue("Owner"));
 		Log.d("TAG", "O2");
-		DisplayToast("���ڵĻ������ǣ�" + IMissData.getValue("Owner"));
-
+		DisplayToast("现在的机主名是" + IMissData.getValue("Owner"));
 		Log.d("TAG", "O3");
 		ToggleButtonTextView = (TextView) findViewById(R.id.togglebutton_textview);
 		
@@ -46,12 +45,11 @@ public class OwnerNameActivity extends Activity {
             public void onClick(View v) { 
             	if (OwnerNameToggleButton.isChecked()) {
             		IMissData.setValue("ShowOwnerNameToStranger", "true");
-            		ToggleButtonTextView.setText("��İ���˿���");
+            		ToggleButtonTextView.setText("对陌生人开启");
             		Log.d("TAG", "O5");
             	} else {
             		IMissData.setValue("ShowOwnerNameToStranger", "false");
-            		ToggleButtonTextView.setText("��İ���˹ر�");
-            		Log.d("TAG", "O6");
+            		ToggleButtonTextView.setText("对陌生人关闭");
             	}
             } 
 		});
@@ -71,8 +69,9 @@ public class OwnerNameActivity extends Activity {
 				OwnerEditText.setFocusable(false);
 				OwnerEditText.setFocusableInTouchMode(false);
 				IMissData.setValue("Owner",OwnerEditText.getText().toString());
-				DisplayToast("���ڵĻ�������" + IMissData.getValue("Owner") + "\n" +
-						(IMissData.getValue("ShowOwnerNameToStranger").equals("true") ? "\t��İ���˿���" : "\t��İ���˹ر�"));	
+
+				DisplayToast("现在的机主名是" + IMissData.getValue("Owner") + "\n" +
+						(IMissData.getValue("ShowOwnerNameToStranger").equals("true") ? "\t对陌生人开启" : "\t对陌生人关闭"));	
 				
 				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);

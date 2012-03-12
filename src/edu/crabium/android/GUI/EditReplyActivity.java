@@ -24,7 +24,7 @@ public class EditReplyActivity extends Activity {
 		
 		ContentEditText = (EditText) findViewById(R.id.content_edittext);
 		ContentEditText.setText(GlobalVariable.TargetReplyContent);
-		ContentEditText.setHint("�����µĻظ�����");
+		ContentEditText.setHint("请输入回复内容");
 			
 		SaveButton = (Button)findViewById(R.id.store_button);
 		SaveButton.setOnClickListener(new Button.OnClickListener() {
