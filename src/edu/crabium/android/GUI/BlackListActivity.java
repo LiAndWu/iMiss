@@ -33,7 +33,7 @@ public class BlackListActivity extends Activity {
 	private Button BackButton;
 	private final static String BlackListColumn1 = "name";
 	private final static String BlackListColumn2 = "number";
-	private List<Map<String,String>> BlackListDisplay;
+	private Map<String,String> BlackListDisplay;
 	private SimpleAdapter adapter;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,17 +45,22 @@ public class BlackListActivity extends Activity {
 		BlackListListView = (ListView) findViewById(R.id.blacklist_listview);
 		setContentView(BlackListLinearLayout);
 		
-		BlackListDisplay = new ArrayList<Map<String,String>>();
-		BlackListDisplay = addValue();
-		final String[] from = {BlackListColumn1, BlackListColumn2};
+		BlackListDisplay = new HashMap<String, String>();
+		BlackListDisplay = IMissData.getBlackList();
+		List<Map<String,String>> list = new ArrayList<Map<String, String>>();
+		list.add(BlackListDisplay);
+		final String[] FORM = {BlackListColumn1, BlackListColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
-		adapter = new SimpleAdapter(this, BlackListDisplay,
-				android.R.layout.simple_list_item_2, from,to);
+		adapter = new SimpleAdapter(this, list,
+				android.R.layout.simple_list_item_2, FORM, to);
 		BlackListListView.setAdapter(adapter);
 		BlackListListView.setItemsCanFocus(true); 
 		BlackListListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
 		
+<<<<<<< HEAD
 		//����OnClick�¼�
+=======
+>>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
 		BlackListListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
 				Log.d("TAG","Position:" + String.valueOf(position));
@@ -68,8 +73,7 @@ public class BlackListActivity extends Activity {
 				
 				Intent intent = new Intent(BlackListActivity.this, EditLinkManActivity.class);
 				startActivity(intent);
-				BlackListActivity.this.finish();
-				
+				BlackListActivity.this.finish();	
 			}
 		});	
 		
@@ -77,7 +81,11 @@ public class BlackListActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
+<<<<<<< HEAD
                 menu.add(0, Menu.FIRST, 0, "ɾ��");
+=======
+                menu.add(0, Menu.FIRST, 0, "刪除");
+>>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
             }   
         });  
 		
@@ -90,7 +98,7 @@ public class BlackListActivity extends Activity {
 			}
 		});
 		
-		NewBlackListItemLinearLayout = (LinearLayout) findViewById(R.id.new_blacklist_item_linearlayout);
+		NewBlackListItemLinearLayout = (LinearLayout) findViewById(R.id.new_blacklist_item_button);
 		NewBlackListItemLinearLayout.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				GlobalVariable.TargetBlackListName = null;
@@ -104,14 +112,18 @@ public class BlackListActivity extends Activity {
 	
 	public boolean onContextItemSelected(MenuItem item) {  
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo();  
+<<<<<<< HEAD
     	if (item.getItemId() == Menu.FIRST) {//ɾ��
+=======
+    	if (item.getItemId() == Menu.FIRST) {//刪除
+>>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
     		int pos = (int) BlackListListView.getAdapter().getItemId(menuInfo.position);
             BlackListDisplay.remove(pos);
-            SaveListToDataBase();
     	} 
     	adapter.notifyDataSetChanged();  
         return super.onContextItemSelected(item);   
     }  
+<<<<<<< HEAD
     
 	//Ĭ�ϻظ�
     public List<Map<String, String>> addValue(){
@@ -151,5 +163,7 @@ public class BlackListActivity extends Activity {
     	
     	return IMissData.WriteNodes("BlackList", list);
     }
+=======
+>>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
 }
 

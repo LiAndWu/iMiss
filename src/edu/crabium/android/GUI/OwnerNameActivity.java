@@ -34,24 +34,24 @@ public class OwnerNameActivity extends Activity {
 		OwnerEditText.setFocusable(true);
 		OwnerEditText.setFocusableInTouchMode(true);
 		OwnerEditText.setHint("输入机主名");
-		OwnerEditText.setText(IMissData.ReadNode("Owner"));
+		OwnerEditText.setText(IMissData.getValue("Owner"));
 		Log.d("TAG", "O2");
-		DisplayToast("现在的机主名是：" + IMissData.ReadNode("Owner"));
+		DisplayToast("现在的机主名是：" + IMissData.getValue("Owner"));
 
 		Log.d("TAG", "O3");
 		ToggleButtonTextView = (TextView) findViewById(R.id.togglebutton_textview);
 		
 		OwnerNameToggleButton = (ToggleButton) findViewById(R.id.ownername_togglebutton);
-		OwnerNameToggleButton.setChecked(IMissData.ReadNode("ShowOwnerNameToStranger").equals("true"));
+		OwnerNameToggleButton.setChecked(IMissData.getValue("ShowOwnerNameToStranger").equals("true"));
 		Log.d("TAG", "O4");
 		OwnerNameToggleButton.setOnClickListener(new Button.OnClickListener(){ 
             public void onClick(View v) { 
             	if (OwnerNameToggleButton.isChecked()) {
-            		IMissData.WriteNode("ShowOwnerNameToStranger", "true");
+            		IMissData.setValue("ShowOwnerNameToStranger", "true");
             		ToggleButtonTextView.setText("对陌生人开启");
             		Log.d("TAG", "O5");
             	} else {
-            		IMissData.WriteNode("ShowOwnerNameToStranger", "false");
+            		IMissData.setValue("ShowOwnerNameToStranger", "false");
             		ToggleButtonTextView.setText("对陌生人关闭");
             		Log.d("TAG", "O6");
             	}
@@ -72,9 +72,9 @@ public class OwnerNameActivity extends Activity {
 			public void onClick(View v) {
 				OwnerEditText.setFocusable(false);
 				OwnerEditText.setFocusableInTouchMode(false);
-				IMissData.WriteNode("Owner",OwnerEditText.getText().toString());
-				DisplayToast("现在的机主名是" + IMissData.ReadNode("Owner") + "\n" +
-						(IMissData.ReadNode("ShowOwnerNameToStranger").equals("true") ? "\t对陌生人开启" : "\t对陌生人关闭"));	
+				IMissData.setValue("Owner",OwnerEditText.getText().toString());
+				DisplayToast("现在的机主名是" + IMissData.getValue("Owner") + "\n" +
+						(IMissData.getValue("ShowOwnerNameToStranger").equals("true") ? "\t对陌生人开启" : "\t对陌生人关闭"));	
 				
 				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);
