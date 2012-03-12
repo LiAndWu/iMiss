@@ -1,7 +1,5 @@
 package edu.crabium.android.GUI;
 
-import org.jdom.Element;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

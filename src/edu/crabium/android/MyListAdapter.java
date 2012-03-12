@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import edu.crabium.android.R;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,7 +28,7 @@ public class MyListAdapter extends BaseAdapter{
 		this.arr = arr;
 		init();
 	}
-	// ³õÊ¼»¯ 
+	// ï¿½ï¿½Ê¼ï¿½ï¿½ 
 	private void init() {
 		mydata = new ArrayList<Map<String,Object>>();
 		for(int i = 0 ; i < count;i++) {
@@ -36,7 +37,7 @@ public class MyListAdapter extends BaseAdapter{
 			map.put(Column2, arr[i][1]);
 			mydata.add(map);
 		}
-		// Õâ¶ù¶¨Òå isSelected Õâ¸ö map ÊÇ¼ÇÂ¼Ã¿¸ö list items µÄ×´Ì¬£¬³õÊ¼×´Ì¬È«²¿Å¶ false
+		// ï¿½ï¿½ï¿½ï¿½ï¿½ isSelected ï¿½ï¿½ï¿½ map ï¿½Ç¼ï¿½Â¼Ã¿ï¿½ï¿½ list items ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½Ê¼×´Ì¬È«ï¿½ï¿½Å¶ false
 		isSelected = new HashMap<Integer, Boolean>();
 		for (int i = 0; i < count; i++) {
 			isSelected.put(i, false);
@@ -61,7 +62,7 @@ public class MyListAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-		// convertView Îª null Ê± ³õÊ¼»¯ convertView
+		// convertView Îª null Ê± ï¿½ï¿½Ê¼ï¿½ï¿½ convertView
 		if(convertView == null){
 			holder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.dispatch_select_user_item, null);
