@@ -29,15 +29,16 @@ public final class R {
         public static final int button_short_light=0x7f02000f;
         public static final int checkmark_and_chevron=0x7f020010;
         public static final int gray_chevron=0x7f020011;
-        public static final int icon=0x7f020012;
-        public static final int layout_bg=0x7f020013;
-        public static final int menu_delete=0x7f020014;
-        public static final int reply_background=0x7f020015;
-        public static final int wheel_bg=0x7f020016;
-        public static final int wheel_val=0x7f020017;
-        public static final int white_background_big=0x7f020018;
-        public static final int white_background_small=0x7f020019;
-        public static final int white_chevron=0x7f02001a;
+        public static final int ic_launcher=0x7f020012;
+        public static final int icon=0x7f020013;
+        public static final int layout_bg=0x7f020014;
+        public static final int menu_delete=0x7f020015;
+        public static final int reply_background=0x7f020016;
+        public static final int wheel_bg=0x7f020017;
+        public static final int wheel_val=0x7f020018;
+        public static final int white_background_big=0x7f020019;
+        public static final int white_background_small=0x7f02001a;
+        public static final int white_chevron=0x7f02001b;
     }
     public static final class id {
         public static final int about_chevron_button=0x7f050022;
@@ -111,7 +112,6 @@ public final class R {
     }
     public static final class string {
         public static final int app_name=0x7f040001;
-        public static final int appname=0x7f040002;
         public static final int hello=0x7f040000;
     }
 }

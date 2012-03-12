@@ -7,7 +7,7 @@ import java.util.Map;
 
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
-import edu.crabium.android.MainActivity;
+import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -92,7 +92,7 @@ public class SetReplyActivity extends Activity {
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(SetReplyActivity.this, MainActivity.class);
+				Intent intent = new Intent(SetReplyActivity.this, IMissActivity.class);
 				startActivity(intent);
 				SetReplyActivity.this.finish();
 			}
@@ -118,8 +118,8 @@ public class SetReplyActivity extends Activity {
 	//设置回复前部分
 	public String ReplyForePart() {
 		String ReplyForePart;
-		if (IMissData.ReadNode("ShowOwnerNameToStranger").equals("true")) {
-			ReplyForePart = "嗨，我是" + IMissData.ReadNode("Owner");
+		if (IMissData.getValue("ShowOwnerNameToStranger").equals("true")) {
+			ReplyForePart = "嗨，我是" + IMissData.getValue("Owner");
 		} else {
 			ReplyForePart = "你好，机主";
 		}

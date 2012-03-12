@@ -1,284 +1,146 @@
 package edu.crabium.android;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
-import org.jdom.Document;
-import org.jdom.Element;
-import org.jdom.JDOMException;
-import org.jdom.input.SAXBuilder;
-import org.jdom.output.XMLOutputter;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.res.AssetManager;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
-public class IMissData
-{
-	static Activity activity;
+public class IMissData{
+	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/files/iMiss.sqlite3";
 	
-	public static void Initiate(Activity activity)
-	{
-		IMissData.activity = activity;
-	}
-
-	public static List<Element> ReadNodes(String NodeName)
-	{
-        try 
-        {
-			SAXBuilder saxBuilder = new SAXBuilder();
-        	FileInputStream fileInputStream  = new FileInputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-        	Document document = saxBuilder.build(fileInputStream);
-        	fileInputStream.close();
-        	Element iMiss = document.getRootElement();
-				
-        	Element Node = iMiss.getChild(NodeName);
-        	return Node.getChildren();
-        } 
-        catch (IOException e1)
-        {
-        	e1.printStackTrace();
-		} 
-        catch (JDOMException e)
-		{
-			e.printStackTrace();
+	private final static String BLACKLIST_TABLE_NAME = "black_list";
+	private final static String BLACKLIST_TABLE_SPEC = "(name TEXT, number TEXT)";
+	private final static String BLACKLIST_GET = "SELECT * FROM " + BLACKLIST_TABLE_NAME;
+	private final static String BLACKLIST_SET = "INSERT INTO " + BLACKLIST_TABLE_NAME + " VALUES ";
+	
+	private final static String IGNORELIST_TABLE_NAME = "ignore_list";
+	private final static String IGNORELIST_TABLE_SPEC = "(name TEXT, number TEXT)";
+	
+	private final static String RESTTIME_TABLE_NAME = "rest_time";
+	private final static String RESTTIME_TABLE_SPEC = "(id INTEGER, start_millis INTEGER, end_millis INTEGER)";
+	
+	private final static String MISC_TABLE_NAME = "misc";
+	private final static String MISC_TABLE_SPEC = "(key STRING, value STRING)";
+	private final static String MISC_GET_VALUE = "SELECT key, value FROM " + MISC_TABLE_NAME + " WHERE key =";
+	private final static String MISC_DEL_VALUE = "DELETE FROM " + MISC_TABLE_NAME + " WHERE key =";
+	private final static String MISC_INSERT_VALUE = "INSERT INTO " + MISC_TABLE_NAME + " (key, value) VALUES ";
+	private final static String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
+	private final static String VERSION = "1";
+	
+	private static Activity activity;
+	private static SQLiteDatabase DB;
+	
+	private static boolean initiated = false;
+	
+	
+	/** get value for specified key
+	 * 
+	 * @param  key
+	 * @return  value
+	 */
+	public static String getValue(String key) {
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		Cursor cursor = DB.rawQuery(MISC_GET_VALUE + "\"" + key + "\"", null);
+		
+		String result;
+		if(cursor.getCount() < 1)
+			result = " ";
+		else{
+			cursor.moveToNext();
+			result = cursor.getString(cursor.getColumnIndex("value"));
 		}
-        
-        return null;
+		
+		DB.close();
+		return result;
 	}
-	
-	public static List<Element> GetRestTime()
-	{
-		return ReadNodes("RestTime");
-	}
-	
-	public static boolean WriteNodes(String NodeName, List<Element> Children)
-	{
-        try 
-        {
-        	SAXBuilder saxBuilder = new SAXBuilder();
-        	FileInputStream fileInputStream  = new FileInputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-			Document document = saxBuilder.build(fileInputStream);
-			fileInputStream.close();
 
-        	Element iMiss = document.getRootElement();
-        	iMiss.removeChild(NodeName);
-        	
-        	Element Node = new Element(NodeName);
-        	Iterator<Element> it = Children.iterator();
-        	while(it.hasNext())
-        	{
-        		Node.addContent((Element)it.next());
-        	}
-        	iMiss.addContent(Node);
-			
-			XMLOutputter out = new XMLOutputter();
-			FileOutputStream fileOutputStream = new FileOutputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-			out.output(document,fileOutputStream);
-			fileOutputStream.flush();
-			fileOutputStream.close();
-			
-			return true;
-				
-		} catch(IOException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (JDOMException e) {
-			e.printStackTrace();
-			return false;
-		}
-        
+	/** delete value if key is matched
+	 * 
+	 * @param key
+	 */
+	public static void delValue(String key) {
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		DB.execSQL(MISC_DEL_VALUE + "\"" + key + "\"");
+		DB.close();
 	}
 	
-	public static boolean WriteNode(String NodeName, String NodeValue)
-	{
-        try 
-        {
-        	SAXBuilder saxBuilder = new SAXBuilder();
-        	FileInputStream fileInputStream  = new FileInputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-			Document document = saxBuilder.build(fileInputStream);
-			fileInputStream.close();
+	/** set value if key is matched
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public static void setValue(String key, String value) {
+		if(!initiated) createTables();
+		
+		if(!getValue(key).trim().equals(""))
+			delValue(key);
 
-        	Element iMiss = document.getRootElement();
-        	Element Node = iMiss.getChild(NodeName);
-			Node.setText(NodeValue);
-			
-			XMLOutputter out = new XMLOutputter();
-			FileOutputStream fileOutputStream = new FileOutputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-			out.output(document,fileOutputStream);
-			fileOutputStream.flush();
-			fileOutputStream.close();
-			
-			return true;
-				
-		} catch(IOException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (JDOMException e) {
-			e.printStackTrace();
-			return false;
-		}
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		DB.execSQL(MISC_INSERT_VALUE +"(\"" + key + "\", \"" + value + "\")");
+		DB.close();
 	}
 	
-	public static boolean InsertChild(String NodeName, Element Child)
+	/** return black list information, packed in a Map
+	 * 
+	 * @return Map<String name, String number> 
+	 */
+	public static Map<String, String> getBlackList()
 	{
-		 try 
-	        {
-	        	SAXBuilder saxBuilder = new SAXBuilder();
-	        	FileInputStream fileInputStream  = new FileInputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-				Document document = saxBuilder.build(fileInputStream);
-				fileInputStream.close();
-
-	        	Element iMiss = document.getRootElement();
-	        	Element Node = iMiss.getChild(NodeName);
-				Node.addContent(Child);
-				XMLOutputter out = new XMLOutputter();
-				FileOutputStream fileOutputStream = new FileOutputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-				out.output(document,fileOutputStream);
-				fileOutputStream.flush();
-				fileOutputStream.close();
-				
-				return true;
-					
-			} catch(IOException e)
-			{
-				e.printStackTrace();
-				return false;
-			} catch (JDOMException e) {
-				e.printStackTrace();
-				return false;
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		Cursor cursor = DB.rawQuery(BLACKLIST_GET, null);
+		
+		Map<String, String> blacklist = new HashMap<String, String>();
+		if(cursor.getCount() > 0){
+			while(cursor.moveToNext()){
+				blacklist.put(cursor.getString(0), cursor.getString(1));
 			}
-	}
-	public static String ReadNode(String NodeName)
-	{
-		Log.d("TAG","Reading: " +  NodeName);
-        try 
-        {
-			SAXBuilder saxBuilder = new SAXBuilder();
-        	FileInputStream fileInputStream  = new FileInputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-        	Document document = saxBuilder.build(fileInputStream);
-        	fileInputStream.close();
-        	
-        	Element iMiss = document.getRootElement();
-        	Element Node = iMiss.getChild(NodeName);
-        	Log.d("TAG","Got "+NodeName+": " +Node.getValue());
-        	return Node.getValue();
-        } 
-        catch (IOException e1)
-        {
-        	e1.printStackTrace();
-		} 
-        catch (JDOMException e)
-		{
-			e.printStackTrace();
 		}
-        
-        return "0";
+		DB.close();
+		return new HashMap<String, String>(blacklist);
 	}
 	
-	public static boolean ChangeGroupInformation(String GroupIdentifier, String GroupName, String GroupText)
-	{
-		try 
-        {
-        	SAXBuilder saxBuilder = new SAXBuilder();
-        	FileInputStream fileInputStream  = new FileInputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-			Document document = saxBuilder.build(fileInputStream);
-			fileInputStream.close();
+	/** insert a column into blacklist.
+	 * 
+	 */
+	public static void setBlackList(String key, String value){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 
-        	Element iMiss = document.getRootElement();
-        	Element Node = iMiss.getChild("Groups");
-        	Element Group = Node.getChild(GroupIdentifier);
-        	
-			Group.getChild("Name").setText(GroupName);
-			Group.getChild("Text").setText(GroupText);
-			
-			XMLOutputter out = new XMLOutputter();
-			FileOutputStream fileOutputStream = new FileOutputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-			out.output(document,fileOutputStream);
-			fileOutputStream.flush();
-			fileOutputStream.close();
-			
-			return true;
-		} catch(IOException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (JDOMException e) {
-			e.printStackTrace();
-			return false;
-		}
+		String[] pair = new String[2];
+		pair[0] = key;
+		pair[1] = value;
+		DB.execSQL(BLACKLIST_SET + "(\"" + key + "\", \"" + value + "\")");
+		DB.close();
+	}
+	/** get activity and create necessary tables
+	 * 
+	 * @param activity
+	 */
+	public static void init(Activity activity){
+		IMissData.activity = activity;
+		createTables();
+		initiated = true;
 	}
 	
-	public static List<Element> GetGroups()
+	/** create necessary tables
+	 *  
+	 */
+	private static void createTables()
 	{
-		List<Element> list = new ArrayList<Element>();
-		List<Element> list_tmp = new ArrayList<Element>();
-		
-		list_tmp = ReadNodes("Groups");
-		
-		Iterator<Element> it = list_tmp.iterator();
-		while(it.hasNext())
-		{
-			Element e = it.next();
-			if(!e.getName().equals("Contacts"))
-				list.add((Element)it.next());
-		}
-		
-		return list;
-	}
-	
-	public static String GetOwnerName()
-	{
-		return ReadNode("Owner");
-	}
-	
-	public static boolean SetOwnerName(String Name)
-	{
-		return WriteNode("Owner", Name);
-	}
-	
-	public static void CheckXMLExistence()
-	{
-        try 
-        {
-			FileInputStream fileInputStream = new FileInputStream("/data/data/edu.crabium.android/files/iMiss.xml");
-			fileInputStream.close();
-		} 
-        catch (FileNotFoundException e) 
-		{
-        	AssetManager assets = activity.getAssets();
-        	try 
-        	{
-				FileOutputStream fileOutputStream =activity.openFileOutput("iMiss.xml",Context.MODE_PRIVATE);
-				InputStream fileInputStream = assets.open("iMiss.xml");
-
-				byte[] buffer = new byte[1024];
-				int length = -1;
-				while((length = fileInputStream.read(buffer)) != -1 )
-				{
-				    fileOutputStream.write(buffer, 0, length);
-				}
-
-				fileOutputStream.flush();
-				fileOutputStream.close();
-			} 
-        	catch (FileNotFoundException e1) {
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				e1.printStackTrace();
-			}    			
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
+		DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+BLACKLIST_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME	+ RESTTIME_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME	+ MISC_TABLE_SPEC);
+		DB.close();
 	}
 }

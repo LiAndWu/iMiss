@@ -10,7 +10,7 @@ import org.jdom.Element;
 
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
-import edu.crabium.android.MainActivity;
+import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -87,7 +87,7 @@ public class BlackListActivity extends Activity {
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
-				Intent intent = new Intent(BlackListActivity.this, MainActivity.class);
+				Intent intent = new Intent(BlackListActivity.this, IMissActivity.class);
 				startActivity(intent);
 				BlackListActivity.this.finish();
 			}

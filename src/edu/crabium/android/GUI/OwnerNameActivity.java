@@ -3,7 +3,7 @@ package edu.crabium.android.GUI;
 
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
-import edu.crabium.android.MainActivity;
+import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -61,7 +61,7 @@ public class OwnerNameActivity extends Activity {
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(OwnerNameActivity.this, MainActivity.class);
+				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);
 				OwnerNameActivity.this.finish();
 			}
@@ -76,7 +76,7 @@ public class OwnerNameActivity extends Activity {
 				DisplayToast("现在的机主名是" + IMissData.ReadNode("Owner") + "\n" +
 						(IMissData.ReadNode("ShowOwnerNameToStranger").equals("true") ? "\t对陌生人开启" : "\t对陌生人关闭"));	
 				
-				Intent intent = new Intent(OwnerNameActivity.this, MainActivity.class);
+				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);
 				OwnerNameActivity.this.finish();
 			}

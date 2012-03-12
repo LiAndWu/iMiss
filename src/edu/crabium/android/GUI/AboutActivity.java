@@ -1,6 +1,6 @@
 package edu.crabium.android.GUI;
 
-import edu.crabium.android.MainActivity;
+import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -40,7 +40,7 @@ public class AboutActivity extends Activity {
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
-			Intent intent = new Intent(AboutActivity.this, MainActivity.class);
+			Intent intent = new Intent(AboutActivity.this, IMissActivity.class);
 			startActivity(intent);
 			AboutActivity.this.finish();
 			}
