@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 
 public class IMissPhoneStateListener extends PhoneStateListener {
 	public void callback() {

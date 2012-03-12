@@ -1,23 +1,17 @@
 package edu.crabium.android;
 
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
-import android.content.res.AssetManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class IMissData{
 	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/files/iMiss.sqlite3";
 	
 	private final static String BLACKLIST_TABLE_NAME = "black_list";
 	private final static String BLACKLIST_TABLE_SPEC = "(name TEXT, number TEXT)";
-	private final static String BLACKLIST_GET = "SELECT * FROM " + BLACKLIST_TABLE_NAME;
-	private final static String BLACKLIST_SET = "INSERT INTO " + BLACKLIST_TABLE_NAME + " VALUES ";
 	
 	private final static String IGNORELIST_TABLE_NAME = "ignore_list";
 	private final static String IGNORELIST_TABLE_SPEC = "(name TEXT, number TEXT)";
@@ -31,9 +25,8 @@ public class IMissData{
 	private final static String MISC_DEL_VALUE = "DELETE FROM " + MISC_TABLE_NAME + " WHERE key =";
 	private final static String MISC_INSERT_VALUE = "INSERT INTO " + MISC_TABLE_NAME + " (key, value) VALUES ";
 	private final static String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
-	private final static String VERSION = "1";
+	private final static int VERSION = 1;
 	
-	private static Activity activity;
 	private static SQLiteDatabase DB;
 	
 	private static boolean initiated = false;
@@ -88,45 +81,84 @@ public class IMissData{
 		DB.close();
 	}
 	
+	/** get values from the specified table 
+	 * 
+	 * @param tableName
+	 * @return 
+	 */
+	public static Map<String, String> getTableValues(String tableName)
+	{
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		
+		String query = "SELECT * FROM " + tableName;
+		Cursor cursor = DB.rawQuery(query, null);
+		
+		Map<String, String> list = new HashMap<String, String>();
+		if(cursor.getCount() > 0){
+			while(cursor.moveToNext()){
+				list.put(cursor.getString(0), cursor.getString(1));
+			}
+		}
+		DB.close();
+		return new HashMap<String, String>(list);
+		
+	}
+	
+	/** add a new column in specified table, with key-value pair
+	 * 
+	 * @param tableName
+	 * @param key
+	 * @param value
+	 */
+	public static void setTableValues(String tableName, String key, String value){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+
+		String sql_text = "INSERT INTO " + tableName + " VALUES (\"" + key + "\", \"" + value + "\")";
+		DB.execSQL(sql_text);
+		DB.close();
+	}
+	
 	/** return black list information, packed in a Map
 	 * 
 	 * @return Map<String name, String number> 
 	 */
 	public static Map<String, String> getBlackList()
 	{
-		if(!initiated) createTables();
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		Cursor cursor = DB.rawQuery(BLACKLIST_GET, null);
-		
-		Map<String, String> blacklist = new HashMap<String, String>();
-		if(cursor.getCount() > 0){
-			while(cursor.moveToNext()){
-				blacklist.put(cursor.getString(0), cursor.getString(1));
-			}
-		}
-		DB.close();
-		return new HashMap<String, String>(blacklist);
+		return getTableValues(BLACKLIST_TABLE_NAME);
+	}
+	
+	/** return ignore list information, packed in a Map
+	 * 
+	 * @return
+	 */
+	public static Map<String, String> getIgnoreList()
+	{
+		return getTableValues(IGNORELIST_TABLE_NAME);
 	}
 	
 	/** insert a column into blacklist.
 	 * 
 	 */
 	public static void setBlackList(String key, String value){
-		if(!initiated) createTables();
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-
-		String[] pair = new String[2];
-		pair[0] = key;
-		pair[1] = value;
-		DB.execSQL(BLACKLIST_SET + "(\"" + key + "\", \"" + value + "\")");
-		DB.close();
+		setTableValues(BLACKLIST_TABLE_NAME, key, value);
 	}
+	
+	/** insert a column into ignore list
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public static void setIgnoreList(String key, String value){
+		setTableValues(IGNORELIST_TABLE_NAME, key, value);
+	}
+	
 	/** get activity and create necessary tables
 	 * 
 	 * @param activity
 	 */
 	public static void init(Activity activity){
-		IMissData.activity = activity;
 		createTables();
 		initiated = true;
 	}
@@ -141,6 +173,7 @@ public class IMissData{
 		DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
 		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME	+ RESTTIME_TABLE_SPEC);
 		DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME	+ MISC_TABLE_SPEC);
+		DB.setVersion(VERSION);
 		DB.close();
 	}
 }

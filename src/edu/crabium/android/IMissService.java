@@ -1,9 +1,7 @@
 package edu.crabium.android;
 
-import java.io.IOException;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import android.app.Service;
 import android.content.Context;
@@ -36,7 +34,7 @@ public class IMissService extends Service{
 		IMissData.setBlackList("d", "234");
 		Map<String,String> blacklist = IMissData.getBlackList();
 		
-		Iterator iter = blacklist.keySet().iterator();
+		Iterator<String> iter = blacklist.keySet().iterator();
 		while(iter.hasNext()){
 			String key = iter.next().toString();
 			Log.d("GREETING", key + blacklist.get(key));
