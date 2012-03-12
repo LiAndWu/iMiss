@@ -34,19 +34,18 @@ public class SetReplyActivity extends Activity {
 	List<Map<String,String>> SetReplyDisplay;
 	private Button BackButton;
 	SimpleAdapter adapter;
-	
+
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_reply);
-		
+
 		SetReplyLinearLayout = (LinearLayout) findViewById(R.id.set_reply_linearlayout);
 		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
 		setContentView(SetReplyLinearLayout);
 
-		
+
 		SetReplyDisplay = new ArrayList<Map<String,String>>();
-		SetReplyDisplay = addValue();
 		final String[] from = {SetReplyColumn1,SetReplyColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
 		adapter = new SimpleAdapter(this, SetReplyDisplay,android.R.layout.simple_list_item_2, from,to);
@@ -54,7 +53,7 @@ public class SetReplyActivity extends Activity {
 		SetReplyListView.setItemsCanFocus(true); 
 		SetReplyListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
 
-		//¼àÌıOnClickÊÂ¼ş
+		//ç›‘å¬OnClickäº‹ä»¶
 		SetReplyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
 				ListView listView = (ListView)parent;
@@ -62,22 +61,22 @@ public class SetReplyActivity extends Activity {
 				HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);
 				GlobalVariable.TargetReplyTitle = map.get(SetReplyColumn1);
 				GlobalVariable.TargetReplyContent = map.get(SetReplyColumn2);
-				
+
 				Intent intent = new Intent(SetReplyActivity.this, EditReplyActivity.class);
 				startActivity(intent);
 				SetReplyActivity.this.finish();
 			}
 		});	
-		
+
 		SetReplyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {         
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "Ñ¡ÔñÁªÏµÈË");   
-                menu.add(0, Menu.FIRST + 1, 0, "É¾³ı");
+                menu.add(0, Menu.FIRST, 0, "é€‰æ‹©è”ç³»äºº");   
+                menu.add(0, Menu.FIRST + 1, 0, "åˆ é™¤");
             }   
         });     
-		 
+
 		NewReplyLinearLayout = (LinearLayout) findViewById(R.id.new_reply_linearlayout);
 		NewReplyLinearLayout.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
@@ -88,7 +87,7 @@ public class SetReplyActivity extends Activity {
 				SetReplyActivity.this.finish();
 			}
 		});
-		
+
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
@@ -98,80 +97,70 @@ public class SetReplyActivity extends Activity {
 			}
 		});
 	}
-	
+
     public boolean onContextItemSelected(MenuItem item) {   
-    	if (item.getItemId() == Menu.FIRST) {//Ñ¡ÔñÁªÏµÈË
+    	if (item.getItemId() == Menu.FIRST) {//é€‰æ‹©è”ç³»äºº
 			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
-    	} else if (item.getItemId() == Menu.FIRST + 1) {//É¾³ı
+    	} else if (item.getItemId() == Menu.FIRST + 1) {//åˆ é™¤
 
     	}
         return super.onContextItemSelected(item);   
     }  
     
-	//ÏÔÊ¾Toast  
+	//æ˜¾ç¤ºToast  
 	public void DisplayToast(String str) {
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 	} 
-	
-	//ÉèÖÃ»Ø¸´Ç°²¿·Ö
+
+	//è®¾ç½®å›å¤å‰éƒ¨åˆ†
 	public String ReplyForePart() {
 		String ReplyForePart;
 		if (IMissData.getValue("ShowOwnerNameToStranger").equals("true")) {
-			ReplyForePart = "àË£¬ÎÒÊÇ" + IMissData.getValue("Owner");
+			ReplyForePart = "å—¨ï¼Œæˆ‘æ˜¯" + IMissData.getValue("Owner");
 		} else {
-			ReplyForePart = "ÄãºÃ£¬»úÖ÷";
+			ReplyForePart = "ä½ å¥½ï¼Œæœºä¸»";
 		}
 		return ReplyForePart;
 	}
-	
-	//Ä¬ÈÏ»Ø¸´
-    public List<Map<String, String>> addValue(){
-    	List<Map<String, String>> value = new ArrayList<Map<String, String>>();
-    	
+
+	//é»˜è®¤å›å¤
+    public void addValue(){
     	Map<String, String> item1 = new HashMap<String, String>();
-    	item1.put(SetReplyColumn1, "¹¤×÷");
-    	item1.put(SetReplyColumn2, ReplyForePart() + ",ÏÖÔÚÓĞÊÂ²»ÄÜ½Óµç»°£¬ÉÔºó»Ø¸´¡£");
-    	value.add(item1);
+    	item1.put(SetReplyColumn1, "å·¥ä½œ");
+    	item1.put(SetReplyColumn2, ReplyForePart() + ",ç°åœ¨æœ‰äº‹ä¸èƒ½æ¥ç”µè¯ï¼Œç¨åå›å¤ã€‚");
+    	SetReplyDisplay.add(item1);
     	
     	Map<String, String> item2 = new HashMap<String, String>();
-    	item2.put(SetReplyColumn1, "¼ÒÈË");
-    	item2.put(SetReplyColumn2, ReplyForePart() + ",ÏÖÔÚÓĞµãÊÂ£¬µÈÏÂÎÒ´ò»ØÈ¥¡£");
-    	value.add(item2);
+    	item2.put(SetReplyColumn1, "å®¶äºº");
+    	item2.put(SetReplyColumn2, ReplyForePart() + ",ç°åœ¨æœ‰ç‚¹äº‹ï¼Œç­‰ä¸‹æˆ‘æ‰“å›å»ã€‚");
+    	SetReplyDisplay.add(item2);
     	
     	Map<String, String> item3 = new HashMap<String, String>();
-    	item3.put(SetReplyColumn1, "ÅóÓÑ");
-    	item3.put(SetReplyColumn2, ReplyForePart() + ",ÏÖÔÚÕıÔÚÃ¦ÂÒÆß°ËÔãÒ»¶ÑÊÂ£¬µÈÏÂÎÒ»á¸øÄã´ò¹ıÈ¥¡£");
-    	value.add(item3);  	
-    	return value;
+    	item3.put(SetReplyColumn1, "æœ‹å‹");
+    	item3.put(SetReplyColumn2, ReplyForePart() + ",ç°åœ¨æ­£åœ¨å¿™ä¹±ä¸ƒå…«ç³Ÿä¸€å †äº‹ï¼Œç­‰ä¸‹æˆ‘ä¼šç»™ä½ æ‰“è¿‡å»ã€‚");
+    	SetReplyDisplay.add(item3);  	
     }
     
-    //ÓÃÀ´Ìí¼ÓĞÂµÄ»Ø¸´Ïî
-    public List<Map<String,String>> addNewValue(String title, String content){
-    	List<Map<String,String>> value = new ArrayList<Map<String,String>>();  	
+    //ç”¨æ¥æ·»åŠ æ–°çš„å›å¤é¡¹
+    public void addNewValue(String title, String content){
     	Map<String,String> item1 = new HashMap<String,String>();
     	item1.put(SetReplyColumn1, title);
     	item1.put(SetReplyColumn2, content);
-    	value.add(item1);	
-    	return value;
+    	SetReplyDisplay.add(item1);	
     }
     
-    //ĞŞ¸Ä»Ø¸´Ïî
-    public List<Map<String,String>> MotifyNewValue(String title, String content){
-    	List<Map<String,String>> value = new ArrayList<Map<String,String>>();  	
+    //ä¿®æ”¹å›å¤é¡¹
+    public void MotifyNewValue(String title, String content){
     	Map<String,String> item1 = new HashMap<String,String>();
     	item1.put(SetReplyColumn1, title);
     	item1.put(SetReplyColumn2, content);
-    	value.add(item1);	
-    	return value;
+    	SetReplyDisplay.add(item1);	
     }
     
-    //É¾³ı»Ø¸´Ïî
-    public List<Map<String,String>> DeleteValue(String title, String content){
-    	List<Map<String,String>> value = new ArrayList<Map<String,String>>();  	
-    	Map<String,String> item1 = new HashMap<String,String>();
-    	item1.remove(GlobalVariable.TargetReplyPosition);
-    	return value;
+    //åˆ é™¤å›å¤é¡¹
+    public void DeleteValue(String title, String content){
+    	SetReplyDisplay.remove(title);
     }
 }

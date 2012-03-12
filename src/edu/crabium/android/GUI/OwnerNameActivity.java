@@ -1,7 +1,5 @@
 package edu.crabium.android.GUI;
 
-
-import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
 import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
@@ -33,10 +31,10 @@ public class OwnerNameActivity extends Activity {
 		OwnerEditText = (EditText) findViewById(R.id.ownername_editview);
 		OwnerEditText.setFocusable(true);
 		OwnerEditText.setFocusableInTouchMode(true);
-		OwnerEditText.setHint("ÊäÈë»úÖ÷Ãû");
+		OwnerEditText.setHint("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 		OwnerEditText.setText(IMissData.getValue("Owner"));
 		Log.d("TAG", "O2");
-		DisplayToast("ÏÖÔÚµÄ»úÖ÷ÃûÊÇ£º" + IMissData.getValue("Owner"));
+		DisplayToast("ï¿½ï¿½ï¿½ÚµÄ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ç£ï¿½" + IMissData.getValue("Owner"));
 
 		Log.d("TAG", "O3");
 		ToggleButtonTextView = (TextView) findViewById(R.id.togglebutton_textview);
@@ -48,11 +46,11 @@ public class OwnerNameActivity extends Activity {
             public void onClick(View v) { 
             	if (OwnerNameToggleButton.isChecked()) {
             		IMissData.setValue("ShowOwnerNameToStranger", "true");
-            		ToggleButtonTextView.setText("¶ÔÄ°ÉúÈË¿ªÆô");
+            		ToggleButtonTextView.setText("ï¿½ï¿½Ä°ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½");
             		Log.d("TAG", "O5");
             	} else {
             		IMissData.setValue("ShowOwnerNameToStranger", "false");
-            		ToggleButtonTextView.setText("¶ÔÄ°ÉúÈË¹Ø±Õ");
+            		ToggleButtonTextView.setText("ï¿½ï¿½Ä°ï¿½ï¿½ï¿½Ë¹Ø±ï¿½");
             		Log.d("TAG", "O6");
             	}
             } 
@@ -73,8 +71,8 @@ public class OwnerNameActivity extends Activity {
 				OwnerEditText.setFocusable(false);
 				OwnerEditText.setFocusableInTouchMode(false);
 				IMissData.setValue("Owner",OwnerEditText.getText().toString());
-				DisplayToast("ÏÖÔÚµÄ»úÖ÷ÃûÊÇ" + IMissData.getValue("Owner") + "\n" +
-						(IMissData.getValue("ShowOwnerNameToStranger").equals("true") ? "\t¶ÔÄ°ÉúÈË¿ªÆô" : "\t¶ÔÄ°ÉúÈË¹Ø±Õ"));	
+				DisplayToast("ï¿½ï¿½ï¿½ÚµÄ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½" + IMissData.getValue("Owner") + "\n" +
+						(IMissData.getValue("ShowOwnerNameToStranger").equals("true") ? "\tï¿½ï¿½Ä°ï¿½ï¿½ï¿½Ë¿ï¿½ï¿½ï¿½" : "\tï¿½ï¿½Ä°ï¿½ï¿½ï¿½Ë¹Ø±ï¿½"));	
 				
 				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);

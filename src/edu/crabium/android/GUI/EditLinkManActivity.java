@@ -1,7 +1,5 @@
 package edu.crabium.android.GUI;
 
-import org.jdom.Element;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +8,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import edu.crabium.android.GlobalVariable;
-import edu.crabium.android.IMissData;
 import edu.crabium.android.R;
 
 public class EditLinkManActivity extends Activity {
@@ -41,7 +38,6 @@ public class EditLinkManActivity extends Activity {
 			}
 		});		
 		
-		
 		SaveButton = (Button)findViewById(R.id.store_button);
 		SaveButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
@@ -51,7 +47,5 @@ public class EditLinkManActivity extends Activity {
 				EditLinkManActivity.this.finish();
 			}
 		});
-		
 	}
-
 }

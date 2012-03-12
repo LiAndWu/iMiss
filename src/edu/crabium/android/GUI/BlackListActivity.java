@@ -2,11 +2,8 @@ package edu.crabium.android.GUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import org.jdom.Element;
 
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
@@ -52,10 +49,10 @@ public class BlackListActivity extends Activity {
 		BlackListDisplay = IMissData.getBlackList();
 		List<Map<String,String>> list = new ArrayList<Map<String, String>>();
 		list.add(BlackListDisplay);
-		final String[] FORM = {BlackListColumn1, BlackListColumn2};
+		final String[] from = {BlackListColumn1, BlackListColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
 		adapter = new SimpleAdapter(this, list,
-				android.R.layout.simple_list_item_2, FORM, to);
+				android.R.layout.simple_list_item_2, from, to);
 		BlackListListView.setAdapter(adapter);
 		BlackListListView.setItemsCanFocus(true); 
 		BlackListListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
