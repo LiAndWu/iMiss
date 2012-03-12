@@ -44,8 +44,8 @@ public class SetReplyActivity extends Activity {
 		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
 		setContentView(SetReplyLinearLayout);
 
-
 		SetReplyDisplay = new ArrayList<Map<String,String>>();
+		addValue();
 		final String[] from = {SetReplyColumn1,SetReplyColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
 		adapter = new SimpleAdapter(this, SetReplyDisplay,android.R.layout.simple_list_item_2, from,to);
@@ -104,15 +104,10 @@ public class SetReplyActivity extends Activity {
 			startActivity(intent);
 			SetReplyActivity.this.finish();
     	} else if (item.getItemId() == Menu.FIRST + 1) {//删除
-
+    	
     	}
         return super.onContextItemSelected(item);   
     }  
-    
-	//显示Toast  
-	public void DisplayToast(String str) {
-		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-	} 
 
 	//设置回复前部分
 	public String ReplyForePart() {
@@ -126,7 +121,7 @@ public class SetReplyActivity extends Activity {
 	}
 
 	//默认回复
-    public void addValue(){
+    private void addValue(){
     	Map<String, String> item1 = new HashMap<String, String>();
     	item1.put(SetReplyColumn1, "工作");
     	item1.put(SetReplyColumn2, ReplyForePart() + ",现在有事不能接电话，稍后回复。");
@@ -163,4 +158,9 @@ public class SetReplyActivity extends Activity {
     public void DeleteValue(String title, String content){
     	SetReplyDisplay.remove(title);
     }
+    
+	//显示Toast  
+	public void DisplayToast(String str) {
+		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+	} 
 }

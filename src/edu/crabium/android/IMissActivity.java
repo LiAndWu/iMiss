@@ -1,7 +1,6 @@
 
 package edu.crabium.android;
 
-import edu.crabium.android.R;
 import edu.crabium.android.GUI.AboutActivity;
 import edu.crabium.android.GUI.BlackListActivity;
 import edu.crabium.android.GUI.OwnerNameActivity;

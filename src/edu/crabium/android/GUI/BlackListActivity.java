@@ -33,7 +33,7 @@ public class BlackListActivity extends Activity {
 	private Button BackButton;
 	private final static String BlackListColumn1 = "name";
 	private final static String BlackListColumn2 = "number";
-	private Map<String,String> BlackListDisplay;
+	private List<Map<String,String>> BlackListDisplay;
 	private SimpleAdapter adapter;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,13 +45,10 @@ public class BlackListActivity extends Activity {
 		BlackListListView = (ListView) findViewById(R.id.blacklist_listview);
 		setContentView(BlackListLinearLayout);
 		
-		BlackListDisplay = new HashMap<String, String>();
-		BlackListDisplay = IMissData.getBlackList();
-		List<Map<String,String>> list = new ArrayList<Map<String, String>>();
-		list.add(BlackListDisplay);
-		final String[] from = {BlackListColumn1, BlackListColumn2};
+	    BlackListDisplay = new ArrayList<Map<String,String>>();
+	     final String[] from = {BlackListColumn1, BlackListColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
-		adapter = new SimpleAdapter(this, list,
+		adapter = new SimpleAdapter(this, BlackListDisplay,
 				android.R.layout.simple_list_item_2, from, to);
 		BlackListListView.setAdapter(adapter);
 		BlackListListView.setItemsCanFocus(true); 
