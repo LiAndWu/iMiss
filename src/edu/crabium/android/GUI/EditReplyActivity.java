@@ -1,6 +1,5 @@
 package edu.crabium.android.GUI;
 
-
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.R;
 import android.app.Activity;
@@ -10,7 +9,6 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
-
 
 public class EditReplyActivity extends Activity {
 	private Button CancelButton, SaveButton;
@@ -26,7 +24,7 @@ public class EditReplyActivity extends Activity {
 		
 		ContentEditText = (EditText) findViewById(R.id.content_edittext);
 		ContentEditText.setText(GlobalVariable.TargetReplyContent);
-		ContentEditText.setHint("ÊäÈëĞÂµÄ»Ø¸´ÄÚÈİ");
+		ContentEditText.setHint("è¯·è¾“å…¥å›å¤å†…å®¹");
 			
 		SaveButton = (Button)findViewById(R.id.store_button);
 		SaveButton.setOnClickListener(new Button.OnClickListener() {

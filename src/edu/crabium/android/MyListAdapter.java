@@ -1,5 +1,4 @@
 package edu.crabium.android;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,21 +26,14 @@ public class MyListAdapter extends BaseAdapter{
 		this.arr = arr;
 		init();
 	}
-<<<<<<< HEAD
-	// ��ʼ�� 
-=======
-	
->>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
+
 	private void init() {
 		myData = new HashMap<String, String>();
 		for(int i = 0 ; i < count;i++) {
 			myData.put(Column1, arr[i][0]);
 			myData.put(Column2, arr[i][1]);
 		}
-<<<<<<< HEAD
-		// ����� isSelected ��� map �Ǽ�¼ÿ�� list items ��״̬����ʼ״̬ȫ��Ŷ false
-=======
->>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
+
 		isSelected = new HashMap<Integer, Boolean>();
 		for (int i = 0; i < count; i++) {
 			isSelected.put(i, false);
@@ -68,10 +60,6 @@ public class MyListAdapter extends BaseAdapter{
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
-<<<<<<< HEAD
-		// convertView Ϊ null ʱ ��ʼ�� convertView
-=======
->>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
 		if(convertView == null){
 			holder = new ViewHolder();
 			convertView = mInflater.inflate(R.layout.dispatch_select_user_item, null);

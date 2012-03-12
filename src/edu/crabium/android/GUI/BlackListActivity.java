@@ -2,11 +2,10 @@ package edu.crabium.android.GUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+
 import edu.crabium.android.GlobalVariable;
-import edu.crabium.android.IMissData;
 import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
@@ -33,7 +32,7 @@ public class BlackListActivity extends Activity {
 	private Button BackButton;
 	private final static String BlackListColumn1 = "name";
 	private final static String BlackListColumn2 = "number";
-	private Map<String,String> BlackListDisplay;
+	private List<Map<String,String>> BlackListDisplay;
 	private SimpleAdapter adapter;
 	
 	public void onCreate(Bundle savedInstanceState) {
@@ -45,22 +44,17 @@ public class BlackListActivity extends Activity {
 		BlackListListView = (ListView) findViewById(R.id.blacklist_listview);
 		setContentView(BlackListLinearLayout);
 		
-		BlackListDisplay = new HashMap<String, String>();
-		BlackListDisplay = IMissData.getBlackList();
-		List<Map<String,String>> list = new ArrayList<Map<String, String>>();
-		list.add(BlackListDisplay);
-		final String[] FORM = {BlackListColumn1, BlackListColumn2};
+
+	    BlackListDisplay = new ArrayList<Map<String,String>>();
+	     final String[] from = {BlackListColumn1, BlackListColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
-		adapter = new SimpleAdapter(this, list,
-				android.R.layout.simple_list_item_2, FORM, to);
+		adapter = new SimpleAdapter(this, BlackListDisplay,
+				android.R.layout.simple_list_item_2, from, to);
+
 		BlackListListView.setAdapter(adapter);
 		BlackListListView.setItemsCanFocus(true); 
 		BlackListListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
 		
-<<<<<<< HEAD
-		//����OnClick�¼�
-=======
->>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
 		BlackListListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
 				Log.d("TAG","Position:" + String.valueOf(position));
@@ -81,11 +75,7 @@ public class BlackListActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-<<<<<<< HEAD
-                menu.add(0, Menu.FIRST, 0, "ɾ��");
-=======
                 menu.add(0, Menu.FIRST, 0, "刪除");
->>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
             }   
         });  
 		
@@ -111,59 +101,14 @@ public class BlackListActivity extends Activity {
 	}
 	
 	public boolean onContextItemSelected(MenuItem item) {  
-    	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo();  
-<<<<<<< HEAD
-    	if (item.getItemId() == Menu.FIRST) {//ɾ��
-=======
+    	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	if (item.getItemId() == Menu.FIRST) {//刪除
->>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
     		int pos = (int) BlackListListView.getAdapter().getItemId(menuInfo.position);
             BlackListDisplay.remove(pos);
     	} 
     	adapter.notifyDataSetChanged();  
         return super.onContextItemSelected(item);   
     }  
-<<<<<<< HEAD
-    
-	//Ĭ�ϻظ�
-    public List<Map<String, String>> addValue(){
-    	List<Map<String, String>> value = new ArrayList<Map<String, String>>();
-    	
-    	List<Element> list = IMissData.ReadNodes("BlackList");
-    	Iterator<Element> it = list.iterator();
-    	
-    	while(it.hasNext())
-    	{
-    		Element e = it.next();
-    		
-        	Map<String, String> item = new HashMap<String, String>();
-        	item.put(BlackListColumn1, e.getChild("Name").getValue());
-        	item.put(BlackListColumn2, e.getChild("Number").getValue());
-        	value.add(item);
-    	}
-    	return value;
-    }
-    
-    private boolean SaveListToDataBase()
-    {
-    	Iterator<Map<String,String>> it = BlackListDisplay.iterator();
-    	List<Element> list = new ArrayList<Element>();
-    	while(it.hasNext())
-    	{
-    		Map<String, String> item = it.next();
-    		Element e = new Element("Item");
-    		Element name = new Element("Name");
-    		Element num  = new Element("Number");
-    		name.setText(item.get(BlackListColumn1));
-    		num.setText(item.get(BlackListColumn2));
-    		e.addContent(name);
-    		e.addContent(num);
-    		list.add(e);
-    	}
-    	
-    	return IMissData.WriteNodes("BlackList", list);
-    }
-=======
->>>>>>> e3544c3cd0f09459d6f4ff157da8492a7fe70fa7
+
 }
 

@@ -9,7 +9,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.TextView;
 
-
 public class HelpActivity extends Activity {
 	private Button BackButton;
 	private TextView HelpTextView;
@@ -30,11 +29,11 @@ public class HelpActivity extends Activity {
 		
 		HelpTextView = (TextView) findViewById(R.id.help_textView);
 		HelpTextView.setText(
-		"1） 机主名：你可以设置回复显示的机主名，同时也可以选择是否对陌生人显示。\n" +
-	    "2） 设置回复：你可以自定义设置回复内容，当然，包括选择用于回复的联系人。\n" +
-		"3） 黑名单： 拦截不想被骚扰的电话。\n" +
-	    "4） 拒接时间段：有些时间段不想接电话？不用关机，设置拒接时间段吧，我们帮你拦截所有电话。\n" +
-		"5） 操作：回复内容，黑名单，拒接时间段等都可以进行，新建，删除，修改等操作。\n");
+		"1锟斤拷 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷没馗锟斤拷锟绞撅拷幕锟斤拷锟斤拷锟酵币诧拷锟斤拷锟窖★拷锟斤拷欠锟斤拷陌锟斤拷锟斤拷锟斤拷示锟斤拷\n" +
+	    "2锟斤拷 锟斤拷锟矫回革拷锟斤拷锟斤拷锟斤拷锟斤拷远锟斤拷锟斤拷锟斤拷没馗锟斤拷锟斤拷荩锟斤拷锟饺伙拷锟斤拷锟斤拷锟窖★拷锟斤拷锟斤拷诨馗锟斤拷锟斤拷锟较碉拷恕锟絓n" +
+		"3锟斤拷 锟斤拷锟斤拷 锟斤拷锟截诧拷锟诫被骚锟脚的电话锟斤拷\n" +
+	    "4锟斤拷 锟杰斤拷时锟斤拷危锟斤拷锟叫┦憋拷锟轿诧拷锟斤拷拥缁帮拷锟斤拷锟斤拷霉鼗锟斤拷锟斤拷镁芙锟绞憋拷锟轿吧ｏ拷锟斤拷锟角帮拷锟斤拷锟斤拷锟斤拷锟斤拷锟叫电话锟斤拷\n" +
+		"5锟斤拷 锟斤拷锟斤拷锟斤拷锟截革拷锟斤拷锟捷ｏ拷锟斤拷锟斤拷锟杰斤拷时锟斤拷蔚榷锟斤拷锟斤拷越锟斤拷校锟斤拷陆锟斤拷锟缴撅拷锟斤拷薷牡炔锟斤拷锟斤拷锟絓n");
 	}
 	
 }
