@@ -36,13 +36,14 @@ public class SetReplyActivity extends Activity {
 	
 	private Button BackButton;
 	private SimpleAdapter adapter;
-	List<Map<String,String>> SetReplyDisplay = new ArrayList<Map<String, String>>();
+	List<Map<String,String>> SetReplyDisplay;
 
 	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_reply);
-
+		
+		SetReplyDisplay = new ArrayList<Map<String, String>>();
 		SetReplyLinearLayout = (LinearLayout) findViewById(R.id.set_reply_linearlayout);
 		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
 		setContentView(SetReplyLinearLayout);
