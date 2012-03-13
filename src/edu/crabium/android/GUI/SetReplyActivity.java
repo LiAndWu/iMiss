@@ -6,27 +6,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.crabium.android.GlobalVariable;
-import edu.crabium.android.IMissData;
-import edu.crabium.android.IMissActivity;
-import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.view.ContextMenu;   
-import android.view.Menu;
-import android.view.MenuItem;   
-import android.view.Window;
-import android.view.ContextMenu.ContextMenuInfo;   
-import android.view.View.OnCreateContextMenuListener;   
+import edu.crabium.android.IMissActivity;
+import edu.crabium.android.IMissData;
+import edu.crabium.android.R;
 
 public class SetReplyActivity extends Activity {
 	LinearLayout	SetReplyLinearLayout, NewReplyLinearLayout;
@@ -116,7 +115,6 @@ public class SetReplyActivity extends Activity {
 	 */
     public boolean onContextItemSelected(MenuItem item, List<Map<String,String>> to) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
-    	
     	if (item.getItemId() == Menu.FIRST) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
 			startActivity(intent);
@@ -127,7 +125,7 @@ public class SetReplyActivity extends Activity {
 			SetReplyActivity.this.finish();
     	} else if (item.getItemId() == Menu.FIRST + 2) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
-    		to.remove(pos);
+    		
 			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
