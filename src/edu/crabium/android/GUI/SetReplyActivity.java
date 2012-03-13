@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
@@ -31,10 +32,12 @@ public class SetReplyActivity extends Activity {
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
-	List<Map<String,String>> SetReplyDisplay;
+	;
 	private Button BackButton;
 	SimpleAdapter adapter;
 
+	//TODO 
+	//String hello;
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -44,8 +47,8 @@ public class SetReplyActivity extends Activity {
 		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
 		setContentView(SetReplyLinearLayout);
 		
-		SetReplyDisplay = new ArrayList<Map<String, String>>();
-		addValue();
+		List<Map<String,String>> SetReplyDisplay = new ArrayList<Map<String, String>>();
+		getGroups(SetReplyDisplay);
 		
 		final String[] from = {SetReplyColumn1, SetReplyColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
@@ -111,7 +114,7 @@ public class SetReplyActivity extends Activity {
     }  
 
 	//设置回复前部分
-	public String ReplyForePart() {
+	private String getReplyForePart() {
 		String ReplyForePart;
 		if (IMissData.getValue("ShowOwnerNameToStranger").equals("true")) {
 			ReplyForePart = "嗨，我是" + IMissData.getValue("Owner");
@@ -122,42 +125,38 @@ public class SetReplyActivity extends Activity {
 	}
 
 	//默认回复
-    private void addValue(){
-    	Map<String, String> item1 = new HashMap<String, String>();
-    	item1.put(SetReplyColumn1, "工作");
-    	item1.put(SetReplyColumn2, ReplyForePart() + ",现在有事不能接电话，稍后回复。");
-    	SetReplyDisplay.add(item1);
+	
+    private void getGroups(List<Map<String,String>> to){
+    	Map<String, String> map = IMissData.getGroups();
+    	Set<String> keys = map.keySet();
     	
-    	Map<String, String> item2 = new HashMap<String, String>();
-    	item2.put(SetReplyColumn1, "家人");
-    	item2.put(SetReplyColumn2, ReplyForePart() + ",现在有点事，等下我打回去。");
-    	SetReplyDisplay.add(item2);
-    	
-    	Map<String, String> item3 = new HashMap<String, String>();
-    	item3.put(SetReplyColumn1, "朋友");
-    	item3.put(SetReplyColumn2, ReplyForePart() + ",现在正在忙乱七八糟一堆事，等下我会给你打过去。");
-    	SetReplyDisplay.add(item3);  	
+    	for(String key : keys){
+        	Map<String, String> item = new HashMap<String, String>();
+        	item.put(SetReplyColumn1, key);
+        	item.put(SetReplyColumn2, map.get(key));
+        	to.add(item);
+    	}	
     }
     
     //用来添加新的回复项
-    public void addNewValue(String title, String content){
+    public void addNewValue(String title, String content,List<Map<String,String>> to){
     	Map<String,String> item1 = new HashMap<String,String>();
     	item1.put(SetReplyColumn1, title);
     	item1.put(SetReplyColumn2, content);
-    	SetReplyDisplay.add(item1);	
+    	to.add(item1);	
     }
     
     //修改回复项
-    public void MotifyNewValue(String title, String content){
+    public void MotifyNewValue(String title, String content, List<Map<String,String>> to){
     	Map<String,String> item1 = new HashMap<String,String>();
     	item1.put(SetReplyColumn1, title);
     	item1.put(SetReplyColumn2, content);
-    	SetReplyDisplay.add(item1);	
+    	to.add(item1);	
     }
     
     //删除回复项
-    public void DeleteValue(String title, String content){
-    	SetReplyDisplay.remove(title);
+    public void DeleteValue(String title, String content,List<Map<String,String>> to){
+    	to.remove(title);
     }
     
 	//显示Toast  
