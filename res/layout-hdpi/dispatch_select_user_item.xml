@@ -6,8 +6,8 @@
   
     <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent" android:weightSum="1" android:layout_weight="0.06" android:clickable="true">
         <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout2" android:layout_width="wrap_content" android:orientation="vertical" android:weightSum="1" android:layout_weight="0.86">
-	            <!-- 姓名 -->
-
+	          
+           	 <!-- 姓名 -->
 	            <TextView
 	                android:id="@+id/dispatch_item_select_user_name"
 	                android:layout_width="260dip"
@@ -21,8 +21,8 @@
 	                android:textSize="23dip" >
 
 	            </TextView>
+	            
 	            <!-- 电话 -->
-
 	            <TextView
 	                android:id="@+id/dispatch_item_select_user_phone"
 	                android:layout_width="260dip"
@@ -41,8 +41,8 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="match_parent"
 		            android:layout_marginRight="8dip"
-		            android:text=" " android:clickable="true">
-
+		            android:clickable="false"
+		            android:focusable="false">
 		        </CheckBox>
     </LinearLayout>
 </LinearLayout>

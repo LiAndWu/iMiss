@@ -24,6 +24,16 @@
 	        android:id="@+id/store_button" android:textStyle="bold">
         </Button>
     </LinearLayout>
-    <ListView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/select_linkman_listView" android:clickable="true"></ListView>
+
+
+    <ListView
+        android:id="@+id/select_linkman_listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:choiceMode="multipleChoice"
+        android:clickable="true"
+        android:focusable="true" >
+	</ListView>
+
     
 </LinearLayout>

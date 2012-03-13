@@ -2,9 +2,11 @@ package edu.crabium.android.GUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
-import edu.crabium.android.MyListAdapter.ViewHolder;
-import edu.crabium.android.MyListAdapter;
+import edu.crabium.android.IMissListViewAdapter;
+import edu.crabium.android.IMissListViewAdapter.ViewHolder;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -23,29 +25,29 @@ import android.widget.AdapterView.OnItemClickListener;
 
 
 public class SelectLinkManActivity extends Activity {
-    private ListView SelectLinkManListView;
+	private ListView selectContactsListView;
     private Button BackButton, SaveButton;
-    
+
+    ArrayList<String[]> name;
+    IMissListViewAdapter adapter;
 	HashMap<Integer,Boolean> map ;
+	
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_linkman);
-
-        ArrayList<String[]> name = new ArrayList<String[]>();
+        
         name = addValue();
         map = new HashMap<Integer, Boolean>();
         for (int i = 0; i < name.size(); i++) {
 			map.put(i, false);
 		}
-        SelectLinkManListView = (ListView) findViewById(R.id.select_linkman_listView); 
-    //    SelectLinkManListView.setOnItemClickListener(lis);
-        
-        final MyListAdapter mla = new MyListAdapter(SelectLinkManActivity.this, name.size(),
-        		name.toArray(new String[][]{}));
-        SelectLinkManListView.setAdapter(mla);
-
+        selectContactsListView = (ListView) findViewById(R.id.select_linkman_listView); 
+        selectContactsListView.setOnItemClickListener( lis);
+        adapter = new IMissListViewAdapter(name, this);
+        selectContactsListView.setAdapter(adapter);
         BackButton = (Button)findViewById(R.id.back_button);
+        
         BackButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
@@ -59,18 +61,40 @@ public class SelectLinkManActivity extends Activity {
             public void onClick(View v) {
             	
                 Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
+                
+                System.out.println("dd");
+                for(int i = 0; i < adapter.getCount(); i++){
+                	System.out.println( ((adapter.getCheck(i))));
+               }
+                /*
+                Map<Integer, Boolean> map = IMissListViewAdapter.getIsSelected();
+                Set<Integer> set = map.keySet();
+                
+                for(int key : set){
+                	System.out.println(key + " " + map.get(key));
+                }*/
+                //System.out.println(mla.getItem(0));
                 startActivity(intent);
                 SelectLinkManActivity.this.finish();
             }
         });	
         
-     Boolean flag =  ((ViewHolder) ((View) SelectLinkManListView.getItemAtPosition(0)).getTag()).cBox.isChecked();
-       
-    	  Log.d("哈哈哈", "第一项是" + flag);
-       
-        
 
-       
+        /*
+        selectContactsListView.setOnItemClickListener(new OnItemClickListener() {
+        	 @Override
+             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+        		 ViewHolder holder = (ViewHolder)arg1.getTag();
+        		 holder.checkBox.toggle();
+        		 adapter.getIsSelected().put(arg2, holder.checkBox.isChecked()); 
+        		 
+        		 if (holder.checkBox.isChecked()) {
+        			 Log.d("greeting", "" + holder.name);
+        			 // 如果选中 ，写入数据库;
+        		 }	 
+        	 }
+        });
+        */
     }
 
     public ArrayList<String[]> addValue(){
@@ -89,23 +113,24 @@ public class SelectLinkManActivity extends Activity {
             while(phone.moveToNext()) {
                 String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));     
                 value.add(new String[]{contact,phoneNumber});
-                Log.d("TAG", "Name: "+ contact + "and Number: " + phoneNumber);
             }
         }
         cursor.close();
-        return value;
+        return new ArrayList<String[]>(value);
     }
+    
     
     private OnItemClickListener lis = new OnItemClickListener() {
 		@Override
 		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, 
 				long arg3) {
 			ViewHolder holder = (ViewHolder) arg1.getTag();
-			holder.cBox.toggle();
-			MyListAdapter.isSelected.put(arg2, holder.cBox.isChecked());
+			holder.checkBox.toggle();
+			adapter.isSelected.put(arg2, holder.checkBox.isChecked());
 			
-			Log.d("TAG全部加进去", "123" + holder.cBox.isChecked());
+			Log.d("TAG", "123" + holder.checkBox.isChecked());
 		}
 	};
+	
 }
 
