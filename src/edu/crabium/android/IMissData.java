@@ -244,4 +244,27 @@ public class IMissData{
 		DB.close();
 		initiated = true;
 	}
+
+	public static void delGroup(String group_name){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		String sql_text = "DELETE FROM " + GROUPS_TABLE_NAME + " WHERE group_name=\"" + group_name + "\"";
+		DB.execSQL(sql_text);
+		DB.close();
+	}
+	
+	public static void addGroup(String[] group) {
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+
+		
+		String sql_text = "INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (null, \"" + group[0] + "\")";
+		DB.execSQL(sql_text);
+		Cursor cursor = DB.rawQuery("SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name=?", new String[]{group[0]});
+		cursor.moveToNext();
+		int group_id = cursor.getInt(0);
+		sql_text = "INSERT INTO " + MESSAGES_TABLE_NAME + " VALUES (null, " + group_id + ", \"" + group[1] + "\")";
+		DB.execSQL(sql_text);
+		DB.close();
+	}
 }
