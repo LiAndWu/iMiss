@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.view.ContextMenu;   
 import android.view.Menu;
 import android.view.MenuItem;   
@@ -77,8 +78,9 @@ public class SetReplyActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "选择联系人");   
-                menu.add(0, Menu.FIRST + 1, 0, "删除");
+                menu.add(0, Menu.FIRST, 0, "查看已选联系人");   
+                menu.add(0, Menu.FIRST + 1, 0, "添加联系人");
+                menu.add(0, Menu.FIRST + 2, 0, "删除联系人");
             }   
         });     
 
@@ -105,21 +107,34 @@ public class SetReplyActivity extends Activity {
 		});
 	}
 
-    public boolean onContextItemSelected(MenuItem item) {   
-    	if (item.getItemId() == Menu.FIRST) {//选择联系人
+	/**
+	 * Define operations for menu of SetReplyListView;
+	 * @param item ,the sub item of menu of SetReplyListView;
+	 * Menu.First:查看已选联系人
+	 * Menu.First + 1：添加联系人
+	 * Menu.First + 2: 删除联系人
+	 */
+    public boolean onContextItemSelected(MenuItem item, List<Map<String,String>> to) {
+    	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
+    	
+    	if (item.getItemId() == Menu.FIRST) {
+			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
+			startActivity(intent);
+			SetReplyActivity.this.finish();
+    	} else if (item.getItemId() == Menu.FIRST + 1) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
-    	} else if (item.getItemId() == Menu.FIRST + 1) {//删除
-    	
+    	} else if (item.getItemId() == Menu.FIRST + 2) {
+    		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
+    		to.remove(pos);
+			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
+			startActivity(intent);
+			SetReplyActivity.this.finish();
     	}
         return super.onContextItemSelected(item);   
     }  
 
-	/** get group information
-	 * 
-	 * @param to the destination to put group information
-	 */
     private void getGroups(List<Map<String,String>> to){
     	Map<String, String> map = IMissData.getGroups();
     	Set<String> keys = map.keySet();
@@ -154,11 +169,6 @@ public class SetReplyActivity extends Activity {
     	item1.put(SetReplyColumn1, title);
     	item1.put(SetReplyColumn2, content);
     	to.add(item1);	
-    }
-    
-    //删除回复项
-    public void DeleteValue(String title, String content,List<Map<String,String>> to){
-    	to.remove(title);
     }
     
 	//显示Toast  
