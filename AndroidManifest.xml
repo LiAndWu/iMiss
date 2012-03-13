@@ -80,7 +80,7 @@
 		          android:configChanges="orientation|keyboardHidden" > 
 		</activity>
 		
-		<activity android:name=".GUI.SelectedContactsActivity"
+		<activity android:name=".GUI.SelectedGroupMemberActivity"
 		          android:screenOrientation="portrait"
 		          android:configChanges="orientation|keyboardHidden" > 
 		</activity>

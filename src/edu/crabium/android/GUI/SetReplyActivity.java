@@ -6,28 +6,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.crabium.android.GlobalVariable;
-import edu.crabium.android.IMissData;
-import edu.crabium.android.IMissActivity;
-import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.ContextMenu.ContextMenuInfo;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnCreateContextMenuListener;
+import android.view.Window;
 import android.widget.AdapterView;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-import android.widget.AdapterView.AdapterContextMenuInfo;
-import android.view.ContextMenu;   
-import android.view.Menu;
-import android.view.MenuItem;   
-import android.view.Window;
-import android.view.ContextMenu.ContextMenuInfo;   
-import android.view.View.OnCreateContextMenuListener;   
+import edu.crabium.android.IMissActivity;
+import edu.crabium.android.IMissData;
+import edu.crabium.android.R;
 
 public class SetReplyActivity extends Activity {
 	LinearLayout	SetReplyLinearLayout, NewReplyLinearLayout;
@@ -35,23 +34,13 @@ public class SetReplyActivity extends Activity {
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
 	
-
+	private Button BackButton;
+	private SimpleAdapter adapter;
 	List<Map<String,String>> SetReplyDisplay = new ArrayList<Map<String, String>>();
 
-	final String[] from = {SetReplyColumn1, SetReplyColumn2};
-	int[] to = {android.R.id.text1, android.R.id.text2};
-	private Button BackButton;
-	SimpleAdapter adapter;
-
-	//TODO 
-	//String hello;
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-	}
-
-	public void onStart(Bundle savedInstanceState){
-		super.onStart();
+	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_reply);
 
 		SetReplyLinearLayout = (LinearLayout) findViewById(R.id.set_reply_linearlayout);
@@ -87,7 +76,7 @@ public class SetReplyActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "已选组员");   
+                menu.add(0, Menu.FIRST, 0, "小组成员");  
                 menu.add(0, Menu.FIRST + 1, 0, "添加组员");
                 menu.add(0, Menu.FIRST + 2, 0, "删除小组");
             }   
@@ -118,40 +107,30 @@ public class SetReplyActivity extends Activity {
 	/**
 	 * Define operations for menu of SetReplyListView;
 	 * @param item ,the sub item of menu of SetReplyListView;
-	 * Menu.First:已选组员
+	 * Menu.First:小组成员
 	 * Menu.First + 1：添加组员
 	 * Menu.First + 2: 删除组员
 	 */
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
-    	
     	if (item.getItemId() == Menu.FIRST) {
-			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
+			Intent intent = new Intent(SetReplyActivity.this, SelectedGroupMemberActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
+			
     	} else if (item.getItemId() == Menu.FIRST + 1) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
+			
     	} else if (item.getItemId() == Menu.FIRST + 2) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
     		IMissData.delGroup(map.get("title"));
     		
-
-    		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
-    		adapter = new SimpleAdapter(this, SetReplyDisplay,android.R.layout.simple_list_item_2, from, to);
-    		SetReplyListView.setAdapter(adapter);
-    	//	SetReplyListView.refreshDrawableState();
-    	//	SetReplyListView.postInvalidate();
-    	//	this.
-    	//	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-    	//	onCreate(null);
-    		
-    		//SetReplyActivity.this.finish();
-			//Intent intent = new Intent(SetReplyActivity.this, SetReplyActivity.class);
-			//startActivity(intent);
-			String hello;
+    		SetReplyActivity.this.finish();
+			Intent intent = new Intent(SetReplyActivity.this, SetReplyActivity.class);
+			startActivity(intent);
     	}
         return super.onContextItemSelected(item);   
     }  
