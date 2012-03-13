@@ -40,6 +40,18 @@ public class IMissData{
 	
 	private static boolean initiated = false;
 	
+	public static Map<String, String> getGroups(){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+
+		Map<String, String> map = new HashMap<String, String>();
+		Cursor cursor = DB.rawQuery("SELECT group_name, message_body FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + MESSAGES_TABLE_NAME + " USING (group_id)", null);
+		while(cursor.moveToNext()){
+			map.put(cursor.getString(0), cursor.getString(1));
+		}
+		DB.close();
+		return map;
+	}
 	
 	/** get value for specified key
 	 * 
@@ -220,7 +232,6 @@ public class IMissData{
 	private static void createTables()
 	{
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
-		
 		DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
 		DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
 		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME		+ RESTTIME_TABLE_SPEC);
@@ -231,5 +242,6 @@ public class IMissData{
 		
 		DB.setVersion(VERSION);
 		DB.close();
+		initiated = true;
 	}
 }

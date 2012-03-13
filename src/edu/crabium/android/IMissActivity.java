@@ -24,12 +24,11 @@ public class IMissActivity extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);    
-        IMissData.init(this);
         
         startService(new Intent(this, IMissService.class));
         
         OwnerNameTextView = (TextView) findViewById(R.id.tv);
-        OwnerNameTextView.setText(IMissData.getValue("Owner"));
+        OwnerNameTextView.setText(IMissData.getValue("owner"));
         
         OwnerNameButton = (LinearLayout)findViewById(R.id.ownername_chevron_button);
         OwnerNameButton.setOnClickListener(new Button.OnClickListener() {
