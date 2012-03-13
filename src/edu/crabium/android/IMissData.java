@@ -49,6 +49,7 @@ public class IMissData{
 		while(cursor.moveToNext()){
 			map.put(cursor.getString(0), cursor.getString(1));
 		}
+		cursor.close();
 		DB.close();
 		return map;
 	}
@@ -70,7 +71,8 @@ public class IMissData{
 			cursor.moveToNext();
 			result = cursor.getString(cursor.getColumnIndex("value"));
 		}
-		
+
+		cursor.close();
 		DB.close();
 		return result;
 	}
@@ -118,6 +120,7 @@ public class IMissData{
 				list.put(cursor.getString(0), cursor.getString(1));
 			}
 		}
+		cursor.close();
 		DB.close();
 		return new HashMap<String, String>(list);
 		
@@ -231,18 +234,19 @@ public class IMissData{
 	 */
 	private static void createTables()
 	{
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
-		DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME		+ RESTTIME_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME			+ MISC_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + MESSAGES_TABLE_NAME		+ MESSAGES_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + PERSONS_TABLE_NAME		+ PERSONS_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + GROUPS_TABLE_NAME		+ GROUPS_TABLE_SPEC);
-		
-		DB.setVersion(VERSION);
-		DB.close();
-		initiated = true;
+		if(!initiated){
+			DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
+			DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
+			DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
+			DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME		+ RESTTIME_TABLE_SPEC);
+			DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME			+ MISC_TABLE_SPEC);
+			DB.execSQL( CREATE_TABLE_TEXT + MESSAGES_TABLE_NAME		+ MESSAGES_TABLE_SPEC);
+			DB.execSQL( CREATE_TABLE_TEXT + PERSONS_TABLE_NAME		+ PERSONS_TABLE_SPEC);
+			DB.execSQL( CREATE_TABLE_TEXT + GROUPS_TABLE_NAME		+ GROUPS_TABLE_SPEC);
+			initiated = true;
+			DB.setVersion(VERSION);
+			DB.close();
+		}
 	}
 
 	public static void delGroup(String group_name){
