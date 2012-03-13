@@ -245,6 +245,14 @@ public class IMissData{
 		initiated = true;
 	}
 
+	public static void delGroup(String group_name){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		String sql_text = "DELETE FROM " + GROUPS_TABLE_NAME + " WHERE group_name=\"" + group_name + "\"";
+		DB.execSQL(sql_text);
+		DB.close();
+	}
+	
 	public static void addGroup(String[] group) {
 		if(!initiated) createTables();
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);

@@ -2,8 +2,6 @@ package edu.crabium.android;
 
 public class GlobalVariable {
 	//�ظ�����
-	public static String TargetReplyTitle = "δ����";
-	public static String TargetReplyContent = null;
 	public static int TargetReplyPosition;
 	
 	//����
