@@ -8,8 +8,6 @@ import java.util.Set;
 import edu.crabium.android.IMissListViewAdapter;
 import edu.crabium.android.IMissListViewAdapter.ViewHolder;
 import edu.crabium.android.R;
-import edu.crabium.android.R.id;
-import edu.crabium.android.R.layout;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;
@@ -18,14 +16,11 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
-import android.util.SparseBooleanArray;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 import android.widget.AdapterView.OnItemClickListener;
 
 
@@ -64,6 +59,7 @@ public class SelectLinkManActivity extends Activity {
         SaveButton = (Button)findViewById(R.id.store_button);
         SaveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+            	
                 Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
                 
                 System.out.println("dd");
@@ -83,6 +79,7 @@ public class SelectLinkManActivity extends Activity {
             }
         });	
         
+
         /*
         selectContactsListView.setOnItemClickListener(new OnItemClickListener() {
         	 @Override
@@ -94,8 +91,7 @@ public class SelectLinkManActivity extends Activity {
         		 if (holder.checkBox.isChecked()) {
         			 Log.d("greeting", "" + holder.name);
         			 // 如果选中 ，写入数据库;
-        		 }
-        		 
+        		 }	 
         	 }
         });
         */

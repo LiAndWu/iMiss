@@ -41,10 +41,10 @@
 		            android:layout_width="wrap_content"
 		            android:layout_height="match_parent"
 		            android:focusable="false"
-		 
+		            android:focusableInTouchMode="false"
 		            android:clickable="false"
 		            android:layout_marginRight="8dip"
-		            android:text=" " >
+		            >
 
 		        </CheckBox>
     </LinearLayout>

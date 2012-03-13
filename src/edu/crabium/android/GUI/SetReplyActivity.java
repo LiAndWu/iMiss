@@ -37,7 +37,6 @@ public class SetReplyActivity extends Activity {
 	private Button BackButton;
 	private SimpleAdapter adapter;
 	List<Map<String,String>> SetReplyDisplay;
-
 	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -79,6 +78,7 @@ public class SetReplyActivity extends Activity {
             	menu.setHeaderTitle("  "); 
                 menu.add(0, Menu.FIRST, 0, "小组成员");  
                 menu.add(0, Menu.FIRST + 1, 0, "添加组员");
+                
                 menu.add(0, Menu.FIRST + 2, 0, "删除小组");
             }   
         });     
