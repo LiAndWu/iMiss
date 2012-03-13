@@ -24,6 +24,6 @@
 	        android:id="@+id/store_button" android:textStyle="bold">
         </Button>
     </LinearLayout>
-    <ListView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/select_linkman_listView"></ListView>
+    <ListView android:layout_height="wrap_content" android:layout_width="match_parent" android:id="@+id/select_linkman_listView" android:clickable="true"></ListView>
     
 </LinearLayout>

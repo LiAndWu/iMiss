@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import edu.crabium.android.MyListAdapter.ViewHolder;
-
 import edu.crabium.android.MyListAdapter;
 import edu.crabium.android.R;
 import android.app.Activity;
@@ -40,7 +39,7 @@ public class SelectLinkManActivity extends Activity {
 			map.put(i, false);
 		}
         SelectLinkManListView = (ListView) findViewById(R.id.select_linkman_listView); 
-        SelectLinkManListView.setOnItemClickListener(lis);
+    //    SelectLinkManListView.setOnItemClickListener(lis);
         
         final MyListAdapter mla = new MyListAdapter(SelectLinkManActivity.this, name.size(),
         		name.toArray(new String[][]{}));
@@ -58,11 +57,20 @@ public class SelectLinkManActivity extends Activity {
         SaveButton = (Button)findViewById(R.id.store_button);
         SaveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
+            	
                 Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
                 startActivity(intent);
                 SelectLinkManActivity.this.finish();
             }
         });	
+        
+     Boolean flag =  ((ViewHolder) ((View) SelectLinkManListView.getItemAtPosition(0)).getTag()).cBox.isChecked();
+       
+    	  Log.d("哈哈哈", "第一项是" + flag);
+       
+        
+
+       
     }
 
     public ArrayList<String[]> addValue(){
@@ -95,7 +103,8 @@ public class SelectLinkManActivity extends Activity {
 			ViewHolder holder = (ViewHolder) arg1.getTag();
 			holder.cBox.toggle();
 			MyListAdapter.isSelected.put(arg2, holder.cBox.isChecked());
-			Log.d("TAG", "123" + holder.cBox.isChecked());
+			
+			Log.d("TAG全部加进去", "123" + holder.cBox.isChecked());
 		}
 	};
 }
