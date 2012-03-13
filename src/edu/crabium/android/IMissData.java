@@ -10,11 +10,20 @@ import android.database.sqlite.SQLiteDatabase;
 public class IMissData{
 	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/files/iMiss.sqlite3";
 	
+	private final static String GROUPS_TABLE_NAME = "groups";
+	private final static String GROUPS_TABLE_SPEC = "(group_id  INTEGER PRIMARY KEY, group_name STRING)";
+	
+	private final static String MESSAGES_TABLE_NAME = "messages";
+	private final static String MESSAGES_TABLE_SPEC = "(message_id  INTEGER PRIMARY KEY, group_id INTEGER, message_body STRING)";
+	
+	private final static String PERSONS_TABLE_NAME = "persons";
+	private final static String PERSONS_TABLE_SPEC = "(person_id  INTEGER PRIMARY KEY, group_id INTEGER, name STRING, number STRING)";
+	
 	private final static String BLACKLIST_TABLE_NAME = "black_list";
-	private final static String BLACKLIST_TABLE_SPEC = "(name TEXT, number TEXT)";
+	private final static String BLACKLIST_TABLE_SPEC = "(number TEXT, name TEXT)";
 	
 	private final static String IGNORELIST_TABLE_NAME = "ignore_list";
-	private final static String IGNORELIST_TABLE_SPEC = "(name TEXT, number TEXT)";
+	private final static String IGNORELIST_TABLE_SPEC = "(number TEXT, name TEXT)";
 	
 	private final static String RESTTIME_TABLE_NAME = "rest_time";
 	private final static String RESTTIME_TABLE_SPEC = "(id INTEGER, start_millis INTEGER, end_millis INTEGER)";
@@ -22,8 +31,8 @@ public class IMissData{
 	private final static String MISC_TABLE_NAME = "misc";
 	private final static String MISC_TABLE_SPEC = "(key STRING, value STRING)";
 	private final static String MISC_GET_VALUE = "SELECT key, value FROM " + MISC_TABLE_NAME + " WHERE key =";
-	private final static String MISC_DEL_VALUE = "DELETE FROM " + MISC_TABLE_NAME + " WHERE key =";
 	private final static String MISC_INSERT_VALUE = "INSERT INTO " + MISC_TABLE_NAME + " (key, value) VALUES ";
+	
 	private final static String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
 	private final static int VERSION = 1;
 	
@@ -31,6 +40,18 @@ public class IMissData{
 	
 	private static boolean initiated = false;
 	
+	public static Map<String, String> getGroups(){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+
+		Map<String, String> map = new HashMap<String, String>();
+		Cursor cursor = DB.rawQuery("SELECT group_name, message_body FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + MESSAGES_TABLE_NAME + " USING (group_id)", null);
+		while(cursor.moveToNext()){
+			map.put(cursor.getString(0), cursor.getString(1));
+		}
+		DB.close();
+		return map;
+	}
 	
 	/** get value for specified key
 	 * 
@@ -59,10 +80,7 @@ public class IMissData{
 	 * @param key
 	 */
 	public static void delValue(String key) {
-		if(!initiated) createTables();
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		DB.execSQL(MISC_DEL_VALUE + "\"" + key + "\"");
-		DB.close();
+		delTableValue(MISC_TABLE_NAME, key);
 	}
 	
 	/** set value if key is matched
@@ -86,7 +104,7 @@ public class IMissData{
 	 * @param tableName
 	 * @return 
 	 */
-	public static Map<String, String> getTableValues(String tableName)
+	private static Map<String, String> getTableValues(String tableName)
 	{
 		if(!initiated) createTables();
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
@@ -116,6 +134,15 @@ public class IMissData{
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 
 		String sql_text = "INSERT INTO " + tableName + " VALUES (\"" + key + "\", \"" + value + "\")";
+		DB.execSQL(sql_text);
+		DB.close();
+	}
+	
+	public static void delTableValue(String tableName, String key){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+
+		String sql_text = "DELETE FROM " + tableName + " WHERE key=\"" + key + "\"";
 		DB.execSQL(sql_text);
 		DB.close();
 	}
@@ -160,14 +187,40 @@ public class IMissData{
 	 * @param key
 	 * @param value
 	 */
-	public static void setIgnoreList(String key, String value){
-		setTableValues(IGNORELIST_TABLE_NAME, key, value);
+	public static void setIgnoreList(String number, String name){
+		setTableValues(IGNORELIST_TABLE_NAME, number, name);
 	}
 	
+	/** delete row in black list if key is matched
+	 * 
+	 * @param key
+	 */
+	public static void delBlackList(String number){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+
+		String sql_text = "DELETE FROM " + BLACKLIST_TABLE_NAME + " WHERE number=\"" + number + "\"";
+		DB.execSQL(sql_text);
+		DB.close();
+	}
+	
+	/** delete row in ignore list if key is matched
+	 * 
+	 * @param key
+	 */
+	public static void delIgnoreList(String number){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+
+		String sql_text = "DELETE FROM " + IGNORELIST_TABLE_NAME + " WHERE number=\"" + number + "\"";
+		DB.execSQL(sql_text);
+		DB.close();
+	}
 	/** get activity and create necessary tables
 	 * 
 	 * @param activity
 	 */
+	
 	public static void init(Activity activity){
 		createTables();
 		initiated = true;
@@ -179,11 +232,16 @@ public class IMissData{
 	private static void createTables()
 	{
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
-		DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+BLACKLIST_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
 		DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME	+ RESTTIME_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME	+ MISC_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME		+ RESTTIME_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME			+ MISC_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + MESSAGES_TABLE_NAME		+ MESSAGES_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + PERSONS_TABLE_NAME		+ PERSONS_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + GROUPS_TABLE_NAME		+ GROUPS_TABLE_SPEC);
+		
 		DB.setVersion(VERSION);
 		DB.close();
+		initiated = true;
 	}
 }
