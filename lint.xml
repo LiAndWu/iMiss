@@ -35,6 +35,7 @@
         <ignore path="res\layout-hdpi\owner_name.xml" />
         <ignore path="res\layout-hdpi\refuse_slot.xml" />
         <ignore path="res\layout-hdpi\select_linkman.xml" />
+        <ignore path="res\layout-hdpi\selected_linkman.xml" />
         <ignore path="res\layout-hdpi\set_refuse_slot_time.xml" />
         <ignore path="res\layout-hdpi\set_reply.xml" />
         <ignore path="res\layout-mdpi\about.xml" />
