@@ -75,7 +75,8 @@ public class BlackListActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "刪除");
+                menu.add(0, Menu.FIRST, 0, "添加");
+                menu.add(0, Menu.FIRST + 1, 0, "刪除");
             }   
         });  
 		
@@ -100,9 +101,18 @@ public class BlackListActivity extends Activity {
 		});	
 	}
 	
+	/**
+	 * Menu.FIRST:添加
+	 * Menu.FIRST + 1:刪除
+	 */
 	public boolean onContextItemSelected(MenuItem item) {  
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
-    	if (item.getItemId() == Menu.FIRST) {//刪除
+    	if (item.getItemId() == Menu.FIRST) {
+    		Intent intent = new Intent(BlackListActivity.this, SelectLinkManActivity.class);
+    		startActivity(intent);
+    		BlackListActivity.this.finish();
+    		
+    	} else if (item.getItemId() == Menu.FIRST + 1) {
     		int pos = (int) BlackListListView.getAdapter().getItemId(menuInfo.position);
             BlackListDisplay.remove(pos);
     	} 
