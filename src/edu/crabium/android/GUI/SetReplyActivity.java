@@ -64,10 +64,11 @@ public class SetReplyActivity extends Activity {
 				ListView listView = (ListView)parent;
 				@SuppressWarnings("unchecked")
 				HashMap<String, String> map = (HashMap<String, String>) listView.getItemAtPosition(position);
-				GlobalVariable.TargetReplyTitle = map.get(SetReplyColumn1);
-				GlobalVariable.TargetReplyContent = map.get(SetReplyColumn2);
-
+				Bundle bundle = new Bundle();
+				bundle.putString("group_name", map.get(SetReplyColumn1));
+				bundle.putString("message_body", map.get(SetReplyColumn2));
 				Intent intent = new Intent(SetReplyActivity.this, EditReplyActivity.class);
+				intent.putExtras(bundle);
 				startActivity(intent);
 				SetReplyActivity.this.finish();
 			}
@@ -86,9 +87,11 @@ public class SetReplyActivity extends Activity {
 		NewReplyLinearLayout = (LinearLayout) findViewById(R.id.new_reply_linearlayout);
 		NewReplyLinearLayout.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				GlobalVariable.TargetReplyTitle = null;
-				GlobalVariable.TargetReplyContent = null;
+				Bundle bundle = new Bundle();
+				bundle.putString("group_name", "");
+				bundle.putString("message_body", "");
 				Intent intent = new Intent(SetReplyActivity.this, EditReplyActivity.class);
+				intent.putExtras(bundle);
 				startActivity(intent);
 				SetReplyActivity.this.finish();
 			}
@@ -132,7 +135,6 @@ public class SetReplyActivity extends Activity {
         return super.onContextItemSelected(item);   
     }  
 
-	//默认回复
     private void getGroups(List<Map<String,String>> to){
     	Map<String, String> map = IMissData.getGroups();
     	Set<String> keys = map.keySet();
@@ -145,12 +147,20 @@ public class SetReplyActivity extends Activity {
     	}	
     }
     
-    //用来添加新的回复项
-    public void addNewValue(String title, String content,List<Map<String,String>> to){
-    	Map<String,String> item1 = new HashMap<String,String>();
-    	item1.put(SetReplyColumn1, title);
-    	item1.put(SetReplyColumn2, content);
-    	to.add(item1);	
+    /** add a new group with specific message
+     * 
+     * @param title Group name
+     * @param content The message you want to send to this group
+     * @param to Destination to put the new entry
+     */
+    public void addGroup(String title, String content,List<Map<String,String>> to){
+    	Map<String,String> item = new HashMap<String,String>();
+    	item.put(SetReplyColumn1, title);
+    	item.put(SetReplyColumn2, content);
+    	to.add(item);
+    	
+    	String[] group = new String[]{title, content};
+    	IMissData.addGroup(group);
     }
     
     //修改回复项
