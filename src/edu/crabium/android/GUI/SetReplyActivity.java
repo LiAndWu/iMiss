@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.IMissData;
@@ -19,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
+import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.view.ContextMenu;   
 import android.view.Menu;
 import android.view.MenuItem;   
@@ -31,10 +33,12 @@ public class SetReplyActivity extends Activity {
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
-	List<Map<String,String>> SetReplyDisplay;
+	;
 	private Button BackButton;
 	SimpleAdapter adapter;
 
+	//TODO 
+	//String hello;
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -44,8 +48,8 @@ public class SetReplyActivity extends Activity {
 		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
 		setContentView(SetReplyLinearLayout);
 		
-		SetReplyDisplay = new ArrayList<Map<String, String>>();
-		addValue();
+		List<Map<String,String>> SetReplyDisplay = new ArrayList<Map<String, String>>();
+		getGroups(SetReplyDisplay);
 		
 		final String[] from = {SetReplyColumn1, SetReplyColumn2};
 		int[] to = {android.R.id.text1, android.R.id.text2};
@@ -73,8 +77,9 @@ public class SetReplyActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "选择联系人");   
-                menu.add(0, Menu.FIRST + 1, 0, "删除");
+                menu.add(0, Menu.FIRST, 0, "查看已选联系人");   
+                menu.add(0, Menu.FIRST + 1, 0, "添加联系人");
+                menu.add(0, Menu.FIRST + 2, 0, "删除联系人");
             }   
         });     
 
@@ -99,65 +104,61 @@ public class SetReplyActivity extends Activity {
 		});
 	}
 
-    public boolean onContextItemSelected(MenuItem item) {   
-    	if (item.getItemId() == Menu.FIRST) {//选择联系人
+	/**
+	 * Define operations for menu of SetReplyListView;
+	 * @param item ,the sub item of menu of SetReplyListView;
+	 * Menu.First:查看已选联系人
+	 * Menu.First + 1：添加联系人
+	 * Menu.First + 2: 删除联系人
+	 */
+    public boolean onContextItemSelected(MenuItem item, List<Map<String,String>> to) {
+    	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
+    	
+    	if (item.getItemId() == Menu.FIRST) {
+			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
+			startActivity(intent);
+			SetReplyActivity.this.finish();
+    	} else if (item.getItemId() == Menu.FIRST + 1) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
-    	} else if (item.getItemId() == Menu.FIRST + 1) {//删除
-    	
+    	} else if (item.getItemId() == Menu.FIRST + 2) {
+    		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
+    		to.remove(pos);
+			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
+			startActivity(intent);
+			SetReplyActivity.this.finish();
     	}
         return super.onContextItemSelected(item);   
     }  
 
-	//设置回复前部分
-	public String ReplyForePart() {
-		String ReplyForePart;
-		if (IMissData.getValue("ShowOwnerNameToStranger").equals("true")) {
-			ReplyForePart = "嗨，我是" + IMissData.getValue("Owner");
-		} else {
-			ReplyForePart = "你好，机主";
-		}
-		return ReplyForePart;
-	}
-
 	//默认回复
-    private void addValue(){
-    	Map<String, String> item1 = new HashMap<String, String>();
-    	item1.put(SetReplyColumn1, "工作");
-    	item1.put(SetReplyColumn2, ReplyForePart() + ",现在有事不能接电话，稍后回复。");
-    	SetReplyDisplay.add(item1);
+    private void getGroups(List<Map<String,String>> to){
+    	Map<String, String> map = IMissData.getGroups();
+    	Set<String> keys = map.keySet();
     	
-    	Map<String, String> item2 = new HashMap<String, String>();
-    	item2.put(SetReplyColumn1, "家人");
-    	item2.put(SetReplyColumn2, ReplyForePart() + ",现在有点事，等下我打回去。");
-    	SetReplyDisplay.add(item2);
-    	
-    	Map<String, String> item3 = new HashMap<String, String>();
-    	item3.put(SetReplyColumn1, "朋友");
-    	item3.put(SetReplyColumn2, ReplyForePart() + ",现在正在忙乱七八糟一堆事，等下我会给你打过去。");
-    	SetReplyDisplay.add(item3);  	
+    	for(String key : keys){
+        	Map<String, String> item = new HashMap<String, String>();
+        	item.put(SetReplyColumn1, key);
+        	item.put(SetReplyColumn2, map.get(key));
+        	to.add(item);
+    	}	
     }
     
     //用来添加新的回复项
-    public void addNewValue(String title, String content){
+    public void addNewValue(String title, String content,List<Map<String,String>> to){
     	Map<String,String> item1 = new HashMap<String,String>();
     	item1.put(SetReplyColumn1, title);
     	item1.put(SetReplyColumn2, content);
-    	SetReplyDisplay.add(item1);	
+    	to.add(item1);	
     }
     
     //修改回复项
-    public void MotifyNewValue(String title, String content){
+    public void MotifyNewValue(String title, String content, List<Map<String,String>> to){
     	Map<String,String> item1 = new HashMap<String,String>();
     	item1.put(SetReplyColumn1, title);
     	item1.put(SetReplyColumn2, content);
-    	SetReplyDisplay.add(item1);	
-    }
-    
-    //删除回复项
-    public void DeleteValue(String title, String content){
-    	SetReplyDisplay.remove(title);
+    	to.add(item1);	
     }
     
 	//显示Toast  
