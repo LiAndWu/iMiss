@@ -13,6 +13,7 @@ import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -33,22 +34,30 @@ public class SetReplyActivity extends Activity {
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
-	;
+	
+
+	List<Map<String,String>> SetReplyDisplay = new ArrayList<Map<String, String>>();
+
+	final String[] from = {SetReplyColumn1, SetReplyColumn2};
+	int[] to = {android.R.id.text1, android.R.id.text2};
 	private Button BackButton;
 	SimpleAdapter adapter;
 
 	//TODO 
 	//String hello;
 	public void onCreate(Bundle savedInstanceState) {
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
+	}
+
+	public void onStart(Bundle savedInstanceState){
+		super.onStart();
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.set_reply);
 
 		SetReplyLinearLayout = (LinearLayout) findViewById(R.id.set_reply_linearlayout);
 		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
 		setContentView(SetReplyLinearLayout);
 		
-		List<Map<String,String>> SetReplyDisplay = new ArrayList<Map<String, String>>();
 		getGroups(SetReplyDisplay);
 		
 		final String[] from = {SetReplyColumn1, SetReplyColumn2};
@@ -78,9 +87,9 @@ public class SetReplyActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "查看已选联系人");   
-                menu.add(0, Menu.FIRST + 1, 0, "添加联系人");
-                menu.add(0, Menu.FIRST + 2, 0, "删除联系人");
+                menu.add(0, Menu.FIRST, 0, "已选组员");   
+                menu.add(0, Menu.FIRST + 1, 0, "添加组员");
+                menu.add(0, Menu.FIRST + 2, 0, "删除小组");
             }   
         });     
 
@@ -106,15 +115,14 @@ public class SetReplyActivity extends Activity {
 			}
 		});
 	}
-
 	/**
 	 * Define operations for menu of SetReplyListView;
 	 * @param item ,the sub item of menu of SetReplyListView;
-	 * Menu.First:查看已选联系人
-	 * Menu.First + 1：添加联系人
-	 * Menu.First + 2: 删除联系人
+	 * Menu.First:已选组员
+	 * Menu.First + 1：添加组员
+	 * Menu.First + 2: 删除组员
 	 */
-    public boolean onContextItemSelected(MenuItem item, List<Map<String,String>> to) {
+    public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	
     	if (item.getItemId() == Menu.FIRST) {
@@ -127,10 +135,23 @@ public class SetReplyActivity extends Activity {
 			SetReplyActivity.this.finish();
     	} else if (item.getItemId() == Menu.FIRST + 2) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
-    		to.remove(pos);
-			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
-			startActivity(intent);
-			SetReplyActivity.this.finish();
+    		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
+    		IMissData.delGroup(map.get("title"));
+    		
+
+    		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
+    		adapter = new SimpleAdapter(this, SetReplyDisplay,android.R.layout.simple_list_item_2, from, to);
+    		SetReplyListView.setAdapter(adapter);
+    	//	SetReplyListView.refreshDrawableState();
+    	//	SetReplyListView.postInvalidate();
+    	//	this.
+    	//	this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    	//	onCreate(null);
+    		
+    		//SetReplyActivity.this.finish();
+			//Intent intent = new Intent(SetReplyActivity.this, SetReplyActivity.class);
+			//startActivity(intent);
+			String hello;
     	}
         return super.onContextItemSelected(item);   
     }  
