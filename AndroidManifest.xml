@@ -79,6 +79,11 @@
 		          android:screenOrientation="portrait"
 		          android:configChanges="orientation|keyboardHidden" > 
 		</activity>
+		
+		<activity android:name=".GUI.SelectedGroupMemberActivity"
+		          android:screenOrientation="portrait"
+		          android:configChanges="orientation|keyboardHidden" > 
+		</activity>
 
     </application>
 

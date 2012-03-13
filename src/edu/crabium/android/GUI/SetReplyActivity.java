@@ -13,6 +13,7 @@ import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnCreateContextMenuListener;
 import android.view.Window;
@@ -32,13 +33,12 @@ public class SetReplyActivity extends Activity {
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
-	;
+	
 	private Button BackButton;
-	SimpleAdapter adapter;
+	private SimpleAdapter adapter;
+	List<Map<String,String>> SetReplyDisplay = new ArrayList<Map<String, String>>();
 
-	//TODO 
-	//String hello;
-	public void onCreate(Bundle savedInstanceState) {
+	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_reply);
@@ -47,7 +47,6 @@ public class SetReplyActivity extends Activity {
 		SetReplyListView = (ListView) findViewById(R.id.set_reply_list_view);
 		setContentView(SetReplyLinearLayout);
 		
-		List<Map<String,String>> SetReplyDisplay = new ArrayList<Map<String, String>>();
 		getGroups(SetReplyDisplay);
 		
 		final String[] from = {SetReplyColumn1, SetReplyColumn2};
@@ -77,9 +76,9 @@ public class SetReplyActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "查看已选联系人");   
-                menu.add(0, Menu.FIRST + 1, 0, "添加联系人");
-                menu.add(0, Menu.FIRST + 2, 0, "删除联系人");
+                menu.add(0, Menu.FIRST, 0, "小组成员");  
+                menu.add(0, Menu.FIRST + 1, 0, "添加组员");
+                menu.add(0, Menu.FIRST + 2, 0, "删除小组");
             }   
         });     
 
@@ -105,30 +104,33 @@ public class SetReplyActivity extends Activity {
 			}
 		});
 	}
-
 	/**
 	 * Define operations for menu of SetReplyListView;
 	 * @param item ,the sub item of menu of SetReplyListView;
-	 * Menu.First:查看已选联系人
-	 * Menu.First + 1：添加联系人
-	 * Menu.First + 2: 删除联系人
+	 * Menu.First:小组成员
+	 * Menu.First + 1：添加组员
+	 * Menu.First + 2: 删除组员
 	 */
-    public boolean onContextItemSelected(MenuItem item, List<Map<String,String>> to) {
+    public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	if (item.getItemId() == Menu.FIRST) {
-			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
+			Intent intent = new Intent(SetReplyActivity.this, SelectedGroupMemberActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
+			
     	} else if (item.getItemId() == Menu.FIRST + 1) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
+			
     	} else if (item.getItemId() == Menu.FIRST + 2) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
+    		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
+    		IMissData.delGroup(map.get("title"));
     		
-			Intent intent = new Intent(SetReplyActivity.this, SelectedContactsActivity.class);
+    		SetReplyActivity.this.finish();
+			Intent intent = new Intent(SetReplyActivity.this, SetReplyActivity.class);
 			startActivity(intent);
-			SetReplyActivity.this.finish();
     	}
         return super.onContextItemSelected(item);   
     }  
