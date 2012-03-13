@@ -124,8 +124,10 @@ public class SetReplyActivity extends Activity {
 		return ReplyForePart;
 	}
 
-	//默认回复
-	
+	/** get group information
+	 * 
+	 * @param to the destination to put group information
+	 */
     private void getGroups(List<Map<String,String>> to){
     	Map<String, String> map = IMissData.getGroups();
     	Set<String> keys = map.keySet();
@@ -139,11 +141,14 @@ public class SetReplyActivity extends Activity {
     }
     
     //用来添加新的回复项
-    public void addNewValue(String title, String content,List<Map<String,String>> to){
-    	Map<String,String> item1 = new HashMap<String,String>();
-    	item1.put(SetReplyColumn1, title);
-    	item1.put(SetReplyColumn2, content);
-    	to.add(item1);	
+    public void addGroup(String title, String content,List<Map<String,String>> to){
+    	Map<String,String> item = new HashMap<String,String>();
+    	item.put(SetReplyColumn1, title);
+    	item.put(SetReplyColumn2, content);
+    	to.add(item);
+    	
+    	String[] group = new String[]{title, content};
+    	IMissData.addGroup(group);
     }
     
     //修改回复项
