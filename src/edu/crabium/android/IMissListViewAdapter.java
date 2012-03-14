@@ -17,7 +17,7 @@ import android.widget.TextView;
 
 
 public class IMissListViewAdapter extends BaseAdapter {
-	private Context context;
+	//private Context context;
 	private ArrayList<String[]> array;
 	public Map<Integer, Boolean>  isSelected;
 	private LayoutInflater inflater = null;
@@ -25,10 +25,9 @@ public class IMissListViewAdapter extends BaseAdapter {
 	private final static int PHONE = 1;
 	
 	public IMissListViewAdapter(ArrayList<String[]> array, Context context) {
-		this.context = context;
+		//this.context = context;
 		this.array = new ArrayList<String[]>(array);
 		
-		Log.d("GREETING", "" + array.size());
 		inflater = LayoutInflater.from(context);
 		isSelected = new HashMap<Integer, Boolean>();
 		for(int i =0; i< array.size(); i++) {
@@ -58,7 +57,6 @@ public class IMissListViewAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		ViewHolder holder = null;
 		if(convertView == null) {
-			Log.d("GREETING", "null");
 			holder = new ViewHolder();
 			convertView = inflater.inflate(R.layout.dispatch_select_user_item, null);
 			holder.name  = (TextView) convertView.findViewById(R.id.dispatch_item_select_user_name);
@@ -70,7 +68,6 @@ public class IMissListViewAdapter extends BaseAdapter {
 			holder = (ViewHolder) convertView.getTag();
 		}
 
-		Log.d("GREETING", "outside" );
 		holder.name.setText(array.get(position)[NAME]);
 		holder.phone.setText(array.get(position)[PHONE]);
 		holder.checkBox.setChecked(isSelected.get(position));
@@ -84,12 +81,5 @@ public class IMissListViewAdapter extends BaseAdapter {
 		 public TextView phone;
 	 }
 	
-	public Map<Integer,Boolean> getIsSelected() {
-		return isSelected;
-	}
-	
-	public void setIsSelected(HashMap<Integer, Boolean> isSelected) {
-		//IMissListViewAdapter.isSelected = isSelected;
-    }
 }
 

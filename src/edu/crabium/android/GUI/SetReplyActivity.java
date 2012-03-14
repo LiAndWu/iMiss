@@ -116,18 +116,29 @@ public class SetReplyActivity extends Activity {
 	 */
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
+    	
     	if (item.getItemId() == MENU_MEMBER) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectedGroupMemberActivity.class);
+    		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
+    		Bundle bundle = new Bundle();
+			bundle.putString("group_name", map.get("title"));
+			intent.putExtras(bundle);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
 			
     	} else if (item.getItemId() == MENU_ADD) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
+			Bundle bundle = new Bundle();
+			@SuppressWarnings("unchecked")
+    		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
+			bundle.putString("group_name", map.get("title"));
+			intent.putExtras(bundle);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
 			
     	} else if (item.getItemId() == MENU_DELETE) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
+			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
     		IMissData.delGroup(map.get("title"));
     		
