@@ -6,6 +6,7 @@ import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -46,6 +47,9 @@ public class ContactsSetReplyActivity extends Activity {
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent(ContactsSetReplyActivity.this, IMissActivity.class);
+			
+			Log.d("LOG", ContactsSetReplyEditText.getText().toString());
+			IMissData.setValue("contacts_reply", ContactsSetReplyEditText.getText().toString());
 			startActivity(intent);
 			ContactsSetReplyActivity.this.finish();
 			}
