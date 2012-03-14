@@ -52,8 +52,8 @@
         android:id="@+id/recent_call_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true" 
-        android:focusable="true">
+        android:clickable="true"
+        android:focusable="true" >
     </ListView>
 
 </LinearLayout>
