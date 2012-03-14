@@ -51,6 +51,7 @@
         <ignore path="res\layout-mdpi\select_linkman.xml" />
         <ignore path="res\layout-mdpi\set_refuse_slot_time.xml" />
         <ignore path="res\layout-mdpi\set_reply.xml" />
+        <ignore path="res\layout-mdpi\software_set.xml" />
     </issue>
     <issue id="InefficientWeight">
         <ignore path="res\layout-hdpi\about.xml" />
