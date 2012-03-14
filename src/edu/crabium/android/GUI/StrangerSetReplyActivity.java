@@ -7,6 +7,7 @@ import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -28,7 +29,7 @@ public class StrangerSetReplyActivity extends Activity {
 		StrangerSetReplyEditText = (EditText) findViewById(R.id.stranger_reply_edittext);
 		StrangerSetReplyEditText.setFocusable(true);
 		StrangerSetReplyEditText.setFocusableInTouchMode(true);
-	//	StrangerSetReplyEditText.setText(IMissData.getValue(ContactsReply));
+		StrangerSetReplyEditText.setText(IMissData.getValue(StrangerReply));
 		
 		StrangerSetReplyTextView = (TextView) findViewById(R.id.stranger_reply_textview);
 		StrangerSetReplyTextView.setText("使用提示：\n" +
@@ -38,7 +39,6 @@ public class StrangerSetReplyActivity extends Activity {
 		CancelButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
-			IMissData.setValue("stranger_reply", StrangerSetReplyEditText.getText().toString());
 			startActivity(intent);
 			StrangerSetReplyActivity.this.finish();
 			}
@@ -48,6 +48,9 @@ public class StrangerSetReplyActivity extends Activity {
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
+			Log.d("HELLO", "STORE " + StrangerSetReplyEditText.getText().toString());
+			IMissData.setValue(StrangerReply, StrangerSetReplyEditText.getText().toString());
+			Log.d("HELLO", "GET" + IMissData.getValue(StrangerReply));
 			startActivity(intent);
 			StrangerSetReplyActivity.this.finish();
 			}

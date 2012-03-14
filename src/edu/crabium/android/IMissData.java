@@ -103,9 +103,7 @@ public class IMissData{
 	 */
 	public static void setValue(String key, String value) {
 		if(!initiated) createTables();
-		
-		if(!getValue(key).trim().equals(""))
-			delValue(key);
+		delValue(key);
 
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		DB.execSQL(MISC_INSERT_VALUE +"(\"" + key + "\", \"" + value + "\")");
