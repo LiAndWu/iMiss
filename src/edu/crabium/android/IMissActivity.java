@@ -50,8 +50,6 @@ public class IMissActivity extends Activity {
 			}
 		});
         
-        /*
-         * 黑名单，隐藏功能
         BlackListButton = (LinearLayout)findViewById(R.id.blacklist_chevron_button);
         BlackListButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -62,7 +60,6 @@ public class IMissActivity extends Activity {
 			}
 		});
         
-        //拒接时间段
         RefuseReplyButton = (LinearLayout)findViewById(R.id.refuse_reply_chevron_button);
         RefuseReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -72,7 +69,7 @@ public class IMissActivity extends Activity {
 				IMissActivity.this.finish();
 			}
 		});
-        */
+        
         AboutButton = (LinearLayout)findViewById(R.id.about_chevron_button);
         AboutButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
