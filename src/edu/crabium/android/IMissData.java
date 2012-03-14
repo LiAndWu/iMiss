@@ -296,18 +296,20 @@ public class IMissData{
 		DB.close();
 	}
 
-	public static Map<String, String> getPersonsFromGroup(String group_name){
+	public static String[][] getPersonsFromGroup(String group_name){
 		if(!initiated) createTables();
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		Map<String, String> map = new HashMap<String, String>();
-		String sql_text = "SELECT name, number FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + PERSONS_TABLE_NAME + " USING (group_id) WHERE group_name=\"" + group_name + "\"";
+		String[][] tuple;
+		String sql_text = "SELECT name, number, group_id FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + PERSONS_TABLE_NAME + " USING (group_id) WHERE group_name=\"" + group_name + "\"";
 		Cursor cursor = DB.rawQuery(sql_text,null);
+		tuple = new String[cursor.getCount()][3];
+		int i = 0;
 		while(cursor.moveToNext()){
-			map.put(cursor.getString(0), cursor.getString(1));
+			tuple[i++] = new String[]{cursor.getString(0), cursor.getString(1), "" + cursor.getInt(2)};
 		}
 		cursor.close();
 		DB.close();
-		return new HashMap<String, String>(map);
+		return tuple;
 	}
 
 	public static void delPersonInGroup(String person_name, String person_phone,String group_name) {
