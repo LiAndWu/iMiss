@@ -40,10 +40,11 @@ public class SelectLinkManActivity extends Activity {
         name = addValue();
         map = new HashMap<Integer, Boolean>();
         for (int i = 0; i < name.size(); i++) {
-			map.put(i, false);
+			map.put(i, false); 
 		}
         selectContactsListView = (ListView) findViewById(R.id.select_linkman_listView); 
         selectContactsListView.setOnItemClickListener( lis);
+        
         adapter = new IMissListViewAdapter(name, this);
         selectContactsListView.setAdapter(adapter);
         BackButton = (Button)findViewById(R.id.back_button);
@@ -79,25 +80,9 @@ public class SelectLinkManActivity extends Activity {
             }
         });	
         
-
-        /*
-        selectContactsListView.setOnItemClickListener(new OnItemClickListener() {
-        	 @Override
-             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        		 ViewHolder holder = (ViewHolder)arg1.getTag();
-        		 holder.checkBox.toggle();
-        		 adapter.getIsSelected().put(arg2, holder.checkBox.isChecked()); 
-        		 
-        		 if (holder.checkBox.isChecked()) {
-        			 Log.d("greeting", "" + holder.name);
-        			 // 如果选中 ，写入数据库;
-        		 }	 
-        	 }
-        });
-        */
     }
 
-    public ArrayList<String[]> addValue(){
+    private ArrayList<String[]> addValue(){
     	ArrayList<String[]> value = new ArrayList<String[]>();
     	
         ContentResolver cr = getContentResolver();

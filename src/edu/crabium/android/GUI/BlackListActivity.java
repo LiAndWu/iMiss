@@ -96,6 +96,7 @@ public class BlackListActivity extends Activity {
 				//添加最近通话联系人，…………
 				GlobalVariable.TargetBlackListName = null;
 				GlobalVariable.TargetBlackListNumber = null;
+				
 				Intent intent = new Intent(BlackListActivity.this, RecentCallActivity.class);
 				startActivity(intent);
 				BlackListActivity.this.finish();

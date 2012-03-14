@@ -37,7 +37,7 @@ public class SelectedGroupMemberActivity extends Activity {
 
 
         SelectedGroupMemberLinearLayout = (LinearLayout) findViewById(R.id.selected_group_member_linearlayout);
-        SelectedGroupMemberListView = (ListView) findViewById(R.id.set_reply_list_view);
+        SelectedGroupMemberListView = (ListView) findViewById(R.id.selected_group_member_listView);
 		setContentView(SelectedGroupMemberLinearLayout);
         
 		getGroups(SelectedGroupMemberDisplay);
