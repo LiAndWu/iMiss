@@ -2,8 +2,6 @@ package edu.crabium.android.GUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
 
 import edu.crabium.android.IMissListViewAdapter;
 import edu.crabium.android.IMissListViewAdapter.ViewHolder;
@@ -80,7 +78,7 @@ public class RecentCallActivity extends Activity {
         });	
     }
 
-    public ArrayList<String[]> addValue(){
+    private ArrayList<String[]> addValue(){
     	ArrayList<String[]> value = new ArrayList<String[]>();
     	
         ContentResolver cr = getContentResolver();

@@ -42,10 +42,11 @@ public class SelectLinkManActivity extends Activity {
         name = addValue();
         map = new HashMap<Integer, Boolean>();
         for (int i = 0; i < name.size(); i++) {
-			map.put(i, false);
+			map.put(i, false); 
 		}
         selectContactsListView = (ListView) findViewById(R.id.select_linkman_listView); 
         selectContactsListView.setOnItemClickListener( lis);
+        
         adapter = new IMissListViewAdapter(name, this);
         selectContactsListView.setAdapter(adapter);
         BackButton = (Button)findViewById(R.id.back_button);
@@ -84,7 +85,7 @@ public class SelectLinkManActivity extends Activity {
         });	
     }
 
-    public ArrayList<String[]> addValue(){
+    private ArrayList<String[]> addValue(){
     	ArrayList<String[]> value = new ArrayList<String[]>();
     	
         ContentResolver cr = getContentResolver();
