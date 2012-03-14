@@ -50,6 +50,8 @@ public class IMissActivity extends Activity {
 			}
 		});
         
+        
+        
         BlackListButton = (LinearLayout)findViewById(R.id.blacklist_chevron_button);
         BlackListButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -60,6 +62,7 @@ public class IMissActivity extends Activity {
 			}
 		});
         
+   
         RefuseReplyButton = (LinearLayout)findViewById(R.id.refuse_reply_chevron_button);
         RefuseReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
