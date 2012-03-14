@@ -28,7 +28,7 @@ public class ContactsSetReplyActivity extends Activity {
 		ContactsSetReplyEditText = (EditText) findViewById(R.id.contacts_reply_edittext);
 		ContactsSetReplyEditText.setFocusable(true);
 		ContactsSetReplyEditText.setFocusableInTouchMode(true);
-	//	ContactsSetReplyEditText.setText(IMissData.getValue(ContactsReply));
+		ContactsSetReplyEditText.setText(IMissData.getValue(ContactsReply));
 		
 		ContactsSetReplyTextView = (TextView) findViewById(R.id.contacts_reply_textview);
 		ContactsSetReplyTextView.setText("使用提示：\n" +
