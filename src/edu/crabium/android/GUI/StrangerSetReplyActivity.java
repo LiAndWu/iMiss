@@ -38,6 +38,7 @@ public class StrangerSetReplyActivity extends Activity {
 		CancelButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
+			IMissData.setValue("stranger_reply", StrangerSetReplyEditText.getText().toString());
 			startActivity(intent);
 			StrangerSetReplyActivity.this.finish();
 			}
