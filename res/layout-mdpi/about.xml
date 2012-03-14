@@ -20,7 +20,8 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="上一步" android:textStyle="bold">
+            android:text="上一步"
+            android:textStyle="bold" >
         </Button>
 
         <TextView
