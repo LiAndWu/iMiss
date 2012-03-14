@@ -6,6 +6,7 @@ import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -20,13 +21,15 @@ public class EditReplyActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.edit_reply);
-		
+
 		bundle = this.getIntent().getExtras();
+		final String group_name = bundle.getString("group_name");
+		String message_body = bundle.getString("message_body");
 		TitleEditText = (EditText) findViewById(R.id.title_edittext);
-		TitleEditText.setText(bundle.getString("group_name"));
+		TitleEditText.setText(group_name);
 		
 		ContentEditText = (EditText) findViewById(R.id.content_edittext);
-		ContentEditText.setText(bundle.getString("message_body"));
+		ContentEditText.setText(message_body);
 		
 		ContentEditText.setHint("请输入回复内容");
 			
@@ -38,9 +41,12 @@ public class EditReplyActivity extends Activity {
 					return;
 				}
 					
+				Log.d("GREETING", "NAME=" + group_name);
+				IMissData.delMessage(group_name);
+				if(!(group_name.equals(TitleEditText.getText().toString()))){
+					IMissData.delGroup(group_name);
+				}
 				
-				if(!bundle.getString("group_name").equals(TitleEditText.getText().toString()))
-					IMissData.delGroup(bundle.getString("group_name"));
 				IMissData.addGroup(new String[]{ TitleEditText.getText().toString(), ContentEditText.getText().toString()});
 				
 				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
