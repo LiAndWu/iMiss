@@ -45,11 +45,11 @@ public class SetRefuseSlotTimeActivity extends Activity {
 		
 		final WheelView hours = (WheelView) findViewById(R.id.hour);
 		hours.setAdapter(new NumericWheelAdapter(0, 23));
-		hours.setLabel("µã");
+		hours.setLabel("ç‚¹");
 	
 		final WheelView mins = (WheelView) findViewById(R.id.mins);
 		mins.setAdapter(new NumericWheelAdapter(0, 59, "%02d"));
-		mins.setLabel("·Ö");
+		mins.setLabel("åˆ†");
 		mins.setCyclic(true);
 	
 
