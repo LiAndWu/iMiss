@@ -9,7 +9,7 @@
     </LinearLayout>
     
     	<!-- 软件服务 -->
-
+
  	 <LinearLayout
  	     android:id="@+id/service_switch_linearlayout"
  	     android:layout_width="match_parent"
@@ -18,19 +18,19 @@
  	     android:background="@drawable/button_background"
  	     android:clickable="false"
  	     android:weightSum="1" >
-
+
         <TextView
             android:id="@+id/service_switch_textview"
             android:layout_width="150dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="13dip"
+            android:layout_marginLeft="22dip"
             android:layout_weight="0.63"
             android:clickable="false"
             android:text="服务开启"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
-            android:textSize="17dip" >
+            android:textSize="19dip" >
 
 </TextView>
 
@@ -56,19 +56,19 @@
         android:background="@drawable/button_background"
         android:clickable="false"
         android:weightSum="1" >
-
+
         <TextView
             android:id="@+id/inform_switch_textview"
             android:layout_width="150dip"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginLeft="13dip"
+            android:layout_marginLeft="22dip"
             android:layout_weight="0.63"
             android:clickable="false"
             android:text="通知开启"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
-            android:textSize="17dip" >
+            android:textSize="19dip" >
 
 </TextView>
 
@@ -85,42 +85,39 @@
 </ToggleButton>
     </LinearLayout>
     <!-- 陌生人开启 -->
-    <LinearLayout
-        android:id="@+id/stranger_switch_linearlayout"
-        android:layout_width="match_parent"
-        android:layout_height="50dip"
-        android:layout_marginTop="3dip"
-        android:background="@drawable/button_background"
-        android:clickable="false"
-        android:weightSum="1" >
+
+		<LinearLayout
+		    android:id="@+id/stranger_switch_linearlayout"
+		    android:layout_width="match_parent"
+		    android:layout_height="50dip"
+		    android:layout_marginTop="3dip"
+		    android:background="@drawable/button_background"
+		    android:clickable="false"
+		    android:weightSum="1" >
+
+		    <TextView
+		        android:id="@+id/stranger_switch_textview"
+		        android:layout_width="150dip"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center_vertical"
+		        android:layout_marginLeft="22dip"
+		        android:layout_weight="0.63"
+		        android:clickable="false"
+		        android:text="陌生人回复开启"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textColor="#000000"
+		        android:textSize="19dip" android:textStyle="bold"/>
+
+		    <ToggleButton
+		        android:id="@+id/stranger_switch_togglebutton"
+		        android:layout_width="34dip"
+		        android:layout_height="30dip"
+		        android:layout_gravity="center_vertical"
+		        android:layout_weight="0.15"
+		        android:background="@drawable/button_short_background"
+		        android:clickable="true"
+		        android:text="ToggleButton" />
+		</LinearLayout>
 
-        <TextView
-            android:id="@+id/stranger_switch_textview"
-            android:layout_width="150dip"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="13dip"
-            android:layout_weight="0.63"
-            android:clickable="false"
-            android:text="对陌生人开启"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="#000000"
-            android:textSize="17dip" >
-
-</TextView>
-
-        <ToggleButton
-            android:id="@+id/stranger_switch_togglebutton"
-            android:layout_width="34dip"
-            android:layout_height="30dip"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0.15"
-            android:background="@drawable/button_short_background"
-            android:clickable="true"
-            android:text="ToggleButton" >
-
-</ToggleButton>
-    </LinearLayout>
-
 
 </LinearLayout>
