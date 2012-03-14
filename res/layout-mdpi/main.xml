@@ -7,7 +7,6 @@
     >
 
     	    <!--软件设置  -->
-
 	<LinearLayout
 	    xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:id="@+id/software_set_chevron_button"
@@ -19,15 +18,20 @@
 	    android:clickable="true"
 	    android:orientation="horizontal"
 	    android:weightSum="1" >
-	    
-	    <TextView android:text="软件设置" 
-		    android:textAppearance="?android:attr/textAppearanceLarge"
-		    android:layout_gravity="center_vertical"
-		    android:textColor="#000000"  
-		    android:textStyle="bold" 
-		    android:layout_height="wrap_content" 
-		    android:layout_marginLeft="15dip" 
-		    android:id="@+id/title_of_widget" android:layout_width="100dip" android:layout_weight="0.9" android:textSize="19dip">
+	    
+	    <TextView
+	        android:id="@+id/title_of_widget"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="22dip"
+	        android:layout_weight="0.9"
+	        android:text="软件设置"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="#000000"
+	        android:textSize="19dip"
+	        android:textStyle="bold" >
+
 	    </TextView>
 	   
 	    <ImageView android:id="@+id/iv" 
@@ -37,7 +41,43 @@
 		    android:layout_gravity="right" android:layout_marginRight="2dip">
 	    </ImageView>
 	</LinearLayout>
-	
+
+
+
+		<LinearLayout
+		    xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:id="@+id/contacts_reply_chevron_button"
+		    android:layout_width="match_parent"
+		    android:layout_height="50dip"
+		    android:layout_marginTop="3dip"
+		    android:background="@drawable/button_background"
+		    android:baselineAligned="false"
+		    android:clickable="true"
+		    android:orientation="horizontal"
+		    android:weightSum="1" >
+
+		    <TextView
+		        android:id="@+id/title_of_widget"
+		        android:layout_width="220dip"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center_vertical"
+		        android:layout_marginLeft="22dip"
+		        android:layout_weight="0.63"
+		        android:text="联系人回复"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textColor="#000000"
+		        android:textSize="19dip"
+		        android:textStyle="bold" />
+
+		    <ImageView
+		        android:id="@+id/iv"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:layout_gravity="right"
+		        android:layout_marginRight="2dip"
+		        android:src="@drawable/black_chevron" />
+		</LinearLayout>
+		
 	    <!-- 设置回复内容 -->
 	<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
 	    android:orientation="horizontal"
@@ -47,15 +87,20 @@
 	    android:clickable="true"
 	    android:baselineAligned="false"
 	    android:layout_width="match_parent" android:layout_height="50dip" android:layout_marginTop="3dip" android:id="@+id/set_reply_chevron_button">
-	    
-	    <TextView android:text="设置回复" 
-		    android:textAppearance="?android:attr/textAppearanceLarge"
-		    android:layout_gravity="center_vertical"
-		    android:textColor="#000000"  
-		    android:textStyle="bold" 
-		    android:layout_height="wrap_content" 
-		    android:layout_marginLeft="15dip" 
-		    android:id="@+id/title_of_widget" android:layout_width="100dip" android:layout_weight="0.9" android:textSize="19dip">
+	    
+	    <TextView
+	        android:id="@+id/title_of_widget"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="22dip"
+	        android:layout_weight="0.9"
+	        android:text="分组回复"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="#000000"
+	        android:textSize="19dip"
+	        android:textStyle="bold" >
+
 	    </TextView>
 	   
 	    <ImageView android:id="@+id/iv" 
@@ -66,7 +111,43 @@
 	    </ImageView>
 	</LinearLayout>
 	
+		
 	
+		<LinearLayout
+		    xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:id="@+id/stranger_reply_chevron_button"
+		    android:layout_width="match_parent"
+		    android:layout_height="50dip"
+		    android:layout_marginTop="3dip"
+		    android:background="@drawable/button_background"
+		    android:baselineAligned="false"
+		    android:clickable="true"
+		    android:orientation="horizontal"
+		    android:weightSum="1" >
+
+		    <TextView
+		        android:id="@+id/title_of_widget"
+		        android:layout_width="220dip"
+		        android:layout_height="wrap_content"
+		        android:layout_gravity="center_vertical"
+		        android:layout_marginLeft="22dip"
+		        android:layout_weight="0.63"
+		        android:text="陌生人回复"
+		        android:textAppearance="?android:attr/textAppearanceLarge"
+		        android:textColor="#000000"
+		        android:textSize="19dip"
+		        android:textStyle="bold" />
+
+		    <ImageView
+		        android:id="@+id/iv"
+		        android:layout_width="wrap_content"
+		        android:layout_height="match_parent"
+		        android:layout_gravity="right"
+		        android:layout_marginRight="2dip"
+		        android:src="@drawable/black_chevron" />
+		</LinearLayout>
+		
+		
 	<!-- 设置黑名单 -->
 	
 	<!-- 拒接时间段 -->
@@ -80,15 +161,20 @@
 	    android:clickable="true"
 	    android:baselineAligned="false"
 	    android:layout_width="match_parent" android:layout_height="50dip" android:layout_marginTop="3dip" android:id="@+id/about_chevron_button">
-	    
-	    <TextView android:text="关于应用" 
-		    android:textAppearance="?android:attr/textAppearanceLarge"
-		    android:layout_gravity="center_vertical"
-		    android:textColor="#000000"  
-		    android:textStyle="bold" 
-		    android:layout_height="wrap_content" 
-		    android:layout_marginLeft="15dip" 
-		    android:id="@+id/title_of_widget" android:layout_width="100dip" android:layout_weight="0.9" android:textSize="19dip">
+	    
+	    <TextView
+	        android:id="@+id/title_of_widget"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="22dip"
+	        android:layout_weight="0.9"
+	        android:text="关于应用"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="#000000"
+	        android:textSize="19dip"
+	        android:textStyle="bold" >
+
 	    </TextView>
 	   
 	    <ImageView android:id="@+id/iv" 

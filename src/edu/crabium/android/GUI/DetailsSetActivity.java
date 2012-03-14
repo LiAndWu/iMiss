@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
@@ -19,6 +20,7 @@ import android.widget.ToggleButton;
 
 public class DetailsSetActivity extends Activity {
 	private Button BackButton;
+
 	private ToggleButton ServiceSwitchToggleButton, InformSwitchToggleButton, StrangerSwitchToggleButton;
 	private TextView ServiceSwitchTextView, InformSwitchTextView, StrangerSwitchTextView;
 	
@@ -64,10 +66,10 @@ public class DetailsSetActivity extends Activity {
 			public void onClick(View v) {
             	if (StrangerSwitchToggleButton.isChecked()) {
             		//IMissData.setValue("StrangerSwitch", "true");
-            		StrangerSwitchTextView.setText("对陌生人开启");
+            		StrangerSwitchTextView.setText("陌生人回复开启");
             	} else {
             		//IMissData.setValue("StrangerSwitch", "false");
-            		StrangerSwitchTextView.setText("对陌生人关闭");
+            		StrangerSwitchTextView.setText("陌生人回复关闭");
             	}
 			}
 		});
@@ -80,6 +82,8 @@ public class DetailsSetActivity extends Activity {
 				DetailsSetActivity.this.finish();
 			}
 		});
+		
+
 	}
 	
 	public void DisplayToast(String str) {
