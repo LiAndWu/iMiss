@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/refuse_slot_linearlayout"
+    android:id="@+id/set_reply_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -22,8 +22,7 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="上一步"
-            android:textStyle="bold" >
+            android:text="上一步" >
         </Button>
 
         <TextView
@@ -32,14 +31,14 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.58"
             android:gravity="center"
-            android:text="拒接时间段"
+            android:text="分组回复"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="24dip"
             android:textStyle="bold" >
         </TextView>
 
         <LinearLayout
-            android:id="@+id/new_refuse_slot_linearlayout"
+            android:id="@+id/new_reply_linearlayout"
             android:layout_width="25dip"
             android:layout_height="35dip"
             android:layout_gravity="center_vertical"
@@ -65,7 +64,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/refuse_slot_listview"
+        android:id="@+id/set_reply_list_view"
         android:layout_width="match_parent"
         android:layout_height="239dp"
         android:layout_weight="1.02" >

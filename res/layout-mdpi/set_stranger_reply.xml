@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/barLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/bar"
+        android:baselineAligned="false"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="70dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dip"
+            android:layout_weight="0.06"
+            android:background="@drawable/button_short_background"
+            android:text="取消"
+            android:textStyle="bold" >
+
+        </Button>
+
+        <TextView
+            android:id="@+id/neverCallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.86"
+            android:gravity="center"
+            android:text="陌生人回复"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="24dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <Button
+            android:id="@+id/store_button"
+            android:layout_width="70dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dip"
+            android:layout_weight="0.06"
+            android:background="@drawable/button_short_background"
+            android:text="保存"
+            android:textStyle="bold" >
+        </Button>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/stranger_reply_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="8dip"
+        android:layout_marginRight="8dip"
+        android:layout_marginTop="10dip"
+        android:layout_weight="0.57"
+        gravity="top"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:textSize="16dip"
+        android:textStyle="bold" >
+    </EditText>
+
+    <TextView
+        android:id="@+id/stranger_reply_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dip"
+        android:layout_marginRight="8dip"
+        android:layout_marginTop="10dip"
+        android:layout_weight="0.22"
+        android:clickable="false"
+        android:focusable="false"
+        android:text="Large Text"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</LinearLayout>
