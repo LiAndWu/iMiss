@@ -33,6 +33,9 @@ public class SetReplyActivity extends Activity {
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
+	private static final int MENU_MEMBER = Menu.FIRST;
+	private static final int MENU_ADD = Menu.FIRST + 1;
+	private static final int MENU_DELETE = Menu.FIRST + 2;
 	
 	private Button BackButton;
 	private SimpleAdapter adapter;
@@ -76,10 +79,9 @@ public class SetReplyActivity extends Activity {
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
             	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "小组成员");  
-                menu.add(0, Menu.FIRST + 1, 0, "添加组员");
-                
-                menu.add(0, Menu.FIRST + 2, 0, "删除小组");
+                menu.add(0, MENU_MEMBER, 0, "小组成员");  
+                menu.add(0, MENU_ADD, 0, "添加组员");    
+                menu.add(0, MENU_DELETE, 0, "删除小组");
             }   
         });     
 
@@ -114,17 +116,17 @@ public class SetReplyActivity extends Activity {
 	 */
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
-    	if (item.getItemId() == Menu.FIRST) {
+    	if (item.getItemId() == MENU_MEMBER) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectedGroupMemberActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
 			
-    	} else if (item.getItemId() == Menu.FIRST + 1) {
+    	} else if (item.getItemId() == MENU_ADD) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
 			
-    	} else if (item.getItemId() == Menu.FIRST + 2) {
+    	} else if (item.getItemId() == MENU_DELETE) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
     		IMissData.delGroup(map.get("title"));
