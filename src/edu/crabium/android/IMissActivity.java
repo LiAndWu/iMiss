@@ -27,7 +27,7 @@ public class IMissActivity extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);    
-        
+        IMissData.init(this);
         startService(new Intent(this, IMissService.class));
         
         /*
@@ -45,6 +45,7 @@ public class IMissActivity extends Activity {
 			}
 		});
         */
+        
         DetatisSetButton = (LinearLayout) findViewById(R.id.software_set_chevron_button);
         DetatisSetButton.setOnClickListener(new Button.OnClickListener() {
 			@Override

@@ -31,7 +31,6 @@ public class IMissService extends Service{
 		/** test!
 		 * 
 		 */
-		IMissData.setBlackList("d", "234");
 		Map<String,String> blacklist = IMissData.getBlackList();
 		
 		Iterator<String> iter = blacklist.keySet().iterator();
