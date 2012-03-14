@@ -100,13 +100,11 @@ public class SelectedGroupMemberActivity extends Activity {
     } 
     
     private void getGroups(List<Map<String,String>> to){
-    	Map<String, String> map = IMissData.getPersonsFromGroup(group_name);
-    	Set<String> keys = map.keySet();
-    	
-    	for(String key : keys){
+    	String[][] tuple = IMissData.getPersonsFromGroup(group_name);
+    	for(String[] key : tuple){
         	Map<String, String> item = new HashMap<String, String>();
-        	item.put(SelectedGroupMemberColumn1, key);
-        	item.put(SelectedGroupMemberColumn2, map.get(key));
+        	item.put(SelectedGroupMemberColumn1, key[0]);
+        	item.put(SelectedGroupMemberColumn2, key[1]);
         	to.add(item);
     	}	
     }
