@@ -64,8 +64,11 @@ public class IMissPlugin {
 		public boolean inContacts(String RingingNumber){
 			List<String[]> array = IMissData.getContacts();
 			for(String[] pair : array){
-				if(pair[1].equals(RingingNumber))
+				Log.d("GREETING", "COMPARING: " + pair[1] + "-" + RingingNumber);
+				if(pair[1].equals(RingingNumber)){
+					Log.d("GREETING", "HIT");
 					return true;
+				}
 			}
 			return false;
 		}
