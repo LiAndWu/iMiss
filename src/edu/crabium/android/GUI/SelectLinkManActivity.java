@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
+import edu.crabium.android.IMissData;
 import edu.crabium.android.IMissListViewAdapter;
 import edu.crabium.android.IMissListViewAdapter.ViewHolder;
 import edu.crabium.android.R;
@@ -33,6 +34,7 @@ public class SelectLinkManActivity extends Activity {
 	private ListView selectContactsListView;
     private Button BackButton, SaveButton;
 
+	Bundle bundle;
     ArrayList<String[]> name;
     IMissListViewAdapter adapter;
 	HashMap<Integer,Boolean> map ;
@@ -41,7 +43,7 @@ public class SelectLinkManActivity extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.select_linkman);
-        
+        bundle = this.getIntent().getExtras();
         name = addValue();
         map = new HashMap<Integer, Boolean>();
         for (int i = 0; i < name.size(); i++) {
@@ -65,40 +67,23 @@ public class SelectLinkManActivity extends Activity {
         SaveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
-                
-                System.out.println("dd");
+                String[] pair;
+                String group_name = bundle.getString("group_name");
+                String person_name;
+                String person_phone;
                 for(int i = 0; i < adapter.getCount(); i++){
-                	System.out.println( ((adapter.getCheck(i))));
+                	if(adapter.getCheck(i)){
+                		pair = (String[]) adapter.getItem(i);
+                		person_name = pair[0];
+                		person_phone = pair[1];
+                		
+                		IMissData.setPersonToGroup(person_name, person_phone, group_name);
+                	}
                }
-                /*
-                Map<Integer, Boolean> map = IMissListViewAdapter.getIsSelected();
-                Set<Integer> set = map.keySet();
-                
-                for(int key : set){
-                	System.out.println(key + " " + map.get(key));
-                }*/
-                //System.out.println(mla.getItem(0));
                 startActivity(intent);
                 SelectLinkManActivity.this.finish();
             }
         });	
-        
-        /*
-        selectContactsListView.setOnItemClickListener(new OnItemClickListener() {
-        	 @Override
-             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-        		 ViewHolder holder = (ViewHolder)arg1.getTag();
-        		 holder.checkBox.toggle();
-        		 adapter.getIsSelected().put(arg2, holder.checkBox.isChecked()); 
-        		 
-        		 if (holder.checkBox.isChecked()) {
-        			 Log.d("greeting", "" + holder.name);
-        			 // 如果选中 ，写入数据库;
-        		 }
-        		 
-        	 }
-        });
-        */
     }
 
     public ArrayList<String[]> addValue(){
@@ -131,8 +116,6 @@ public class SelectLinkManActivity extends Activity {
 			ViewHolder holder = (ViewHolder) arg1.getTag();
 			holder.checkBox.toggle();
 			adapter.isSelected.put(arg2, holder.checkBox.isChecked());
-			
-			Log.d("TAG", "123" + holder.checkBox.isChecked());
 		}
 	};
 	

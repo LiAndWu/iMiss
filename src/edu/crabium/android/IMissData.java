@@ -6,6 +6,7 @@ import java.util.Map;
 import android.app.Activity;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 public class IMissData{
 	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/files/iMiss.sqlite3";
@@ -269,6 +270,29 @@ public class IMissData{
 		int group_id = cursor.getInt(0);
 		sql_text = "INSERT INTO " + MESSAGES_TABLE_NAME + " VALUES (null, " + group_id + ", \"" + group[1] + "\")";
 		DB.execSQL(sql_text);
+		DB.close();
+	}
+
+	public static void setPersonToGroup(String person_name, String person_phone, String group_name) {
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		
+		String sql_text;
+		Cursor cursor = DB.rawQuery("SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name=\"" + group_name + "\"", null);
+		cursor.moveToNext();
+		int group_id = cursor.getInt(0);
+		cursor.close();
+		
+		cursor = DB.rawQuery("SELECT person_id FROM " + PERSONS_TABLE_NAME + " WHERE name=\"" + person_name + "\" AND number=\"" + person_phone + "\"", null);
+		if(cursor.getCount() < 1){
+			sql_text = "INSERT INTO " + PERSONS_TABLE_NAME + " VALUES (null, " + group_id  + ",\"" + person_name + "\",\"" + person_phone + "\")"; 
+			DB.execSQL(sql_text);
+		}
+		else{
+			sql_text = "UPDATE " + PERSONS_TABLE_NAME + " SET group_id = " + group_id;
+			DB.execSQL(sql_text);
+		}
+		cursor.close();
 		DB.close();
 	}
 }

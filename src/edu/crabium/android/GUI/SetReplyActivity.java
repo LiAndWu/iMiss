@@ -121,11 +121,17 @@ public class SetReplyActivity extends Activity {
 			
     	} else if (item.getItemId() == Menu.FIRST + 1) {
 			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
+			Bundle bundle = new Bundle();
+			@SuppressWarnings("unchecked")
+    		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
+			bundle.putString("group_name", map.get("title"));
+			intent.putExtras(bundle);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
 			
     	} else if (item.getItemId() == Menu.FIRST + 2) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
+			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
     		IMissData.delGroup(map.get("title"));
     		
