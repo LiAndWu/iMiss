@@ -49,7 +49,7 @@ public class EditReplyActivity extends Activity {
 				
 				IMissData.addGroup(new String[]{ TitleEditText.getText().toString(), ContentEditText.getText().toString()});
 				
-				Intent intent = new Intent(EditReplyActivity.this, SetReplyActivity.class);
+				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
 				EditReplyActivity.this.finish();
@@ -59,7 +59,7 @@ public class EditReplyActivity extends Activity {
 		CancelButton = (Button)findViewById(R.id.cancel_button);
 		CancelButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(EditReplyActivity.this, SetReplyActivity.class);
+				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
 				startActivity(intent);
 				EditReplyActivity.this.finish();
 			}

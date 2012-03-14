@@ -70,7 +70,7 @@ public class SelectedGroupMemberActivity extends Activity {
         BackButton = (Button)findViewById(R.id.back_button);
         BackButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(SelectedGroupMemberActivity.this, SetReplyActivity.class);
+                Intent intent = new Intent(SelectedGroupMemberActivity.this, GroupsSetReplyActivity.class);
                 startActivity(intent);
                 SelectedGroupMemberActivity.this.finish();
             }
