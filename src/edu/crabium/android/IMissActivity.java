@@ -51,7 +51,8 @@ public class IMissActivity extends Activity {
 		});
         
         
-        
+        /*
+         *黑名单，暂缓开发
         BlackListButton = (LinearLayout)findViewById(R.id.blacklist_chevron_button);
         BlackListButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -62,7 +63,7 @@ public class IMissActivity extends Activity {
 			}
 		});
         
-   
+                  拒接名单，暂缓开发
         RefuseReplyButton = (LinearLayout)findViewById(R.id.refuse_reply_chevron_button);
         RefuseReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -73,6 +74,7 @@ public class IMissActivity extends Activity {
 			}
 		});
         
+        */
         AboutButton = (LinearLayout)findViewById(R.id.about_chevron_button);
         AboutButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
