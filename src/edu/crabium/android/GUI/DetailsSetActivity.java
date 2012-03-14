@@ -21,7 +21,9 @@ public class DetailsSetActivity extends Activity {
 	private Button BackButton;
 	private ToggleButton ServiceSwitchToggleButton, InformSwitchToggleButton, StrangerSwitchToggleButton;
 	private TextView ServiceSwitchTextView, InformSwitchTextView, StrangerSwitchTextView;
-	
+	private static String ServiceSwitch = "service_switch";
+	private static String InformSwitch = "inform_switch";
+	private static String StrangerSwitch = "stranger_switch";
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -29,14 +31,14 @@ public class DetailsSetActivity extends Activity {
 		
 		ServiceSwitchTextView = (TextView) findViewById(R.id.service_switch_textview);
 		ServiceSwitchToggleButton = (ToggleButton) findViewById(R.id.service_switch_togglebutton);
-		//ServiceSwitchToggleButton.setChecked(IMissData.getValue("ServiceSwitch").equals("true"));
+		ServiceSwitchToggleButton.setChecked(IMissData.getValue(ServiceSwitch).equals("true"));
 		ServiceSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (ServiceSwitchToggleButton.isChecked()) {
-            	//	IMissData.setValue("ServiceSwitch", "true");
+            		IMissData.setValue(ServiceSwitch, "true");
             		ServiceSwitchTextView.setText("服务开启");
             	} else {
-            	//	IMissData.setValue("ServiceSwitch", "false");
+            		IMissData.setValue(ServiceSwitch, "false");
             		ServiceSwitchTextView.setText("服务关闭");
             	}
 			}
@@ -44,14 +46,14 @@ public class DetailsSetActivity extends Activity {
 		
 		InformSwitchTextView = (TextView) findViewById(R.id.inform_switch_textview);
 		InformSwitchToggleButton = (ToggleButton) findViewById(R.id.inform_switch_togglebutton);
-	//	InformSwitchToggleButton.setChecked(IMissData.getValue("InformSwitch").equals("true"));
+		InformSwitchToggleButton.setChecked(IMissData.getValue(InformSwitch).equals("true"));
 		InformSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (InformSwitchToggleButton.isChecked()) {
-            	//	IMissData.setValue("InformSwitch", "true");
+            		IMissData.setValue(InformSwitch, "true");
             		InformSwitchTextView.setText("通知开启");
             	} else {
-            	//	IMissData.setValue("InformSwitch", "false");
+            		IMissData.setValue(InformSwitch, "false");
             		InformSwitchTextView.setText("通知关闭");
             	}
 			}
@@ -59,14 +61,14 @@ public class DetailsSetActivity extends Activity {
 		
 		StrangerSwitchTextView = (TextView) findViewById(R.id.stranger_switch_textview);
 		StrangerSwitchToggleButton = (ToggleButton) findViewById(R.id.stranger_switch_togglebutton);
-		//StrangerSwitchToggleButton.setChecked(IMissData.getValue("StrangerSwitch").equals("true"));
+		StrangerSwitchToggleButton.setChecked(IMissData.getValue(StrangerSwitch).equals("true"));
 		StrangerSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (StrangerSwitchToggleButton.isChecked()) {
-            		//IMissData.setValue("StrangerSwitch", "true");
+            		IMissData.setValue(StrangerSwitch, "true");
             		StrangerSwitchTextView.setText("对陌生人开启");
             	} else {
-            		//IMissData.setValue("StrangerSwitch", "false");
+            		IMissData.setValue(StrangerSwitch, "false");
             		StrangerSwitchTextView.setText("对陌生人关闭");
             	}
 			}
