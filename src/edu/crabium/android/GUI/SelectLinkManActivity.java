@@ -72,11 +72,13 @@ public class SelectLinkManActivity extends Activity {
                 String person_name;
                 String person_phone;
                 for(int i = 0; i < adapter.getCount(); i++){
-                	if(adapter.getCheck(i)){
+                	Log.d("HELL", " " + adapter.getCheck(i));
+                	if(adapter.getCheck(i) == true){
                 		pair = (String[]) adapter.getItem(i);
                 		person_name = pair[0];
                 		person_phone = pair[1];
-                		
+
+                		Log.d("HELL",  "CHOSE " + person_name);
                 		IMissData.setPersonToGroup(person_name, person_phone, group_name);
                 	}
                }
@@ -116,6 +118,7 @@ public class SelectLinkManActivity extends Activity {
 			ViewHolder holder = (ViewHolder) arg1.getTag();
 			holder.checkBox.toggle();
 			adapter.isSelected.put(arg2, holder.checkBox.isChecked());
+			Log.d("HELLO", ""+ arg2 + holder.checkBox.isChecked());
 		}
 	};
 	

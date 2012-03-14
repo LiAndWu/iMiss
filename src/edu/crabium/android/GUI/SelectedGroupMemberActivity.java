@@ -24,6 +24,7 @@ public class SelectedGroupMemberActivity extends Activity {
 	LinearLayout	SelectedGroupMemberLinearLayout;
     private ListView SelectedGroupMemberListView;
     private Button BackButton;
+    private Bundle bundle;
     
 	private static final String SelectedGroupMemberColumn1 = "title";
 	private static final String SelectedGroupMemberColumn2 = "content";
@@ -34,10 +35,10 @@ public class SelectedGroupMemberActivity extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.selected_group_member);
-
-
+        
+        bundle = this.getIntent().getExtras();
         SelectedGroupMemberLinearLayout = (LinearLayout) findViewById(R.id.selected_group_member_linearlayout);
-        SelectedGroupMemberListView = (ListView) findViewById(R.id.set_reply_list_view);
+        SelectedGroupMemberListView = (ListView) findViewById(R.id.selected_group_member_listView);
 		setContentView(SelectedGroupMemberLinearLayout);
         
 		getGroups(SelectedGroupMemberDisplay);
@@ -61,13 +62,13 @@ public class SelectedGroupMemberActivity extends Activity {
 
     /*已选成员列表………………待修改*/
     private void getGroups(List<Map<String,String>> to){
-    	Map<String, String> map = IMissData.getGroups();
+    	Map<String, String> map = IMissData.getPersonsFromGroup(bundle.getString("group_name"));
     	Set<String> keys = map.keySet();
     	
     	for(String key : keys){
         	Map<String, String> item = new HashMap<String, String>();
         	item.put(SelectedGroupMemberColumn1, key);
-        	item.put(SelectedGroupMemberColumn1, map.get(key));
+        	item.put(SelectedGroupMemberColumn2, map.get(key));
         	to.add(item);
     	}	
     }

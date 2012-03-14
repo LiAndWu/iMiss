@@ -289,10 +289,24 @@ public class IMissData{
 			DB.execSQL(sql_text);
 		}
 		else{
-			sql_text = "UPDATE " + PERSONS_TABLE_NAME + " SET group_id = " + group_id;
+			sql_text = "UPDATE " + PERSONS_TABLE_NAME + " SET group_id = " + group_id + " WHERE name=\"" + person_name + "\" AND number=\"" + person_phone + "\"";
 			DB.execSQL(sql_text);
 		}
 		cursor.close();
 		DB.close();
+	}
+
+	public static Map<String, String> getPersonsFromGroup(String group_name){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		Map<String, String> map = new HashMap<String, String>();
+		String sql_text = "SELECT name, number FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + PERSONS_TABLE_NAME + " USING (group_id) WHERE group_name=\"" + group_name + "\"";
+		Cursor cursor = DB.rawQuery(sql_text,null);
+		while(cursor.moveToNext()){
+			map.put(cursor.getString(0), cursor.getString(1));
+		}
+		cursor.close();
+		DB.close();
+		return new HashMap<String, String>(map);
 	}
 }

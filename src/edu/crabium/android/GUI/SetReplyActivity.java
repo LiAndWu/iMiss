@@ -115,7 +115,11 @@ public class SetReplyActivity extends Activity {
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	if (item.getItemId() == Menu.FIRST) {
+			Bundle bundle = new Bundle();
 			Intent intent = new Intent(SetReplyActivity.this, SelectedGroupMemberActivity.class);
+    		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
+			bundle.putString("group_name", map.get("title"));
+			intent.putExtras(bundle);
 			startActivity(intent);
 			SetReplyActivity.this.finish();
 			

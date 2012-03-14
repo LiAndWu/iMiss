@@ -26,7 +26,7 @@
             android:textStyle="bold" >
 </TextView>
     </LinearLayout>
-
+
     <ListView
         android:id="@+id/selected_group_member_listView"
         android:layout_width="match_parent"
