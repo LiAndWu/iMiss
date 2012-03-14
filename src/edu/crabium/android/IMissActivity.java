@@ -3,11 +3,13 @@ package edu.crabium.android;
 
 import edu.crabium.android.GUI.AboutActivity;
 import edu.crabium.android.GUI.BlackListActivity;
+import edu.crabium.android.GUI.ContactsSetReplyActivity;
 import edu.crabium.android.GUI.DetailsSetActivity;
 import edu.crabium.android.GUI.EditReplyActivity;
 import edu.crabium.android.GUI.OwnerNameActivity;
 import edu.crabium.android.GUI.RefuseSlotActivity;
 import edu.crabium.android.GUI.GroupsSetReplyActivity;
+import edu.crabium.android.GUI.StrangerSetReplyActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -106,7 +108,7 @@ public class IMissActivity extends Activity {
 		StrangerReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, EditReplyActivity.class);
+				Intent intent = new Intent(IMissActivity.this, StrangerSetReplyActivity.class);
 				startActivity(intent);
 				IMissActivity.this.finish();
 			}
@@ -116,7 +118,7 @@ public class IMissActivity extends Activity {
 		ContactsReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, EditReplyActivity.class);
+				Intent intent = new Intent(IMissActivity.this, ContactsSetReplyActivity.class);
 				startActivity(intent);
 				IMissActivity.this.finish();
 			}
