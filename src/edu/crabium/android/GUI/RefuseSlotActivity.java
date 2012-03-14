@@ -47,7 +47,6 @@ public class RefuseSlotActivity extends Activity {
 		RefuseSlotListView.setItemsCanFocus(true); 
 		RefuseSlotListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
 
-		//¼àÌýOnClickÊÂ¼þ
 		RefuseSlotListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
 				ListView listView = (ListView)parent;
@@ -83,33 +82,30 @@ public class RefuseSlotActivity extends Activity {
 		});
 	}
 	
-	//ÏÔÊ¾Toast  
 	public void DisplayToast(String str) {
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 	} 
 	
-	//Ä¬ÈÏ»Ø¸´
     public List<Map<String, String>> addValue(){
     	List<Map<String, String>> value = new ArrayList<Map<String, String>>();
     	
     	Map<String, String> item1 = new HashMap<String, String>();
-    	item1.put(Column_1, "¾Ü½ÓÊ±¼ä¶Î1");
+    	item1.put(Column_1, "ï¿½Ü½ï¿½Ê±ï¿½ï¿½ï¿½1");
     	item1.put(Column_2, TargetRefuseSlot);
     	value.add(item1);
     	
     	Map<String, String> item2 = new HashMap<String, String>();
-    	item2.put(Column_1, "¾Ü½ÓÊ±¼ä¶Î2");
+    	item2.put(Column_1, "ï¿½Ü½ï¿½Ê±ï¿½ï¿½ï¿½2");
     	item2.put(Column_2, TargetRefuseSlot);
     	value.add(item2);
     	
     	Map<String, String> item3 = new HashMap<String, String>();
-    	item3.put(Column_1, "¾Ü½ÓÊ±¼ä¶Î3");
+    	item3.put(Column_1, "ï¿½Ü½ï¿½Ê±ï¿½ï¿½ï¿½3");
     	item3.put(Column_2, TargetRefuseSlot);
     	value.add(item3);  	
     	return value;
     }
     
-    //ÓÃÀ´Ìí¼ÓÐÂµÄ»Ø¸´Ïî
     public List<Map<String,String>> addNewValue(String title, String content){
     	List<Map<String,String>> value = new ArrayList<Map<String,String>>();  	
     	Map<String,String> item1 = new HashMap<String,String>();

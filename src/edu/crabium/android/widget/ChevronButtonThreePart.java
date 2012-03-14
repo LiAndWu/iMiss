@@ -20,7 +20,6 @@ public class ChevronButtonThreePart extends LinearLayout {
 
     public ChevronButtonThreePart(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // 导入布局
         LayoutInflater.from(context).inflate(R.layout.chevron_button_threepart, this, true);
         iv = (ImageView) findViewById(R.id.iv);
         tv = (TextView) findViewById(R.id.tv);
@@ -30,25 +29,15 @@ public class ChevronButtonThreePart extends LinearLayout {
     }
 
     
-    /**
-     * 设置图片资源
-     */
     public void setImageResource(int resId) {
         iv.setImageResource(resId);
     }
 
-    /**
-     * 设置按钮标题的文字
-     */
     public void setTitleTextViewText(String text) {
         TitleWidget.setText(text);
     }
     
-    /**
-     * 设置选择后的内容
-     */
     public void setContentTextViewText(String text) {
         tv.setText(text);
     }
-
 }

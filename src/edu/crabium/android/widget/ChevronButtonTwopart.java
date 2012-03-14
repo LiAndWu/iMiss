@@ -20,23 +20,16 @@ public class ChevronButtonTwopart extends LinearLayout {
 
     public ChevronButtonTwopart(Context context, AttributeSet attrs) {
         super(context, attrs);
-        // ���벼��
         LayoutInflater.from(context).inflate(R.layout.chevron_button_twopart, this, true);
         iv = (ImageView) findViewById(R.id.iv);
         TitleWidget = (TextView) findViewById(R.id.title_of_widget);
 
     }
     
-    /**
-     * ����ͼƬ��Դ
-     */
     public void setImageResource(int resId) {
         iv.setImageResource(resId);
     }
 
-    /**
-     * ���ð�ť���������
-     */
     public void setTitleTextViewText(String text) {
         TitleWidget.setText(text);
     }

@@ -14,6 +14,7 @@
     </issue>
     <issue id="DisableBaselineAlignment">
         <ignore path="res\layout-hdpi\dispatch_select_user_item.xml" />
+        <ignore path="res\layout-hdpi\set_refuse_slot_time.xml" />
     </issue>
     <issue id="DuplicateIds">
         <ignore path="res\layout-hdpi\about.xml" />
@@ -82,6 +83,7 @@
         <ignore path="res\layout-hdpi\edit_reply.xml" />
         <ignore path="res\layout-hdpi\owner_name.xml" />
         <ignore path="res\layout-hdpi\refuse_slot.xml" />
+        <ignore path="res\layout-hdpi\set_refuse_slot_time.xml" />
         <ignore path="res\layout-hdpi\set_reply.xml" />
         <ignore path="res\layout-mdpi\black_list.xml" />
         <ignore path="res\layout-mdpi\edit_reply.xml" />

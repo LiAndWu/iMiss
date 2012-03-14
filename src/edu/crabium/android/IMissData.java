@@ -309,4 +309,19 @@ public class IMissData{
 		DB.close();
 		return new HashMap<String, String>(map);
 	}
+
+	public static void delPersonInGroup(String person_name, String person_phone,String group_name) {
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		
+		String sql_text = "SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name = \"" + group_name + "\"";
+		Cursor cursor = DB.rawQuery(sql_text, null);
+		cursor.moveToNext();
+		int group_id = cursor.getInt(0);
+		
+		sql_text = "UPDATE " + PERSONS_TABLE_NAME + " SET group_id = 0 WHERE group_id=" + group_id + " AND name = \"" + person_name + "\" AND number =\"" + person_phone + "\"";
+		DB.execSQL(sql_text);
+		cursor.close();
+		DB.close();
+	}
 }
