@@ -1,5 +1,6 @@
 package edu.crabium.android;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -18,7 +19,7 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
 
 public class IMissData{
-	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/files/iMiss.sqlite3";
+	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/iMiss.sqlite3";
 	
 	private final static String GROUPS_TABLE_NAME = "groups";
 	private final static String GROUPS_TABLE_SPEC = "(group_id  INTEGER PRIMARY KEY, group_name STRING)";
@@ -246,6 +247,8 @@ public class IMissData{
 	private static void createTables()
 	{
 		if(!initiated){
+			//File dir = new File(context.getApplicationInfo().dataDir+"/files");
+			//dir.mkdirs();
 			DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
 			DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
 			DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
