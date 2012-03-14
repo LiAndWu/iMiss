@@ -2,9 +2,28 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:weightSum="1" android:orientation="vertical">
-    <LinearLayout android:layout_width="fill_parent" android:weightSum="1" android:layout_height="50dip" android:background="@drawable/bar" android:baselineAligned="false" android:id="@+id/barLinearLayout">
-        <Button android:layout_width="85dip" android:layout_height="40dip" android:layout_margin="3dip" android:text="上一步" android:layout_gravity="center_vertical" android:layout_weight="0.06" android:background="@drawable/button_short_background" android:id="@+id/back_button" android:textStyle="bold"></Button>
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/barLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/bar"
+        android:baselineAligned="false"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="85dip"
+            android:layout_height="40dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dip"
+            android:layout_weight="0.06"
+            android:background="@drawable/button_short_background"
+            android:text="上一步"
+            android:textStyle="bold" >
+        </Button>
 
         <TextView
             android:id="@+id/neverCallTextView"
@@ -16,19 +35,20 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dip"
             android:textStyle="bold" >
-</TextView>
+        </TextView>
     </LinearLayout>
-    
-    	<!-- 软件服务 -->
- 	 <LinearLayout
- 	     android:id="@+id/service_switch_linearlayout"
- 	     android:layout_width="match_parent"
- 	     android:layout_height="50dip"
- 	     android:layout_marginTop="7dip"
- 	     android:background="@drawable/button_background"
- 	     android:clickable="false"
- 	     android:weightSum="1" >
-
+
+    <!-- 软件服务 -->
+
+    <LinearLayout
+        android:id="@+id/service_switch_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginTop="7dip"
+        android:background="@drawable/button_background"
+        android:clickable="false"
+        android:weightSum="1" >
+
         <TextView
             android:id="@+id/service_switch_textview"
             android:layout_width="150dip"
@@ -42,9 +62,8 @@
             android:textColor="#000000"
             android:textSize="19dip"
             android:textStyle="bold" >
+        </TextView>
 
-</TextView>
-
         <ToggleButton
             android:id="@+id/service_switch_togglebutton"
             android:layout_width="45dip"
@@ -54,12 +73,12 @@
             android:background="@drawable/button_short_background"
             android:clickable="true"
             android:text="ToggleButton" >
-
-</ToggleButton>
+        </ToggleButton>
     </LinearLayout>
-    
- 	 <!-- 通知栏提醒 -->
-    <LinearLayout
+
+    <!-- 通知栏提醒 -->
+
+    <LinearLayout
         android:id="@+id/inform_switch_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="50dip"
@@ -67,7 +86,7 @@
         android:background="@drawable/button_background"
         android:clickable="false"
         android:weightSum="1" >
-
+
         <TextView
             android:id="@+id/inform_switch_textview"
             android:layout_width="150dip"
@@ -81,9 +100,8 @@
             android:textColor="#000000"
             android:textSize="19dip"
             android:textStyle="bold" >
+        </TextView>
 
-</TextView>
-
         <ToggleButton
             android:id="@+id/inform_switch_togglebutton"
             android:layout_width="45dip"
@@ -93,11 +111,11 @@
             android:background="@drawable/button_short_background"
             android:clickable="true"
             android:text="ToggleButton" >
-
-</ToggleButton>
+        </ToggleButton>
     </LinearLayout>
-    <!-- 陌生人开启 -->
-    <LinearLayout
+    <!-- 陌生人开启 -->
+
+    <LinearLayout
         android:id="@+id/stranger_switch_linearlayout"
         android:layout_width="match_parent"
         android:layout_height="50dip"
@@ -105,7 +123,7 @@
         android:background="@drawable/button_background"
         android:clickable="false"
         android:weightSum="1" >
-
+
         <TextView
             android:id="@+id/stranger_switch_textview"
             android:layout_width="150dip"
@@ -119,9 +137,8 @@
             android:textColor="#000000"
             android:textSize="19dip"
             android:textStyle="bold" >
+        </TextView>
 
-</TextView>
-
         <ToggleButton
             android:id="@+id/stranger_switch_togglebutton"
             android:layout_width="45dip"
@@ -131,11 +148,7 @@
             android:background="@drawable/button_short_background"
             android:clickable="true"
             android:text="ToggleButton" >
-
-</ToggleButton>
+        </ToggleButton>
     </LinearLayout>
-
-
-	
 
 </LinearLayout>
