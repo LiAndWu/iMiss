@@ -3,6 +3,7 @@ package edu.crabium.android;
 
 import edu.crabium.android.GUI.AboutActivity;
 import edu.crabium.android.GUI.BlackListActivity;
+import edu.crabium.android.GUI.DetailsSetActivity;
 import edu.crabium.android.GUI.OwnerNameActivity;
 import edu.crabium.android.GUI.RefuseSlotActivity;
 import edu.crabium.android.GUI.SetReplyActivity;
@@ -17,7 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class IMissActivity extends Activity {
-	LinearLayout OwnerNameButton, SetReplyButton,
+	LinearLayout OwnerNameButton, DetatisSetButton, SetReplyButton,
     BlackListButton, RefuseReplyButton, AboutButton;
 	TextView OwnerNameTextView;
     public void onCreate(Bundle savedInstanceState) {
@@ -27,10 +28,12 @@ public class IMissActivity extends Activity {
         
         startService(new Intent(this, IMissService.class));
         
+        /*
+         * 
         OwnerNameTextView = (TextView) findViewById(R.id.tv);
         OwnerNameTextView.setText(IMissData.getValue("owner"));
         
-        OwnerNameButton = (LinearLayout)findViewById(R.id.ownername_chevron_button);
+        OwnerNameButton = (LinearLayout)findViewById(R.id.software_set_chevron_button);
         OwnerNameButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -39,6 +42,17 @@ public class IMissActivity extends Activity {
 				IMissActivity.this.finish();
 			}
 		});
+        */
+        DetatisSetButton = (LinearLayout) findViewById(R.id.software_set_chevron_button);
+        DetatisSetButton.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(IMissActivity.this, DetailsSetActivity.class);
+				startActivity(intent);
+				IMissActivity.this.finish();
+			}
+		});
+        
         
         SetReplyButton = (LinearLayout)findViewById(R.id.set_reply_chevron_button);
         SetReplyButton.setOnClickListener(new Button.OnClickListener() {
