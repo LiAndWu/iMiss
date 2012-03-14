@@ -27,6 +27,7 @@ public class IMissPlugin {
 					//return default
 					Log.d("IMISS", "BLANK MESSAGE");
 					text = "我知道你是谁，但是我很忙";
+					text = IMissData.getValue("contacts_reply");
 				}
 				else{
 					Log.d("IMISS", "HAVE MESSAGE");
@@ -38,6 +39,7 @@ public class IMissPlugin {
 				if(OpenToStranger()){
 					Log.d("IMISS","NOT KNOWN");
 					text = "我不认识你啊！";
+					text = IMissData.getValue("stranger_reply");
 				}
 				else
 					text = " ";
@@ -62,8 +64,11 @@ public class IMissPlugin {
 		public boolean inContacts(String RingingNumber){
 			List<String[]> array = IMissData.getContacts();
 			for(String[] pair : array){
-				if(pair[1].equals(RingingNumber))
+				Log.d("GREETING", "COMPARING: " + pair[1] + "-" + RingingNumber);
+				if(pair[1].equals(RingingNumber)){
+					Log.d("GREETING", "HIT");
 					return true;
+				}
 			}
 			return false;
 		}

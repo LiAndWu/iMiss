@@ -103,9 +103,7 @@ public class IMissData{
 	 */
 	public static void setValue(String key, String value) {
 		if(!initiated) createTables();
-		
-		if(!getValue(key).trim().equals(""))
-			delValue(key);
+		delValue(key);
 
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		DB.execSQL(MISC_INSERT_VALUE +"(\"" + key + "\", \"" + value + "\")");
@@ -330,8 +328,11 @@ public class IMissData{
 		String sql_text = "SELECT group_id FROM " + PERSONS_TABLE_NAME + " WHERE number = \"" + person_phone + "\"";
 		Cursor cursor = DB.rawQuery(sql_text, null);
 		
-		if(cursor.getCount() < 1)
+		if(cursor.getCount() < 1){
+			cursor.close();
+			DB.close();
 			return 0;
+		}
 		cursor.moveToNext();
 		int group_id = cursor.getInt(0);
 		cursor.close();
@@ -385,6 +386,7 @@ public class IMissData{
             while(phone.moveToNext()) {
                 String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));     
                 value.add(new String[]{contact,phoneNumber});
+                Log.d("GREETING", "PHONE LOOKUP: " + contact + " " +  phoneNumber);
             }
         }
         cursor.close();
