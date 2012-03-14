@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import edu.crabium.android.IMissData;
 import edu.crabium.android.IMissListViewAdapter;
 import edu.crabium.android.IMissListViewAdapter.ViewHolder;
 import edu.crabium.android.R;
@@ -25,36 +24,35 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 
-public class SelectLinkManActivity extends Activity {
-	private ListView selectContactsListView;
+public class RecentCallActivity extends Activity {
+	private ListView recentCallListView;
     private Button BackButton, SaveButton;
 
-	Bundle bundle;
-    ArrayList<String[]> name;
+    ArrayList<String[]> CallRecords;
     IMissListViewAdapter adapter;
 	HashMap<Integer,Boolean> map ;
 	
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.select_linkman);
-        bundle = this.getIntent().getExtras();
-        name = addValue();
+        setContentView(R.layout.recent_call);
+        
+        CallRecords = addValue();
         map = new HashMap<Integer, Boolean>();
-        for (int i = 0; i < name.size(); i++) {
+        for (int i = 0; i < CallRecords.size(); i++) {
 			map.put(i, false);
 		}
-        selectContactsListView = (ListView) findViewById(R.id.select_linkman_listView); 
-        selectContactsListView.setOnItemClickListener( lis);
-        adapter = new IMissListViewAdapter(name, this);
-        selectContactsListView.setAdapter(adapter);
+        recentCallListView = (ListView) findViewById(R.id.recent_call_listView); 
+        recentCallListView.setOnItemClickListener( lis);
+        adapter = new IMissListViewAdapter(CallRecords, this);
+        recentCallListView.setAdapter(adapter);
         BackButton = (Button)findViewById(R.id.back_button);
         
         BackButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
+                Intent intent = new Intent(RecentCallActivity.this, BlackListActivity.class);
                 startActivity(intent);
-                SelectLinkManActivity.this.finish();
+                RecentCallActivity.this.finish();
             }
         });	
         
@@ -62,24 +60,22 @@ public class SelectLinkManActivity extends Activity {
         SaveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
             	
-                Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
-                String[] pair;
-                String group_name = bundle.getString("group_name");
-                String person_name;
-                String person_phone;
+                Intent intent = new Intent(RecentCallActivity.this, BlackListActivity.class);
+                
+                System.out.println("dd");
                 for(int i = 0; i < adapter.getCount(); i++){
-                	Log.d("HELL", " " + adapter.getCheck(i));
-                	if(adapter.getCheck(i) == true){
-                		pair = (String[]) adapter.getItem(i);
-                		person_name = pair[0];
-                		person_phone = pair[1];
-
-                		Log.d("HELL",  "CHOSE " + person_name);
-                		IMissData.setPersonToGroup(person_name, person_phone, group_name);
-                	}
+                	System.out.println( ((adapter.getCheck(i))));
                }
+                /*
+                Map<Integer, Boolean> map = IMissListViewAdapter.getIsSelected();
+                Set<Integer> set = map.keySet();
+                
+                for(int key : set){
+                	System.out.println(key + " " + map.get(key));
+                }*/
+                //System.out.println(mla.getItem(0));
                 startActivity(intent);
-                SelectLinkManActivity.this.finish();
+                RecentCallActivity.this.finish();
             }
         });	
     }
@@ -114,9 +110,11 @@ public class SelectLinkManActivity extends Activity {
 			ViewHolder holder = (ViewHolder) arg1.getTag();
 			holder.checkBox.toggle();
 			adapter.isSelected.put(arg2, holder.checkBox.isChecked());
-			Log.d("HELLO", ""+ arg2 + holder.checkBox.isChecked());
+			
+			Log.d("TAG", "123" + holder.checkBox.isChecked());
 		}
 	};
 	
 }
+
 

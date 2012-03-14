@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/select_linkman_linearlayout"
+    android:id="@+id/recent_call_linearlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical" >
@@ -30,7 +30,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.95"
             android:gravity="center"
-            android:text="选择联系人"
+            android:text="最近通话"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="24dip"
             android:textStyle="bold" >
@@ -49,7 +49,7 @@
     </LinearLayout>
 
     <ListView
-        android:id="@+id/select_linkman_listView"
+        android:id="@+id/recent_call_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clickable="true" 
