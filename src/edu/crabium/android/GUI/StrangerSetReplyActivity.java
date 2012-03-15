@@ -36,7 +36,7 @@ public class StrangerSetReplyActivity extends Activity {
 		
 		StrangerSetReplyTextView = (TextView) findViewById(R.id.stranger_reply_textview);
 		StrangerSetReplyTextView.setText("使用提示：\n" +
-		"设置的是   不在通讯录中陌生人   的默认回复。");
+		"回复对象是：不在通讯录中的陌生人。");
 		
 		CancelButton = (Button)findViewById(R.id.cancel_button);
 		CancelButton.setOnClickListener(new Button.OnClickListener() {

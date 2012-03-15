@@ -40,7 +40,7 @@
 
         <LinearLayout
             android:id="@+id/new_reply_linearlayout"
-            android:layout_width="30dip"
+            android:layout_width="40dip"
             android:layout_height="40dip"
             android:layout_gravity="center_vertical"
             android:layout_marginBottom="3dip"
