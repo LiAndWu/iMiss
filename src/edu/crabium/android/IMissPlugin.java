@@ -42,11 +42,13 @@ public class IMissPlugin {
 				}
 				else
 					text = " ";
+				notify_summary = "向" + IMissPhoneStateListener.RingingNumber + notify_summary;
 			}
 			
+			text = text + "[iMiss]";
 			sm.sendTextMessage(IMissPhoneStateListener.RingingNumber, null, text, null, null);
 			notify_body = notify_body_header + text;
-			IMissData.nofity(notify_summary, notify_title, notify_body);
+			IMissData.nofity(notify_summary, notify_summary, notify_body);
 		}
 
 		public void run() {
