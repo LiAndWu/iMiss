@@ -51,6 +51,7 @@ public class IMissData{
 	private static ContentResolver contentResolver;
 	private static Context context;
 	private static boolean initiated = false;
+	private static ArrayList<String[]> contactsArrayList;
 	
 	public static Map<String, String> getGroups(){
 		if(!initiated) createTables();
@@ -397,27 +398,53 @@ public class IMissData{
 		DB.close();
 	}
 	
-    public static ArrayList<String[]> getContacts(){
-    	ArrayList<String[]> value = new ArrayList<String[]>();
-    	
+    public static ArrayList<String[]> getContacts(){   	
         ContentResolver cr = contentResolver;
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
 
-       while(cursor.moveToNext()) {
-            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
-            String contact = cursor.getString(nameFieldColumnIndex);
+        Log.d("iMiss V1.0", "Getting Contacts");
+        if(cursor != null && cursor.getCount() > 0){
+        	Log.d("iMiss V1.0", "Got cursor.");
+	       while(cursor.moveToNext()) {
+	            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
+	            String contact = cursor.getString(nameFieldColumnIndex);
+	
+	            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+	            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
+	            
 
-            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
+	            Log.d("iMiss V1.0", "Getting Phone");
+	            if(phone != null && phone.getCount() != 0){
+	                Log.d("iMiss V1.0", "Got phone");
+	            	if(contactsArrayList != null)
+	            		contactsArrayList.clear();
+	            	else
+	            		contactsArrayList = new ArrayList<String[]>();
+	            		
+		            while(phone.moveToNext()) {
+		                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));     
+		                contactsArrayList.add(new String[]{contact,phoneNumber});
+		                Log.d("GREETING", "PHONE LOOKUP: " + contact + " " +  phoneNumber);
+		            }
+	            }
+	            else{
 
-            while(phone.moveToNext()) {
-                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));     
-                value.add(new String[]{contact,phoneNumber});
-                Log.d("GREETING", "PHONE LOOKUP: " + contact + " " +  phoneNumber);
-            }
+	                Log.d("iMiss V1.0", "Get phone failed.");
+	            }
+	            phone.close();
+	        }
         }
-        cursor.close();
-        return new ArrayList<String[]>(value);
+        else{
+
+            Log.d("iMiss V1.0", "Get cursor failed.");
+        }
+	    cursor.close();
+        
+        if(contactsArrayList != null){
+        	return new ArrayList<String[]>(contactsArrayList);
+        }
+        else
+        	return new ArrayList<String[]>();
     }
 
     
