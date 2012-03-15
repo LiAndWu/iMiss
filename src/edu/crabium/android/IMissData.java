@@ -1,15 +1,25 @@
 package edu.crabium.android;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ContentResolver;
+import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.provider.ContactsContract;
+import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
 
 public class IMissData{
-	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/files/iMiss.sqlite3";
+	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/iMiss.sqlite3";
 	
 	private final static String GROUPS_TABLE_NAME = "groups";
 	private final static String GROUPS_TABLE_SPEC = "(group_id  INTEGER PRIMARY KEY, group_name STRING)";
@@ -38,7 +48,8 @@ public class IMissData{
 	private final static int VERSION = 1;
 	
 	private static SQLiteDatabase DB;
-	
+	private static ContentResolver contentResolver;
+	private static Context context;
 	private static boolean initiated = false;
 	
 	public static Map<String, String> getGroups(){
@@ -93,9 +104,7 @@ public class IMissData{
 	 */
 	public static void setValue(String key, String value) {
 		if(!initiated) createTables();
-		
-		if(!getValue(key).trim().equals(""))
-			delValue(key);
+		delValue(key);
 
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		DB.execSQL(MISC_INSERT_VALUE +"(\"" + key + "\", \"" + value + "\")");
@@ -228,6 +237,8 @@ public class IMissData{
 	public static void init(Activity activity){
 		createTables();
 		initiated = true;
+		context = activity;
+		IMissData.contentResolver = activity.getContentResolver();
 	}
 	
 	/** create necessary tables
@@ -236,6 +247,8 @@ public class IMissData{
 	private static void createTables()
 	{
 		if(!initiated){
+			//File dir = new File(context.getApplicationInfo().dataDir+"/files");
+			//dir.mkdirs();
 			DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
 			DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
 			DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
@@ -261,8 +274,6 @@ public class IMissData{
 	public static void addGroup(String[] group) {
 		if(!initiated) createTables();
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-
-		
 		String sql_text = "INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (null, \"" + group[0] + "\")";
 		DB.execSQL(sql_text);
 		Cursor cursor = DB.rawQuery("SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name=?", new String[]{group[0]});
@@ -270,6 +281,7 @@ public class IMissData{
 		int group_id = cursor.getInt(0);
 		sql_text = "INSERT INTO " + MESSAGES_TABLE_NAME + " VALUES (null, " + group_id + ", \"" + group[1] + "\")";
 		DB.execSQL(sql_text);
+		cursor.close();
 		DB.close();
 	}
 
@@ -296,6 +308,40 @@ public class IMissData{
 		DB.close();
 	}
 
+	public static String getGroupMessage(int group_id){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		
+		String sql_text = "SELECT message_body FROM " + MESSAGES_TABLE_NAME + " WHERE group_id = " + group_id;
+		Cursor cursor = DB.rawQuery(sql_text, null);
+		
+		if(cursor.getCount() < 1)
+			return "";
+		cursor.moveToNext();
+		String str = cursor.getString(0);
+		cursor.close();
+		DB.close();
+		
+		return str;
+	}
+	public static int getGroupInfoByNumber(String person_phone){
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		
+		String sql_text = "SELECT group_id FROM " + PERSONS_TABLE_NAME + " WHERE number = \"" + person_phone + "\"";
+		Cursor cursor = DB.rawQuery(sql_text, null);
+		
+		if(cursor.getCount() < 1){
+			cursor.close();
+			DB.close();
+			return 0;
+		}
+		cursor.moveToNext();
+		int group_id = cursor.getInt(0);
+		cursor.close();
+		DB.close();
+		return group_id;
+	}
 	public static String[][] getPersonsFromGroup(String group_name){
 		if(!initiated) createTables();
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
@@ -325,5 +371,65 @@ public class IMissData{
 		DB.execSQL(sql_text);
 		cursor.close();
 		DB.close();
+	}
+	
+    public static ArrayList<String[]> getContacts(){
+    	ArrayList<String[]> value = new ArrayList<String[]>();
+    	
+        ContentResolver cr = contentResolver;
+        Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+
+       while(cursor.moveToNext()) {
+            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
+            String contact = cursor.getString(nameFieldColumnIndex);
+
+            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
+
+            while(phone.moveToNext()) {
+                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));     
+                value.add(new String[]{contact,phoneNumber});
+                Log.d("GREETING", "PHONE LOOKUP: " + contact + " " +  phoneNumber);
+            }
+        }
+        cursor.close();
+        return new ArrayList<String[]>(value);
+    }
+
+    
+	public static void delMessage(String group_name) {
+		if(!initiated) createTables();
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		String sql_text = "SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name = \"" + group_name + "\"";
+		Cursor cursor = DB.rawQuery(sql_text, null);
+		
+		Log.d("GREETING",""+group_name);
+		if(cursor.getCount() >= 1){
+			cursor.moveToNext();
+			int id = cursor.getInt(0);
+			Log.d("GREETING", "id: " + id);
+			sql_text = "DELETE FROM " + MESSAGES_TABLE_NAME + " WHERE group_id=" + id;
+			DB.execSQL(sql_text);
+		}
+		cursor.close();
+		DB.close();
+	}
+	
+	public static void nofity(String notify_summary,String notify_title, String notify_body){     //定义NotificationManager
+        String ns = Context.NOTIFICATION_SERVICE;
+        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
+        //定义通知栏展现的内容信息
+        long time = System.currentTimeMillis();
+        Notification notification = new Notification(R.drawable.add, notify_summary, time);
+         
+        //定义下拉通知栏时要展现的内容信息
+        Intent notificationIntent = new Intent(context, IMissActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
+                notificationIntent, 0);
+        notification.setLatestEventInfo(context, notify_title, notify_body,
+                contentIntent);
+         
+        //用mNotificationManager的notify方法通知用户生成标题栏消息通知
+        mNotificationManager.notify(1, notification);
 	}
 }

@@ -53,7 +53,7 @@ public class SelectLinkManActivity extends Activity {
         
         BackButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
+                Intent intent = new Intent(SelectLinkManActivity.this, GroupsSetReplyActivity.class);
                 startActivity(intent);
                 SelectLinkManActivity.this.finish();
             }
@@ -63,7 +63,7 @@ public class SelectLinkManActivity extends Activity {
         SaveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
             	
-                Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
+                Intent intent = new Intent(SelectLinkManActivity.this, GroupsSetReplyActivity.class);
                 String[] pair;
                 String group_name = bundle.getString("group_name");
                 String person_name;
