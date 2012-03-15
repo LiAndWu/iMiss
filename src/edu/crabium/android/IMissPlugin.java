@@ -46,6 +46,10 @@ public class IMissPlugin {
 			}
 			
 			text = text + "[iMiss]";
+			
+			Log.d("iMiss V1.0", "Sending SMS, number:" +IMissPhoneStateListener.RingingNumber + ", text:" + text); 
+			
+			if(IMissPhoneStateListener.RingingNumber != null && !IMissPhoneStateListener.RingingNumber.trim().equals(""))
 			sm.sendTextMessage(IMissPhoneStateListener.RingingNumber, null, text, null, null);
 			notify_body = notify_body_header + text;
 			IMissData.nofity(notify_summary, notify_summary, notify_body);

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
+import android.util.Log;
 
 public class IMissPhoneStateListener extends PhoneStateListener {
 	public void callback() {
@@ -56,6 +57,7 @@ public class IMissPhoneStateListener extends PhoneStateListener {
 	}
 
 	public void onRinging(String incomingNumber) {
+		Log.d("iMiss V1.0", "IncomingNumber: " + incomingNumber);
 		PreviousState = TelephonyManager.CALL_STATE_RINGING;
 		TimeMark = System.currentTimeMillis();
 		RingingNumber = incomingNumber;
