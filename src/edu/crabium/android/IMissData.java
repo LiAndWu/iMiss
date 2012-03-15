@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.app.Activity;
 import android.app.Notification;
@@ -267,7 +269,7 @@ public class IMissData{
 			DB.close();
 			
 			if(getValue(ContactsReply).trim().equals(""))
-				setValue(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a fun day!! ");
+				setValue(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day!! ");
 			if(getValue(StrangerReply).trim().equals(""))
 				setValue(StrangerReply, "我的主人好像不认识你哦，难道你是，骗子？");
 			
@@ -398,10 +400,55 @@ public class IMissData{
 		DB.close();
 	}
 	
+	public static boolean inContacts(String RingingNumber){	
+        ContentResolver cr = contentResolver;
+        Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
+        Pattern pattern = Pattern.compile("-");
+		Matcher matcher;
+        
+        Log.d("iMiss V1.0", "Getting Contacts");
+        if(cursor != null && cursor.getCount() > 0){
+        	Log.d("iMiss V1.0", "Got cursor.");
+	       while(cursor.moveToNext()) {
+	            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
+	            String contact = cursor.getString(nameFieldColumnIndex);
+	
+	            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+	            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
+	            
+	            Log.d("iMiss V1.0", "Getting Phone");
+	            if(phone != null && phone.getCount() != 0){
+		            while(phone.moveToNext()) {
+		                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+	    				matcher = pattern.matcher(phoneNumber);
+	    				String num = matcher.replaceAll("");
+	    				Log.d("iMiss V1.0", "Num: " + num);
+	    				if(num.equals(RingingNumber)){
+	    					cursor.close();
+	    					phone.close();
+	    					return true;
+	    				}
+		                Log.d("GREETING", "PHONE LOOKUP: " + contact + " " +  phoneNumber);
+		            }
+	            }
+	            else{
+
+	                Log.d("iMiss V1.0", "Get phone failed.");
+	            }
+	            phone.close();
+	        }
+        }
+        else{
+
+            Log.d("iMiss V1.0", "Get cursor failed.");
+        }
+	    cursor.close();
+		return false;
+	}
     public static ArrayList<String[]> getContacts(){   	
         ContentResolver cr = contentResolver;
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-
+        Boolean cleared = false;
         Log.d("iMiss V1.0", "Getting Contacts");
         if(cursor != null && cursor.getCount() > 0){
         	Log.d("iMiss V1.0", "Got cursor.");
@@ -416,15 +463,18 @@ public class IMissData{
 	            Log.d("iMiss V1.0", "Getting Phone");
 	            if(phone != null && phone.getCount() != 0){
 	                Log.d("iMiss V1.0", "Got phone");
-	            	if(contactsArrayList != null)
-	            		contactsArrayList.clear();
-	            	else
-	            		contactsArrayList = new ArrayList<String[]>();
 	            		
 		            while(phone.moveToNext()) {
-		                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));     
+		                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+		                if(!cleared){
+			            	if(contactsArrayList != null)
+			            		contactsArrayList.clear();
+			            	else
+			            		contactsArrayList = new ArrayList<String[]>();
+			            	cleared = true;
+		                }
 		                contactsArrayList.add(new String[]{contact,phoneNumber});
-		                Log.d("GREETING", "PHONE LOOKUP: " + contact + " " +  phoneNumber);
+		                Log.d("GREETING", "PHONE LOOKUP:  " + contact + " " +  phoneNumber);
 		            }
 	            }
 	            else{
@@ -441,6 +491,7 @@ public class IMissData{
 	    cursor.close();
         
         if(contactsArrayList != null){
+        	Log.d("IMiss V1.0", "Contacts not null, size: " + contactsArrayList.size());
         	return new ArrayList<String[]>(contactsArrayList);
         }
         else

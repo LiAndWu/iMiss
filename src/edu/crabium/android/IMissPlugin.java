@@ -2,6 +2,8 @@ package edu.crabium.android;
 
 import java.lang.reflect.Array;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -73,8 +75,16 @@ public class IMissPlugin {
 		
 		public String inContacts(String RingingNumber){
 			List<String[]> array = IMissData.getContacts();
+			Pattern pattern = Pattern.compile("-");
+			Matcher matcher;
+			
+			System.out.println("array.size()=" + array.size());
 			for(String[] pair : array){
-				if(pair[1].equals(RingingNumber)){
+				Log.d("iMiss V1.0", "Pair[1]: " + pair[1]);
+				matcher = pattern.matcher(pair[1]);
+				String num = matcher.replaceAll("");
+				Log.d("iMiss V1.0", "Num: " + num);
+				if(num.equals(RingingNumber)){
 					return pair[0];
 				}
 			}
