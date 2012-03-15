@@ -29,7 +29,10 @@ public class StrangerSetReplyActivity extends Activity {
 		StrangerSetReplyEditText = (EditText) findViewById(R.id.stranger_reply_edittext);
 		StrangerSetReplyEditText.setFocusable(true);
 		StrangerSetReplyEditText.setFocusableInTouchMode(true);
+		
+		StrangerSetReplyEditText.setHint("输入陌生人回复.");
 		StrangerSetReplyEditText.setText(IMissData.getValue(StrangerReply));
+		
 		
 		StrangerSetReplyTextView = (TextView) findViewById(R.id.stranger_reply_textview);
 		StrangerSetReplyTextView.setText("使用提示：\n" +

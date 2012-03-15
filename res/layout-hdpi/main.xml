@@ -98,7 +98,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="22dip"
             android:layout_weight="0.9"
-            android:text="分組回复"
+            android:text="分组回复"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
             android:textSize="19dip"
