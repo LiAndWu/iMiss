@@ -58,7 +58,6 @@ public class IMissActivity extends Activity {
 			}
 		});
         
-        
         SetReplyButton = (LinearLayout)findViewById(R.id.set_reply_chevron_button);
         SetReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
