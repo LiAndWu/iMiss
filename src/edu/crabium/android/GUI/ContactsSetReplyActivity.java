@@ -34,7 +34,7 @@ public class ContactsSetReplyActivity extends Activity {
 		
 		
 		ContactsSetReplyTextView = (TextView) findViewById(R.id.contacts_reply_textview);
-		ContactsSetReplyTextView.setText("使用提示：\n" +	"设置的是   在通讯录中联系人   的默认回复。");
+		ContactsSetReplyTextView.setText("使用提示：\n" +	"设置的是   没有在小组中添加，但在通讯录中联系人   的默认回复。");
 		
 		CancelButton = (Button)findViewById(R.id.cancel_button);
 		CancelButton.setOnClickListener(new Button.OnClickListener() {

@@ -67,16 +67,27 @@ public class AboutActivity extends Activity {
 	    		"\t\t\t  chinawelon@gmail.com\n" +	 
 		        "\t\t     Crabium & Mabbage Workshop\n\t\t\t\t  LiWei and WuXudong\n\t\t\t\t\t Copyleft 2011.";  
 		        AboutTextView.setText(introduce); 
-		} else {//高分辨率
+		} else if (dm.heightPixels / dm.widthPixels < 16 / 9){//高分辨率，魅族960 * 640（3:2）显示良好
 	        String introduce = "       \n" + 
-	        "\t\tiMiss\n" +
-	        "\t\tVersion 1.0\n" +     
-	      	"\t\t吴旭东:\n\t\t\t\t  http://tikiet.blog.163.com\n" +
+	        "\t\t\tiMiss\n" +
+	        "\t\t\tVersion 1.0\n" +     
+	      	"\t\t\t吴旭东:\n\t\t\t\t  http://tikiet.blog.163.com\n" +
 	        "\t\t\t\t  wuxd@me.com\n" +
-    		"\t\t李伟:\n\t\t\t\t  http://mindlee.net\n" +
+    		"\t\t\t李伟:\n\t\t\t\t  http://mindlee.net\n" +
     		"\t\t\t\t  chinawelon@gmail.com\n" +	 
 	        "\t\t\t     Crabium & Mabbage Workshop\n\t\t\t\t\t\t\t  LiWei and WuXudong\n\t\t\t\t\t\t\t\t\t Copyleft 2011.";  
 	        AboutTextView.setText(introduce); 
+		} else {//高分辨率，小米854 * 480 （16:9）显示良好
+	        String introduce = "       \n\n" + 
+	        "\t\tiMiss\n" +
+	        "\t\tVersion 1.0\n" +     
+	      	"\t\t吴旭东:\n\t\t\t  http://tikiet.blog.163.com\n" +
+	        "\t\t\t  wuxd@me.com\n" +
+    		"\t\t李伟:\n\t\t\t  http://mindlee.net\n" +
+    		"\t\t\t  chinawelon@gmail.com\n\n" +	 
+	        "\t\t\tCrabium & Mabbage Workshop\n\t\t\t\t\t LiWei and WuXudong\n\t\t\t\t\t\t\tCopyleft 2011.";  
+	        AboutTextView.setText(introduce); 
+			
 		}
 	}
 	

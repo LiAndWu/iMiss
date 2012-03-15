@@ -57,6 +57,7 @@
             android:layout_weight="0.56"
             android:lineSpacingExtra="4dip"
             android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:maxLines = "13"      
             android:scrollbars="vertical"
             android:text="嗨，这是帮助"
             android:textAppearance="?android:attr/textAppearanceLarge"
