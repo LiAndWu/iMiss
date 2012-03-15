@@ -48,21 +48,22 @@
         android:background="@drawable/white_background_big"
         android:orientation="vertical"
         android:weightSum="1" >
-
+
         <TextView
             android:id="@+id/help_textView"
             android:layout_width="272dp"
-            android:layout_height="255dp"
+            android:layout_height="300dp"
             android:layout_gravity="center_vertical|center_horizontal|center"
-            android:layout_marginTop="30dip"
+            android:layout_marginTop="25dip"
             android:layout_weight="0.56"
             android:lineSpacingExtra="4dip"
-            android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbars="vertical"
+            android:singleLine="false"
             android:text="嗨，这是帮助"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
             android:textSize="17dip" >
+
         </TextView>
     </LinearLayout>
 

@@ -51,7 +51,7 @@
         <TextView
             android:id="@+id/help_textView"
             android:layout_width="272dp"
-            android:layout_height="255dp"
+            android:layout_height="280dip"
             android:layout_gravity="center_vertical|center_horizontal|center"
             android:layout_marginTop="30dip"
             android:layout_weight="0.56"

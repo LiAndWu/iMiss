@@ -266,7 +266,7 @@ public class IMissData{
 			if(getValue(ContactsReply).trim().equals(""))
 				setValue(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a fun day!! ");
 			if(getValue(StrangerReply).trim().equals(""))
-				setValue(StrangerReply, "我的主人好像不认识您哦，难道你是，骗子？");
+				setValue(StrangerReply, "我的主人好像不认识你哦，难道你是，骗子？");
 			
 			if(getGroups().size() == 0){
 				addGroup(new String[]{"朋友", "你爹在忙"});
@@ -436,7 +436,7 @@ public class IMissData{
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
         //定义通知栏展现的内容信息
         long time = System.currentTimeMillis();
-        Notification notification = new Notification(R.drawable.add, notify_summary, time);
+        Notification notification = new Notification(R.drawable.icon_small, notify_summary, time);
          
         //定义下拉通知栏时要展现的内容信息
         Intent notificationIntent = new Intent(context, IMissActivity.class);

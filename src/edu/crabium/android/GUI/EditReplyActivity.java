@@ -27,6 +27,7 @@ public class EditReplyActivity extends Activity {
 		String message_body = bundle.getString("message_body");
 		TitleEditText = (EditText) findViewById(R.id.title_edittext);
 		TitleEditText.setText(group_name);
+		TitleEditText.setHint("请输入分组名称");
 		
 		ContentEditText = (EditText) findViewById(R.id.content_edittext);
 		ContentEditText.setText(message_body);

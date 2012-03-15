@@ -62,21 +62,23 @@
         gravity="top"
         android:gravity="top"
         android:inputType="textMultiLine"
-        android:textSize="16dip"
+        android:textSize="18dip"
         android:textStyle="bold">
     </EditText>
-
+
     <TextView
         android:id="@+id/stranger_reply_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="8dip"
-        android:layout_marginRight="8dip"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="12dip"
         android:layout_marginTop="10dip"
         android:layout_weight="0.22"
         android:clickable="false"
         android:focusable="false"
         android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#7F7F7F"
+        android:textSize="16dip" />
 
 </LinearLayout>

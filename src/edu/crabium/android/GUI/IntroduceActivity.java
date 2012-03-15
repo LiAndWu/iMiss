@@ -29,9 +29,9 @@ public class IntroduceActivity extends Activity {
 		});
 		
 		IntroduceTextView = (TextView) findViewById(R.id.introduce_textView);
-		  IntroduceTextView.setText("\n\n\tiMiss是一款贴心的来电辅助软" +
+		  IntroduceTextView.setText("\n\n    iMiss是一款贴心的来电辅助软" +
 				 "件。如果你因为重要的事情错过了同样重要的一个电话，那么iMiss可以帮助你解决这个难题。" +
-				"\n\t在您无法接听或者错过来电的时候，iMiss会自动帮您发送一条信息到来电者的手机上，一切就欧凯啦~");
+				"\n    在您无法接听或者错过来电的时候，iMiss会自动帮您发送一条信息到来电者的手机上，一切就欧凯啦~");
 	}
 	
 }
