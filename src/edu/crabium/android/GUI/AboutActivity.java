@@ -57,6 +57,14 @@ public class AboutActivity extends Activity {
 		getWindowManager().getDefaultDisplay().getMetrics(dm);
 
 		AboutTextView = (TextView) findViewById(R.id.about_textView);
+		/**
+		 * if (heightPixels < 600) 
+		 * 		low resolution, such as 480 * 320
+		 * else if (heightPixels / widthPixels < 16 / 9)
+		 * 		high resolution apply to 5:3 or 3:2 or : 4:3
+		 * else 
+		 * 		high resolution apply to 16:9 and more strange proportion
+ 		 */
 		if (dm.heightPixels < 600) {
 		        String introduce = "       \n" + 
 		        "\tiMiss\n" +
@@ -65,9 +73,9 @@ public class AboutActivity extends Activity {
 		        "\t\t\t  wuxd@me.com\n" +
 	    		"\t李伟:\n\t\t\t  http://mindlee.net\n" +
 	    		"\t\t\t  chinawelon@gmail.com\n" +	 
-		        "\t\t     Crabium & Mabbage Workshop\n\t\t\t\t  LiWei and WuXudong\n\t\t\t\t\t Copyleft 2011.";  
+		        "\t\tCrabium & Mabbage Workshop\n\t\t\t\tLiWei and WuXudong\n\t\t\t\t\tCopyleft 2011.";  
 		        AboutTextView.setText(introduce); 
-		} else if (dm.heightPixels / dm.widthPixels < 16 / 9){//高分辨率，魅族960 * 640（3:2）显示良好
+		} else if (9 * dm.heightPixels < 16 * dm.widthPixels ) {//高分辨率，魅族960 * 640（3:2）显示良好
 	        String introduce = "       \n" + 
 	        "\t\t\tiMiss\n" +
 	        "\t\t\tVersion 1.0\n" +     
