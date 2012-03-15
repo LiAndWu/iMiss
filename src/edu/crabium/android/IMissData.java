@@ -249,6 +249,8 @@ public class IMissData{
 		if(!initiated){
 			//File dir = new File(context.getApplicationInfo().dataDir+"/files");
 			//dir.mkdirs();
+			String ContactsReply = "contacts_reply";
+			String StrangerReply = "stranger_reply";
 			DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
 			DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
 			DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
@@ -260,6 +262,16 @@ public class IMissData{
 			initiated = true;
 			DB.setVersion(VERSION);
 			DB.close();
+			
+			if(getValue(ContactsReply).trim().equals(""))
+				setValue(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a fun day!! ");
+			if(getValue(StrangerReply).trim().equals(""))
+				setValue(StrangerReply, "我的主人好像不认识您哦，难道你是，骗子？");
+			
+			if(getGroups().size() == 0){
+				addGroup(new String[]{"朋友", "你爹在忙"});
+				addGroup(new String[]{"家人", "爹我在忙"});
+			}
 		}
 	}
 
@@ -271,6 +283,10 @@ public class IMissData{
 		DB.close();
 	}
 	
+	/** add a new group with specific message
+	 * 
+	 * @param group[] group[0]: group name; group[1]: message
+	 */
 	public static void addGroup(String[] group) {
 		if(!initiated) createTables();
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
