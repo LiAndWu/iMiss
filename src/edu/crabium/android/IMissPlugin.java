@@ -16,29 +16,28 @@ public class IMissPlugin {
 
 		public void Send() {
 			String text = "";
+			String notify_summary = "发送了一条短信";
+			String notify_title = "iMiss";
+			String notify_body = "";
+			String notify_body_header = "发送内容：";
+			
 			SmsManager sm = SmsManager.getDefault();
-			IMissData.nofity("Sent a message", "IMiss", "New incoming");
 			if(!iMissOn()) return;
-			if(inContacts(IMissPhoneStateListener.RingingNumber)){
+			
+			String destination_name = inContacts(IMissPhoneStateListener.RingingNumber);
+			if(!destination_name.trim().equals("")){
 				int group_id = IMissData.getGroupInfoByNumber(IMissPhoneStateListener.RingingNumber);
 				String message =  IMissData.getGroupMessage(group_id);
-				Log.d("IMISS", "KNOWN");
 				if(message.trim().equals("")){
-					//return default
-					Log.d("IMISS", "BLANK MESSAGE");
-					text = "我知道你是谁，但是我很忙";
 					text = IMissData.getValue("contacts_reply");
 				}
 				else{
-					Log.d("IMISS", "HAVE MESSAGE");
 					text = message;
 				}
-				
+				notify_summary = "向" + destination_name + notify_summary;
 			}
 			else{
 				if(OpenToStranger()){
-					Log.d("IMISS","NOT KNOWN");
-					text = "我不认识你啊！";
 					text = IMissData.getValue("stranger_reply");
 				}
 				else
@@ -46,6 +45,8 @@ public class IMissPlugin {
 			}
 			
 			sm.sendTextMessage(IMissPhoneStateListener.RingingNumber, null, text, null, null);
+			notify_body = notify_body_header + text;
+			IMissData.nofity(notify_summary, notify_title, notify_body);
 		}
 
 		public void run() {
@@ -61,16 +62,14 @@ public class IMissPlugin {
 				return false;
 		}
 		
-		public boolean inContacts(String RingingNumber){
+		public String inContacts(String RingingNumber){
 			List<String[]> array = IMissData.getContacts();
 			for(String[] pair : array){
-				Log.d("GREETING", "COMPARING: " + pair[1] + "-" + RingingNumber);
 				if(pair[1].equals(RingingNumber)){
-					Log.d("GREETING", "HIT");
-					return true;
+					return pair[0];
 				}
 			}
-			return false;
+			return "";
 		}
 		
 		public boolean iMissOn(){
