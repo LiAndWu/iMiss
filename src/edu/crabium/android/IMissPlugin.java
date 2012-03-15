@@ -20,6 +20,7 @@ public class IMissPlugin {
 			String notify_title = "iMiss";
 			String notify_body = "";
 			String notify_body_header = "发送内容：";
+			String ServiceSwitch = "service_switch";
 			
 			SmsManager sm = SmsManager.getDefault();
 			if(!iMissOn()) return;
@@ -52,7 +53,9 @@ public class IMissPlugin {
 			if(IMissPhoneStateListener.RingingNumber != null && !IMissPhoneStateListener.RingingNumber.trim().equals(""))
 			sm.sendTextMessage(IMissPhoneStateListener.RingingNumber, null, text, null, null);
 			notify_body = notify_body_header + text;
-			IMissData.nofity(notify_summary, notify_summary, notify_body);
+			
+			if(IMissData.getValue(ServiceSwitch).trim().equals("true"))
+				IMissData.nofity(notify_summary, notify_summary, notify_body);
 		}
 
 		public void run() {
