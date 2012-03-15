@@ -251,6 +251,8 @@ public class IMissData{
 			//dir.mkdirs();
 			String ContactsReply = "contacts_reply";
 			String StrangerReply = "stranger_reply";
+			String []switches = new String[]{"service_switch","inform_switch","stranger_switch"};
+			
 			DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
 			DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
 			DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
@@ -271,6 +273,12 @@ public class IMissData{
 			if(getGroups().size() == 0){
 				addGroup(new String[]{"朋友", "你爹在忙"});
 				addGroup(new String[]{"家人", "爹我在忙"});
+			}
+			
+			for(String swc : switches){
+				if(getValue(swc).trim().equals("")){
+					setValue(swc, "true");
+				}
 			}
 		}
 	}
