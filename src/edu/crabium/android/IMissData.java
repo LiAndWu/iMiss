@@ -269,7 +269,7 @@ public class IMissData{
 			DB.close();
 			
 			if(getValue(ContactsReply).trim().equals(""))
-				setValue(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day!! ");
+				setValue(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day！！");
 			if(getValue(StrangerReply).trim().equals(""))
 				setValue(StrangerReply, "我的主人好像不认识你哦，难道你是，骗子？");
 			

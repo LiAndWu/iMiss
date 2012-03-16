@@ -19,6 +19,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class IMissActivity extends Activity {
 	private LinearLayout OwnerNameButton, DetatisSetButton, SetReplyButton,
@@ -32,6 +33,7 @@ public class IMissActivity extends Activity {
         IMissData.init(this);
         startService(new Intent(this, IMissService.class));
         
+        DisplayToast(" Morning，HangZhou ！！");
         /*
          * 
         OwnerNameTextView = (TextView) findViewById(R.id.tv);
@@ -123,4 +125,8 @@ public class IMissActivity extends Activity {
 			}
 		});
     }
+    
+	public void DisplayToast(String str) {
+		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+	}
 }
