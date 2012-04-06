@@ -28,7 +28,6 @@ public class IMissService extends Service{
 		
 		//Install functions
 		myPhoneCallListener.Callback(IMissPhoneStateListener.CALLED, "tag", new IMissPlugin().new SendSMS());
-		
 		/** test!
 		 * 
 		 */

@@ -1,138 +1,91 @@
 package edu.crabium.android;
 
-import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.provider.ContactsContract;
-import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
 
+/** 
+ * A singleton class that provides all the necessary methods to interact with iMiss' database.
+ * 
+ */
 public class IMissSettingProvider{
-	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/iMiss.sqlite3";
 	
 	private final static String GROUPS_TABLE_NAME = "groups";
-	private final static String GROUPS_TABLE_SPEC = "(group_id  INTEGER PRIMARY KEY, group_name STRING)";
-	
 	private final static String MESSAGES_TABLE_NAME = "messages";
-	private final static String MESSAGES_TABLE_SPEC = "(message_id  INTEGER PRIMARY KEY, group_id INTEGER, message_body STRING)";
-	
 	private final static String PERSONS_TABLE_NAME = "persons";
-	private final static String PERSONS_TABLE_SPEC = "(person_id  INTEGER PRIMARY KEY, group_id INTEGER, name STRING, number STRING)";
-	
 	private final static String BLACKLIST_TABLE_NAME = "black_list";
-	private final static String BLACKLIST_TABLE_SPEC = "(number TEXT, name TEXT)";
-	
 	private final static String IGNORELIST_TABLE_NAME = "ignore_list";
-	private final static String IGNORELIST_TABLE_SPEC = "(number TEXT, name TEXT)";
-	
 	private final static String RESTTIME_TABLE_NAME = "rest_time";
-	private final static String RESTTIME_TABLE_SPEC = "(id INTEGER, start_millis INTEGER, end_millis INTEGER)";
-	
 	private final static String MISC_TABLE_NAME = "misc";
-	private final static String MISC_TABLE_SPEC = "(key STRING, value STRING)";
-	private final static String MISC_GET_VALUE = "SELECT key, value FROM " + MISC_TABLE_NAME + " WHERE key =";
-	private final static String MISC_INSERT_VALUE = "INSERT INTO " + MISC_TABLE_NAME + " (key, value) VALUES ";
 	
-	//private final static String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
-	private final static int VERSION = 1;
-	
-	private static SQLiteDatabase DB;
-	private static ContentResolver contentResolver;
-	private static Context context;
-	private static ArrayList<String[]> contactsArrayList;
-	
+	private Context context;
 	private static final IMissSettingProvider INSTANCE  = new IMissSettingProvider();
 	
 	private IMissSettingProvider(){
 		createTables();
 	};
 	
-	public static void setContext(Context context){
-		IMissSettingProvider.context = context;
-		IMissSettingProvider.contentResolver = IMissSettingProvider.context.getContentResolver();
+	private SQLiteDatabase openDatabase(){
+		final String DATABASE_NAME = "/data/data/edu.crabium.android/iMiss.sqlite3";
+		return SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 	}
 	
-	public static IMissSettingProvider getInstance(){
-		return INSTANCE;
-	}
-	
-	public Map<String, String> getGroups(){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	private void createTables()
+	{
+		final String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
+		final String BLACKLIST_TABLE_SPEC = "(number TEXT, name TEXT)";
+		final String IGNORELIST_TABLE_SPEC = "(number TEXT, name TEXT)";
+		final String RESTTIME_TABLE_SPEC = "(id INTEGER, start_millis INTEGER, end_millis INTEGER)";
+		final String MISC_TABLE_SPEC = "(key STRING, value STRING)";
+		final String PERSONS_TABLE_SPEC = "(person_id  INTEGER PRIMARY KEY, group_id INTEGER, name STRING, number STRING)";
+		final String MESSAGES_TABLE_SPEC = "(message_id  INTEGER PRIMARY KEY, group_id INTEGER, message_body STRING)";
+		final String GROUPS_TABLE_SPEC = "(group_id  INTEGER PRIMARY KEY, group_name STRING)";
 
-		Map<String, String> map = new HashMap<String, String>();
-		Cursor cursor = DB.rawQuery("SELECT group_name, message_body FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + MESSAGES_TABLE_NAME + " USING (group_id)", null);
-		while(cursor.moveToNext()){
-			map.put(cursor.getString(0), cursor.getString(1));
-		}
-		cursor.close();
-		DB.close();
-		return map;
-	}
-	
-	/** get value for specified key
-	 * 
-	 * @param  key
-	 * @return  value
-	 */
-	public String getSetting(String key) {
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		Cursor cursor = DB.rawQuery(MISC_GET_VALUE + "\"" + key + "\"", null);
+		final String ContactsReply = "contacts_reply";
+		final String StrangerReply = "stranger_reply";
 		
-		String result;
-		if(cursor.getCount() < 1)
-			result = " ";
-		else{
-			cursor.moveToNext();
-			result = cursor.getString(cursor.getColumnIndex("value"));
+		final String []switches = new String[]{"service_switch","inform_switch","stranger_switch"};
+		
+		final int VERSION = 1;
+		
+		SQLiteDatabase DB = openDatabase();
+		
+		DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME		+ RESTTIME_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME			+ MISC_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + MESSAGES_TABLE_NAME		+ MESSAGES_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + PERSONS_TABLE_NAME		+ PERSONS_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + GROUPS_TABLE_NAME		+ GROUPS_TABLE_SPEC);
+		DB.setVersion(VERSION);
+		DB.close();
+		
+		// Set default replies for strangers and friends
+		if(getSetting(ContactsReply).trim().equals(""))
+			addSetting(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day！！");
+		if(getSetting(StrangerReply).trim().equals(""))
+			addSetting(StrangerReply, "我的主人好像不认识你哦，难道你是，骗子？");
+
+		// Set default groups and messages
+		if(getGroups().size() == 0){
+			addGroup("朋友", "你爹在忙");
+			addGroup("家人", "爹我在忙");
 		}
-
-		cursor.close();
-		DB.close();
-		return result;
-	}
-
-	/** delete value if key is matched
-	 * 
-	 * @param key
-	 */
-	public void deleteSetting(String key) {
-		delTableValue(MISC_TABLE_NAME, key);
+		
+		// Create setting and set to true if setting is not in database
+		for(String swc : switches){
+			if(getSetting(swc).trim().equals("")){
+				addSetting(swc, "true");
+			}
+		}
 	}
 	
-	/** set value if key is matched
-	 * 
-	 * @param key
-	 * @param value
-	 */
-	public void addSetting(String key, String value) {
-		deleteSetting(key);
-
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		DB.execSQL(MISC_INSERT_VALUE +"(\"" + key + "\", \"" + value + "\")");
-		DB.close();
-	}
-	
-	/** get values from the specified table 
-	 * 
-	 * @param tableName
-	 * @return 
-	 */
 	private Map<String, String> getTableValues(String tableName)
 	{
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+		SQLiteDatabase DB = openDatabase();
 		
 		String query = "SELECT * FROM " + tableName;
 		Cursor cursor = DB.rawQuery(query, null);
@@ -149,161 +102,208 @@ public class IMissSettingProvider{
 		
 	}
 	
-	/** add a new column in specified table, with key-value pair
-	 * 
-	 * @param tableName
-	 * @param key
-	 * @param value
-	 */
-	public void setTableValues(String tableName, String key, String value){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	private void addEntryToTable(String tableName, String key, String value){
+		SQLiteDatabase DB = openDatabase();
 
 		String sql_text = "INSERT INTO " + tableName + " VALUES (\"" + key + "\", \"" + value + "\")";
 		DB.execSQL(sql_text);
 		DB.close();
 	}
 	
-	public void delTableValue(String tableName, String key){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	/**
+	 * 
+	 * @return the previously stored context
+	 */
+	public Context getContext(){
+		return context;
+	}
+	
+	/**
+	 * store application runtime environment to this provider
+	 * @param context Context of a specific Activity or Service
+	 */
+	public void setContext(Context context){
+		this.context = context;
+	}
+	
+	/**
+	 * 
+	 * @return a iMissSettingProvider singleton
+	 */
+	public static IMissSettingProvider getInstance(){
+		return INSTANCE;
+	}
+	
+	/**
+	 * 
+	 * @return a Map that stores <group name, message> entries
+	 */
+	public Map<String, String> getGroups(){
+		SQLiteDatabase DB = openDatabase();
 
-		String sql_text = "DELETE FROM " + tableName + " WHERE key=\"" + key + "\"";
+		Map<String, String> map = new HashMap<String, String>();
+		Cursor cursor = DB.rawQuery("SELECT group_name, message_body FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + MESSAGES_TABLE_NAME + " USING (group_id)", null);
+		while(cursor.moveToNext()){
+			map.put(cursor.getString(0), cursor.getString(1));
+		}
+		cursor.close();
+		DB.close();
+		return map;
+	}
+	
+	/**
+	 * Return setting of the specified key
+	 * @param key setting
+	 * @return setting value
+	 */
+	public String getSetting(String key) {
+		final String MISC_GET_VALUE = "SELECT key, value FROM " + MISC_TABLE_NAME + " WHERE key =";
+		
+		SQLiteDatabase DB = openDatabase();
+		Cursor cursor = DB.rawQuery(MISC_GET_VALUE + "\"" + key + "\"", null);
+		
+		String result;
+		if(cursor.getCount() < 1)
+			result = " ";
+		else{
+			cursor.moveToNext();
+			result = cursor.getString(cursor.getColumnIndex("value"));
+		}
+
+		cursor.close();
+		DB.close();
+		return result;
+	}
+
+	/**
+	 * Delete a setting that specified by the key
+	 * @param key setting
+	 */
+	public void deleteSetting(String key) {
+		String sql_text = "DELETE FROM " + MISC_TABLE_NAME + " WHERE key=\"" + key + "\"";
+		SQLiteDatabase DB = openDatabase();
 		DB.execSQL(sql_text);
 		DB.close();
 	}
 	
-	/** return black list information, packed in a Map
+	
+	/**
+	 * Add a new setting, delete the old setting if key already exists.
 	 * 
-	 * @return Map<String name, String number> 
+	 * @param key name of the new setting
+	 * @param value
+	 */
+	public void addSetting(String key, String value) {
+		final String MISC_INSERT_VALUE = "INSERT INTO " + MISC_TABLE_NAME + " (key, value) VALUES ";
+		
+		deleteSetting(key);
+		SQLiteDatabase DB = openDatabase();
+		DB.execSQL(MISC_INSERT_VALUE +"(\"" + key + "\", \"" + value + "\")");
+		DB.close();
+	}
+	
+	/** 
+	 * Return black list information
+	 * @return  a Map with <number, name> entries
 	 */
 	public Map<String, String> getBlackList()
 	{
 		return getTableValues(BLACKLIST_TABLE_NAME);
 	}
 	
-	/** return ignore list information, packed in a Map
-	 * 
-	 * @return
+	/**
+	 * Return ignore list information
+	 * @return a Map with <number, name> entries
 	 */
 	public Map<String, String> getIgnoreList()
 	{
 		return getTableValues(IGNORELIST_TABLE_NAME);
 	}
 	
-	/** insert a column into blacklist.
-	 * 
+	/**
+	 * Add a person to black list.
+	 * @param number Person's number
+	 * @param name Person's name
 	 */
-	public void setBlackList(String key, String value){
-		setTableValues(BLACKLIST_TABLE_NAME, key, value);
+	public void addPersonToBlackList(String number, String name){
+		addEntryToTable(BLACKLIST_TABLE_NAME, number, name);
 	}
 	
-	/** insert key-value pairs
+	/**
+	 * Add something to ignore list
+	 * Ignore list is not black list, it stores some numbers that you 
+	 * never what to reply, such as 10086, 10010.
 	 * 
-	 * @param pairs
+	 * @param number it's number
+	 * @param name it's name
 	 */
-	public void setBlackList(String[][] pairs){
-		for(String[] pair : pairs){
-			setTableValues(BLACKLIST_TABLE_NAME, pair[0],pair[1]);
-		}
+	public void addPersonToIgnoreList(String number, String name){
+		addEntryToTable(IGNORELIST_TABLE_NAME, number, name);
 	}
 	
-	/** insert a column into ignore list
-	 * 
-	 * @param key
-	 * @param value
+	/**
+	 * Delete entries from black list, if number is matched
+	 * @param number the number that you want to remove from black list
 	 */
-	public void setIgnoreList(String number, String name){
-		setTableValues(IGNORELIST_TABLE_NAME, number, name);
-	}
-	
-	/** delete row in black list if key is matched
-	 * 
-	 * @param key
-	 */
-	public void delBlackList(String number){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	public void deleteFromBlackList(String number){
+		SQLiteDatabase DB = openDatabase();
 
 		String sql_text = "DELETE FROM " + BLACKLIST_TABLE_NAME + " WHERE number=\"" + number + "\"";
 		DB.execSQL(sql_text);
 		DB.close();
 	}
 	
-	/** delete row in ignore list if key is matched
+	/**
+	 * Delete entris from ignore list, if number is matched
 	 * 
-	 * @param key
+	 * @param number the number that you want to remove from ignore list
 	 */
-	public void delIgnoreList(String number){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	public void deleteFromIgnoreList(String number){
+		SQLiteDatabase DB = openDatabase();
 
 		String sql_text = "DELETE FROM " + IGNORELIST_TABLE_NAME + " WHERE number=\"" + number + "\"";
 		DB.execSQL(sql_text);
 		DB.close();
 	}
-	
-	/** create necessary tables
-	 *  
+
+	/**
+	 * Delete a group with the specified group name
+	 * @param group_name group that you want to delete
 	 */
-	private void createTables()
-	{
-		final String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
-
-		String ContactsReply = "contacts_reply";
-		String StrangerReply = "stranger_reply";
-		String []switches = new String[]{"service_switch","inform_switch","stranger_switch"};
-		
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
-		DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME		+ RESTTIME_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME			+ MISC_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + MESSAGES_TABLE_NAME		+ MESSAGES_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + PERSONS_TABLE_NAME		+ PERSONS_TABLE_SPEC);
-		DB.execSQL( CREATE_TABLE_TEXT + GROUPS_TABLE_NAME		+ GROUPS_TABLE_SPEC);
-		DB.setVersion(VERSION);
-		DB.close();
-		
-		if(getSetting(ContactsReply).trim().equals(""))
-			addSetting(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day！！");
-		if(getSetting(StrangerReply).trim().equals(""))
-			addSetting(StrangerReply, "我的主人好像不认识你哦，难道你是，骗子？");
-		
-		if(getGroups().size() == 0){
-			addGroup(new String[]{"朋友", "你爹在忙"});
-			addGroup(new String[]{"家人", "爹我在忙"});
-		}
-		
-		for(String swc : switches){
-			if(getSetting(swc).trim().equals("")){
-				addSetting(swc, "true");
-			}
-		}
-	}
-
-	public void delGroup(String group_name){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	public void deleteGroup(String group_name){
+		SQLiteDatabase DB = openDatabase();
 		String sql_text = "DELETE FROM " + GROUPS_TABLE_NAME + " WHERE group_name=\"" + group_name + "\"";
 		DB.execSQL(sql_text);
 		DB.close();
 	}
 	
-	/** add a new group with specific message
-	 * 
-	 * @param group[] group[0]: group name; group[1]: message
+	/**
+	 * Add a group with specified name and message
+	 * @param name group name
+	 * @param message message for this group
 	 */
-	public void addGroup(String[] group) {
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		String sql_text = "INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (null, \"" + group[0] + "\")";
+	public void addGroup(String name, String message) {
+		SQLiteDatabase DB = openDatabase();
+		String sql_text = "INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (null, \"" + name + "\")";
 		DB.execSQL(sql_text);
-		Cursor cursor = DB.rawQuery("SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name=?", new String[]{group[0]});
+		Cursor cursor = DB.rawQuery("SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name=?", new String[]{name});
 		cursor.moveToNext();
 		int group_id = cursor.getInt(0);
-		sql_text = "INSERT INTO " + MESSAGES_TABLE_NAME + " VALUES (null, " + group_id + ", \"" + group[1] + "\")";
+		sql_text = "INSERT INTO " + MESSAGES_TABLE_NAME + " VALUES (null, " + group_id + ", \"" + message + "\")";
 		DB.execSQL(sql_text);
 		cursor.close();
 		DB.close();
 	}
 
-	public void setPersonToGroup(String person_name, String person_phone, String group_name) {
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	//TODO Need Refactor
+	/**
+	 * Add/Move person to a new group
+	 * @param person_name
+	 * @param person_phone
+	 * @param group_name
+	 */
+	public void addPersonToGroup(String person_name, String person_phone, String group_name) {
+		SQLiteDatabase DB = openDatabase();
 		
 		String sql_text;
 		Cursor cursor = DB.rawQuery("SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name=\"" + group_name + "\"", null);
@@ -324,8 +324,13 @@ public class IMissSettingProvider{
 		DB.close();
 	}
 
-	public String getGroupMessage(int group_id){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	/**
+	 * Return message of the group with specified group id
+	 * @param group_id
+	 * @return group message, black string is returned if specific group is not found
+	 */
+	public String getMessageByGroupId(int group_id){
+		SQLiteDatabase DB = openDatabase();
 		
 		String sql_text = "SELECT message_body FROM " + MESSAGES_TABLE_NAME + " WHERE group_id = " + group_id;
 		Cursor cursor = DB.rawQuery(sql_text, null);
@@ -339,154 +344,13 @@ public class IMissSettingProvider{
 		
 		return str;
 	}
-	public int getGroupInfoByNumber(String person_phone){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		
-		String sql_text = "SELECT group_id FROM " + PERSONS_TABLE_NAME + " WHERE number = \"" + person_phone + "\"";
-		Cursor cursor = DB.rawQuery(sql_text, null);
-		
-		if(cursor.getCount() < 1){
-			cursor.close();
-			DB.close();
-			return 0;
-		}
-		cursor.moveToNext();
-		int group_id = cursor.getInt(0);
-		cursor.close();
-		DB.close();
-		return group_id;
-	}
-	public String[][] getPersonsFromGroup(String group_name){
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		String[][] tuple;
-		String sql_text = "SELECT name, number, group_id FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + PERSONS_TABLE_NAME + " USING (group_id) WHERE group_name=\"" + group_name + "\"";
-		Cursor cursor = DB.rawQuery(sql_text,null);
-		tuple = new String[cursor.getCount()][3];
-		int i = 0;
-		while(cursor.moveToNext()){
-			tuple[i++] = new String[]{cursor.getString(0), cursor.getString(1), "" + cursor.getInt(2)};
-		}
-		cursor.close();
-		DB.close();
-		return tuple;
-	}
-
-	public void delPersonInGroup(String person_name, String person_phone,String group_name) {
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
-		
-		String sql_text = "SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name = \"" + group_name + "\"";
-		Cursor cursor = DB.rawQuery(sql_text, null);
-		cursor.moveToNext();
-		int group_id = cursor.getInt(0);
-		
-		sql_text = "UPDATE " + PERSONS_TABLE_NAME + " SET group_id = 0 WHERE group_id=" + group_id + " AND name = \"" + person_name + "\" AND number =\"" + person_phone + "\"";
-		DB.execSQL(sql_text);
-		cursor.close();
-		DB.close();
-	}
 	
-	public boolean inContacts(String RingingNumber){
-        ContentResolver cr = contentResolver;
-        Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-        Pattern pattern = Pattern.compile("-");
-		Matcher matcher;
-        
-        Log.d("iMiss V1.0", "Getting Contacts");
-        if(cursor != null && cursor.getCount() > 0){
-        	Log.d("iMiss V1.0", "Got cursor.");
-	       while(cursor.moveToNext()) {
-	            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
-	            String contact = cursor.getString(nameFieldColumnIndex);
-	
-	            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-	            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
-	            
-	            Log.d("iMiss V1.0", "Getting Phone");
-	            if(phone != null && phone.getCount() != 0){
-		            while(phone.moveToNext()) {
-		                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-	    				matcher = pattern.matcher(phoneNumber);
-	    				String num = matcher.replaceAll("");
-	    				Log.d("iMiss V1.0", "Num: " + num);
-	    				if(num.equals(RingingNumber)){
-	    					cursor.close();
-	    					phone.close();
-	    					return true;
-	    				}
-		                Log.d("GREETING", "PHONE LOOKUP: " + contact + " " +  phoneNumber);
-		            }
-	            }
-	            else{
-
-	                Log.d("iMiss V1.0", "Get phone failed.");
-	            }
-	            phone.close();
-	        }
-        }
-        else{
-
-            Log.d("iMiss V1.0", "Get cursor failed.");
-        }
-	    cursor.close();
-		return false;
-	}
-	
-    public ArrayList<String[]> getContacts(){   	
-        ContentResolver cr = contentResolver;
-        Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-        Boolean cleared = false;
-        Log.d("iMiss V1.0", "Getting Contacts");
-        if(cursor != null && cursor.getCount() > 0){
-        	Log.d("iMiss V1.0", "Got cursor.");
-	       while(cursor.moveToNext()) {
-	            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
-	            String contact = cursor.getString(nameFieldColumnIndex);
-	
-	            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-	            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
-	            
-
-	            Log.d("iMiss V1.0", "Getting Phone");
-	            if(phone != null && phone.getCount() != 0){
-	                Log.d("iMiss V1.0", "Got phone");
-	            		
-		            while(phone.moveToNext()) {
-		                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-		                if(!cleared){
-			            	if(contactsArrayList != null)
-			            		contactsArrayList.clear();
-			            	else
-			            		contactsArrayList = new ArrayList<String[]>();
-			            	cleared = true;
-		                }
-		                contactsArrayList.add(new String[]{contact,phoneNumber});
-		                Log.d("GREETING", "PHONE LOOKUP:  " + contact + " " +  phoneNumber);
-		            }
-	            }
-	            else{
-
-	                Log.d("iMiss V1.0", "Get phone failed.");
-	            }
-	            phone.close();
-	        }
-        }
-        else{
-
-            Log.d("iMiss V1.0", "Get cursor failed.");
-        }
-	    cursor.close();
-        
-        if(contactsArrayList != null){
-        	Log.d("IMiss V1.0", "Contacts not null, size: " + contactsArrayList.size());
-        	return new ArrayList<String[]>(contactsArrayList);
-        }
-        else
-        	return new ArrayList<String[]>();
-    }
-
-    
-	public void delMessage(String group_name) {
-		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
+	/**
+	 * Delete message of spcified group
+	 * @param group_name
+	 */
+	public void deleteMessage(String group_name) {
+		SQLiteDatabase DB = openDatabase();
 		String sql_text = "SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name = \"" + group_name + "\"";
 		Cursor cursor = DB.rawQuery(sql_text, null);
 		
@@ -502,21 +366,66 @@ public class IMissSettingProvider{
 		DB.close();
 	}
 	
-	public void nofity(String notify_summary,String notify_title, String notify_body){     //定义NotificationManager
-        String ns = Context.NOTIFICATION_SERVICE;
-        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
-        //定义通知栏展现的内容信息
-        long time = System.currentTimeMillis();
-        Notification notification = new Notification(R.drawable.icon_small, notify_summary, time);
-         
-        //定义下拉通知栏时要展现的内容信息
-        Intent notificationIntent = new Intent(context, IMissActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                notificationIntent, 0);
-        notification.setLatestEventInfo(context, notify_title, notify_body,
-                contentIntent);
-         
-        //用mNotificationManager的notify方法通知用户生成标题栏消息通知
-        mNotificationManager.notify(1, notification);
+	/**
+	 * Return a person's group id by telephone number
+	 * @param person_phone
+	 * @return group id, 0 is returned if number doesn't match
+	 */
+	public int getGroupIdByPhoneNumber(String person_phone){
+		SQLiteDatabase DB = openDatabase();
+		
+		String sql_text = "SELECT group_id FROM " + PERSONS_TABLE_NAME + " WHERE number = \"" + person_phone + "\"";
+		Cursor cursor = DB.rawQuery(sql_text, null);
+		
+		if(cursor.getCount() < 1){
+			cursor.close();
+			DB.close();
+			return 0;
+		}
+		cursor.moveToNext();
+		int group_id = cursor.getInt(0);
+		cursor.close();
+		DB.close();
+		return group_id;
+	}
+	
+	/**
+	 * Return all the persons in the group
+	 * @param group_name
+	 * @return A 2D array, with {name, number, group id} entries
+	 */
+	public String[][] getPersonsFromGroup(String group_name){
+		SQLiteDatabase DB = openDatabase();
+		String[][] tuple;
+		String sql_text = "SELECT name, number, group_id FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + PERSONS_TABLE_NAME + " USING (group_id) WHERE group_name=\"" + group_name + "\"";
+		Cursor cursor = DB.rawQuery(sql_text,null);
+		tuple = new String[cursor.getCount()][3];
+		int i = 0;
+		while(cursor.moveToNext()){
+			tuple[i++] = new String[]{cursor.getString(0), cursor.getString(1), "" + cursor.getInt(2)};
+		}
+		cursor.close();
+		DB.close();
+		return tuple;
+	}
+
+	/**
+	 * Delete a person from a specific group
+	 * @param person_name
+	 * @param person_phone
+	 * @param group_name
+	 */
+	public void deletePersonFromGroup(String person_name, String person_phone,String group_name) {
+		SQLiteDatabase DB = openDatabase();
+		
+		String sql_text = "SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name = \"" + group_name + "\"";
+		Cursor cursor = DB.rawQuery(sql_text, null);
+		cursor.moveToNext();
+		int group_id = cursor.getInt(0);
+		
+		sql_text = "UPDATE " + PERSONS_TABLE_NAME + " SET group_id = 0 WHERE group_id=" + group_id + " AND name = \"" + person_name + "\" AND number =\"" + person_phone + "\"";
+		DB.execSQL(sql_text);
+		cursor.close();
+		DB.close();
 	}
 }

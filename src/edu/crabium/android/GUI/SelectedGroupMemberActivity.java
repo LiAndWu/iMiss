@@ -88,7 +88,7 @@ public class SelectedGroupMemberActivity extends Activity {
     		Map<String, String> pair = SelectedGroupMemberDisplay.get(menuInfo.position);
     		Log.d("HELLO", pair.get(SelectedGroupMemberColumn1) + pair.get(SelectedGroupMemberColumn2));
     		
-    		sp.delPersonInGroup(pair.get(SelectedGroupMemberColumn1),pair.get(SelectedGroupMemberColumn2), group_name);
+    		sp.deletePersonFromGroup(pair.get(SelectedGroupMemberColumn1),pair.get(SelectedGroupMemberColumn2), group_name);
     		SelectedGroupMemberActivity.this.finish();
 			Intent intent = new Intent(SelectedGroupMemberActivity.this, SelectedGroupMemberActivity.class);
 			Bundle bundle = new Bundle();

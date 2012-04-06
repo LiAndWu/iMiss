@@ -44,12 +44,12 @@ public class EditReplyActivity extends Activity {
 				}
 					
 				Log.d("GREETING", "NAME=" + group_name);
-				sp.delMessage(group_name);
+				sp.deleteMessage(group_name);
 				if(!(group_name.equals(TitleEditText.getText().toString()))){
-					sp.delGroup(group_name);
+					sp.deleteGroup(group_name);
 				}
 				
-				sp.addGroup(new String[]{ TitleEditText.getText().toString(), ContentEditText.getText().toString()});
+				sp.addGroup(TitleEditText.getText().toString(), ContentEditText.getText().toString());
 				
 				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
 				intent.putExtras(bundle);

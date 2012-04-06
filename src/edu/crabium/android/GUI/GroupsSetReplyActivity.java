@@ -142,7 +142,7 @@ public class GroupsSetReplyActivity extends Activity {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
-    		sp.delGroup(map.get("title"));
+    		sp.deleteGroup(map.get("title"));
     		
     		GroupsSetReplyActivity.this.finish();
 			Intent intent = new Intent(GroupsSetReplyActivity.this, GroupsSetReplyActivity.class);
@@ -175,8 +175,7 @@ public class GroupsSetReplyActivity extends Activity {
     	item.put(SetReplyColumn2, content);
     	to.add(item);
     	
-    	String[] group = new String[]{title, content};
-    	sp.addGroup(group);
+    	sp.addGroup(title, content);
     }
     
     //修改回复项

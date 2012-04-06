@@ -76,7 +76,7 @@ public class SelectLinkManActivity extends Activity {
                 		person_phone = pair[1];
 
                 		Log.d("HELL",  "CHOSE " + person_name);
-                		sp.setPersonToGroup(person_name, person_phone, group_name);
+                		sp.addPersonToGroup(person_name, person_phone, group_name);
                 	}
                }
                 startActivity(intent);
