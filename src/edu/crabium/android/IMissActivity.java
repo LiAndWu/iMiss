@@ -29,8 +29,10 @@ public class IMissActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);    
-        IMissData.init(this);
+        setContentView(R.layout.main);
+        
+        IMissSettingProvider sp = IMissSettingProvider.getInstance();
+        sp.setContext(this);
         startService(new Intent(this, IMissService.class));
         
         DisplayToast("Morning, Wei！！");

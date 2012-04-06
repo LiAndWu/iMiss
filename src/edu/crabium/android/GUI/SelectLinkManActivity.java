@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import edu.crabium.android.IMissData;
+import edu.crabium.android.IMissSettingProvider;
 import edu.crabium.android.IMissListViewAdapter;
 import edu.crabium.android.IMissListViewAdapter.ViewHolder;
 import edu.crabium.android.R;
@@ -33,7 +33,7 @@ public class SelectLinkManActivity extends Activity {
     ArrayList<String[]> name;
     IMissListViewAdapter adapter;
 	HashMap<Integer,Boolean> map ;
-	
+	IMissSettingProvider sp = IMissSettingProvider.getInstance();
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
@@ -76,7 +76,7 @@ public class SelectLinkManActivity extends Activity {
                 		person_phone = pair[1];
 
                 		Log.d("HELL",  "CHOSE " + person_name);
-                		IMissData.setPersonToGroup(person_name, person_phone, group_name);
+                		sp.addPersonToGroup(person_name, person_phone, group_name);
                 	}
                }
                 startActivity(intent);

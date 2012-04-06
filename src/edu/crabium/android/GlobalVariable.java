@@ -5,7 +5,6 @@ public class GlobalVariable {
 	//黑名单编辑号码时，全局变量，待删除
 	public static String TargetBlackListName = null;
 	public static String TargetBlackListNumber = null;
-	public static int TargetBlackListPosition;
 	
 	//设置拒接时间段时全局变量，待删除
 	public static int TargetStartTimeHour = 00;
