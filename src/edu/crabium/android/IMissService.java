@@ -1,7 +1,7 @@
 package edu.crabium.android;
 
 
-import edu.crabium.android.plungin.SendSMS;
+import edu.crabium.android.plugin.SendSMS;
 
 import android.app.Service;
 import android.content.Context;

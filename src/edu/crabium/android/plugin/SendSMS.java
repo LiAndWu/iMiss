@@ -1,4 +1,4 @@
-package edu.crabium.android.plungin;
+package edu.crabium.android.plugin;
 
 import java.util.ArrayList;
 import java.util.List;

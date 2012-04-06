@@ -57,7 +57,6 @@ public class IMissActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, DetailsSetActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
         
@@ -67,7 +66,6 @@ public class IMissActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, GroupsSetReplyActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
         
@@ -102,7 +100,6 @@ public class IMissActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, AboutActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
         
@@ -112,7 +109,6 @@ public class IMissActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, StrangerSetReplyActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
 		
@@ -122,12 +118,7 @@ public class IMissActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, ContactsSetReplyActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
     }
-    
-	public void DisplayToast(String str) {
-		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-	}
 }
