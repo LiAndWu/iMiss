@@ -1,7 +1,7 @@
 
 package edu.crabium.android.GUI;
 
-import edu.crabium.android.IMissData;
+import edu.crabium.android.IMissSettingProvider;
 import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
@@ -20,12 +20,14 @@ import android.widget.ToggleButton;
 
 public class DetailsSetActivity extends Activity {
 	private Button BackButton;
-
 	private ToggleButton ServiceSwitchToggleButton, InformSwitchToggleButton, StrangerSwitchToggleButton;
 	private TextView ServiceSwitchTextView, InformSwitchTextView, StrangerSwitchTextView;
 	private static String ServiceSwitch = "service_switch";
 	private static String InformSwitch = "inform_switch";
 	private static String StrangerSwitch = "stranger_switch";
+	
+	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -33,7 +35,7 @@ public class DetailsSetActivity extends Activity {
 		
 		ServiceSwitchTextView = (TextView) findViewById(R.id.service_switch_textview);
 		ServiceSwitchToggleButton = (ToggleButton) findViewById(R.id.service_switch_togglebutton);
-		ServiceSwitchToggleButton.setChecked(IMissData.getValue(ServiceSwitch).equals("true"));
+		ServiceSwitchToggleButton.setChecked(sp.getSetting(ServiceSwitch).equals("true"));
 		
     	if (ServiceSwitchToggleButton.isChecked()) {
     		ServiceSwitchTextView.setText("服务开启");
@@ -44,10 +46,10 @@ public class DetailsSetActivity extends Activity {
 		ServiceSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (ServiceSwitchToggleButton.isChecked()) {
-            		IMissData.setValue(ServiceSwitch, "true");
+            		sp.addSetting(ServiceSwitch, "true");
             		ServiceSwitchTextView.setText("服务开启");
             	} else {
-            		IMissData.setValue(ServiceSwitch, "false");
+            		sp.addSetting(ServiceSwitch, "false");
             		ServiceSwitchTextView.setText("服务关闭");
             	}
 			}
@@ -55,7 +57,7 @@ public class DetailsSetActivity extends Activity {
 		
 		InformSwitchTextView = (TextView) findViewById(R.id.inform_switch_textview);
 		InformSwitchToggleButton = (ToggleButton) findViewById(R.id.inform_switch_togglebutton);
-		InformSwitchToggleButton.setChecked(IMissData.getValue(InformSwitch).equals("true"));
+		InformSwitchToggleButton.setChecked(sp.getSetting(InformSwitch).equals("true"));
 		
     	if (InformSwitchToggleButton.isChecked()) {
     		InformSwitchTextView.setText("通知开启");
@@ -66,10 +68,10 @@ public class DetailsSetActivity extends Activity {
 		InformSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (InformSwitchToggleButton.isChecked()) {
-            		IMissData.setValue(InformSwitch, "true");
+            		sp.addSetting(InformSwitch, "true");
             		InformSwitchTextView.setText("通知开启");
             	} else {
-            		IMissData.setValue(InformSwitch, "false");
+            		sp.addSetting(InformSwitch, "false");
             		InformSwitchTextView.setText("通知关闭");
             	}
 			}
@@ -77,7 +79,7 @@ public class DetailsSetActivity extends Activity {
 		
 		StrangerSwitchTextView = (TextView) findViewById(R.id.stranger_switch_textview);
 		StrangerSwitchToggleButton = (ToggleButton) findViewById(R.id.stranger_switch_togglebutton);
-		StrangerSwitchToggleButton.setChecked(IMissData.getValue(StrangerSwitch).equals("true"));
+		StrangerSwitchToggleButton.setChecked(sp.getSetting(StrangerSwitch).equals("true"));
 		
     	if (StrangerSwitchToggleButton.isChecked()) {
     		StrangerSwitchTextView.setText("陌生人回复开启");
@@ -88,10 +90,10 @@ public class DetailsSetActivity extends Activity {
 		StrangerSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (StrangerSwitchToggleButton.isChecked()) {
-            		IMissData.setValue(StrangerSwitch, "true");
+            		sp.addSetting(StrangerSwitch, "true");
             		StrangerSwitchTextView.setText("陌生人回复开启");
             	} else {
-            		IMissData.setValue(StrangerSwitch, "false");
+            		sp.addSetting(StrangerSwitch, "false");
             		StrangerSwitchTextView.setText("陌生人回复关闭");
             	}
 			}

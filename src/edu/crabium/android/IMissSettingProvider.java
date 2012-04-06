@@ -20,7 +20,7 @@ import android.provider.ContactsContract;
 import android.provider.ContactsContract.PhoneLookup;
 import android.util.Log;
 
-public class IMissData{
+public class IMissSettingProvider{
 	private final static String DATABASE_NAME = "/data/data/edu.crabium.android/iMiss.sqlite3";
 	
 	private final static String GROUPS_TABLE_NAME = "groups";
@@ -46,17 +46,30 @@ public class IMissData{
 	private final static String MISC_GET_VALUE = "SELECT key, value FROM " + MISC_TABLE_NAME + " WHERE key =";
 	private final static String MISC_INSERT_VALUE = "INSERT INTO " + MISC_TABLE_NAME + " (key, value) VALUES ";
 	
-	private final static String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
+	//private final static String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
 	private final static int VERSION = 1;
 	
 	private static SQLiteDatabase DB;
 	private static ContentResolver contentResolver;
 	private static Context context;
-	private static boolean initiated = false;
 	private static ArrayList<String[]> contactsArrayList;
 	
-	public static Map<String, String> getGroups(){
-		if(!initiated) createTables();
+	private static final IMissSettingProvider INSTANCE  = new IMissSettingProvider();
+	
+	private IMissSettingProvider(){
+		createTables();
+	};
+	
+	public static void setContext(Context context){
+		IMissSettingProvider.context = context;
+		IMissSettingProvider.contentResolver = IMissSettingProvider.context.getContentResolver();
+	}
+	
+	public static IMissSettingProvider getInstance(){
+		return INSTANCE;
+	}
+	
+	public Map<String, String> getGroups(){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 
 		Map<String, String> map = new HashMap<String, String>();
@@ -74,8 +87,7 @@ public class IMissData{
 	 * @param  key
 	 * @return  value
 	 */
-	public static String getValue(String key) {
-		if(!initiated) createTables();
+	public String getSetting(String key) {
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		Cursor cursor = DB.rawQuery(MISC_GET_VALUE + "\"" + key + "\"", null);
 		
@@ -96,7 +108,7 @@ public class IMissData{
 	 * 
 	 * @param key
 	 */
-	public static void delValue(String key) {
+	public void deleteSetting(String key) {
 		delTableValue(MISC_TABLE_NAME, key);
 	}
 	
@@ -105,9 +117,8 @@ public class IMissData{
 	 * @param key
 	 * @param value
 	 */
-	public static void setValue(String key, String value) {
-		if(!initiated) createTables();
-		delValue(key);
+	public void addSetting(String key, String value) {
+		deleteSetting(key);
 
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		DB.execSQL(MISC_INSERT_VALUE +"(\"" + key + "\", \"" + value + "\")");
@@ -119,9 +130,8 @@ public class IMissData{
 	 * @param tableName
 	 * @return 
 	 */
-	private static Map<String, String> getTableValues(String tableName)
+	private Map<String, String> getTableValues(String tableName)
 	{
-		if(!initiated) createTables();
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		
 		String query = "SELECT * FROM " + tableName;
@@ -145,8 +155,7 @@ public class IMissData{
 	 * @param key
 	 * @param value
 	 */
-	public static void setTableValues(String tableName, String key, String value){
-		if(!initiated) createTables();
+	public void setTableValues(String tableName, String key, String value){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 
 		String sql_text = "INSERT INTO " + tableName + " VALUES (\"" + key + "\", \"" + value + "\")";
@@ -154,8 +163,7 @@ public class IMissData{
 		DB.close();
 	}
 	
-	public static void delTableValue(String tableName, String key){
-		if(!initiated) createTables();
+	public void delTableValue(String tableName, String key){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 
 		String sql_text = "DELETE FROM " + tableName + " WHERE key=\"" + key + "\"";
@@ -167,7 +175,7 @@ public class IMissData{
 	 * 
 	 * @return Map<String name, String number> 
 	 */
-	public static Map<String, String> getBlackList()
+	public Map<String, String> getBlackList()
 	{
 		return getTableValues(BLACKLIST_TABLE_NAME);
 	}
@@ -176,7 +184,7 @@ public class IMissData{
 	 * 
 	 * @return
 	 */
-	public static Map<String, String> getIgnoreList()
+	public Map<String, String> getIgnoreList()
 	{
 		return getTableValues(IGNORELIST_TABLE_NAME);
 	}
@@ -184,7 +192,7 @@ public class IMissData{
 	/** insert a column into blacklist.
 	 * 
 	 */
-	public static void setBlackList(String key, String value){
+	public void setBlackList(String key, String value){
 		setTableValues(BLACKLIST_TABLE_NAME, key, value);
 	}
 	
@@ -192,7 +200,7 @@ public class IMissData{
 	 * 
 	 * @param pairs
 	 */
-	public static void setBlackList(String[][] pairs){
+	public void setBlackList(String[][] pairs){
 		for(String[] pair : pairs){
 			setTableValues(BLACKLIST_TABLE_NAME, pair[0],pair[1]);
 		}
@@ -203,7 +211,7 @@ public class IMissData{
 	 * @param key
 	 * @param value
 	 */
-	public static void setIgnoreList(String number, String name){
+	public void setIgnoreList(String number, String name){
 		setTableValues(IGNORELIST_TABLE_NAME, number, name);
 	}
 	
@@ -211,8 +219,7 @@ public class IMissData{
 	 * 
 	 * @param key
 	 */
-	public static void delBlackList(String number){
-		if(!initiated) createTables();
+	public void delBlackList(String number){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 
 		String sql_text = "DELETE FROM " + BLACKLIST_TABLE_NAME + " WHERE number=\"" + number + "\"";
@@ -224,70 +231,54 @@ public class IMissData{
 	 * 
 	 * @param key
 	 */
-	public static void delIgnoreList(String number){
-		if(!initiated) createTables();
+	public void delIgnoreList(String number){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 
 		String sql_text = "DELETE FROM " + IGNORELIST_TABLE_NAME + " WHERE number=\"" + number + "\"";
 		DB.execSQL(sql_text);
 		DB.close();
 	}
-	/** get activity and create necessary tables
-	 * 
-	 * @param activity
-	 */
-	
-	public static void init(Activity activity){
-		createTables();
-		initiated = true;
-		context = activity;
-		IMissData.contentResolver = activity.getContentResolver();
-	}
 	
 	/** create necessary tables
 	 *  
 	 */
-	private static void createTables()
+	private void createTables()
 	{
-		if(!initiated){
-			//File dir = new File(context.getApplicationInfo().dataDir+"/files");
-			//dir.mkdirs();
-			String ContactsReply = "contacts_reply";
-			String StrangerReply = "stranger_reply";
-			String []switches = new String[]{"service_switch","inform_switch","stranger_switch"};
-			
-			DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
-			DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
-			DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
-			DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME		+ RESTTIME_TABLE_SPEC);
-			DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME			+ MISC_TABLE_SPEC);
-			DB.execSQL( CREATE_TABLE_TEXT + MESSAGES_TABLE_NAME		+ MESSAGES_TABLE_SPEC);
-			DB.execSQL( CREATE_TABLE_TEXT + PERSONS_TABLE_NAME		+ PERSONS_TABLE_SPEC);
-			DB.execSQL( CREATE_TABLE_TEXT + GROUPS_TABLE_NAME		+ GROUPS_TABLE_SPEC);
-			initiated = true;
-			DB.setVersion(VERSION);
-			DB.close();
-			
-			if(getValue(ContactsReply).trim().equals(""))
-				setValue(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day！！");
-			if(getValue(StrangerReply).trim().equals(""))
-				setValue(StrangerReply, "我的主人好像不认识你哦，难道你是，骗子？");
-			
-			if(getGroups().size() == 0){
-				addGroup(new String[]{"朋友", "你爹在忙"});
-				addGroup(new String[]{"家人", "爹我在忙"});
-			}
-			
-			for(String swc : switches){
-				if(getValue(swc).trim().equals("")){
-					setValue(swc, "true");
-				}
+		final String CREATE_TABLE_TEXT = "CREATE TABLE IF NOT EXISTS ";
+
+		String ContactsReply = "contacts_reply";
+		String StrangerReply = "stranger_reply";
+		String []switches = new String[]{"service_switch","inform_switch","stranger_switch"};
+		
+		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME,null);
+		DB.execSQL( CREATE_TABLE_TEXT + BLACKLIST_TABLE_NAME	+ BLACKLIST_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + IGNORELIST_TABLE_NAME	+ IGNORELIST_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + RESTTIME_TABLE_NAME		+ RESTTIME_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + MISC_TABLE_NAME			+ MISC_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + MESSAGES_TABLE_NAME		+ MESSAGES_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + PERSONS_TABLE_NAME		+ PERSONS_TABLE_SPEC);
+		DB.execSQL( CREATE_TABLE_TEXT + GROUPS_TABLE_NAME		+ GROUPS_TABLE_SPEC);
+		DB.setVersion(VERSION);
+		DB.close();
+		
+		if(getSetting(ContactsReply).trim().equals(""))
+			addSetting(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day！！");
+		if(getSetting(StrangerReply).trim().equals(""))
+			addSetting(StrangerReply, "我的主人好像不认识你哦，难道你是，骗子？");
+		
+		if(getGroups().size() == 0){
+			addGroup(new String[]{"朋友", "你爹在忙"});
+			addGroup(new String[]{"家人", "爹我在忙"});
+		}
+		
+		for(String swc : switches){
+			if(getSetting(swc).trim().equals("")){
+				addSetting(swc, "true");
 			}
 		}
 	}
 
-	public static void delGroup(String group_name){
-		if(!initiated) createTables();
+	public void delGroup(String group_name){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		String sql_text = "DELETE FROM " + GROUPS_TABLE_NAME + " WHERE group_name=\"" + group_name + "\"";
 		DB.execSQL(sql_text);
@@ -298,8 +289,7 @@ public class IMissData{
 	 * 
 	 * @param group[] group[0]: group name; group[1]: message
 	 */
-	public static void addGroup(String[] group) {
-		if(!initiated) createTables();
+	public void addGroup(String[] group) {
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		String sql_text = "INSERT INTO " + GROUPS_TABLE_NAME + " VALUES (null, \"" + group[0] + "\")";
 		DB.execSQL(sql_text);
@@ -312,8 +302,7 @@ public class IMissData{
 		DB.close();
 	}
 
-	public static void setPersonToGroup(String person_name, String person_phone, String group_name) {
-		if(!initiated) createTables();
+	public void setPersonToGroup(String person_name, String person_phone, String group_name) {
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		
 		String sql_text;
@@ -335,8 +324,7 @@ public class IMissData{
 		DB.close();
 	}
 
-	public static String getGroupMessage(int group_id){
-		if(!initiated) createTables();
+	public String getGroupMessage(int group_id){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		
 		String sql_text = "SELECT message_body FROM " + MESSAGES_TABLE_NAME + " WHERE group_id = " + group_id;
@@ -351,8 +339,7 @@ public class IMissData{
 		
 		return str;
 	}
-	public static int getGroupInfoByNumber(String person_phone){
-		if(!initiated) createTables();
+	public int getGroupInfoByNumber(String person_phone){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		
 		String sql_text = "SELECT group_id FROM " + PERSONS_TABLE_NAME + " WHERE number = \"" + person_phone + "\"";
@@ -369,8 +356,7 @@ public class IMissData{
 		DB.close();
 		return group_id;
 	}
-	public static String[][] getPersonsFromGroup(String group_name){
-		if(!initiated) createTables();
+	public String[][] getPersonsFromGroup(String group_name){
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		String[][] tuple;
 		String sql_text = "SELECT name, number, group_id FROM " + GROUPS_TABLE_NAME + " INNER JOIN " + PERSONS_TABLE_NAME + " USING (group_id) WHERE group_name=\"" + group_name + "\"";
@@ -385,8 +371,7 @@ public class IMissData{
 		return tuple;
 	}
 
-	public static void delPersonInGroup(String person_name, String person_phone,String group_name) {
-		if(!initiated) createTables();
+	public void delPersonInGroup(String person_name, String person_phone,String group_name) {
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		
 		String sql_text = "SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name = \"" + group_name + "\"";
@@ -400,7 +385,7 @@ public class IMissData{
 		DB.close();
 	}
 	
-	public static boolean inContacts(String RingingNumber){	
+	public boolean inContacts(String RingingNumber){
         ContentResolver cr = contentResolver;
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         Pattern pattern = Pattern.compile("-");
@@ -445,7 +430,8 @@ public class IMissData{
 	    cursor.close();
 		return false;
 	}
-    public static ArrayList<String[]> getContacts(){   	
+	
+    public ArrayList<String[]> getContacts(){   	
         ContentResolver cr = contentResolver;
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         Boolean cleared = false;
@@ -499,8 +485,7 @@ public class IMissData{
     }
 
     
-	public static void delMessage(String group_name) {
-		if(!initiated) createTables();
+	public void delMessage(String group_name) {
 		DB = SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 		String sql_text = "SELECT group_id FROM " + GROUPS_TABLE_NAME + " WHERE group_name = \"" + group_name + "\"";
 		Cursor cursor = DB.rawQuery(sql_text, null);
@@ -517,7 +502,7 @@ public class IMissData{
 		DB.close();
 	}
 	
-	public static void nofity(String notify_summary,String notify_title, String notify_body){     //定义NotificationManager
+	public void nofity(String notify_summary,String notify_title, String notify_body){     //定义NotificationManager
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
         //定义通知栏展现的内容信息

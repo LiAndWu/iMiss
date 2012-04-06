@@ -29,11 +29,12 @@ public class IMissActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);    
-        IMissData.init(this);
+        setContentView(R.layout.main);
+        
+        IMissSettingProvider.setContext(this);
+        IMissSettingProvider sp = IMissSettingProvider.getInstance();
         startService(new Intent(this, IMissService.class));
         
-        DisplayToast(" Morning，HangZhou ！！");
         /*
          * 
         OwnerNameTextView = (TextView) findViewById(R.id.tv);

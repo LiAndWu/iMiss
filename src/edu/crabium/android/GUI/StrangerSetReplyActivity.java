@@ -2,7 +2,7 @@
 package edu.crabium.android.GUI;
 
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissData;
+import edu.crabium.android.IMissSettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,6 +21,9 @@ public class StrangerSetReplyActivity extends Activity {
 	private Button CancelButton, StoreButton;
 	
 	private final static String StrangerReply = "stranger_reply";
+	
+	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -31,7 +34,7 @@ public class StrangerSetReplyActivity extends Activity {
 		StrangerSetReplyEditText.setFocusableInTouchMode(true);
 		
 		StrangerSetReplyEditText.setHint("输入陌生人回复.");
-		StrangerSetReplyEditText.setText(IMissData.getValue(StrangerReply));
+		StrangerSetReplyEditText.setText(sp.getSetting(StrangerReply));
 		
 		
 		StrangerSetReplyTextView = (TextView) findViewById(R.id.stranger_reply_textview);
@@ -52,8 +55,8 @@ public class StrangerSetReplyActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
 			Log.d("HELLO", "STORE " + StrangerSetReplyEditText.getText().toString());
-			IMissData.setValue(StrangerReply, StrangerSetReplyEditText.getText().toString());
-			Log.d("HELLO", "GET" + IMissData.getValue(StrangerReply));
+			sp.addSetting(StrangerReply, StrangerSetReplyEditText.getText().toString());
+			Log.d("HELLO", "GET" + sp.getSetting(StrangerReply));
 			startActivity(intent);
 			StrangerSetReplyActivity.this.finish();
 			}

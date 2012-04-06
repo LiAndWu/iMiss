@@ -1,7 +1,7 @@
 package edu.crabium.android.GUI;
 
 import edu.crabium.android.GlobalVariable;
-import edu.crabium.android.IMissData;
+import edu.crabium.android.IMissSettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,6 +17,7 @@ public class EditReplyActivity extends Activity {
 	private Button CancelButton, SaveButton;
 	private EditText TitleEditText, ContentEditText;
 	private Bundle bundle;
+	IMissSettingProvider sp = IMissSettingProvider.getInstance();
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -43,12 +44,12 @@ public class EditReplyActivity extends Activity {
 				}
 					
 				Log.d("GREETING", "NAME=" + group_name);
-				IMissData.delMessage(group_name);
+				sp.delMessage(group_name);
 				if(!(group_name.equals(TitleEditText.getText().toString()))){
-					IMissData.delGroup(group_name);
+					sp.delGroup(group_name);
 				}
 				
-				IMissData.addGroup(new String[]{ TitleEditText.getText().toString(), ContentEditText.getText().toString()});
+				sp.addGroup(new String[]{ TitleEditText.getText().toString(), ContentEditText.getText().toString()});
 				
 				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
 				intent.putExtras(bundle);

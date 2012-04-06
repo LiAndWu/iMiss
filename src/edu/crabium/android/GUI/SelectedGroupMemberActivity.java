@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.crabium.android.IMissData;
+import edu.crabium.android.IMissSettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -38,6 +38,7 @@ public class SelectedGroupMemberActivity extends Activity {
 	private SimpleAdapter adapter;
 	List<Map<String,String>> SelectedGroupMemberDisplay = new ArrayList<Map<String, String>>();
 	
+	IMissSettingProvider sp = IMissSettingProvider.getInstance();
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
@@ -87,7 +88,7 @@ public class SelectedGroupMemberActivity extends Activity {
     		Map<String, String> pair = SelectedGroupMemberDisplay.get(menuInfo.position);
     		Log.d("HELLO", pair.get(SelectedGroupMemberColumn1) + pair.get(SelectedGroupMemberColumn2));
     		
-    		IMissData.delPersonInGroup(pair.get(SelectedGroupMemberColumn1),pair.get(SelectedGroupMemberColumn2), group_name);
+    		sp.delPersonInGroup(pair.get(SelectedGroupMemberColumn1),pair.get(SelectedGroupMemberColumn2), group_name);
     		SelectedGroupMemberActivity.this.finish();
 			Intent intent = new Intent(SelectedGroupMemberActivity.this, SelectedGroupMemberActivity.class);
 			Bundle bundle = new Bundle();
@@ -100,7 +101,7 @@ public class SelectedGroupMemberActivity extends Activity {
     } 
     
     private void getGroups(List<Map<String,String>> to){
-    	String[][] tuple = IMissData.getPersonsFromGroup(group_name);
+    	String[][] tuple = sp.getPersonsFromGroup(group_name);
     	for(String[] key : tuple){
         	Map<String, String> item = new HashMap<String, String>();
         	item.put(SelectedGroupMemberColumn1, key[0]);

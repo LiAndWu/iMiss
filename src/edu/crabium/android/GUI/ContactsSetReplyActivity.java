@@ -1,7 +1,7 @@
 package edu.crabium.android.GUI;
 
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissData;
+import edu.crabium.android.IMissSettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,13 +25,14 @@ public class ContactsSetReplyActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_contacts_reply);
+		IMissSettingProvider sp = IMissSettingProvider.getInstance();
 		
 		ContactsSetReplyEditText = (EditText) findViewById(R.id.contacts_reply_edittext);
 		ContactsSetReplyEditText.setFocusable(true);
 		ContactsSetReplyEditText.setFocusableInTouchMode(true);
 		
 		ContactsSetReplyEditText.setHint("输入联系人回复.");
-		ContactsSetReplyEditText.setText(IMissData.getValue(ContactsReply));
+		ContactsSetReplyEditText.setText(sp.getSetting(ContactsReply));
 		
 		
 		ContactsSetReplyTextView = (TextView) findViewById(R.id.contacts_reply_textview);
@@ -50,9 +51,9 @@ public class ContactsSetReplyActivity extends Activity {
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent(ContactsSetReplyActivity.this, IMissActivity.class);
-			
+			IMissSettingProvider sp = IMissSettingProvider.getInstance();
 			Log.d("LOG", ContactsSetReplyEditText.getText().toString());
-			IMissData.setValue("contacts_reply", ContactsSetReplyEditText.getText().toString());
+			sp.addSetting("contacts_reply", ContactsSetReplyEditText.getText().toString());
 			startActivity(intent);
 			ContactsSetReplyActivity.this.finish();
 			}

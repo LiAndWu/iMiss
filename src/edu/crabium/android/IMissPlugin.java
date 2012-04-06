@@ -9,8 +9,9 @@ import android.telephony.SmsManager;
 import android.util.Log;
 
 public class IMissPlugin {
+	private IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	
 	public class SendSMS implements Runnable{
-
 		public void Send(String text, String RingingNumber) {
 			SmsManager sm = SmsManager.getDefault();
 			sm.sendTextMessage(RingingNumber, null, text, null, null);
@@ -27,12 +28,13 @@ public class IMissPlugin {
 			SmsManager sm = SmsManager.getDefault();
 			if(!iMissOn()) return;
 			
+			
 			String destination_name = inContacts(IMissPhoneStateListener.RingingNumber);
 			if(!destination_name.trim().equals("")){
-				int group_id = IMissData.getGroupInfoByNumber(IMissPhoneStateListener.RingingNumber);
-				String message =  IMissData.getGroupMessage(group_id);
+				int group_id = sp.getGroupInfoByNumber(IMissPhoneStateListener.RingingNumber);
+				String message =  sp.getGroupMessage(group_id);
 				if(message.trim().equals("")){
-					text = IMissData.getValue("contacts_reply");
+					text = sp.getSetting("contacts_reply");
 				}
 				else{
 					text = message;
@@ -41,7 +43,7 @@ public class IMissPlugin {
 			}
 			else{
 				if(OpenToStranger()){
-					text = IMissData.getValue("stranger_reply");
+					text = sp.getSetting("stranger_reply");
 				}
 				else
 					text = " ";
@@ -56,8 +58,8 @@ public class IMissPlugin {
 			sm.sendTextMessage(IMissPhoneStateListener.RingingNumber, null, text, null, null);
 			notify_body = notify_body_header + text;
 			
-			if(IMissData.getValue(ServiceSwitch).trim().equals("true"))
-				IMissData.nofity(notify_summary, notify_summary, notify_body);
+			if(sp.getSetting(ServiceSwitch).trim().equals("true"))
+				sp.nofity(notify_summary, notify_summary, notify_body);
 		}
 
 		public void run() {
@@ -66,7 +68,7 @@ public class IMissPlugin {
 		
 		public boolean OpenToStranger(){
 			String StrangerSwitch = "stranger_switch";
-			if(IMissData.getValue(StrangerSwitch).equals("true")){
+			if(sp.getSetting(StrangerSwitch).equals("true")){
 				return true;
 			}
 			else
@@ -74,7 +76,7 @@ public class IMissPlugin {
 		}
 		
 		public String inContacts(String RingingNumber){
-			List<String[]> array = IMissData.getContacts();
+			List<String[]> array = sp.getContacts();
 			Pattern pattern = Pattern.compile("-");
 			Matcher matcher;
 			
@@ -93,7 +95,7 @@ public class IMissPlugin {
 		
 		public boolean iMissOn(){
 			String ServiceSwitch = "service_switch";
-			if(IMissData.getValue(ServiceSwitch).equals("true")){
+			if(sp.getSetting(ServiceSwitch).equals("true")){
 				return true;
 			}
 			else
