@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.IMissListViewAdapter;
 import edu.crabium.android.IMissListViewAdapter.ViewHolder;
 import edu.crabium.android.R;
@@ -33,7 +33,7 @@ public class SelectLinkManActivity extends Activity {
     ArrayList<String[]> name;
     IMissListViewAdapter adapter;
 	HashMap<Integer,Boolean> map ;
-	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	SettingProvider sp = SettingProvider.getInstance();
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
