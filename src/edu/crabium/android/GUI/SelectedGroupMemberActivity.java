@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -38,7 +38,7 @@ public class SelectedGroupMemberActivity extends Activity {
 	private SimpleAdapter adapter;
 	List<Map<String,String>> SelectedGroupMemberDisplay = new ArrayList<Map<String, String>>();
 	
-	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	SettingProvider sp = SettingProvider.getInstance();
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);

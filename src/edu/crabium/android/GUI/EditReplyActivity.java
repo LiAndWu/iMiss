@@ -1,7 +1,7 @@
 package edu.crabium.android.GUI;
 
 import edu.crabium.android.GlobalVariable;
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -17,7 +17,7 @@ public class EditReplyActivity extends Activity {
 	private Button CancelButton, SaveButton;
 	private EditText TitleEditText, ContentEditText;
 	private Bundle bundle;
-	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	SettingProvider sp = SettingProvider.getInstance();
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);

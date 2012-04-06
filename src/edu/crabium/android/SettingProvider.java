@@ -11,7 +11,7 @@ import android.util.Log;
  * A singleton class that provides all the necessary methods to interact with iMiss' database.
  * 
  */
-public class IMissSettingProvider{
+public class SettingProvider{
 	
 	private final static String GROUPS_TABLE_NAME = "groups";
 	private final static String MESSAGES_TABLE_NAME = "messages";
@@ -22,9 +22,9 @@ public class IMissSettingProvider{
 	private final static String MISC_TABLE_NAME = "misc";
 	
 	private Context context;
-	private static final IMissSettingProvider INSTANCE  = new IMissSettingProvider();
+	private static final SettingProvider INSTANCE  = new SettingProvider();
 	
-	private IMissSettingProvider(){
+	private SettingProvider(){
 		createTables();
 	};
 	
@@ -130,7 +130,7 @@ public class IMissSettingProvider{
 	 * 
 	 * @return a iMissSettingProvider singleton
 	 */
-	public static IMissSettingProvider getInstance(){
+	public static SettingProvider getInstance(){
 		return INSTANCE;
 	}
 	

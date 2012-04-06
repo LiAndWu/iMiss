@@ -2,7 +2,7 @@
 package edu.crabium.android.GUI;
 
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -22,7 +22,7 @@ public class StrangerSetReplyActivity extends Activity {
 	
 	private final static String StrangerReply = "stranger_reply";
 	
-	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	SettingProvider sp = SettingProvider.getInstance();
 	
 	protected void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

@@ -25,7 +25,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 
 public class GroupsSetReplyActivity extends Activity {
@@ -40,7 +40,7 @@ public class GroupsSetReplyActivity extends Activity {
 	private Button BackButton;
 	private SimpleAdapter adapter;
 	
-	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	SettingProvider sp = SettingProvider.getInstance();
 	List<Map<String,String>> SetReplyDisplay;
 	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -73,7 +73,6 @@ public class GroupsSetReplyActivity extends Activity {
 				Intent intent = new Intent(GroupsSetReplyActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				GroupsSetReplyActivity.this.finish();
 			}
 		});	
 
@@ -96,7 +95,6 @@ public class GroupsSetReplyActivity extends Activity {
 				Intent intent = new Intent(GroupsSetReplyActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				GroupsSetReplyActivity.this.finish();
 			}
 		});
 
@@ -105,7 +103,6 @@ public class GroupsSetReplyActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(GroupsSetReplyActivity.this, IMissActivity.class);
 				startActivity(intent);
-				GroupsSetReplyActivity.this.finish();
 			}
 		});
 	}
@@ -126,7 +123,6 @@ public class GroupsSetReplyActivity extends Activity {
 			bundle.putString("group_name", map.get("title"));
 			intent.putExtras(bundle);
 			startActivity(intent);
-			GroupsSetReplyActivity.this.finish();
 			
     	} else if (item.getItemId() == MENU_ADD) {
 			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectLinkManActivity.class);
@@ -136,7 +132,6 @@ public class GroupsSetReplyActivity extends Activity {
 			bundle.putString("group_name", map.get("title"));
 			intent.putExtras(bundle);
 			startActivity(intent);
-			GroupsSetReplyActivity.this.finish();
 			
     	} else if (item.getItemId() == MENU_DELETE) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
@@ -144,14 +139,14 @@ public class GroupsSetReplyActivity extends Activity {
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
     		sp.deleteGroup(map.get("title"));
     		
-    		GroupsSetReplyActivity.this.finish();
-			Intent intent = new Intent(GroupsSetReplyActivity.this, GroupsSetReplyActivity.class);
-			startActivity(intent);
+    		getGroups(SetReplyDisplay);
+    		adapter.notifyDataSetChanged();
     	}
         return super.onContextItemSelected(item);   
     }  
 
     private void getGroups(List<Map<String,String>> to){
+    	to.clear();
     	Map<String, String> map = sp.getGroups();
     	Set<String> keys = map.keySet();
     	
