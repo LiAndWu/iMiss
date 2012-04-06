@@ -33,7 +33,7 @@ public class IMissActivity extends Activity {
         IMissData.init(this);
         startService(new Intent(this, IMissService.class));
         
-        DisplayToast(" Morning，HangZhou ！！");
+        DisplayToast("Morning, Wei！！");
         /*
          * 
         OwnerNameTextView = (TextView) findViewById(R.id.tv);

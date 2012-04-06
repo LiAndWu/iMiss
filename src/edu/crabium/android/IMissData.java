@@ -276,6 +276,8 @@ public class IMissData{
 			if(getGroups().size() == 0){
 				addGroup(new String[]{"朋友", "你爹在忙"});
 				addGroup(new String[]{"家人", "爹我在忙"});
+				addGroup(new String[]{"老师", "老子没空"});
+				
 			}
 			
 			for(String swc : switches){
