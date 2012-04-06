@@ -43,7 +43,6 @@ public class ContactsSetReplyActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(ContactsSetReplyActivity.this, IMissActivity.class);
 			startActivity(intent);
-			ContactsSetReplyActivity.this.finish();
 			}
 		});
 		
@@ -55,7 +54,6 @@ public class ContactsSetReplyActivity extends Activity {
 			Log.d("LOG", ContactsSetReplyEditText.getText().toString());
 			sp.addSetting("contacts_reply", ContactsSetReplyEditText.getText().toString());
 			startActivity(intent);
-			ContactsSetReplyActivity.this.finish();
 			}
 		});
 	}

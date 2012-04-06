@@ -29,7 +29,6 @@ public class AboutActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(AboutActivity.this, IMissActivity.class);
 			startActivity(intent);
-			AboutActivity.this.finish();
 			}
 		});
 		
@@ -39,7 +38,6 @@ public class AboutActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(AboutActivity.this, IntroduceActivity.class);
 				startActivity(intent);
-				AboutActivity.this.finish();
 			}
 		});
         
@@ -49,7 +47,6 @@ public class AboutActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(AboutActivity.this, HelpActivity.class);
 				startActivity(intent);
-				AboutActivity.this.finish(); 
 			}
 		});
 		

@@ -55,7 +55,6 @@ public class SelectContactsActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectContactsActivity.this, GroupsSetReplyActivity.class);
                 startActivity(intent);
-                SelectContactsActivity.this.finish();
             }
         });	
         
@@ -80,7 +79,6 @@ public class SelectContactsActivity extends Activity {
                 	}
                }
                 startActivity(intent);
-                SelectContactsActivity.this.finish();
             }
         });	
     }

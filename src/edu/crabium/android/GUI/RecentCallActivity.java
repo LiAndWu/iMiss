@@ -50,7 +50,6 @@ public class RecentCallActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(RecentCallActivity.this, BlackListActivity.class);
                 startActivity(intent);
-                RecentCallActivity.this.finish();
             }
         });	
         
@@ -73,7 +72,6 @@ public class RecentCallActivity extends Activity {
                 }*/
                 //System.out.println(mla.getItem(0));
                 startActivity(intent);
-                RecentCallActivity.this.finish();
             }
         });	
     }

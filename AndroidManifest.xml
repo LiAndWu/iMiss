@@ -74,7 +74,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.EditLinkManActivity"
+            android:name=".GUI.EditContactActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
