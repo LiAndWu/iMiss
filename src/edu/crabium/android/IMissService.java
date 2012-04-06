@@ -15,7 +15,6 @@ public class IMissService extends Service{
 
 	@Override
 	public IBinder onBind(Intent intent) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 	
@@ -23,16 +22,15 @@ public class IMissService extends Service{
 	public void onCreate() {
 		TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
 		IMissPhoneStateListener myPhoneCallListener = new IMissPhoneStateListener();
+		IMissSettingProvider sp = IMissSettingProvider.getInstance();
 		tm.listen(myPhoneCallListener,PhoneStateListener.LISTEN_CALL_STATE); 
 		
 		//Install functions
 		myPhoneCallListener.Callback(IMissPhoneStateListener.CALLED, "tag", new IMissPlugin().new SendSMS());
-		
 		/** test!
 		 * 
 		 */
-		IMissData.setBlackList("d", "234");
-		Map<String,String> blacklist = IMissData.getBlackList();
+		Map<String,String> blacklist = sp.getBlackList();
 		
 		Iterator<String> iter = blacklist.keySet().iterator();
 		while(iter.hasNext()){

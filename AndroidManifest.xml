@@ -44,7 +44,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.SetReplyActivity"
+            android:name=".GUI.GroupsSetReplyActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
@@ -103,7 +103,24 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
-
+        
+        <activity
+            android:name=".GUI.DetailsSetActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+        <activity
+            android:name=".GUI.ContactsSetReplyActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
+        
+         <activity
+            android:name=".GUI.StrangerSetReplyActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
+        </activity>
     </application>
 
 </manifest>

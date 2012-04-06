@@ -25,10 +25,10 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissData;
+import edu.crabium.android.IMissSettingProvider;
 import edu.crabium.android.R;
 
-public class SetReplyActivity extends Activity {
+public class GroupsSetReplyActivity extends Activity {
 	LinearLayout	SetReplyLinearLayout, NewReplyLinearLayout;
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
@@ -39,11 +39,13 @@ public class SetReplyActivity extends Activity {
 	
 	private Button BackButton;
 	private SimpleAdapter adapter;
+	
+	IMissSettingProvider sp = IMissSettingProvider.getInstance();
 	List<Map<String,String>> SetReplyDisplay;
 	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.set_reply);
+		setContentView(R.layout.groups_set_reply);
 		
 		SetReplyDisplay = new ArrayList<Map<String, String>>();
 		SetReplyLinearLayout = (LinearLayout) findViewById(R.id.set_reply_linearlayout);
@@ -68,10 +70,10 @@ public class SetReplyActivity extends Activity {
 				Bundle bundle = new Bundle();
 				bundle.putString("group_name", map.get(SetReplyColumn1));
 				bundle.putString("message_body", map.get(SetReplyColumn2));
-				Intent intent = new Intent(SetReplyActivity.this, EditReplyActivity.class);
+				Intent intent = new Intent(GroupsSetReplyActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				SetReplyActivity.this.finish();
+				GroupsSetReplyActivity.this.finish();
 			}
 		});	
 
@@ -91,19 +93,19 @@ public class SetReplyActivity extends Activity {
 				Bundle bundle = new Bundle();
 				bundle.putString("group_name", "");
 				bundle.putString("message_body", "");
-				Intent intent = new Intent(SetReplyActivity.this, EditReplyActivity.class);
+				Intent intent = new Intent(GroupsSetReplyActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				SetReplyActivity.this.finish();
+				GroupsSetReplyActivity.this.finish();
 			}
 		});
 
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(SetReplyActivity.this, IMissActivity.class);
+				Intent intent = new Intent(GroupsSetReplyActivity.this, IMissActivity.class);
 				startActivity(intent);
-				SetReplyActivity.this.finish();
+				GroupsSetReplyActivity.this.finish();
 			}
 		});
 	}
@@ -118,39 +120,39 @@ public class SetReplyActivity extends Activity {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	
     	if (item.getItemId() == MENU_MEMBER) {
-			Intent intent = new Intent(SetReplyActivity.this, SelectedGroupMemberActivity.class);
+			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectedGroupMemberActivity.class);
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
     		Bundle bundle = new Bundle();
 			bundle.putString("group_name", map.get("title"));
 			intent.putExtras(bundle);
 			startActivity(intent);
-			SetReplyActivity.this.finish();
+			GroupsSetReplyActivity.this.finish();
 			
     	} else if (item.getItemId() == MENU_ADD) {
-			Intent intent = new Intent(SetReplyActivity.this, SelectLinkManActivity.class);
+			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectLinkManActivity.class);
 			Bundle bundle = new Bundle();
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
 			bundle.putString("group_name", map.get("title"));
 			intent.putExtras(bundle);
 			startActivity(intent);
-			SetReplyActivity.this.finish();
+			GroupsSetReplyActivity.this.finish();
 			
     	} else if (item.getItemId() == MENU_DELETE) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
-    		IMissData.delGroup(map.get("title"));
+    		sp.deleteGroup(map.get("title"));
     		
-    		SetReplyActivity.this.finish();
-			Intent intent = new Intent(SetReplyActivity.this, SetReplyActivity.class);
+    		GroupsSetReplyActivity.this.finish();
+			Intent intent = new Intent(GroupsSetReplyActivity.this, GroupsSetReplyActivity.class);
 			startActivity(intent);
     	}
         return super.onContextItemSelected(item);   
     }  
 
     private void getGroups(List<Map<String,String>> to){
-    	Map<String, String> map = IMissData.getGroups();
+    	Map<String, String> map = sp.getGroups();
     	Set<String> keys = map.keySet();
     	
     	for(String key : keys){
@@ -173,8 +175,7 @@ public class SetReplyActivity extends Activity {
     	item.put(SetReplyColumn2, content);
     	to.add(item);
     	
-    	String[] group = new String[]{title, content};
-    	IMissData.addGroup(group);
+    	sp.addGroup(title, content);
     }
     
     //修改回复项
