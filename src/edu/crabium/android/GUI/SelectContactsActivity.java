@@ -25,7 +25,7 @@ import android.widget.ListView;
 import android.widget.AdapterView.OnItemClickListener;
 
 
-public class SelectLinkManActivity extends Activity {
+public class SelectContactsActivity extends Activity {
 	private ListView selectContactsListView;
     private Button BackButton, SaveButton;
 
@@ -53,9 +53,9 @@ public class SelectLinkManActivity extends Activity {
         
         BackButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(SelectLinkManActivity.this, GroupsSetReplyActivity.class);
+                Intent intent = new Intent(SelectContactsActivity.this, GroupsSetReplyActivity.class);
                 startActivity(intent);
-                SelectLinkManActivity.this.finish();
+                SelectContactsActivity.this.finish();
             }
         });	
         
@@ -63,7 +63,7 @@ public class SelectLinkManActivity extends Activity {
         SaveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
             	
-                Intent intent = new Intent(SelectLinkManActivity.this, GroupsSetReplyActivity.class);
+                Intent intent = new Intent(SelectContactsActivity.this, GroupsSetReplyActivity.class);
                 String[] pair;
                 String group_name = bundle.getString("group_name");
                 String person_name;
@@ -80,7 +80,7 @@ public class SelectLinkManActivity extends Activity {
                 	}
                }
                 startActivity(intent);
-                SelectLinkManActivity.this.finish();
+                SelectContactsActivity.this.finish();
             }
         });	
     }
