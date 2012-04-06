@@ -1,7 +1,7 @@
 
 package edu.crabium.android.GUI;
 
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.IMissActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
@@ -26,7 +26,7 @@ public class DetailsSetActivity extends Activity {
 	private static String InformSwitch = "inform_switch";
 	private static String StrangerSwitch = "stranger_switch";
 	
-	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	SettingProvider sp = SettingProvider.getInstance();
 	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

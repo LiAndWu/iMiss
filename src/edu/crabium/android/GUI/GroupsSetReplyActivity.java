@@ -25,7 +25,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 
 public class GroupsSetReplyActivity extends Activity {
@@ -40,7 +40,7 @@ public class GroupsSetReplyActivity extends Activity {
 	private Button BackButton;
 	private SimpleAdapter adapter;
 	
-	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	SettingProvider sp = SettingProvider.getInstance();
 	List<Map<String,String>> SetReplyDisplay;
 	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

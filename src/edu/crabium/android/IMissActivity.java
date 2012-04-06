@@ -31,7 +31,7 @@ public class IMissActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        IMissSettingProvider sp = IMissSettingProvider.getInstance();
+        SettingProvider sp = SettingProvider.getInstance();
         sp.setContext(this);
         startService(new Intent(this, IMissService.class));
         

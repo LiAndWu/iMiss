@@ -1,7 +1,7 @@
 package edu.crabium.android.GUI;
 
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -25,7 +25,7 @@ public class ContactsSetReplyActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.set_contacts_reply);
-		IMissSettingProvider sp = IMissSettingProvider.getInstance();
+		SettingProvider sp = SettingProvider.getInstance();
 		
 		ContactsSetReplyEditText = (EditText) findViewById(R.id.contacts_reply_edittext);
 		ContactsSetReplyEditText.setFocusable(true);
@@ -51,7 +51,7 @@ public class ContactsSetReplyActivity extends Activity {
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
 			Intent intent = new Intent(ContactsSetReplyActivity.this, IMissActivity.class);
-			IMissSettingProvider sp = IMissSettingProvider.getInstance();
+			SettingProvider sp = SettingProvider.getInstance();
 			Log.d("LOG", ContactsSetReplyEditText.getText().toString());
 			sp.addSetting("contacts_reply", ContactsSetReplyEditText.getText().toString());
 			startActivity(intent);
