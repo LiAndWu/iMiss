@@ -25,7 +25,7 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissData;
+import edu.crabium.android.IMissSettingProvider;
 import edu.crabium.android.R;
 
 public class GroupsSetReplyActivity extends Activity {
@@ -39,6 +39,8 @@ public class GroupsSetReplyActivity extends Activity {
 	
 	private Button BackButton;
 	private SimpleAdapter adapter;
+	
+	IMissSettingProvider sp = IMissSettingProvider.getInstance();
 	List<Map<String,String>> SetReplyDisplay;
 	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -140,7 +142,7 @@ public class GroupsSetReplyActivity extends Activity {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
-    		IMissData.delGroup(map.get("title"));
+    		sp.deleteGroup(map.get("title"));
     		
     		GroupsSetReplyActivity.this.finish();
 			Intent intent = new Intent(GroupsSetReplyActivity.this, GroupsSetReplyActivity.class);
@@ -150,7 +152,7 @@ public class GroupsSetReplyActivity extends Activity {
     }  
 
     private void getGroups(List<Map<String,String>> to){
-    	Map<String, String> map = IMissData.getGroups();
+    	Map<String, String> map = sp.getGroups();
     	Set<String> keys = map.keySet();
     	
     	for(String key : keys){
@@ -173,8 +175,7 @@ public class GroupsSetReplyActivity extends Activity {
     	item.put(SetReplyColumn2, content);
     	to.add(item);
     	
-    	String[] group = new String[]{title, content};
-    	IMissData.addGroup(group);
+    	sp.addGroup(title, content);
     }
     
     //修改回复项
