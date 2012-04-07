@@ -24,7 +24,6 @@ public class HelpActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(HelpActivity.this, AboutActivity.class);
 			startActivity(intent);
-			HelpActivity.this.finish();
 			}
 		});
 		

@@ -125,7 +125,7 @@ public class GroupsSetReplyActivity extends Activity {
 			startActivity(intent);
 			
     	} else if (item.getItemId() == MENU_ADD) {
-			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectLinkManActivity.class);
+			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectContactsActivity.class);
 			Bundle bundle = new Bundle();
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);

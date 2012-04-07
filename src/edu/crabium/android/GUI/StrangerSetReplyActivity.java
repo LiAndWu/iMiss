@@ -46,7 +46,6 @@ public class StrangerSetReplyActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
 			startActivity(intent);
-			StrangerSetReplyActivity.this.finish();
 			}
 		});
 		
@@ -58,7 +57,6 @@ public class StrangerSetReplyActivity extends Activity {
 			sp.addSetting(StrangerReply, StrangerSetReplyEditText.getText().toString());
 			Log.d("HELLO", "GET" + sp.getSetting(StrangerReply));
 			startActivity(intent);
-			StrangerSetReplyActivity.this.finish();
 			}
 		});
 	}

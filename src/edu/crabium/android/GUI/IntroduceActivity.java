@@ -24,7 +24,6 @@ public class IntroduceActivity extends Activity {
 		public void onClick(View v) {
 			Intent intent = new Intent(IntroduceActivity.this, AboutActivity.class);
 			startActivity(intent);
-			IntroduceActivity.this.finish();
 			}
 		});
 		

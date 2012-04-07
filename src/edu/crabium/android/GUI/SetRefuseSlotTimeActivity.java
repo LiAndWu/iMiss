@@ -105,7 +105,6 @@ public class SetRefuseSlotTimeActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(SetRefuseSlotTimeActivity.this, RefuseSlotActivity.class);
 				startActivity(intent);
-				SetRefuseSlotTimeActivity.this.finish();
 			}
 		});
 		
@@ -119,7 +118,6 @@ public class SetRefuseSlotTimeActivity extends Activity {
 				EndTimeEditText.setFocusableInTouchMode(false);
 				Intent intent = new Intent(SetRefuseSlotTimeActivity.this, RefuseSlotActivity.class);
 				startActivity(intent);
-				SetRefuseSlotTimeActivity.this.finish();
 			}
 		});
 	}

@@ -22,103 +22,64 @@ import android.provider.ContactsContract.PhoneLookup;
 import android.telephony.SmsManager;
 import android.util.Log;
 
-
 public class SendSMS implements Runnable{
 	private SettingProvider sp = SettingProvider.getInstance();
     Context context = sp.getContext();
 	ContentResolver contentResolver = context.getContentResolver();
-	
-	public void Send(String text, String RingingNumber) {
-		SmsManager sm = SmsManager.getDefault();
-		sm.sendTextMessage(RingingNumber, null, text, null, null);
-	}
 
-	public void Send() {
-		String text = "";
-		String notify_summary = "发送了一条短信";
-		String notify_title = "iMiss";
-		String notify_body = "";
-		String notify_body_header = "发送内容：";
-		String ServiceSwitch = "service_switch";
+	private void send() {
+		if(!iMissIsOn()) return;
+
+		String ringingNumber;
+		ringingNumber  = IMissPhoneStateListener.RingingNumber;
+		String callerName = getNameByNumber(ringingNumber);
+		StringBuilder smsTextBuilder = new StringBuilder();
+		StringBuilder notifySummaryBuilder = new StringBuilder();
+		notifySummaryBuilder.append("发送了一条短信");
 		
-		SmsManager sm = SmsManager.getDefault();
-		if(!iMissOn()) return;
-		
-		
-		String destination_name = inContacts(IMissPhoneStateListener.RingingNumber);
-		if(!destination_name.trim().equals("")){
-			int group_id = sp.getGroupIdByPhoneNumber(IMissPhoneStateListener.RingingNumber);
-			String message =  sp.getMessageByGroupId(group_id);
-			if(message.trim().equals("")){
-				text = sp.getSetting("contacts_reply");
-			}
-			else{
-				text = message;
-			}
-			notify_summary = "向" + destination_name + notify_summary;
+		if(!callerName.trim().equals("")){
+			int groupId = sp.getGroupIdByPhoneNumber(ringingNumber);
+			String message =  sp.getMessageByGroupId(groupId);
+			
+			smsTextBuilder.append(message.trim().equals("")? sp.getSetting("contacts_reply") : message);
+			notifySummaryBuilder.insert(0,"向" + callerName);
 		}
 		else{
-			if(OpenToStranger()){
-				text = sp.getSetting("stranger_reply");
-			}
-			else
-				text = " ";
-			notify_summary = "向" + IMissPhoneStateListener.RingingNumber + notify_summary;
+			smsTextBuilder.append(replyToStranger() ? sp.getSetting("stranger_reply") : " ");
+			notifySummaryBuilder.insert(0,"向" + ringingNumber);
 		}
 		
-		text = text + "[iMiss]";
+		smsTextBuilder.append("[iMiss]");
 		
-		Log.d("iMiss V1.0", "Sending SMS, number:" +IMissPhoneStateListener.RingingNumber + ", text:" + text); 
+		Log.d("iMiss V1.0", "Sending SMS, number:" +ringingNumber + ", text:" + smsTextBuilder.toString()); 
 		
-		if(IMissPhoneStateListener.RingingNumber != null && !IMissPhoneStateListener.RingingNumber.trim().equals(""))
-		sm.sendTextMessage(IMissPhoneStateListener.RingingNumber, null, text, null, null);
-		notify_body = notify_body_header + text;
-		
-		if(sp.getSetting(ServiceSwitch).trim().equals("true"))
-			nofity(notify_summary, notify_summary, notify_body);
+		if(ringingNumber != null && !ringingNumber.trim().equals("")){
+			String smsText = smsTextBuilder.toString();
+			SmsManager sm = SmsManager.getDefault();
+			sm.sendTextMessage(ringingNumber, null, smsText, null, null);
+
+			String notifyBodyHeader = "发送内容：";
+			String notifyBody = notifyBodyHeader + smsText;
+			String notifySummary = notifySummaryBuilder.toString();
+			nofity(notifySummary, notifySummary, notifyBody);
+		}
 	}
 
 	public void run() {
-		Send();
+		send();
 	}
 	
-	public boolean OpenToStranger(){
+	private boolean replyToStranger(){
 		String StrangerSwitch = "stranger_switch";
-		if(sp.getSetting(StrangerSwitch).equals("true")){
-			return true;
-		}
-		else
-			return false;
+		return sp.getSetting(StrangerSwitch).equals("true") ? true : false;
 	}
 	
-	public String inContacts(String RingingNumber){
-		List<String[]> array = getContacts();
-		Pattern pattern = Pattern.compile("-");
-		Matcher matcher;
-		
-		System.out.println("array.size()=" + array.size());
-		for(String[] pair : array){
-			Log.d("iMiss V1.0", "Pair[1]: " + pair[1]);
-			matcher = pattern.matcher(pair[1]);
-			String num = matcher.replaceAll("");
-			Log.d("iMiss V1.0", "Num: " + num);
-			if(num.equals(RingingNumber)){
-				return pair[0];
-			}
-		}
-		return "";
-	}
-	
-	public boolean iMissOn(){
+	private boolean iMissIsOn(){
 		String ServiceSwitch = "service_switch";
-		if(sp.getSetting(ServiceSwitch).equals("true")){
-			return true;
-		}
-		else
-			return false;
+		return sp.getSetting(ServiceSwitch).equals("true") ?  true : false;
 	}
 	
-	public void nofity(String notify_summary,String notify_title, String notify_body){     //定义NotificationManager
+	private void nofity(String notify_summary,String notify_title, String notify_body){     //定义NotificationManager
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
         //定义通知栏展现的内容信息
@@ -136,58 +97,46 @@ public class SendSMS implements Runnable{
         mNotificationManager.notify(1, notification);
 	}
 	
-	public ArrayList<String[]> getContacts(){   	
+	private String getNameByNumber(String RingingNumber){
+		Pattern pattern = Pattern.compile("-");
+		Matcher matcher;
+		String num;
         ContentResolver cr = contentResolver;
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-    	ArrayList<String[]> contactsArrayList = null;
-    	
-        Boolean cleared = false;
-        Log.d("iMiss V1.0", "Getting Contacts");
-        if(cursor != null && cursor.getCount() > 0){
-        	Log.d("iMiss V1.0", "Got cursor.");
-	       while(cursor.moveToNext()) {
-	            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
-	            String contact = cursor.getString(nameFieldColumnIndex);
-	
-	            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-	            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
-	            
-
-	            Log.d("iMiss V1.0", "Getting Phone");
-	            if(phone != null && phone.getCount() != 0){
-	                Log.d("iMiss V1.0", "Got phone");
-	            		
-		            while(phone.moveToNext()) {
-		                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-		                if(!cleared){
-			            	if(contactsArrayList != null)
-			            		contactsArrayList.clear();
-			            	else
-			            		contactsArrayList = new ArrayList<String[]>();
-			            	cleared = true;
-		                }
-		                contactsArrayList.add(new String[]{contact,phoneNumber});
-		                Log.d("GREETING", "PHONE LOOKUP:  " + contact + " " +  phoneNumber);
-		            }
-	            }
-	            else{
-
-	                Log.d("iMiss V1.0", "Get phone failed.");
-	            }
-	            phone.close();
-	        }
-        }
-        else{
-
-            Log.d("iMiss V1.0", "Get cursor failed.");
-        }
-	    cursor.close();
+        Cursor phone = null;
         
-        if(contactsArrayList != null){
-        	Log.d("IMiss V1.0", "Contacts not null, size: " + contactsArrayList.size());
-        	return new ArrayList<String[]>(contactsArrayList);
+        try{
+	        if(cursor != null && cursor.getCount() > 0)
+		       while(cursor.moveToNext()) {
+		            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
+		            String name = cursor.getString(nameFieldColumnIndex);
+		
+		            String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+		            phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, 
+		            		ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactId, null, null);
+	
+		            if(phone != null && phone.getCount() != 0)
+			            while(phone.moveToNext()) {
+			                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+			    			matcher = pattern.matcher(phoneNumber);
+			    			num = matcher.replaceAll("");
+			    			if(num.equals(RingingNumber))
+			    				return name;
+			            }
+		        }
         }
-        else
-        	return new ArrayList<String[]>();
-    }
+        finally{
+        	if (phone != null)
+        		try{
+        			phone.close();
+        		}catch(Exception e){}
+        	
+        	if( cursor != null)
+        		try{
+        			cursor.close();
+        		}catch(Exception e){}
+        }
+        
+        return " ";
+	}
 }
