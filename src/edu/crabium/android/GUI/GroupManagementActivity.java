@@ -29,7 +29,7 @@ import edu.crabium.android.IMissActivity;
 import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 
-public class GroupsSetReplyActivity extends Activity {
+public class GroupManagementActivity extends Activity {
 	LinearLayout	SetReplyLinearLayout, NewReplyLinearLayout;
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
@@ -67,7 +67,7 @@ public class GroupsSetReplyActivity extends Activity {
 				Bundle bundle = new Bundle();
 				bundle.putString("group_name", map.get(SetReplyColumn1));
 				bundle.putString("message_body", map.get(SetReplyColumn2));
-				Intent intent = new Intent(GroupsSetReplyActivity.this, EditReplyActivity.class);
+				Intent intent = new Intent(GroupManagementActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}
@@ -87,7 +87,7 @@ public class GroupsSetReplyActivity extends Activity {
 				Bundle bundle = new Bundle();
 				bundle.putString("group_name", "");
 				bundle.putString("message_body", "");
-				Intent intent = new Intent(GroupsSetReplyActivity.this, EditReplyActivity.class);
+				Intent intent = new Intent(GroupManagementActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}
@@ -96,7 +96,7 @@ public class GroupsSetReplyActivity extends Activity {
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(GroupsSetReplyActivity.this, IMissActivity.class);
+				Intent intent = new Intent(GroupManagementActivity.this, IMissActivity.class);
 				startActivity(intent);
 			}
 		});
@@ -106,7 +106,7 @@ public class GroupsSetReplyActivity extends Activity {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	
     	if (item.getItemId() == R.id.gm_view_member) {
-			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectedGroupMemberActivity.class);
+			Intent intent = new Intent(GroupManagementActivity.this, GroupMemberManagementActivity.class);
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
     		Bundle bundle = new Bundle();
 			bundle.putString("group_name", map.get("title"));
@@ -114,7 +114,7 @@ public class GroupsSetReplyActivity extends Activity {
 			startActivity(intent);
 			
     	} else if (item.getItemId() == R.id.gm_add_member) {
-			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectContactsActivity.class);
+			Intent intent = new Intent(GroupManagementActivity.this, SelectContactsActivity.class);
 			Bundle bundle = new Bundle();
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);

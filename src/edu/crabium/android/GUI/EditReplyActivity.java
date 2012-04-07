@@ -51,7 +51,7 @@ public class EditReplyActivity extends Activity {
 				
 				sp.addGroup(TitleEditText.getText().toString(), ContentEditText.getText().toString());
 				
-				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
+				Intent intent = new Intent(EditReplyActivity.this, GroupManagementActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
 			}
@@ -60,7 +60,7 @@ public class EditReplyActivity extends Activity {
 		CancelButton = (Button)findViewById(R.id.cancel_button);
 		CancelButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
+				Intent intent = new Intent(EditReplyActivity.this, GroupManagementActivity.class);
 				startActivity(intent);
 			}
 		});

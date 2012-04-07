@@ -53,7 +53,7 @@ public class SelectContactsActivity extends Activity {
         
         BackButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(SelectContactsActivity.this, GroupsSetReplyActivity.class);
+                Intent intent = new Intent(SelectContactsActivity.this, GroupManagementActivity.class);
                 startActivity(intent);
             }
         });	
@@ -62,7 +62,7 @@ public class SelectContactsActivity extends Activity {
         SaveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
             	
-                Intent intent = new Intent(SelectContactsActivity.this, GroupsSetReplyActivity.class);
+                Intent intent = new Intent(SelectContactsActivity.this, GroupManagementActivity.class);
                 String[] pair;
                 String group_name = bundle.getString("group_name");
                 String person_name;
