@@ -32,7 +32,7 @@ public class SendSMS implements Runnable{
 
 		String ringingNumber;
 		ringingNumber  = IMissPhoneStateListener.RingingNumber;
-		String callerName = inContacts(ringingNumber);
+		String callerName = getNameByNumber(ringingNumber);
 		StringBuilder smsTextBuilder = new StringBuilder();
 		StringBuilder notifySummaryBuilder = new StringBuilder();
 		notifySummaryBuilder.append("发送了一条短信");
@@ -74,24 +74,6 @@ public class SendSMS implements Runnable{
 		return sp.getSetting(StrangerSwitch).equals("true") ? true : false;
 	}
 	
-	private String inContacts(String RingingNumber){
-		List<String[]> array = getContacts();
-		Pattern pattern = Pattern.compile("-");
-		Matcher matcher;
-		
-		System.out.println("array.size()=" + array.size());
-		for(String[] pair : array){
-			Log.d("iMiss V1.0", "Pair[1]: " + pair[1]);
-			matcher = pattern.matcher(pair[1]);
-			String num = matcher.replaceAll("");
-			Log.d("iMiss V1.0", "Num: " + num);
-			if(num.equals(RingingNumber)){
-				return pair[0];
-			}
-		}
-		return "";
-	}
-	
 	private boolean iMissIsOn(){
 		String ServiceSwitch = "service_switch";
 		return sp.getSetting(ServiceSwitch).equals("true") ?  true : false;
@@ -115,58 +97,46 @@ public class SendSMS implements Runnable{
         mNotificationManager.notify(1, notification);
 	}
 	
-	private ArrayList<String[]> getContacts(){   	
+	private String getNameByNumber(String RingingNumber){
+		Pattern pattern = Pattern.compile("-");
+		Matcher matcher;
+		String num;
         ContentResolver cr = contentResolver;
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
-    	ArrayList<String[]> contactsArrayList = null;
-    	
-        Boolean cleared = false;
-        Log.d("iMiss V1.0", "Getting Contacts");
-        if(cursor != null && cursor.getCount() > 0){
-        	Log.d("iMiss V1.0", "Got cursor.");
-	       while(cursor.moveToNext()) {
-	            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
-	            String contact = cursor.getString(nameFieldColumnIndex);
-	
-	            String ContactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
-	            Cursor phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + ContactId, null, null);
-	            
-
-	            Log.d("iMiss V1.0", "Getting Phone");
-	            if(phone != null && phone.getCount() != 0){
-	                Log.d("iMiss V1.0", "Got phone");
-	            		
-		            while(phone.moveToNext()) {
-		                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-		                if(!cleared){
-			            	if(contactsArrayList != null)
-			            		contactsArrayList.clear();
-			            	else
-			            		contactsArrayList = new ArrayList<String[]>();
-			            	cleared = true;
-		                }
-		                contactsArrayList.add(new String[]{contact,phoneNumber});
-		                Log.d("GREETING", "PHONE LOOKUP:  " + contact + " " +  phoneNumber);
-		            }
-	            }
-	            else{
-
-	                Log.d("iMiss V1.0", "Get phone failed.");
-	            }
-	            phone.close();
-	        }
-        }
-        else{
-
-            Log.d("iMiss V1.0", "Get cursor failed.");
-        }
-	    cursor.close();
+        Cursor phone = null;
         
-        if(contactsArrayList != null){
-        	Log.d("IMiss V1.0", "Contacts not null, size: " + contactsArrayList.size());
-        	return new ArrayList<String[]>(contactsArrayList);
+        try{
+	        if(cursor != null && cursor.getCount() > 0)
+		       while(cursor.moveToNext()) {
+		            int nameFieldColumnIndex = cursor.getColumnIndex(PhoneLookup.DISPLAY_NAME);
+		            String name = cursor.getString(nameFieldColumnIndex);
+		
+		            String contactId = cursor.getString(cursor.getColumnIndex(ContactsContract.Contacts._ID));
+		            phone = cr.query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, 
+		            		ContactsContract.CommonDataKinds.Phone.CONTACT_ID + "=" + contactId, null, null);
+	
+		            if(phone != null && phone.getCount() != 0)
+			            while(phone.moveToNext()) {
+			                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
+			    			matcher = pattern.matcher(phoneNumber);
+			    			num = matcher.replaceAll("");
+			    			if(num.equals(RingingNumber))
+			    				return name;
+			            }
+		        }
         }
-        else
-        	return new ArrayList<String[]>();
-    }
+        finally{
+        	if (phone != null)
+        		try{
+        			phone.close();
+        		}catch(Exception e){}
+        	
+        	if( cursor != null)
+        		try{
+        			cursor.close();
+        		}catch(Exception e){}
+        }
+        
+        return " ";
+	}
 }
