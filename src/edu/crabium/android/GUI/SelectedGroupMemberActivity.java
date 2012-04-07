@@ -73,7 +73,6 @@ public class SelectedGroupMemberActivity extends Activity {
             public void onClick(View v) {
                 Intent intent = new Intent(SelectedGroupMemberActivity.this, GroupsSetReplyActivity.class);
                 startActivity(intent);
-                SelectedGroupMemberActivity.this.finish();
             }
         });	
     }

@@ -55,7 +55,6 @@ public class RefuseSlotActivity extends Activity {
 				
 				Intent intent = new Intent(RefuseSlotActivity.this, SetRefuseSlotTimeActivity.class);
 				startActivity(intent);
-				RefuseSlotActivity.this.finish();
 			}
 		});	
 		 
@@ -68,7 +67,6 @@ public class RefuseSlotActivity extends Activity {
 				GlobalVariable.TargetEndTimeMins = 0;
 				Intent intent = new Intent(RefuseSlotActivity.this, SetRefuseSlotTimeActivity.class);
 				startActivity(intent);
-				RefuseSlotActivity.this.finish();
 			}
 		});
 		
@@ -77,7 +75,6 @@ public class RefuseSlotActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(RefuseSlotActivity.this, IMissActivity.class);
 				startActivity(intent);
-				RefuseSlotActivity.this.finish();
 			}
 		});
 	}

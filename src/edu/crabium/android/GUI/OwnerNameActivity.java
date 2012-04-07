@@ -59,7 +59,6 @@ public class OwnerNameActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);
-				OwnerNameActivity.this.finish();
 			}
 		});
 		
@@ -75,7 +74,6 @@ public class OwnerNameActivity extends Activity {
 				
 				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);
-				OwnerNameActivity.this.finish();
 			}
 		});
 	}

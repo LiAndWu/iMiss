@@ -104,7 +104,6 @@ public class DetailsSetActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(DetailsSetActivity.this, IMissActivity.class);
 				startActivity(intent);
-				DetailsSetActivity.this.finish();
 			}
 		});
 		

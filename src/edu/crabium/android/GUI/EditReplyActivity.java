@@ -54,7 +54,6 @@ public class EditReplyActivity extends Activity {
 				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				EditReplyActivity.this.finish();
 			}
 		});
 			
@@ -63,7 +62,6 @@ public class EditReplyActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(EditReplyActivity.this, GroupsSetReplyActivity.class);
 				startActivity(intent);
-				EditReplyActivity.this.finish();
 			}
 		});
 	}

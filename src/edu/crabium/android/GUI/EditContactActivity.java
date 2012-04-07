@@ -10,7 +10,7 @@ import android.widget.EditText;
 import edu.crabium.android.GlobalVariable;
 import edu.crabium.android.R;
 
-public class EditLinkManActivity extends Activity {
+public class EditContactActivity extends Activity {
 	private Button CancelButton, SaveButton;
 	EditText NameEditText, PhoneEditText;
 	
@@ -32,9 +32,8 @@ public class EditLinkManActivity extends Activity {
 		CancelButton = (Button)findViewById(R.id.cancel_button);
 		CancelButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(EditLinkManActivity.this, BlackListActivity.class);
+				Intent intent = new Intent(EditContactActivity.this, BlackListActivity.class);
 				startActivity(intent);
-				EditLinkManActivity.this.finish();
 			}
 		});		
 		
@@ -42,9 +41,8 @@ public class EditLinkManActivity extends Activity {
 		SaveButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				
-				Intent intent = new Intent(EditLinkManActivity.this, BlackListActivity.class);
+				Intent intent = new Intent(EditContactActivity.this, BlackListActivity.class);
 				startActivity(intent);
-				EditLinkManActivity.this.finish();
 			}
 		});
 	}
