@@ -59,7 +59,6 @@ public class RecentCallActivity extends Activity {
             	
                 Intent intent = new Intent(RecentCallActivity.this, BlackListActivity.class);
                 
-                System.out.println("dd");
                 for(int i = 0; i < adapter.getCount(); i++){
                 	System.out.println( ((adapter.getCheck(i))));
                }
@@ -106,8 +105,6 @@ public class RecentCallActivity extends Activity {
 			ViewHolder holder = (ViewHolder) arg1.getTag();
 			holder.checkBox.toggle();
 			adapter.isSelected.put(arg2, holder.checkBox.isChecked());
-			
-			Log.d("TAG", "123" + holder.checkBox.isChecked());
 		}
 	};
 	

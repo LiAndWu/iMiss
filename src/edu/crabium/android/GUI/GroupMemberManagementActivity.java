@@ -1,20 +1,16 @@
-
 package edu.crabium.android.GUI;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.ContextMenu;
-import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -80,18 +76,12 @@ public class GroupMemberManagementActivity extends Activity {
 
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
-    	
+    
     	if (item.getItemId() == R.id.gmm_delete_member) {
-    		int pos = (int) SelectedGroupMemberListView.getAdapter().getItemId(menuInfo.position);
-			@SuppressWarnings("unchecked")
-    		//Map<String,String> map = (Map<String, String>)SelectedGroupMemberListView.getItemAtPosition(pos);
     		Map<String, String> pair = SelectedGroupMemberDisplay.get(menuInfo.position);
-    		Log.d("HELLO", pair.get(SelectedGroupMemberColumn1) + pair.get(SelectedGroupMemberColumn2));
-    		
     		sp.deletePersonFromGroup(pair.get(SelectedGroupMemberColumn1),pair.get(SelectedGroupMemberColumn2), group_name);
     		getGroups(SelectedGroupMemberDisplay);
     		adapter.notifyDataSetChanged();
-    		
     	} 
         return super.onContextItemSelected(item);   
     } 

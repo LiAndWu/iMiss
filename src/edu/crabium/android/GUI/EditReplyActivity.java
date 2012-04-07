@@ -43,7 +43,6 @@ public class EditReplyActivity extends Activity {
 					return;
 				}
 					
-				Log.d("GREETING", "NAME=" + group_name);
 				sp.deleteMessage(group_name);
 				if(!(group_name.equals(TitleEditText.getText().toString()))){
 					sp.deleteGroup(group_name);
