@@ -51,6 +51,7 @@ public class IMissPhoneStateListener extends PhoneStateListener {
 		super.onCallStateChanged(state, incomingNumber);
 	}
 
+	//TODO: search CallLog for missed calls
 	public void onIdle(String incomingNumber) {
 		if (PreviousState == TelephonyManager.CALL_STATE_RINGING) {
 			if(incomingNumber != null && !incomingNumber.trim().equals("")){
