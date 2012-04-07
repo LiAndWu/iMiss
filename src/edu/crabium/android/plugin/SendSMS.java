@@ -79,28 +79,23 @@ public class SendSMS implements Runnable{
 		return sp.getSetting(ServiceSwitch).equals("true") ?  true : false;
 	}
 	
-	private void nofity(String notify_summary,String notify_title, String notify_body){     //定义NotificationManager
+	private void nofity(String notifySummary,String notifyTitle, String notifyBody){
         String ns = Context.NOTIFICATION_SERVICE;
-        NotificationManager mNotificationManager = (NotificationManager) context.getSystemService(ns);
-        //定义通知栏展现的内容信息
+        NotificationManager notificationManager = (NotificationManager) context.getSystemService(ns);
+        
         long time = System.currentTimeMillis();
-        Notification notification = new Notification(R.drawable.icon_small, notify_summary, time);
+        Notification notification = new Notification(R.drawable.icon_small, notifySummary, time);
          
-        //定义下拉通知栏时要展现的内容信息
         Intent notificationIntent = new Intent(context, IMissActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(context, 0,
-                notificationIntent, 0);
-        notification.setLatestEventInfo(context, notify_title, notify_body,
-                contentIntent);
-         
-        //用mNotificationManager的notify方法通知用户生成标题栏消息通知
-        mNotificationManager.notify(1, notification);
+        PendingIntent contentIntent = PendingIntent.getActivity(context, 0, notificationIntent, 0);
+        notification.setLatestEventInfo(context, notifyTitle, notifyBody, contentIntent);
+        notification.flags |= Notification.FLAG_AUTO_CANCEL;
+        
+        notificationManager.notify(1, notification);
 	}
 	
 	private String getNameByNumber(String RingingNumber){
 		Pattern pattern = Pattern.compile("-");
-		Matcher matcher;
-		String num;
         ContentResolver cr = contentResolver;
         Cursor cursor = cr.query(ContactsContract.Contacts.CONTENT_URI, null, null, null, null);
         Cursor phone = null;
@@ -118,8 +113,8 @@ public class SendSMS implements Runnable{
 		            if(phone != null && phone.getCount() != 0)
 			            while(phone.moveToNext()) {
 			                String phoneNumber = phone.getString(phone.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER));
-			    			matcher = pattern.matcher(phoneNumber);
-			    			num = matcher.replaceAll("");
+			    			Matcher matcher = pattern.matcher(phoneNumber);
+			    			String num = matcher.replaceAll("");
 			    			if(num.equals(RingingNumber))
 			    				return name;
 			            }
