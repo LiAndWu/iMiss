@@ -22,7 +22,6 @@ public class IMissService extends Service{
 	public void onCreate() {
 		TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
 		IMissPhoneStateListener myPhoneCallListener = new IMissPhoneStateListener();
-		SettingProvider sp = SettingProvider.getInstance();
 		tm.listen(myPhoneCallListener,PhoneStateListener.LISTEN_CALL_STATE); 
 		
 		//Install functions

@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
@@ -33,9 +34,6 @@ public class GroupsSetReplyActivity extends Activity {
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
-	private static final int MENU_MEMBER = Menu.FIRST;
-	private static final int MENU_ADD = Menu.FIRST + 1;
-	private static final int MENU_DELETE = Menu.FIRST + 2;
 	
 	private Button BackButton;
 	private SimpleAdapter adapter;
@@ -61,7 +59,6 @@ public class GroupsSetReplyActivity extends Activity {
 		SetReplyListView.setItemsCanFocus(true); 
 		SetReplyListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
 
-		//监听OnClick事件
 		SetReplyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
 				ListView listView = (ListView)parent;
@@ -79,10 +76,8 @@ public class GroupsSetReplyActivity extends Activity {
 		SetReplyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {         
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
-            	menu.setHeaderTitle("  "); 
-                menu.add(0, MENU_MEMBER, 0, "小组成员");  
-                menu.add(0, MENU_ADD, 0, "添加组员");    
-                menu.add(0, MENU_DELETE, 0, "删除小组");
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.group_management_menu, menu);
             }   
         });     
 
@@ -106,17 +101,11 @@ public class GroupsSetReplyActivity extends Activity {
 			}
 		});
 	}
-	/**
-	 * Define operations for menu of SetReplyListView;
-	 * @param item ,the sub item of menu of SetReplyListView;
-	 * Menu.First:小组成员
-	 * Menu.First + 1：添加组员
-	 * Menu.First + 2: 删除组员
-	 */
+	
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	
-    	if (item.getItemId() == MENU_MEMBER) {
+    	if (item.getItemId() == R.id.gm_view_member) {
 			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectedGroupMemberActivity.class);
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
     		Bundle bundle = new Bundle();
@@ -124,7 +113,7 @@ public class GroupsSetReplyActivity extends Activity {
 			intent.putExtras(bundle);
 			startActivity(intent);
 			
-    	} else if (item.getItemId() == MENU_ADD) {
+    	} else if (item.getItemId() == R.id.gm_add_member) {
 			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectContactsActivity.class);
 			Bundle bundle = new Bundle();
 			@SuppressWarnings("unchecked")
@@ -133,7 +122,7 @@ public class GroupsSetReplyActivity extends Activity {
 			intent.putExtras(bundle);
 			startActivity(intent);
 			
-    	} else if (item.getItemId() == MENU_DELETE) {
+    	} else if (item.getItemId() == R.id.gm_delete_group) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
