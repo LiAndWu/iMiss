@@ -67,6 +67,4 @@ public class EditReplyActivity extends Activity {
 	public void displayToast(String str) {
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 	}
-	
 }
-

@@ -254,7 +254,7 @@ public class SettingProvider{
 	}
 	
 	/**
-	 * Delete entris from ignore list, if number is matched
+	 * Delete entries from ignore list, if number is matched
 	 * 
 	 * @param number the number that you want to remove from ignore list
 	 */
