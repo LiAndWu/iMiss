@@ -63,6 +63,7 @@ public final class R {
         public static final int gm_add_member=0x7f060048;
         public static final int gm_delete_group=0x7f060049;
         public static final int gm_view_member=0x7f060047;
+        public static final int gmm_delete_member=0x7f06004a;
         public static final int help_chevron_button=0x7f060006;
         public static final int help_textView=0x7f060020;
         public static final int hour=0x7f060038;
@@ -142,6 +143,7 @@ public final class R {
     }
     public static final class menu {
         public static final int group_management_menu=0x7f050000;
+        public static final int group_member_management_menu=0x7f050001;
     }
     public static final class string {
         public static final int app_name=0x7f040001;

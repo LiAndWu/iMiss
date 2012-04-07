@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.ContextMenu;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -27,7 +28,7 @@ import android.widget.SimpleAdapter;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 ;
 
-public class SelectedGroupMemberActivity extends Activity {
+public class GroupMemberManagementActivity extends Activity {
 	LinearLayout	SelectedGroupMemberLinearLayout;
     private ListView SelectedGroupMemberListView;
     private Button BackButton;
@@ -63,15 +64,15 @@ public class SelectedGroupMemberActivity extends Activity {
 		SelectedGroupMemberListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {         
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
-            	menu.setHeaderTitle("  "); 
-                menu.add(0, Menu.FIRST, 0, "删除");  
+            	MenuInflater inflater = getMenuInflater();
+            	inflater.inflate(R.menu.group_member_management_menu, menu);
             }   
         });  
 		
         BackButton = (Button)findViewById(R.id.back_button);
         BackButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(SelectedGroupMemberActivity.this, GroupsSetReplyActivity.class);
+                Intent intent = new Intent(GroupMemberManagementActivity.this, GroupManagementActivity.class);
                 startActivity(intent);
             }
         });	
@@ -80,7 +81,7 @@ public class SelectedGroupMemberActivity extends Activity {
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	
-    	if (item.getItemId() == Menu.FIRST) {
+    	if (item.getItemId() == R.id.gmm_delete_member) {
     		int pos = (int) SelectedGroupMemberListView.getAdapter().getItemId(menuInfo.position);
 			@SuppressWarnings("unchecked")
     		//Map<String,String> map = (Map<String, String>)SelectedGroupMemberListView.getItemAtPosition(pos);
@@ -88,19 +89,16 @@ public class SelectedGroupMemberActivity extends Activity {
     		Log.d("HELLO", pair.get(SelectedGroupMemberColumn1) + pair.get(SelectedGroupMemberColumn2));
     		
     		sp.deletePersonFromGroup(pair.get(SelectedGroupMemberColumn1),pair.get(SelectedGroupMemberColumn2), group_name);
-    		SelectedGroupMemberActivity.this.finish();
-			Intent intent = new Intent(SelectedGroupMemberActivity.this, SelectedGroupMemberActivity.class);
-			Bundle bundle = new Bundle();
-			bundle.putString("group_name", group_name);
-			intent.putExtras(bundle);
-			startActivity(intent);
-			
+    		getGroups(SelectedGroupMemberDisplay);
+    		adapter.notifyDataSetChanged();
+    		
     	} 
         return super.onContextItemSelected(item);   
     } 
     
     private void getGroups(List<Map<String,String>> to){
     	String[][] tuple = sp.getPersonsFromGroup(group_name);
+    	to.clear();
     	for(String[] key : tuple){
         	Map<String, String> item = new HashMap<String, String>();
         	item.put(SelectedGroupMemberColumn1, key[0]);
