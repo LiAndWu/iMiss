@@ -8,7 +8,7 @@ import edu.crabium.android.GUI.DetailsSetActivity;
 import edu.crabium.android.GUI.EditReplyActivity;
 import edu.crabium.android.GUI.OwnerNameActivity;
 import edu.crabium.android.GUI.RefuseSlotActivity;
-import edu.crabium.android.GUI.GroupsSetReplyActivity;
+import edu.crabium.android.GUI.GroupManagementActivity;
 import edu.crabium.android.GUI.StrangerSetReplyActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
@@ -64,7 +64,7 @@ public class IMissActivity extends Activity {
         SetReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, GroupsSetReplyActivity.class);
+				Intent intent = new Intent(IMissActivity.this, GroupManagementActivity.class);
 				startActivity(intent);
 			}
 		});
