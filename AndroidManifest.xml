@@ -39,85 +39,80 @@
             android:enabled="true" />
 
         <activity
-            android:name=".GUI.OwnerNameActivity"
+            android:name=".OwnerNameActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.GroupManagementActivity"
+            android:name=".GroupManagementActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.EditReplyActivity"
+            android:name=".EditReplyActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.BlackListActivity"
+            android:name=".SelectContactsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.SelectContactsActivity"
+            android:name=".RefuseSlotActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.RefuseSlotActivity"
+            android:name=".SetRefuseSlotTimeActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.SetRefuseSlotTimeActivity"
+            android:name=".EditContactActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.EditContactActivity"
+            android:name=".IntroduceActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.IntroduceActivity"
+            android:name=".AboutActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.AboutActivity"
+            android:name=".HelpActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.HelpActivity"
+            android:name=".GroupMemberManagementActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.GroupMemberManagementActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
-            android:name=".GUI.RecentCallActivity"
+            android:name=".RecentCallActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         
         <activity
-            android:name=".GUI.DetailsSetActivity"
+            android:name=".PreferencesActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         
         <activity
-            android:name=".GUI.ContactsSetReplyActivity"
+            android:name=".ContactsSetReplyActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
         
          <activity
-            android:name=".GUI.StrangerSetReplyActivity"
+            android:name=".StrangerSetReplyActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>

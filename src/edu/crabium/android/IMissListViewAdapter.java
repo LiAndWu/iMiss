@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 
 public class IMissListViewAdapter extends BaseAdapter {
-	//private Context context;
 	private ArrayList<String[]> array;
 	public Map<Integer, Boolean>  isSelected;
 	private LayoutInflater inflater = null;
@@ -25,7 +24,6 @@ public class IMissListViewAdapter extends BaseAdapter {
 	private final static int PHONE = 1;
 	
 	public IMissListViewAdapter(ArrayList<String[]> array, Context context) {
-		//this.context = context;
 		this.array = new ArrayList<String[]>(array);
 		
 		inflater = LayoutInflater.from(context);

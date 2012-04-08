@@ -25,8 +25,8 @@ import android.telephony.SmsManager;
  */
 public class SendSMS implements Runnable{
 	private SettingProvider sp = SettingProvider.getInstance();
-    Context context = sp.getContext();
-	ContentResolver contentResolver = context.getContentResolver();
+    private Context context = sp.getContext();
+	private ContentResolver contentResolver = context.getContentResolver();
 
 	public void run() {
 		send();
