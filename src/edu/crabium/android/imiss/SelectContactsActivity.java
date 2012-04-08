@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Set;
 
 import edu.crabium.android.imiss.IMissListViewAdapter.ViewHolder;
-import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Intent;

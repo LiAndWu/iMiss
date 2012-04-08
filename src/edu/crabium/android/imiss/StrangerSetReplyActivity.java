@@ -1,7 +1,6 @@
 
 package edu.crabium.android.imiss;
 
-import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

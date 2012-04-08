@@ -1,7 +1,5 @@
 package edu.crabium.android.imiss;
 
-
-import edu.crabium.android.R;
 import edu.crabium.android.imiss.wheel.NumericWheelAdapter;
 import edu.crabium.android.imiss.wheel.OnWheelChangedListener;
 import edu.crabium.android.imiss.wheel.OnWheelScrollListener;
