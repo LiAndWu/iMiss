@@ -1,15 +1,5 @@
-
 package edu.crabium.android;
 
-import edu.crabium.android.GUI.AboutActivity;
-import edu.crabium.android.GUI.BlackListActivity;
-import edu.crabium.android.GUI.ContactsSetReplyActivity;
-import edu.crabium.android.GUI.DetailsSetActivity;
-import edu.crabium.android.GUI.EditReplyActivity;
-import edu.crabium.android.GUI.OwnerNameActivity;
-import edu.crabium.android.GUI.RefuseSlotActivity;
-import edu.crabium.android.GUI.GroupManagementActivity;
-import edu.crabium.android.GUI.StrangerSetReplyActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -18,14 +8,8 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 public class IMissActivity extends Activity {
-	private LinearLayout OwnerNameButton, DetatisSetButton, SetReplyButton,
-    BlackListButton, RefuseReplyButton, AboutButton;
-	TextView OwnerNameTextView;
-	private LinearLayout StrangerReplyButton, ContactsReplyButton;
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
@@ -34,33 +18,17 @@ public class IMissActivity extends Activity {
         SettingProvider sp = SettingProvider.getInstance();
         sp.setContext(this);
         startService(new Intent(this, IMissService.class));
-        
-        /*
-         * 
-        OwnerNameTextView = (TextView) findViewById(R.id.tv);
-        OwnerNameTextView.setText(IMissData.getValue("owner"));
-        
-        OwnerNameButton = (LinearLayout)findViewById(R.id.software_set_chevron_button);
-        OwnerNameButton.setOnClickListener(new Button.OnClickListener() {
+   
+        LinearLayout preferencesButton = (LinearLayout) findViewById(R.id.software_set_chevron_button);
+        preferencesButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, OwnerNameActivity.class);
-				startActivity(intent);
-				IMissActivity.this.finish();
-			}
-		});
-        */
-        
-        DetatisSetButton = (LinearLayout) findViewById(R.id.software_set_chevron_button);
-        DetatisSetButton.setOnClickListener(new Button.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, DetailsSetActivity.class);
+				Intent intent = new Intent(IMissActivity.this, PreferencesActivity.class);
 				startActivity(intent);
 			}
 		});
         
-        SetReplyButton = (LinearLayout)findViewById(R.id.set_reply_chevron_button);
+        LinearLayout SetReplyButton = (LinearLayout)findViewById(R.id.set_reply_chevron_button);
         SetReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -69,21 +37,37 @@ public class IMissActivity extends Activity {
 			}
 		});
         
-        
-        /*
-         *黑名单，暂缓开发
-        BlackListButton = (LinearLayout)findViewById(R.id.blacklist_chevron_button);
-        BlackListButton.setOnClickListener(new Button.OnClickListener() {
+        LinearLayout aboutButton = (LinearLayout)findViewById(R.id.about_chevron_button);
+        aboutButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, BlackListActivity.class);
+				Intent intent = new Intent(IMissActivity.this, AboutActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
         
-                  拒接名单，暂缓开发
-        RefuseReplyButton = (LinearLayout)findViewById(R.id.refuse_reply_chevron_button);
+        LinearLayout StrangerReplyButton = (LinearLayout) findViewById(R.id.stranger_reply_chevron_button);
+		StrangerReplyButton.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(IMissActivity.this, StrangerSetReplyActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+		LinearLayout ContactsReplyButton = (LinearLayout) findViewById(R.id.contacts_reply_chevron_button);
+		ContactsReplyButton.setOnClickListener(new Button.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Intent intent = new Intent(IMissActivity.this, ContactsSetReplyActivity.class);
+				startActivity(intent);
+			}
+		});
+		
+
+        /*
+        拒接名单，暂缓开发
+        LinearLayout RefuseReplyButton = (LinearLayout)findViewById(R.id.refuse_reply_chevron_button);
         RefuseReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -93,32 +77,18 @@ public class IMissActivity extends Activity {
 			}
 		});
         
-        */
-        AboutButton = (LinearLayout)findViewById(R.id.about_chevron_button);
-        AboutButton.setOnClickListener(new Button.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, AboutActivity.class);
-				startActivity(intent);
-			}
-		});
+        TextView OwnerNameTextView = (TextView) findViewById(R.id.tv);
+        OwnerNameTextView.setText(IMissData.getValue("owner"));
         
-		StrangerReplyButton = (LinearLayout) findViewById(R.id.stranger_reply_chevron_button);
-		StrangerReplyButton.setOnClickListener(new Button.OnClickListener() {
+        LinearLayout OwnerNameButton = (LinearLayout)findViewById(R.id.software_set_chevron_button);
+        OwnerNameButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, StrangerSetReplyActivity.class);
+				Intent intent = new Intent(IMissActivity.this, OwnerNameActivity.class);
 				startActivity(intent);
+				IMissActivity.this.finish();
 			}
 		});
-		
-		ContactsReplyButton = (LinearLayout) findViewById(R.id.contacts_reply_chevron_button);
-		ContactsReplyButton.setOnClickListener(new Button.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, ContactsSetReplyActivity.class);
-				startActivity(intent);
-			}
-		});
+        */
     }
 }
