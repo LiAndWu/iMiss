@@ -54,11 +54,6 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".BlackListActivity"
-            android:configChanges="orientation|keyboardHidden"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".SelectContactsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
@@ -105,7 +100,7 @@
         </activity>
         
         <activity
-            android:name=".DetailsSetActivity"
+            android:name=".PreferencesActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>

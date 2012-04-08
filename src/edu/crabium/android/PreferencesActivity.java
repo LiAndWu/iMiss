@@ -16,7 +16,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
-public class DetailsSetActivity extends Activity {
+public class PreferencesActivity extends Activity {
 	private Button BackButton;
 	private ToggleButton serviceSwitchToggleButton, informSwitchToggleButton, strangerSwitchToggleButton;
 	private TextView serviceSwitchTextView, informSwitchTextView, strangerSwitchTextView;
@@ -100,7 +100,7 @@ public class DetailsSetActivity extends Activity {
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(DetailsSetActivity.this, IMissActivity.class);
+				Intent intent = new Intent(PreferencesActivity.this, IMissActivity.class);
 				startActivity(intent);
 			}
 		});

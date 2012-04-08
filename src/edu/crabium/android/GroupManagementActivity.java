@@ -105,7 +105,8 @@ public class GroupManagementActivity extends Activity {
     	
     	if (item.getItemId() == R.id.gm_view_member) {
 			Intent intent = new Intent(GroupManagementActivity.this, GroupMemberManagementActivity.class);
-    		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
+    		@SuppressWarnings("unchecked")
+			Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
     		Bundle bundle = new Bundle();
 			bundle.putString("group_name", map.get("title"));
 			intent.putExtras(bundle);
