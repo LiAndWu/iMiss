@@ -1,15 +1,6 @@
 
 package edu.crabium.android;
 
-import edu.crabium.android.GUI.AboutActivity;
-import edu.crabium.android.GUI.BlackListActivity;
-import edu.crabium.android.GUI.ContactsSetReplyActivity;
-import edu.crabium.android.GUI.DetailsSetActivity;
-import edu.crabium.android.GUI.EditReplyActivity;
-import edu.crabium.android.GUI.OwnerNameActivity;
-import edu.crabium.android.GUI.RefuseSlotActivity;
-import edu.crabium.android.GUI.GroupManagementActivity;
-import edu.crabium.android.GUI.StrangerSetReplyActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
