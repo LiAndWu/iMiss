@@ -3,9 +3,9 @@ package edu.crabium.android.imiss.plugin;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import edu.crabium.android.R;
 import edu.crabium.android.imiss.IMissActivity;
 import edu.crabium.android.imiss.IMissPhoneStateListener;
+import edu.crabium.android.imiss.R;
 import edu.crabium.android.imiss.SettingProvider;
 
 import android.app.Notification;

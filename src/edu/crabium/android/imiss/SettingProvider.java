@@ -29,7 +29,7 @@ public class SettingProvider{
 	};
 	
 	private SQLiteDatabase openDatabase(){
-		final String DATABASE_NAME = "/data/data/edu.crabium.android/iMiss.sqlite3";
+		final String DATABASE_NAME = "/data/data/edu.crabium.android.imiss/iMiss.sqlite3";
 		return SQLiteDatabase.openOrCreateDatabase(DATABASE_NAME, null);
 	}
 	

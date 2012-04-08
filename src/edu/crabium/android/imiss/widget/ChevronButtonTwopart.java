@@ -1,6 +1,6 @@
 package edu.crabium.android.imiss.widget;
 
-import edu.crabium.android.R;
+import edu.crabium.android.imiss.R;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;

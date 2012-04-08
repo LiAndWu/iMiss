@@ -25,7 +25,6 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
-import edu.crabium.android.R;
 
 public class GroupManagementActivity extends Activity {
 	LinearLayout	SetReplyLinearLayout, NewReplyLinearLayout;
