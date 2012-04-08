@@ -22,7 +22,8 @@ package edu.crabium.android.imiss.wheel;
 import java.util.LinkedList;
 import java.util.List;
 
-import edu.crabium.android.R;
+import edu.crabium.android.imiss.R;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;

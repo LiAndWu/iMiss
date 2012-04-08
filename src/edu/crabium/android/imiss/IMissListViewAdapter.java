@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import edu.crabium.android.R;
 
 import android.content.Context;
 import android.util.Log;
