@@ -1,4 +1,3 @@
-
 package edu.crabium.android;
 
 import edu.crabium.android.GUI.AboutActivity;
@@ -8,7 +7,7 @@ import edu.crabium.android.GUI.DetailsSetActivity;
 import edu.crabium.android.GUI.EditReplyActivity;
 import edu.crabium.android.GUI.OwnerNameActivity;
 import edu.crabium.android.GUI.RefuseSlotActivity;
-import edu.crabium.android.GUI.GroupsSetReplyActivity;
+import edu.crabium.android.GUI.GroupManagementActivity;
 import edu.crabium.android.GUI.StrangerSetReplyActivity;
 import edu.crabium.android.R;
 import android.app.Activity;
@@ -31,11 +30,10 @@ public class IMissActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
         
-        IMissSettingProvider sp = IMissSettingProvider.getInstance();
+        SettingProvider sp = SettingProvider.getInstance();
         sp.setContext(this);
         startService(new Intent(this, IMissService.class));
         
-        DisplayToast("Morning, Wei！！");
         /*
          * 
         OwnerNameTextView = (TextView) findViewById(R.id.tv);
@@ -58,7 +56,6 @@ public class IMissActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, DetailsSetActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
         
@@ -66,9 +63,8 @@ public class IMissActivity extends Activity {
         SetReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Intent intent = new Intent(IMissActivity.this, GroupsSetReplyActivity.class);
+				Intent intent = new Intent(IMissActivity.this, GroupManagementActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
         
@@ -103,7 +99,6 @@ public class IMissActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, AboutActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
         
@@ -113,22 +108,16 @@ public class IMissActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, StrangerSetReplyActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
-		
+
 		ContactsReplyButton = (LinearLayout) findViewById(R.id.contacts_reply_chevron_button);
 		ContactsReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				Intent intent = new Intent(IMissActivity.this, ContactsSetReplyActivity.class);
 				startActivity(intent);
-				IMissActivity.this.finish();
 			}
 		});
     }
-    
-	public void DisplayToast(String str) {
-		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-	}
 }

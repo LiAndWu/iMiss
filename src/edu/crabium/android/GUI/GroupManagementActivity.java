@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.util.Log;
 import android.view.View;
@@ -25,22 +26,19 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 
-public class GroupsSetReplyActivity extends Activity {
+public class GroupManagementActivity extends Activity {
 	LinearLayout	SetReplyLinearLayout, NewReplyLinearLayout;
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
-	private static final int MENU_MEMBER = Menu.FIRST;
-	private static final int MENU_ADD = Menu.FIRST + 1;
-	private static final int MENU_DELETE = Menu.FIRST + 2;
 	
 	private Button BackButton;
 	private SimpleAdapter adapter;
 	
-	IMissSettingProvider sp = IMissSettingProvider.getInstance();
+	SettingProvider sp = SettingProvider.getInstance();
 	List<Map<String,String>> SetReplyDisplay;
 	public void onCreate(Bundle savedInstanceState) { 
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -61,7 +59,6 @@ public class GroupsSetReplyActivity extends Activity {
 		SetReplyListView.setItemsCanFocus(true); 
 		SetReplyListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
 
-		//监听OnClick事件
 		SetReplyListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {	
 				ListView listView = (ListView)parent;
@@ -70,20 +67,17 @@ public class GroupsSetReplyActivity extends Activity {
 				Bundle bundle = new Bundle();
 				bundle.putString("group_name", map.get(SetReplyColumn1));
 				bundle.putString("message_body", map.get(SetReplyColumn2));
-				Intent intent = new Intent(GroupsSetReplyActivity.this, EditReplyActivity.class);
+				Intent intent = new Intent(GroupManagementActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				GroupsSetReplyActivity.this.finish();
 			}
 		});	
 
 		SetReplyListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {         
             @Override   
             public void onCreateContextMenu(ContextMenu menu, View v,ContextMenuInfo menuInfo) { 
-            	menu.setHeaderTitle("  "); 
-                menu.add(0, MENU_MEMBER, 0, "小组成员");  
-                menu.add(0, MENU_ADD, 0, "添加组员");    
-                menu.add(0, MENU_DELETE, 0, "删除小组");
+                MenuInflater inflater = getMenuInflater();
+                inflater.inflate(R.menu.group_management_menu, menu);
             }   
         });     
 
@@ -93,65 +87,55 @@ public class GroupsSetReplyActivity extends Activity {
 				Bundle bundle = new Bundle();
 				bundle.putString("group_name", "");
 				bundle.putString("message_body", "");
-				Intent intent = new Intent(GroupsSetReplyActivity.this, EditReplyActivity.class);
+				Intent intent = new Intent(GroupManagementActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
 				startActivity(intent);
-				GroupsSetReplyActivity.this.finish();
 			}
 		});
 
 		BackButton = (Button)findViewById(R.id.back_button);
 		BackButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(GroupsSetReplyActivity.this, IMissActivity.class);
+				Intent intent = new Intent(GroupManagementActivity.this, IMissActivity.class);
 				startActivity(intent);
-				GroupsSetReplyActivity.this.finish();
 			}
 		});
 	}
-	/**
-	 * Define operations for menu of SetReplyListView;
-	 * @param item ,the sub item of menu of SetReplyListView;
-	 * Menu.First:小组成员
-	 * Menu.First + 1：添加组员
-	 * Menu.First + 2: 删除组员
-	 */
+	
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	
-    	if (item.getItemId() == MENU_MEMBER) {
-			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectedGroupMemberActivity.class);
+    	if (item.getItemId() == R.id.gm_view_member) {
+			Intent intent = new Intent(GroupManagementActivity.this, GroupMemberManagementActivity.class);
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
     		Bundle bundle = new Bundle();
 			bundle.putString("group_name", map.get("title"));
 			intent.putExtras(bundle);
 			startActivity(intent);
-			GroupsSetReplyActivity.this.finish();
 			
-    	} else if (item.getItemId() == MENU_ADD) {
-			Intent intent = new Intent(GroupsSetReplyActivity.this, SelectLinkManActivity.class);
+    	} else if (item.getItemId() == R.id.gm_add_member) {
+			Intent intent = new Intent(GroupManagementActivity.this, SelectContactsActivity.class);
 			Bundle bundle = new Bundle();
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(menuInfo.position);
 			bundle.putString("group_name", map.get("title"));
 			intent.putExtras(bundle);
 			startActivity(intent);
-			GroupsSetReplyActivity.this.finish();
 			
-    	} else if (item.getItemId() == MENU_DELETE) {
+    	} else if (item.getItemId() == R.id.gm_delete_group) {
     		int pos = (int) SetReplyListView.getAdapter().getItemId(menuInfo.position);
 			@SuppressWarnings("unchecked")
     		Map<String,String> map = (Map<String, String>)SetReplyListView.getItemAtPosition(pos);
     		sp.deleteGroup(map.get("title"));
     		
-    		GroupsSetReplyActivity.this.finish();
-			Intent intent = new Intent(GroupsSetReplyActivity.this, GroupsSetReplyActivity.class);
-			startActivity(intent);
+    		getGroups(SetReplyDisplay);
+    		adapter.notifyDataSetChanged();
     	}
         return super.onContextItemSelected(item);   
     }  
 
     private void getGroups(List<Map<String,String>> to){
+    	to.clear();
     	Map<String, String> map = sp.getGroups();
     	Set<String> keys = map.keySet();
     	

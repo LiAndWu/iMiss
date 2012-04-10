@@ -1,7 +1,7 @@
 package edu.crabium.android.GUI;
 
 import edu.crabium.android.IMissActivity;
-import edu.crabium.android.IMissSettingProvider;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
@@ -21,7 +21,7 @@ public class OwnerNameActivity extends Activity {
 	private ToggleButton OwnerNameToggleButton;
 	private EditText OwnerEditText;
 	private TextView ToggleButtonTextView;
-	IMissSettingProvider sp =  IMissSettingProvider.getInstance();
+	SettingProvider sp =  SettingProvider.getInstance();
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
@@ -59,7 +59,6 @@ public class OwnerNameActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);
-				OwnerNameActivity.this.finish();
 			}
 		});
 		
@@ -75,7 +74,6 @@ public class OwnerNameActivity extends Activity {
 				
 				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
 				startActivity(intent);
-				OwnerNameActivity.this.finish();
 			}
 		});
 	}

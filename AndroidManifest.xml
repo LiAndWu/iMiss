@@ -44,7 +44,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.GroupsSetReplyActivity"
+            android:name=".GUI.GroupManagementActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
@@ -59,7 +59,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.SelectLinkManActivity"
+            android:name=".GUI.SelectContactsActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
@@ -74,7 +74,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.EditLinkManActivity"
+            android:name=".GUI.EditContactActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
@@ -94,7 +94,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".GUI.SelectedGroupMemberActivity"
+            android:name=".GUI.GroupMemberManagementActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>

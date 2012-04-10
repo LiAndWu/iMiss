@@ -67,9 +67,8 @@ public class BlackListActivity extends Activity {
 				GlobalVariable.TargetBlackListName = map.get(BlackListColumn1);
 				GlobalVariable.TargetBlackListNumber = map.get(BlackListColumn2);
 				
-				Intent intent = new Intent(BlackListActivity.this, EditLinkManActivity.class);
+				Intent intent = new Intent(BlackListActivity.this, EditContactActivity.class);
 				startActivity(intent);
-				BlackListActivity.this.finish();	
 			}
 		});	
 		
@@ -86,7 +85,6 @@ public class BlackListActivity extends Activity {
 		public void onClick(View v) {
 				Intent intent = new Intent(BlackListActivity.this, IMissActivity.class);
 				startActivity(intent);
-				BlackListActivity.this.finish();
 			}
 		});
 		
@@ -99,7 +97,6 @@ public class BlackListActivity extends Activity {
 				
 				Intent intent = new Intent(BlackListActivity.this, RecentCallActivity.class);
 				startActivity(intent);
-				BlackListActivity.this.finish();
 			}
 		});	
 	}
