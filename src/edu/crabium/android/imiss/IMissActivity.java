@@ -1,23 +1,27 @@
 package edu.crabium.android.imiss;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 public class IMissActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
+
         SettingProvider sp = SettingProvider.getInstance();
         sp.setContext(this);
         startService(new Intent(this, IMissService.class));
    
+        DisplayToast("Bonjour, Wei！！");
         LinearLayout preferencesButton = (LinearLayout) findViewById(R.id.software_set_chevron_button);
         preferencesButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -53,7 +57,7 @@ public class IMissActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 		LinearLayout ContactsReplyButton = (LinearLayout) findViewById(R.id.contacts_reply_chevron_button);
 		ContactsReplyButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -62,7 +66,7 @@ public class IMissActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
+
 
         /*
         拒接名单，暂缓开发
@@ -90,4 +94,8 @@ public class IMissActivity extends Activity {
 		});
         */
     }
+    
+	public void DisplayToast(String str) {
+		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
+	}
 }

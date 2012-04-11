@@ -1,3 +1,6 @@
+/*
+ * 此类待遗弃，和已有功能重复，类中字符串没有使用XML
+ * */
 package edu.crabium.android.imiss;
 
 import android.app.Activity;
@@ -11,7 +14,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 
 public class OwnerNameActivity extends Activity {
 	private Button BackButton, StoreButton;

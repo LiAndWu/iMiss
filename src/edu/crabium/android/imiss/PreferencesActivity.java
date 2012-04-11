@@ -1,4 +1,3 @@
-
 package edu.crabium.android.imiss;
 
 import android.app.Activity;
@@ -11,7 +10,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ToggleButton;
-
 
 public class PreferencesActivity extends Activity {
 	private Button BackButton;
@@ -32,20 +30,28 @@ public class PreferencesActivity extends Activity {
 		serviceSwitchToggleButton = (ToggleButton) findViewById(R.id.service_switch_togglebutton);
 		serviceSwitchToggleButton.setChecked(sp.getSetting(serviceSwitch).equals("true"));
 		
+		final String servicesOpenString = getResources().getString(R.string.services_open);
+		final String servicesCloseString = getResources().getString(R.string.services_close);
+		final String notificationOpenString = getResources().getString(R.string.notification_open);
+		final String notificationCloseString = getResources().getString(R.string.notification_close);
+		final String strangerReplyOpenString = getResources().getString(R.string.stranger_reply_open);
+		final String strangerReplyCloseString = getResources().getString(R.string.stranger_reply_close);
+		
+		
     	if (serviceSwitchToggleButton.isChecked()) {
-    		serviceSwitchTextView.setText("服务开启");
+    		serviceSwitchTextView.setText(servicesOpenString);
     	} else {
-    		serviceSwitchTextView.setText("服务关闭");
+    		serviceSwitchTextView.setText(servicesCloseString);
     	}
     	
 		serviceSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (serviceSwitchToggleButton.isChecked()) {
             		sp.addSetting(serviceSwitch, "true");
-            		serviceSwitchTextView.setText("服务开启");
+            		serviceSwitchTextView.setText(servicesOpenString);
             	} else {
             		sp.addSetting(serviceSwitch, "false");
-            		serviceSwitchTextView.setText("服务关闭");
+            		serviceSwitchTextView.setText(servicesCloseString);
             	}
 			}
 		});
@@ -55,19 +61,19 @@ public class PreferencesActivity extends Activity {
 		informSwitchToggleButton.setChecked(sp.getSetting(informSwitch).equals("true"));
 		
     	if (informSwitchToggleButton.isChecked()) {
-    		informSwitchTextView.setText("通知开启");
+    		informSwitchTextView.setText(notificationOpenString);
     	} else {
-    		informSwitchTextView.setText("通知关闭");
+    		informSwitchTextView.setText(notificationCloseString);
     	}
     	
 		informSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (informSwitchToggleButton.isChecked()) {
             		sp.addSetting(informSwitch, "true");
-            		informSwitchTextView.setText("通知开启");
+            		informSwitchTextView.setText(notificationOpenString);
             	} else {
             		sp.addSetting(informSwitch, "false");
-            		informSwitchTextView.setText("通知关闭");
+            		informSwitchTextView.setText(notificationCloseString);
             	}
 			}
 		});
@@ -77,19 +83,19 @@ public class PreferencesActivity extends Activity {
 		strangerSwitchToggleButton.setChecked(sp.getSetting(strangerSwitch).equals("true"));
 		
     	if (strangerSwitchToggleButton.isChecked()) {
-    		strangerSwitchTextView.setText("陌生人回复开启");
+    		strangerSwitchTextView.setText(strangerReplyOpenString);
     	} else {
-    		strangerSwitchTextView.setText("陌生人回复关闭");
+    		strangerSwitchTextView.setText(strangerReplyCloseString);
     	}
     	
 		strangerSwitchToggleButton.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
             	if (strangerSwitchToggleButton.isChecked()) {
             		sp.addSetting(strangerSwitch, "true");
-            		strangerSwitchTextView.setText("陌生人回复开启");
+            		strangerSwitchTextView.setText(strangerReplyOpenString);
             	} else {
             		sp.addSetting(strangerSwitch, "false");
-            		strangerSwitchTextView.setText("陌生人回复关闭");
+            		strangerSwitchTextView.setText(strangerReplyCloseString);
             	}
 			}
 		});
@@ -101,8 +107,6 @@ public class PreferencesActivity extends Activity {
 				startActivity(intent);
 			}
 		});
-		
-
 	}
 	
 	public void DisplayToast(String str) {

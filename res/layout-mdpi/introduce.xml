@@ -20,7 +20,7 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="上一步"
+            android:text="@string/back"
             android:textStyle="bold" >
         </Button>
 
@@ -30,7 +30,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.39"
             android:gravity="center"
-            android:text="iMiss介绍"
+            android:text="@string/imiss_introduce"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="24dip"
             android:textStyle="bold" >

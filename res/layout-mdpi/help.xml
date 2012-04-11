@@ -20,7 +20,7 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="上一步" >
+            android:text="@string/back" >
         </Button>
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.47"
             android:gravity="center"
-            android:text="帮助"
+            android:text="@string/help"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="24dip"
             android:textStyle="bold" >
