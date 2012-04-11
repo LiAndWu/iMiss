@@ -22,7 +22,7 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="上一步" >
+            android:text="@string/back" >
         </Button>
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.58"
             android:gravity="center"
-            android:text="分组回复"
+            android:text="@string/groups_reply"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="24dip"
             android:textStyle="bold" >

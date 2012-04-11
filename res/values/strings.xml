@@ -1,5 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="hello">Hello World, IMissActivity!</string>
-    <string name="app_name">IMiss</string>
+    <string name="app_name">iMiss</string>
+    <string name = "back">上一步</string>
+    <string name = "cancel">取消</string>
+    <string name = "store">保存</string>
+    <string name = "new_item">新建</string>
+    <string name = "sample_name">王小帅</string>
+    <string name = "sample_phone">15012344321</string>
+    <string name = "sample_title">示例标题</string>
+    <string name = "sample_content">示例内容</string>
+    <string name = "about_imiss">关于iMiss</string>
+    <string name = "imiss_introduce">iMiss介绍</string>
+    <string name = "imiss_help">iMiss帮助</string>
+    <string name = "black_list">黑名单</string>
+    <string name = "contacts">联系人</string>
+    <string name = "edit_reply">编辑回复</string>
+    <string name = "groups_reply">分组回复</string>
+    <string name = "help">帮助</string>
+    <string name = "software_setting">软件设置</string>
+    <string name = "contacts_reply">联系人回复</string>
+    <string name = "stranger_reply">陌生人回复</string>
+    <string name = "about_app">关于应用</string>
+    <string name = "owner_name">机主名</string>
+    <string name = "services_open">服务开启</string>
+    <string name = "services_close">服务关闭</string>
+    <string name = "notification_open">通知开启</string>
+    <string name = "notification_close">通知关闭</string>
+    <string name = "stranger_reply_open">陌生人回复开启</string>
+    <string name = "stranger_reply_close">陌生人回复关闭</string>
+    <string name = "recent_call">最近通话</string>
+    <string name = "refuse_slot">拒接时间段</string>
+    <string name = "select_contacts">选择联系人</string>
+    <string name = "group_members">小组成员</string>
+    <string name = "set_time">设置时间</string>
+    <string name = "friends">朋友</string>
+    <string name = "friends_reply_content">你爹很忙</string>
+    <string name = "family">家庭</string>
+    <string name = "family_reply_content">爹我很忙</string>
+    <string name = "edit_reply_title_hint">请输入分组名称</string>
+    <string name = "edit_reply_content_hint">请输入回复内容</string>
+    <string name = "edit_reply_not_empty_hint">组名不能为空</string>
+    <string name = "contacts_reply_edit_hint">"输入联系人回复."</string>
+    <string name = "contacts_reply_use_hint">"使用提示：\n回复对象是：没有在小组中添加，但在通讯录中的联系人。 "</string>
+   	<string name = "stranger_reply_edit_hint">"输入陌生人回复."</string>
+    <string name = "stranger_reply_use_hint">"使用提示：\n回复对象是：不在通讯录中的陌生人。"</string>
+    <string name = "contacts_reply_content">"我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day！！"</string>
+    <string name = "stranger_reply_cotent">"我的主人好像不认识你哦，难道你是，骗子？"</string>
+    <string name = "introduce">"\n\n    iMiss是一款贴心的来电辅助软" 
+				 "件。如果你因为重要的事情错过了同样重要的一个电话，那么iMiss可以帮助你解决这个难题。" 
+				"\n    在您无法接听或者错过来电的时候，iMiss会自动帮您发送一条信息到来电者的手机上，一切就欧凯啦~"
+	</string>
+    <string name = "help_description">	   
+       "1) 软件设置：\n" 
+	   "    服务关闭/开启选项：设置对未接来电是否回复。\n" 
+	   "    通知关闭/开启选项：设置回复短信后是否通知\n" 
+	   "    陌生人回复关闭/开启选项：设置对陌生人的未接来电回复是否开启。\n" 
+	   "\n2) 联系人回复：\n"  
+	   	"    设置对通讯录中联系人的回复, 但是如果联系人已经添加到小组中，则回复小组中设置的内容。\n" 
+	   "\n3) 分组回复：\n" +
+	   	"    设置对不同小组的不同回复，每个小组可添加一定联系人。比如对家人，朋友等设置不同回复内容。\n" 
+	   "\n4) 陌生人回复：\n"  
+	   	"    设置对不在通讯录中陌生人的回复。\n"
+	</string>
+	
+    <string name = "about_description_lower_resolution">
+        "       \n" 
+		"\tiMiss\n" 
+        "\tVersion 1.0\n"    
+      	"\t吴旭东:\n\t\t\t  http://tikiet.blog.163.com\n" 
+        "\t\t\t  wuxd@me.com\n" 
+		"\t李伟:\n\t\t\t  http://mindlee.net\n" 
+ 		"\t\t\t  chinawelon@gmail.com\n" 
+        "\t\tCrabium amp; Mabbage Workshop\n\t\t\t\tLiWei and WuXudong\n\t\t\t\t\tCopyleft 2011."
+    </string>
+    
+    <string name = "about_description_960_640">
+        "       \n" 
+	    "\t\t\tiMiss\n" 
+        "\t\t\tVersion 1.0\n"  
+	    "\t\t\t吴旭东:\n\t\t\t\t  http://tikiet.blog.163.com\n" 
+	    "\t\t\t\t  wuxd@me.com\n" 
+  		"\t\t\t李伟:\n\t\t\t\t  http://mindlee.net\n" 
+   		"\t\t\t\t  chinawelon@gmail.com\n" 
+   	    "\t\t\t     Crabium amp; Mabbage Workshop\n\t\t\t\t\t\t\t  LiWei and WuXudong\n\t\t\t\t\t\t\t\t\t Copyleft 2011." 
+    </string>
+    
+    <string name = "about_description_854_480">
+        "       \n\n" 
+	    "\t\tiMiss\n" 
+	    "\t\tVersion 1.0\n"   
+	    "\t\t吴旭东:\n\t\t\t  http://tikiet.blog.163.com\n" 
+	    "\t\t\t  wuxd@me.com\n" 
+  		"\t\t李伟:\n\t\t\t  http://mindlee.net\n" 
+    	"\t\t\t  chinawelon@gmail.com\n\n"  
+	    "\t\t\tCrabium amp; Mabbage Workshop\n\t\t\t\t\t LiWei and WuXudong\n\t\t\t\t\t\t\tCopyleft 2011." 
+    </string>
 </resources>

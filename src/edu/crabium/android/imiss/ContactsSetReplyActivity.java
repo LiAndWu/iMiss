@@ -28,12 +28,14 @@ public class ContactsSetReplyActivity extends Activity {
 		ContactsSetReplyEditText.setFocusable(true);
 		ContactsSetReplyEditText.setFocusableInTouchMode(true);
 		
-		ContactsSetReplyEditText.setHint("输入联系人回复.");
+		String contactsReplyEditHintString = getResources().getString(R.string.contacts_reply_edit_hint);
+		ContactsSetReplyEditText.setHint(contactsReplyEditHintString);
 		ContactsSetReplyEditText.setText(sp.getSetting(ContactsReply));
 		
 		
 		ContactsSetReplyTextView = (TextView) findViewById(R.id.contacts_reply_textview);
-		ContactsSetReplyTextView.setText("使用提示：\n" +	"回复对象是：没有在小组中添加，但在通讯录中的联系人。 ");
+		String contactsReplyUseHintString = getResources().getString(R.string.contacts_reply_use_hint);
+		ContactsSetReplyTextView.setText(contactsReplyUseHintString);
 		
 		CancelButton = (Button)findViewById(R.id.cancel_button);
 		CancelButton.setOnClickListener(new Button.OnClickListener() {

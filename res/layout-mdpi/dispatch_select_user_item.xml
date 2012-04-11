@@ -21,7 +21,7 @@
             android:weightSum="1" >
 
             <!-- 姓名 -->
-
+
             <TextView
                 android:id="@+id/dispatch_item_select_user_name"
                 android:layout_width="260dip"
@@ -30,12 +30,13 @@
                 android:layout_marginRight="5dip"
                 android:layout_marginTop="5dip"
                 android:layout_weight="0.28"
-                android:text="姓名"
+                android:text="@string/sample_name"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:textSize="23dip" >
+
             </TextView>
             <!-- 电话 -->
-
+
             <TextView
                 android:id="@+id/dispatch_item_select_user_phone"
                 android:layout_width="260dip"
@@ -43,9 +44,10 @@
                 android:layout_marginLeft="5dip"
                 android:layout_marginRight="5dip"
                 android:layout_weight="0.27"
-                android:text="150672382443"
+                android:text="@string/sample_phone"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textSize="17dip" >
+
             </TextView>
         </LinearLayout>
 
