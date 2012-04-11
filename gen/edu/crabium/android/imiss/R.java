@@ -68,16 +68,16 @@ public final class R {
         public static final int dispatch_item_select_user_name=0x7f080010;
         public static final int dispatch_item_select_user_phone=0x7f080011;
         public static final int endTime_editView=0x7f080037;
-        public static final int gm_add_member=0x7f080046;
-        public static final int gm_delete_group=0x7f080047;
-        public static final int gm_view_member=0x7f080045;
-        public static final int gmm_delete_member=0x7f080048;
+        public static final int gm_add_member=0x7f080048;
+        public static final int gm_delete_group=0x7f080049;
+        public static final int gm_view_member=0x7f080047;
+        public static final int gmm_delete_member=0x7f08004a;
         public static final int help_chevron_button=0x7f080006;
         public static final int help_textView=0x7f080020;
         public static final int hour=0x7f080038;
-        public static final int inform_switch_linearlayout=0x7f08003f;
-        public static final int inform_switch_textview=0x7f080040;
-        public static final int inform_switch_togglebutton=0x7f080041;
+        public static final int inform_switch_linearlayout=0x7f080041;
+        public static final int inform_switch_textview=0x7f080042;
+        public static final int inform_switch_togglebutton=0x7f080043;
         public static final int introduce_chevron_button=0x7f080003;
         public static final int introduce_textView=0x7f080021;
         public static final int iv=0x7f080005;
@@ -103,9 +103,9 @@ public final class R {
         public static final int select_linkman_listView=0x7f080031;
         public static final int selected_group_member_linearlayout=0x7f080032;
         public static final int selected_group_member_listView=0x7f080033;
-        public static final int service_switch_linearlayout=0x7f08003c;
-        public static final int service_switch_textview=0x7f08003d;
-        public static final int service_switch_togglebutton=0x7f08003e;
+        public static final int service_switch_linearlayout=0x7f08003e;
+        public static final int service_switch_textview=0x7f08003f;
+        public static final int service_switch_togglebutton=0x7f080040;
         public static final int set_reply_chevron_button=0x7f080024;
         public static final int set_reply_linearlayout=0x7f08001d;
         public static final int set_reply_list_view=0x7f08001f;
@@ -115,10 +115,12 @@ public final class R {
         public static final int stranger_reply_chevron_button=0x7f080025;
         public static final int stranger_reply_edittext=0x7f08003a;
         public static final int stranger_reply_textview=0x7f08003b;
-        public static final int stranger_switch_linearlayout=0x7f080042;
-        public static final int stranger_switch_textview=0x7f080043;
-        public static final int stranger_switch_togglebutton=0x7f080044;
+        public static final int stranger_switch_linearlayout=0x7f080044;
+        public static final int stranger_switch_textview=0x7f080045;
+        public static final int stranger_switch_togglebutton=0x7f080046;
         public static final int switchbutton_linearlayout=0x7f080028;
+        public static final int text1=0x7f08003c;
+        public static final int text2=0x7f08003d;
         public static final int title_edittext=0x7f08001b;
         public static final int title_of_widget=0x7f080004;
         public static final int togglebutton_textview=0x7f080029;
@@ -144,7 +146,8 @@ public final class R {
         public static final int set_contacts_reply=0x7f030010;
         public static final int set_refuse_slot_time=0x7f030011;
         public static final int set_stranger_reply=0x7f030012;
-        public static final int software_set=0x7f030013;
+        public static final int simple_list_item_2=0x7f030013;
+        public static final int software_set=0x7f030014;
     }
     public static final class menu {
         public static final int group_management_menu=0x7f070000;

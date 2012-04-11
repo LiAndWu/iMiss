@@ -12,7 +12,6 @@ import android.widget.TextView;
 
 
 public class AboutActivity extends Activity {
-	private Button BackButton;
 	private TextView AboutTextView;
 	int start, end;
 	private LinearLayout IntroduceButton, HelpButton;
@@ -23,14 +22,6 @@ public class AboutActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.about);
 		  
-		BackButton = (Button)findViewById(R.id.back_button);
-		BackButton.setOnClickListener(new Button.OnClickListener() {
-		public void onClick(View v) {
-			Intent intent = new Intent(AboutActivity.this, IMissActivity.class);
-			startActivity(intent);
-			}
-		});
-		
 		IntroduceButton = (LinearLayout)findViewById(R.id.introduce_chevron_button);
 		IntroduceButton.setOnClickListener(new Button.OnClickListener() {
 			@Override

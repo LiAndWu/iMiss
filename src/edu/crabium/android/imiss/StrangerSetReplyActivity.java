@@ -15,7 +15,7 @@ public class StrangerSetReplyActivity extends Activity {
 
 	private  EditText strangerSetReplyEditText;
 	private TextView strangerSetReplyTextView;
-	private Button CancelButton, StoreButton;
+	private Button StoreButton;
 	
 	private final static String StrangerReply = "stranger_reply";
 	SettingProvider sp = SettingProvider.getInstance();
@@ -37,22 +37,13 @@ public class StrangerSetReplyActivity extends Activity {
 		String strangerReplyUseHintString = getResources().getString(R.string.stranger_reply_use_hint);
 		strangerSetReplyTextView.setText(strangerReplyUseHintString);
 		
-		CancelButton = (Button)findViewById(R.id.cancel_button);
-		CancelButton.setOnClickListener(new Button.OnClickListener() {
-		public void onClick(View v) {
-			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
-			startActivity(intent);
-			}
-		});
-		
 		StoreButton = (Button)findViewById(R.id.store_button);
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
-			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
 			Log.d("HELLO", "STORE " + strangerSetReplyEditText.getText().toString());
 			sp.addSetting(StrangerReply, strangerSetReplyEditText.getText().toString());
 			Log.d("HELLO", "GET" + sp.getSetting(StrangerReply));
-			startActivity(intent);
+			StrangerSetReplyActivity.this.finish();
 			}
 		});
 	}

@@ -15,7 +15,7 @@ public class ContactsSetReplyActivity extends Activity {
 
 	private  EditText ContactsSetReplyEditText;
 	private TextView ContactsSetReplyTextView;
-	private Button CancelButton, StoreButton;
+	private Button StoreButton;
 	
 	private final static String ContactsReply = "contacts_reply";
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,22 +37,13 @@ public class ContactsSetReplyActivity extends Activity {
 		String contactsReplyUseHintString = getResources().getString(R.string.contacts_reply_use_hint);
 		ContactsSetReplyTextView.setText(contactsReplyUseHintString);
 		
-		CancelButton = (Button)findViewById(R.id.cancel_button);
-		CancelButton.setOnClickListener(new Button.OnClickListener() {
-		public void onClick(View v) {
-			Intent intent = new Intent(ContactsSetReplyActivity.this, IMissActivity.class);
-			startActivity(intent);
-			}
-		});
-		
 		StoreButton = (Button)findViewById(R.id.store_button);
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
-			Intent intent = new Intent(ContactsSetReplyActivity.this, IMissActivity.class);
 			SettingProvider sp = SettingProvider.getInstance();
 			Log.d("LOG", ContactsSetReplyEditText.getText().toString());
 			sp.addSetting("contacts_reply", ContactsSetReplyEditText.getText().toString());
-			startActivity(intent);
+			ContactsSetReplyActivity.this.finish();
 			}
 		});
 	}

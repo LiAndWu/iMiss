@@ -21,7 +21,6 @@ public class IMissActivity extends Activity {
         sp.setContext(this);
         startService(new Intent(this, IMissService.class));
    
-        DisplayToast("Bonjour, Wei！！");
         LinearLayout preferencesButton = (LinearLayout) findViewById(R.id.software_set_chevron_button);
         preferencesButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -94,8 +93,4 @@ public class IMissActivity extends Activity {
 		});
         */
     }
-    
-	public void DisplayToast(String str) {
-		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
-	}
 }
