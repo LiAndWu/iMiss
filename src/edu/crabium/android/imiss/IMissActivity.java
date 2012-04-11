@@ -1,7 +1,9 @@
 package edu.crabium.android.imiss;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -14,12 +16,12 @@ public class IMissActivity extends Activity {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        
+
         SettingProvider sp = SettingProvider.getInstance();
         sp.setContext(this);
         startService(new Intent(this, IMissService.class));
    
-      //  DisplayToast("Bonjour, 海雁！！");
+        DisplayToast("Bonjour, Wei！！");
         LinearLayout preferencesButton = (LinearLayout) findViewById(R.id.software_set_chevron_button);
         preferencesButton.setOnClickListener(new Button.OnClickListener() {
 			@Override

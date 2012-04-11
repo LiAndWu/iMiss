@@ -25,18 +25,22 @@ public class EditReplyActivity extends Activity {
 		String message_body = bundle.getString("message_body");
 		TitleEditText = (EditText) findViewById(R.id.title_edittext);
 		TitleEditText.setText(group_name);
-		TitleEditText.setHint("请输入分组名称");
+		
+		String editReplyTitleString = getResources().getString(R.string.edit_reply_title_hint);
+		TitleEditText.setHint(editReplyTitleString);
 		
 		ContentEditText = (EditText) findViewById(R.id.content_edittext);
 		ContentEditText.setText(message_body);
 		
-		ContentEditText.setHint("请输入回复内容");
+		String editReplyContentString = getResources().getString(R.string.edit_reply_content_hint);
+		ContentEditText.setHint(editReplyContentString);
 			
 		SaveButton = (Button)findViewById(R.id.store_button);
 		SaveButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				if(TitleEditText.getText().toString().equals("")){
-					displayToast("组名不能为空");
+					String editReplyNotEmptyString = getResources().getString(R.string.edit_reply_not_empty_hint);
+					DisplayToast(editReplyNotEmptyString);
 					return;
 				}
 					
@@ -61,7 +65,7 @@ public class EditReplyActivity extends Activity {
 			}
 		});
 	}
-	public void displayToast(String str) {
+	public void DisplayToast(String str) {
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 	}
 }
