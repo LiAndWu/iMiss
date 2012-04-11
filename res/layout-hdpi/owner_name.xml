@@ -21,7 +21,7 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="上一步"
+            android:text="@string/back"
             android:textStyle="bold" >
         </Button>
 
@@ -31,7 +31,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.85"
             android:gravity="center"
-            android:text="机主名"
+            android:text="@string/owner_name"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dip"
             android:textStyle="bold" >
