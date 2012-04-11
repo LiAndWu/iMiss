@@ -19,6 +19,7 @@ public class IMissActivity extends Activity {
 
         SettingProvider sp = SettingProvider.getInstance();
         sp.setContext(this);
+        
         startService(new Intent(this, IMissService.class));
    
         LinearLayout preferencesButton = (LinearLayout) findViewById(R.id.software_set_chevron_button);
