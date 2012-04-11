@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class EditReplyActivity extends Activity {
-	private Button CancelButton, SaveButton;
+	private Button SaveButton;
 	private EditText TitleEditText, ContentEditText;
 	private Bundle bundle;
 	SettingProvider sp = SettingProvider.getInstance();
@@ -50,18 +50,7 @@ public class EditReplyActivity extends Activity {
 				}
 				
 				sp.addGroup(TitleEditText.getText().toString(), ContentEditText.getText().toString());
-				
-				Intent intent = new Intent(EditReplyActivity.this, GroupManagementActivity.class);
-				intent.putExtras(bundle);
-				startActivity(intent);
-			}
-		});
-			
-		CancelButton = (Button)findViewById(R.id.cancel_button);
-		CancelButton.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(EditReplyActivity.this, GroupManagementActivity.class);
-				startActivity(intent);
+				EditReplyActivity.this.finish();
 			}
 		});
 	}

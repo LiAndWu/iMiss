@@ -16,7 +16,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class OwnerNameActivity extends Activity {
-	private Button BackButton, StoreButton;
+	private Button StoreButton;
 	private ToggleButton OwnerNameToggleButton;
 	private EditText OwnerEditText;
 	private TextView ToggleButtonTextView;
@@ -53,13 +53,6 @@ public class OwnerNameActivity extends Activity {
             } 
 		});
 		
-		BackButton = (Button)findViewById(R.id.back_button);
-		BackButton.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
-				startActivity(intent);
-			}
-		});
 		
 		StoreButton = (Button)findViewById(R.id.store_button);
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
@@ -71,8 +64,7 @@ public class OwnerNameActivity extends Activity {
 				DisplayToast("现在的机主名是" + sp.getSetting("Owner") + "\n" +
 						(sp.getSetting("ShowOwnerNameToStranger").equals("true") ? "\t对陌生人开启" : "\t对陌生人关闭"));	
 				
-				Intent intent = new Intent(OwnerNameActivity.this, IMissActivity.class);
-				startActivity(intent);
+				OwnerNameActivity.this.finish();
 			}
 		});
 	}

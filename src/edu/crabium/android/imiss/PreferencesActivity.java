@@ -12,7 +12,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class PreferencesActivity extends Activity {
-	private Button BackButton;
 	private ToggleButton serviceSwitchToggleButton, informSwitchToggleButton, strangerSwitchToggleButton;
 	private TextView serviceSwitchTextView, informSwitchTextView, strangerSwitchTextView;
 	private static String serviceSwitch = "service_switch";
@@ -97,14 +96,6 @@ public class PreferencesActivity extends Activity {
             		sp.addSetting(strangerSwitch, "false");
             		strangerSwitchTextView.setText(strangerReplyCloseString);
             	}
-			}
-		});
-		
-		BackButton = (Button)findViewById(R.id.back_button);
-		BackButton.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(PreferencesActivity.this, IMissActivity.class);
-				startActivity(intent);
 			}
 		});
 	}

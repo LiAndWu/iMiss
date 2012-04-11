@@ -23,7 +23,6 @@ public class RefuseSlotActivity extends Activity {
 	private String Column_1 = "title";
 	private String Column_2 = "content";
 	private List<Map<String,String>> display;
-	private Button BackButton;
 	public String TargetRefuseSlot = GlobalVariable.TargetStartTimeHour + " : " + GlobalVariable.TargetStartTimeMins + " ~ "
 			+ GlobalVariable.TargetEndTimeHour + " : " + GlobalVariable.TargetEndTimeMins;
 	public void onCreate(Bundle savedInstanceState) {
@@ -67,13 +66,6 @@ public class RefuseSlotActivity extends Activity {
 			}
 		});
 		
-		BackButton = (Button)findViewById(R.id.back_button);
-		BackButton.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(RefuseSlotActivity.this, IMissActivity.class);
-				startActivity(intent);
-			}
-		});
 	}
 	
 	public void DisplayToast(String str) {

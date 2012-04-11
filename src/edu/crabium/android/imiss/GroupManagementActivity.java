@@ -31,8 +31,7 @@ public class GroupManagementActivity extends Activity {
 	ListView		SetReplyListView;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
-	
-	private Button BackButton;
+
 	private SimpleAdapter adapter;
 	
 	SettingProvider sp = SettingProvider.getInstance();
@@ -86,14 +85,6 @@ public class GroupManagementActivity extends Activity {
 				bundle.putString("message_body", "");
 				Intent intent = new Intent(GroupManagementActivity.this, EditReplyActivity.class);
 				intent.putExtras(bundle);
-				startActivity(intent);
-			}
-		});
-
-		BackButton = (Button)findViewById(R.id.back_button);
-		BackButton.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(GroupManagementActivity.this, IMissActivity.class);
 				startActivity(intent);
 			}
 		});

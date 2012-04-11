@@ -5,7 +5,6 @@ import edu.crabium.android.imiss.wheel.OnWheelChangedListener;
 import edu.crabium.android.imiss.wheel.OnWheelScrollListener;
 import edu.crabium.android.imiss.wheel.WheelView;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.View;
@@ -13,9 +12,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 
-
 public class SetRefuseSlotTimeActivity extends Activity {
-	private Button BackButton, StoreButton;
+	private Button StoreButton;
 	private EditText StartTimeEditText, EndTimeEditText;
 	@SuppressWarnings("unused")
 	private boolean timeChanged = false;
@@ -97,14 +95,6 @@ public class SetRefuseSlotTimeActivity extends Activity {
 		hours.addScrollingListener(scrollListener);
 		mins.addScrollingListener(scrollListener);	
 		
-		BackButton = (Button)findViewById(R.id.back_button);
-		  BackButton.setOnClickListener(new Button.OnClickListener() {
-			public void onClick(View v) {
-				Intent intent = new Intent(SetRefuseSlotTimeActivity.this, RefuseSlotActivity.class);
-				startActivity(intent);
-			}
-		});
-		
 		StoreButton = (Button)findViewById(R.id.store_button);
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
 			@Override
@@ -113,8 +103,7 @@ public class SetRefuseSlotTimeActivity extends Activity {
 				StartTimeEditText.setFocusableInTouchMode(false);
 				EndTimeEditText.setFocusable(false);
 				EndTimeEditText.setFocusableInTouchMode(false);
-				Intent intent = new Intent(SetRefuseSlotTimeActivity.this, RefuseSlotActivity.class);
-				startActivity(intent);
+				SetRefuseSlotTimeActivity.this.finish();
 			}
 		});
 	}
