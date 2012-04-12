@@ -20,7 +20,8 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="上一步" android:textStyle="bold">
+            android:text="@string/back"
+            android:textStyle="bold" >
         </Button>
 
         <TextView
@@ -29,7 +30,7 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.32"
             android:gravity="center"
-            android:text="关于iMiss"
+            android:text="@string/about_imiss"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="24dip"
             android:textStyle="bold" >
@@ -57,7 +58,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dip"
             android:layout_weight="0.9"
-            android:text="iMiss介绍"
+            android:text="@string/imiss_introduce"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
             android:textSize="19dip"
@@ -95,7 +96,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dip"
             android:layout_weight="0.9"
-            android:text="iMiss帮助"
+            android:text="@string/imiss_help"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
             android:textSize="19dip"
@@ -111,14 +112,14 @@
             android:src="@drawable/black_chevron" >
         </ImageView>
     </LinearLayout>
-
+
     <TextView
         android:id="@+id/about_textView"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="265dip"
         android:layout_marginLeft="8dip"
         android:layout_marginRight="8dip"
-        android:layout_marginTop="28dip"
+        android:layout_marginTop="23dip"
         android:autoLink="web|email"
         android:background="@drawable/white_background_small"
         android:lineSpacingExtra="3dip"
@@ -127,6 +128,7 @@
         android:textColor="#000000"
         android:textSize="15dip"
         android:textStyle="bold" >
+
     </TextView>
 
 </LinearLayout>

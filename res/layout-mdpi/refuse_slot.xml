@@ -1,18 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent" android:weightSum="1" android:id="@+id/refuse_slot_linearlayout">
-    <LinearLayout android:background="@drawable/bar" android:id="@+id/barLinearLayout" android:weightSum="1" android:layout_height="45dp" android:baselineAligned="false" android:layout_width="fill_parent">
-        <Button android:layout_gravity="center_vertical" android:id="@+id/back_button" android:background="@drawable/button_short_background" android:layout_width="70dip" android:text="上一步" android:layout_height="35dip" android:layout_margin="3dip" android:layout_weight="0.06" android:textStyle="bold"></Button>
-        <TextView android:text="拒接时间段" android:textAppearance="?android:attr/textAppearanceMedium" android:id="@+id/neverCallTextView" android:textSize="24dip" android:textStyle="bold" android:layout_width="wrap_content" android:layout_height="fill_parent" android:gravity="center" android:layout_weight="0.58"></TextView>
-        <LinearLayout android:background="@drawable/button_short_background" android:weightSum="1" android:orientation="horizontal" android:baselineAligned="false" android:clickable="true" android:layout_gravity="center_vertical" android:layout_weight="0.3" android:layout_marginLeft="30dip" android:layout_marginRight="3dip" android:layout_marginTop="3dip" android:layout_marginBottom="3dip" android:layout_height="35dip" android:layout_width="25dip" android:id="@+id/new_refuse_slot_linearlayout">
-            <ImageView android:src="@drawable/add" android:layout_gravity="center_vertical" android:id="@+id/iv" android:layout_height="21dp" android:layout_width="match_parent"></ImageView>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/refuse_slot_linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/barLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/bar"
+        android:baselineAligned="false"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="70dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dip"
+            android:layout_weight="0.06"
+            android:background="@drawable/button_short_background"
+            android:text="@string/back"
+            android:textStyle="bold" >
+        </Button>
+
+        <TextView
+            android:id="@+id/neverCallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.58"
+            android:gravity="center"
+            android:text="@string/refuse_slot"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="24dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <LinearLayout
+            android:id="@+id/new_refuse_slot_linearlayout"
+            android:layout_width="25dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="3dip"
+            android:layout_marginLeft="30dip"
+            android:layout_marginRight="3dip"
+            android:layout_marginTop="3dip"
+            android:layout_weight="0.3"
+            android:background="@drawable/button_short_background"
+            android:baselineAligned="false"
+            android:clickable="true"
+            android:orientation="horizontal"
+            android:weightSum="1" >
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="21dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/add" >
+            </ImageView>
         </LinearLayout>
     </LinearLayout>
-   <ListView android:layout_width="match_parent" 
-    android:layout_height="239dp" android:layout_weight="1.02" android:id="@+id/refuse_slot_listview">
-  </ListView>
-</LinearLayout>
 
+    <ListView
+        android:id="@+id/refuse_slot_listview"
+        android:layout_width="match_parent"
+        android:layout_height="239dp"
+        android:layout_weight="1.02" >
+    </ListView>
+
+</LinearLayout>
