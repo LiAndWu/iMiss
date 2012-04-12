@@ -34,7 +34,7 @@
             android:gravity="center"
             android:text="@string/black_list"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="25dip"
+            android:textSize="23dip"
             android:textStyle="bold" >
         </TextView>
 

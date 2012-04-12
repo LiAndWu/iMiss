@@ -32,7 +32,7 @@
             android:gravity="center"
             android:text="@string/about_imiss"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="24dip"
+            android:textSize="21dip"
             android:textStyle="bold" >
         </TextView>
     </LinearLayout>
