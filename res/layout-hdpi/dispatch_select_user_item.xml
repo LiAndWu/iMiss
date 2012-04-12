@@ -21,7 +21,7 @@
             android:weightSum="1" >
 
             <!-- 姓名 -->
-
+
             <TextView
                 android:id="@+id/dispatch_item_select_user_name"
                 android:layout_width="260dip"
@@ -32,11 +32,12 @@
                 android:layout_weight="0.28"
                 android:text="姓名"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textSize="23dip" >
+                android:textSize="20dip" >
+
             </TextView>
 
             <!-- 电话 -->
-
+
             <TextView
                 android:id="@+id/dispatch_item_select_user_phone"
                 android:layout_width="260dip"
@@ -46,7 +47,8 @@
                 android:layout_weight="0.27"
                 android:text="150672382443"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textSize="17dip" >
+                android:textSize="15dip" >
+
             </TextView>
         </LinearLayout>
 
@@ -56,7 +58,7 @@
             android:layout_height="match_parent"
             android:layout_marginRight="8dip"
             android:clickable="false"
-            android:focusable="false" >
+            android:focusable="false">
         </CheckBox>
     </LinearLayout>
 
