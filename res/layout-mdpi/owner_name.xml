@@ -2,13 +2,42 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:weightSum="1" android:orientation="vertical">
-    <LinearLayout android:layout_width="fill_parent" android:weightSum="1" android:layout_height="45dp" android:background="@drawable/bar" android:baselineAligned="false" android:id="@+id/barLinearLayout">
-        <Button android:layout_width="70dip" android:layout_height="35dip" android:layout_margin="3dip" android:text="上一步" android:layout_gravity="center_vertical" android:layout_weight="0.06" android:background="@drawable/button_short_background" android:id="@+id/back_button" android:textStyle="bold"></Button>
-        <TextView android:text="机主名" android:textSize="24dip" android:layout_width="wrap_content" android:layout_height="fill_parent" android:textAppearance="?android:attr/textAppearanceMedium" android:textStyle="bold" android:id="@+id/neverCallTextView" android:gravity="center" android:layout_weight="0.85"></TextView>
-        <Button android:layout_margin="3dip" android:layout_weight="0.06" android:layout_height="35dip" android:layout_width="70dip" android:text="保存" android:background="@drawable/button_short_background" android:layout_gravity="center_vertical" android:id="@+id/store_button" android:textStyle="bold"></Button>
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/barLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="45dp"
+        android:background="@drawable/bar"
+        android:baselineAligned="false"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/neverCallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.85"
+            android:gravity="center"
+            android:text="机主名"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="24dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <Button
+            android:id="@+id/store_button"
+            android:layout_width="70dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dip"
+            android:layout_weight="0.06"
+            android:background="@drawable/button_short_background"
+            android:text="保存"
+            android:textStyle="bold" >
+        </Button>
     </LinearLayout>
-    
+
     <EditText
         android:id="@+id/ownername_editview"
         android:layout_width="match_parent"
@@ -18,9 +47,8 @@
         android:layout_marginRight="5dip"
         android:layout_marginTop="10dip"
         android:maxLines="1" >
-
     </EditText>
-    
+
     <LinearLayout
         android:id="@+id/switchbutton_linearlayout"
         android:layout_width="match_parent"
@@ -43,7 +71,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
             android:textSize="17dip" >
-</TextView>
+        </TextView>
 
         <ToggleButton
             android:id="@+id/ownername_togglebutton"
@@ -54,9 +82,7 @@
             android:background="@drawable/button_short_background"
             android:clickable="true"
             android:text="ToggleButton" >
-
-</ToggleButton>
+        </ToggleButton>
     </LinearLayout>
-
 
 </LinearLayout>

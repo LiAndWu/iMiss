@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/barLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/bar"
+        android:baselineAligned="false"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/neverCallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.28"
+            android:gravity="center"
+            android:text="@string/software_setting"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="25dip"
+            android:textStyle="bold" >
+        </TextView>
+    </LinearLayout>
+
+    <!-- 软件服务 -->
+
+    <LinearLayout
+        android:id="@+id/service_switch_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginTop="7dip"
+        android:background="@drawable/button_background"
+        android:clickable="false"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/service_switch_textview"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="22dip"
+            android:layout_weight="0.63"
+            android:clickable="false"
+            android:text="@string/services_open"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="19dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <ToggleButton
+            android:id="@+id/service_switch_togglebutton"
+            android:layout_width="45dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.15"
+            android:background="@drawable/button_short_background"
+            android:clickable="true">
+        </ToggleButton>
+    </LinearLayout>
+
+    <!-- 通知栏提醒 -->
+
+    <LinearLayout
+        android:id="@+id/inform_switch_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginTop="3dip"
+        android:background="@drawable/button_background"
+        android:clickable="false"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/inform_switch_textview"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="22dip"
+            android:layout_weight="0.63"
+            android:clickable="false"
+            android:text="@string/notification_open"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="19dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <ToggleButton
+            android:id="@+id/inform_switch_togglebutton"
+            android:layout_width="45dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.15"
+            android:background="@drawable/button_short_background"
+            android:clickable="true">
+        </ToggleButton>
+    </LinearLayout>
+    <!-- 陌生人开启 -->
+
+    <LinearLayout
+        android:id="@+id/stranger_switch_linearlayout"
+        android:layout_width="match_parent"
+        android:layout_height="50dip"
+        android:layout_marginTop="3dip"
+        android:background="@drawable/button_background"
+        android:clickable="false"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/stranger_switch_textview"
+            android:layout_width="150dip"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="22dip"
+            android:layout_weight="0.63"
+            android:clickable="false"
+            android:text="@string/stranger_reply_open"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#000000"
+            android:textSize="19dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <ToggleButton
+            android:id="@+id/stranger_switch_togglebutton"
+            android:layout_width="45dip"
+            android:layout_height="35dip"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.15"
+            android:background="@drawable/button_short_background"
+            android:clickable="true">
+        </ToggleButton>
+    </LinearLayout>
+
+</LinearLayout>

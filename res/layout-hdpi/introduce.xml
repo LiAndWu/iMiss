@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent">
-    <LinearLayout android:layout_height="50dip" android:background="@drawable/bar" android:weightSum="1" android:id="@+id/barLinearLayout" android:baselineAligned="false" android:layout_width="fill_parent">
-        <Button android:layout_height="40dip" android:layout_margin="3dip" android:text="上一步" android:layout_weight="0.06" android:background="@drawable/button_short_background" android:layout_width="85dip" android:layout_gravity="center_vertical" android:id="@+id/back_button" android:textStyle="bold"></Button>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/barLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/bar"
+        android:baselineAligned="false"
+        android:weightSum="1" >
 
         <TextView
             android:id="@+id/neverCallTextView"
@@ -13,13 +18,24 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.29"
             android:gravity="center"
-            android:text="iMiss介绍"
+            android:text="@string/imiss_introduce"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dip"
             android:textStyle="bold" >
-</TextView>
+        </TextView>
     </LinearLayout>
-    <LinearLayout android:id="@+id/linearLayout1" android:layout_width="match_parent" android:orientation="vertical" android:weightSum="1" android:layout_height="match_parent" android:background="@drawable/white_background_big" android:layout_marginLeft="8dip" android:layout_marginRight="8dip" android:layout_marginTop="10dip" android:layout_marginBottom="10dip">
+
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dip"
+        android:layout_marginLeft="8dip"
+        android:layout_marginRight="8dip"
+        android:layout_marginTop="10dip"
+        android:background="@drawable/white_background_big"
+        android:orientation="vertical"
+        android:weightSum="1" >
 
         <TextView
             android:id="@+id/introduce_textView"
@@ -30,11 +46,11 @@
             android:lineSpacingExtra="5dip"
             android:scrollbarAlwaysDrawVerticalTrack="true"
             android:scrollbars="vertical"
-            android:text="嗨，这是介绍。"
+            android:text="text"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
             android:textSize="18dip" >
-</TextView>
+        </TextView>
     </LinearLayout>
-    
+
 </LinearLayout>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1" >
+
+    <LinearLayout
+        android:id="@+id/barLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/bar"
+        android:baselineAligned="false"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/neverCallTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.86"
+            android:gravity="center"
+            android:text="@string/contacts_reply"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textSize="25dip"
+            android:textStyle="bold" >
+        </TextView>
+
+        <Button
+            android:id="@+id/store_button"
+            android:layout_width="85dip"
+            android:layout_height="40dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dip"
+            android:layout_weight="0.06"
+            android:background="@drawable/button_short_background"
+            android:text="@string/store"
+            android:textStyle="bold" >
+
+        </Button>
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/contacts_reply_edittext"
+        android:layout_width="match_parent"
+        android:layout_height="20dip"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginLeft="8dip"
+        android:layout_marginRight="8dip"
+        android:layout_marginTop="10dip"
+        android:layout_weight="0.57"
+        android:gravity="top"
+        android:inputType="textMultiLine"
+        android:textSize="18dip"
+        android:textStyle="bold">
+    </EditText>
+
+    <TextView
+        android:id="@+id/contacts_reply_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="12dip"
+        android:layout_marginRight="12dip"
+        android:layout_marginTop="10dip"
+        android:layout_weight="0.22"
+        android:clickable="false"
+        android:focusable="false"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/hint_text_color"
+        android:textSize="16dip" />
+
+</LinearLayout>

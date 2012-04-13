@@ -13,24 +13,13 @@
         android:baselineAligned="false"
         android:weightSum="1" >
 
-        <Button
-            android:id="@+id/back_button"
-            android:layout_width="70dip"
-            android:layout_height="35dip"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="3dip"
-            android:layout_weight="0.06"
-            android:background="@drawable/button_short_background"
-            android:text="上一步" >
-        </Button>
-
         <TextView
             android:id="@+id/neverCallTextView"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="0.95"
             android:gravity="center"
-            android:text="最近通话"
+            android:text="@string/recent_call"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="24dip"
             android:textStyle="bold" >
@@ -44,7 +33,7 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="保存" >
+            android:text="@string/store" >
         </Button>
     </LinearLayout>
 
@@ -52,8 +41,8 @@
         android:id="@+id/recent_call_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true" 
-        android:focusable="true">
+        android:clickable="true"
+        android:focusable="true" >
     </ListView>
 
 </LinearLayout>

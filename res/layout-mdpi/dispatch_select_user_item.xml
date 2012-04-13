@@ -1,48 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:weightSum="1" android:orientation="vertical">
-  
-    <LinearLayout android:layout_height="wrap_content" android:id="@+id/linearLayout1" android:layout_width="match_parent" android:weightSum="1" android:layout_weight="0.06" >
-        <LinearLayout android:layout_height="match_parent" android:id="@+id/linearLayout2" android:layout_width="wrap_content" android:orientation="vertical" android:weightSum="1" android:layout_weight="0.86">
-	            <!-- 姓名 -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:weightSum="1" >
 
-	            <TextView
-	                android:id="@+id/dispatch_item_select_user_name"
-	                android:layout_width="260dip"
-	                android:layout_height="wrap_content"
-	                android:layout_marginLeft="5dip"
-	                android:layout_marginRight="5dip"
-	                android:layout_marginTop="5dip"
-	                android:layout_weight="0.28"
-	                android:text="姓名"
-	                android:textAppearance="?android:attr/textAppearanceLarge"
-	                android:textSize="23dip" >
+    <LinearLayout
+        android:id="@+id/linearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.06"
+        android:weightSum="1" >
 
-	            </TextView>
-	            <!-- 电话 -->
+        <LinearLayout
+            android:id="@+id/linearLayout2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0.86"
+            android:orientation="vertical"
+            android:weightSum="1" >
 
-	            <TextView
-	                android:id="@+id/dispatch_item_select_user_phone"
-	                android:layout_width="260dip"
-	                android:layout_height="wrap_content"
-	                android:layout_marginLeft="5dip"
-	                android:layout_marginRight="5dip"
-	                android:layout_weight="0.27"
-	                android:text="150672382443"
-	                android:textAppearance="?android:attr/textAppearanceMedium" android:textSize="17dip">
+            <!-- 姓名 -->
+
+            <TextView
+                android:id="@+id/dispatch_item_select_user_name"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_marginTop="5dip"
+                android:layout_weight="0.28"
+                android:text="@string/sample_name"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="23dip" >
 
-	            </TextView>
+            </TextView>
+            <!-- 电话 -->
+
+            <TextView
+                android:id="@+id/dispatch_item_select_user_phone"
+                android:layout_width="260dip"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dip"
+                android:layout_marginRight="5dip"
+                android:layout_weight="0.27"
+                android:text="@string/sample_phone"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textSize="17dip" >
+
+            </TextView>
         </LinearLayout>
 
-		        <CheckBox
-		            android:id="@+id/dispatch_item_select_user_checkbox"
-		            android:layout_width="wrap_content"
-		            android:layout_height="match_parent"
-		            android:focusable="false"
-		            android:clickable="false"
-		            android:layout_marginRight="8dip">
-		        </CheckBox>
+        <CheckBox
+            android:id="@+id/dispatch_item_select_user_checkbox"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dip"
+            android:clickable="false"
+            android:focusable="false" >
+        </CheckBox>
     </LinearLayout>
+
 </LinearLayout>
