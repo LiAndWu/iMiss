@@ -15,10 +15,9 @@ public class StrangerSetReplyActivity extends Activity {
 
 	private  EditText strangerSetReplyEditText;
 	private TextView strangerSetReplyTextView;
-	private Button CancelButton, StoreButton;
+	private Button StoreButton;
 	
 	private final static String StrangerReply = "stranger_reply";
-	
 	SettingProvider sp = SettingProvider.getInstance();
 	
 	protected void onCreate(Bundle savedInstanceState) {
@@ -30,30 +29,21 @@ public class StrangerSetReplyActivity extends Activity {
 		strangerSetReplyEditText.setFocusable(true);
 		strangerSetReplyEditText.setFocusableInTouchMode(true);
 		
-		strangerSetReplyEditText.setHint("输入陌生人回复.");
+		String strangerReplyEditHintString = getResources().getString(R.string.stranger_reply_edit_hint);
+		strangerSetReplyEditText.setHint(strangerReplyEditHintString);
 		strangerSetReplyEditText.setText(sp.getSetting(StrangerReply));
 		
-		
 		strangerSetReplyTextView = (TextView) findViewById(R.id.stranger_reply_textview);
-		strangerSetReplyTextView.setText("使用提示：\n" +
-		"回复对象是：不在通讯录中的陌生人。");
-		
-		CancelButton = (Button)findViewById(R.id.cancel_button);
-		CancelButton.setOnClickListener(new Button.OnClickListener() {
-		public void onClick(View v) {
-			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
-			startActivity(intent);
-			}
-		});
+		String strangerReplyUseHintString = getResources().getString(R.string.stranger_reply_use_hint);
+		strangerSetReplyTextView.setText(strangerReplyUseHintString);
 		
 		StoreButton = (Button)findViewById(R.id.store_button);
 		StoreButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
-			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
 			Log.d("HELLO", "STORE " + strangerSetReplyEditText.getText().toString());
 			sp.addSetting(StrangerReply, strangerSetReplyEditText.getText().toString());
 			Log.d("HELLO", "GET" + sp.getSetting(StrangerReply));
-			startActivity(intent);
+			StrangerSetReplyActivity.this.finish();
 			}
 		});
 	}

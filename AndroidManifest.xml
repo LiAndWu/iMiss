@@ -116,7 +116,6 @@
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="portrait" >
         </activity>
-
     </application>
 
 </manifest>

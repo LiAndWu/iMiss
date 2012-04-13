@@ -8,15 +8,20 @@
 	    android:clickable="true"
 	    android:baselineAligned="false"
 	    android:layout_width="match_parent" android:layout_height="50dip" android:layout_marginTop="3dip">
-	    
-	    <TextView android:text="标题" 
-		    android:textAppearance="?android:attr/textAppearanceLarge"
-		    android:layout_gravity="center_vertical"
-		    android:textColor="#000000"  
-		    android:textStyle="bold" 
-		    android:layout_height="wrap_content" 
-		    android:layout_marginLeft="15dip" 
-		    android:id="@+id/title_of_widget" android:layout_width="100dip" android:layout_weight="0.9" android:textSize="19dip">
+	    
+	    <TextView
+	        android:id="@+id/title_of_widget"
+	        android:layout_width="100dip"
+	        android:layout_height="wrap_content"
+	        android:layout_gravity="center_vertical"
+	        android:layout_marginLeft="15dip"
+	        android:layout_weight="0.9"
+	        android:text="@string/sample_title"
+	        android:textAppearance="?android:attr/textAppearanceLarge"
+	        android:textColor="#000000"
+	        android:textSize="19dip"
+	        android:textStyle="bold" >
+
 	    </TextView>
 	   
 	    <ImageView android:id="@+id/iv" 

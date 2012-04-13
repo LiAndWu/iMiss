@@ -12,25 +12,13 @@
         android:baselineAligned="false"
         android:weightSum="1" >
 
-        <Button
-            android:id="@+id/back_button"
-            android:layout_width="85dip"
-            android:layout_height="40dip"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="3dip"
-            android:layout_weight="0.06"
-            android:background="@drawable/button_short_background"
-            android:text="上一步"
-            android:textStyle="bold" >
-        </Button>
-
         <TextView
             android:id="@+id/neverCallTextView"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="0.47"
             android:gravity="center"
-            android:text="帮助"
+            android:text="@string/help"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dip"
             android:textStyle="bold" >
@@ -59,7 +47,7 @@
             android:lineSpacingExtra="4dip"
             android:scrollbars="vertical"
             android:singleLine="false"
-            android:text="嗨，这是帮助"
+            android:text="text"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="#000000"
             android:textSize="17dip" >

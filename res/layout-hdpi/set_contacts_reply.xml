@@ -13,30 +13,18 @@
         android:baselineAligned="false"
         android:weightSum="1" >
 
-        <Button
-            android:id="@+id/cancel_button"
-            android:layout_width="85dip"
-            android:layout_height="40dip"
-            android:layout_gravity="center_vertical"
-            android:layout_margin="3dip"
-            android:layout_weight="0.06"
-            android:background="@drawable/button_short_background"
-            android:text="取消"
-            android:textStyle="bold" >
-        </Button>
-
         <TextView
             android:id="@+id/neverCallTextView"
             android:layout_width="wrap_content"
             android:layout_height="fill_parent"
             android:layout_weight="0.86"
             android:gravity="center"
-            android:text="联系人回复"
+            android:text="@string/contacts_reply"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dip"
             android:textStyle="bold" >
         </TextView>
-
+
         <Button
             android:id="@+id/store_button"
             android:layout_width="85dip"
@@ -45,8 +33,9 @@
             android:layout_margin="3dip"
             android:layout_weight="0.06"
             android:background="@drawable/button_short_background"
-            android:text="保存"
+            android:text="@string/store"
             android:textStyle="bold" >
+
         </Button>
     </LinearLayout>
 
@@ -59,13 +48,12 @@
         android:layout_marginRight="8dip"
         android:layout_marginTop="10dip"
         android:layout_weight="0.57"
-        gravity="top"
         android:gravity="top"
         android:inputType="textMultiLine"
         android:textSize="18dip"
         android:textStyle="bold">
     </EditText>
-
+
     <TextView
         android:id="@+id/contacts_reply_textview"
         android:layout_width="match_parent"
@@ -76,9 +64,8 @@
         android:layout_weight="0.22"
         android:clickable="false"
         android:focusable="false"
-        android:text="Large Text"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#7F7F7F"
+        android:textColor="@color/hint_text_color"
         android:textSize="16dip" />
 
 </LinearLayout>
