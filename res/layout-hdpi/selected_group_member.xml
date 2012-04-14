@@ -1,17 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:orientation="vertical"
-  android:layout_width="match_parent"
-  android:layout_height="match_parent" android:id="@+id/selected_group_member_linearlayout">
-    <LinearLayout android:weightSum="1" android:layout_height="50dip" android:background="@drawable/bar" android:layout_width="fill_parent" android:id="@+id/barLinearLayout" android:baselineAligned="false">
-        <Button android:layout_height="40dip" 
-	        android:background="@drawable/button_short_background" 
-	        android:layout_weight="0.06" 
-	        android:layout_gravity="center_vertical" 
-	        android:layout_width="85dip" 
-	        android:text="上一步" 
-	        android:layout_margin="3dip" android:id="@+id/back_button" android:textStyle="bold">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/selected_group_member_linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/barLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="50dip"
+        android:background="@drawable/bar"
+        android:baselineAligned="false"
+        android:weightSum="1" >
+
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="85dip"
+            android:layout_height="40dip"
+            android:layout_gravity="center_vertical"
+            android:layout_margin="3dip"
+            android:layout_weight="0.06"
+            android:background="@drawable/button_short_background"
+            android:text="@string/back"
+            android:textStyle="bold" >
         </Button>
 
         <TextView
@@ -20,18 +31,17 @@
             android:layout_height="fill_parent"
             android:layout_weight="0.20"
             android:gravity="center"
-            android:text="小組成员"
+            android:text="@string/group_members"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="25dip"
             android:textStyle="bold" >
-</TextView>
+        </TextView>
     </LinearLayout>
-
+
     <ListView
         android:id="@+id/selected_group_member_listView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
+    </ListView>
 
-</ListView>
-    
 </LinearLayout>
