@@ -25,7 +25,7 @@ import android.widget.AdapterView.AdapterContextMenuInfo;
 public class GroupMemberManagementActivity extends Activity {
 	LinearLayout	SelectedGroupMemberLinearLayout;
     private ListView SelectedGroupMemberListView;
-    
+    private Button backButton;
     private static String group_name;
 	private static final String SelectedGroupMemberColumn1 = "title";
 	private static final String SelectedGroupMemberColumn2 = "content";
@@ -52,7 +52,6 @@ public class GroupMemberManagementActivity extends Activity {
 		SelectedGroupMemberListView.setAdapter(adapter);
 		SelectedGroupMemberListView.setItemsCanFocus(true); 
 		SelectedGroupMemberListView.setChoiceMode(ListView.CHOICE_MODE_MULTIPLE); 
-
 		
 		SelectedGroupMemberListView.setOnCreateContextMenuListener(new OnCreateContextMenuListener() {         
             @Override   
@@ -61,6 +60,13 @@ public class GroupMemberManagementActivity extends Activity {
             	inflater.inflate(R.menu.group_member_management_menu, menu);
             }   
         });  
+		
+		backButton = (Button)findViewById(R.id.back_button);
+		backButton.setOnClickListener(new Button.OnClickListener() {
+		public void onClick(View v) {
+			GroupMemberManagementActivity.this.finish();
+			}
+		});	
     }
 
     public boolean onContextItemSelected(MenuItem item) {

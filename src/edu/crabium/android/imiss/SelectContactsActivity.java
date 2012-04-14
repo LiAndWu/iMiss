@@ -25,6 +25,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class SelectContactsActivity extends Activity {
 	private ListView selectContactsListView;
     private Button saveButton;
+    private Button backButton;
 
 	Bundle bundle;
     ArrayList<String[]> name;
@@ -47,6 +48,13 @@ public class SelectContactsActivity extends Activity {
         adapter = new IMissListViewAdapter(name, this);
         selectContactsListView.setAdapter(adapter);
         
+		backButton = (Button)findViewById(R.id.back_button);
+		backButton.setOnClickListener(new Button.OnClickListener() {
+		public void onClick(View v) {
+			SelectContactsActivity.this.finish();
+			}
+		});
+		
         saveButton = (Button)findViewById(R.id.store_button);
         saveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {

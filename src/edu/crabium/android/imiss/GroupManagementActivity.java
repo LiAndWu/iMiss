@@ -29,6 +29,7 @@ import android.widget.Toast;
 public class GroupManagementActivity extends Activity {
 	LinearLayout	SetReplyLinearLayout, NewReplyLinearLayout;
 	ListView		SetReplyListView;
+	private Button backButton;
 	private static final String SetReplyColumn1 = "title";
 	private static final String SetReplyColumn2 = "content";
 
@@ -77,6 +78,13 @@ public class GroupManagementActivity extends Activity {
             }   
         });     
 
+		backButton = (Button)findViewById(R.id.back_button);
+		backButton.setOnClickListener(new Button.OnClickListener() {
+		public void onClick(View v) {
+			GroupManagementActivity.this.finish();
+			}
+		});
+		
 		NewReplyLinearLayout = (LinearLayout) findViewById(R.id.new_reply_linearlayout);
 		NewReplyLinearLayout.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
