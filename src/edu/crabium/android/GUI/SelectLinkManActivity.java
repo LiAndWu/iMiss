@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import edu.crabium.android.IMissData;
+import edu.crabium.android.SettingProvider;
 import edu.crabium.android.IMissListViewAdapter;
 import edu.crabium.android.IMissListViewAdapter.ViewHolder;
 import edu.crabium.android.R;
@@ -33,7 +33,7 @@ public class SelectLinkManActivity extends Activity {
     ArrayList<String[]> name;
     IMissListViewAdapter adapter;
 	HashMap<Integer,Boolean> map ;
-	
+	SettingProvider sp = SettingProvider.getInstance();
     public void onCreate(Bundle savedInstanceState) {
     	requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
@@ -53,7 +53,7 @@ public class SelectLinkManActivity extends Activity {
         
         BackButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
+                Intent intent = new Intent(SelectLinkManActivity.this, GroupsSetReplyActivity.class);
                 startActivity(intent);
                 SelectLinkManActivity.this.finish();
             }
@@ -63,7 +63,7 @@ public class SelectLinkManActivity extends Activity {
         SaveButton.setOnClickListener(new Button.OnClickListener() {
             public void onClick(View v) {
             	
-                Intent intent = new Intent(SelectLinkManActivity.this, SetReplyActivity.class);
+                Intent intent = new Intent(SelectLinkManActivity.this, GroupsSetReplyActivity.class);
                 String[] pair;
                 String group_name = bundle.getString("group_name");
                 String person_name;
@@ -76,7 +76,7 @@ public class SelectLinkManActivity extends Activity {
                 		person_phone = pair[1];
 
                 		Log.d("HELL",  "CHOSE " + person_name);
-                		IMissData.setPersonToGroup(person_name, person_phone, group_name);
+                		sp.addPersonToGroup(person_name, person_phone, group_name);
                 	}
                }
                 startActivity(intent);

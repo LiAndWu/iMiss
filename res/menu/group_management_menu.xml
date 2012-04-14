@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/gm_view_member" android:title="小组成员"></item>
+    <item android:id="@+id/gm_add_member" android:title="添加组员"></item>
+    <item android:id="@+id/gm_delete_group" android:title="删除小组"></item>
+    
+</menu>

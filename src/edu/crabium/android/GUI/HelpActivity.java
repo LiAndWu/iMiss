@@ -4,6 +4,7 @@ import edu.crabium.android.R;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.method.ScrollingMovementMethod;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -28,12 +29,18 @@ public class HelpActivity extends Activity {
 		});
 		
 	   HelpTextView = (TextView) findViewById(R.id.help_textView);
+	   HelpTextView.setMovementMethod(ScrollingMovementMethod.getInstance()); 
 	   HelpTextView.setText(
-	  "1） 机主名：你可以设置回复显示的机主名，同时也可以选择是否对陌生人显示。\n" +
-	   "2） 设置回复：你可以自定义设置回复内容，当然，包括选择用于回复的联系人。\n" +			   
-	   "3） 黑名单： 拦截不想被骚扰的电话。\n" +
-	   "4） 拒接时间段：有些时间段不想接电话？不用关机，设置拒接时间段吧，我们帮你拦截所有电话。\n" +
-	   "5） 操作：回复内容，黑名单，拒接时间段等都可以进行，新建，删除，修改等操作。\n");	
+	   "1) 软件设置：\n" +
+	   "    服务关闭/开启选项：设置对未接来电是否回复。\n" +
+	   "    通知关闭/开启选项：设置回复短信后是否通知\n" +
+	   "    陌生人回复关闭/开启选项：设置对陌生人的未接来电回复是否开启。\n" +
+	   "\n2) 联系人回复：\n"  +
+	   	"    设置对通讯录中联系人的回复, 但是如果联系人已经添加到小组中，则回复小组中设置的内容。\n" +
+	   "\n3) 分组回复：\n" + 
+	   	"    设置对不同小组的不同回复，每个小组可添加一定联系人。比如对家人，朋友等设置不同回复内容。\n" +
+	   "\n4) 陌生人回复：\n"  +
+	   	"    设置对不在通讯录中陌生人的回复。\n");
 	 }
 }
 
