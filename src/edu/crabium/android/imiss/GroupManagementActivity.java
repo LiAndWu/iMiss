@@ -98,6 +98,12 @@ public class GroupManagementActivity extends Activity {
 		});
 	}
 	
+	@Override
+	public void onResume(){
+		getGroups(SetReplyDisplay);
+		adapter.notifyDataSetChanged();
+	}
+	
     public boolean onContextItemSelected(MenuItem item) {
     	AdapterContextMenuInfo menuInfo = (AdapterContextMenuInfo)item.getMenuInfo(); 
     	
