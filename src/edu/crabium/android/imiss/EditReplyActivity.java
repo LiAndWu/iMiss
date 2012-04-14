@@ -62,9 +62,6 @@ public class EditReplyActivity extends Activity {
 		});
 	}
 	
-
-	
-	
 	public void DisplayToast(String str) {
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 	}
