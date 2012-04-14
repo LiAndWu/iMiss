@@ -22,7 +22,7 @@
             android:background="@drawable/button_short_background"
             android:text="@string/back" >
         </Button>
-
+
         <TextView
             android:id="@+id/neverCallTextView"
             android:layout_width="wrap_content"
@@ -31,8 +31,9 @@
             android:gravity="center"
             android:text="@string/help"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="24dip"
+            android:textSize="22dip"
             android:textStyle="bold" >
+
         </TextView>
     </LinearLayout>
 

@@ -11,11 +11,19 @@ import android.widget.TextView;
 
 public class HelpActivity extends Activity {
 	private TextView HelpTextView;
+	private Button backButton;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.help);
+		
+		backButton = (Button)findViewById(R.id.back_button);
+		backButton.setOnClickListener(new Button.OnClickListener() {
+		public void onClick(View v) {
+			HelpActivity.this.finish();
+			}
+		});
 		
 	   HelpTextView = (TextView) findViewById(R.id.help_textView);
 	   HelpTextView.setMovementMethod(ScrollingMovementMethod.getInstance()); 

@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class EditReplyActivity extends Activity {
-	private Button saveButton;
+	private Button saveButton, cancelButton;
 	private EditText TitleEditText, ContentEditText;
 	private Bundle bundle;
 	SettingProvider sp = SettingProvider.getInstance();
@@ -35,13 +35,20 @@ public class EditReplyActivity extends Activity {
 		String editReplyContentString = getResources().getString(R.string.edit_reply_content_hint);
 		ContentEditText.setHint(editReplyContentString);
 			
+		cancelButton = (Button)findViewById(R.id.cancel_button);
+		cancelButton.setOnClickListener(new Button.OnClickListener() {
+			public void onClick(View v) {
+				EditReplyActivity.this.finish();
+				}
+		});
+		
 		saveButton = (Button)findViewById(R.id.store_button);
 		saveButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				if(TitleEditText.getText().toString().equals("")){
 					String editReplyNotEmptyString = getResources().getString(R.string.edit_reply_not_empty_hint);
 					DisplayToast(editReplyNotEmptyString);
-					return;
+					return ;
 				}
 					
 				sp.deleteMessage(group_name);
@@ -54,6 +61,10 @@ public class EditReplyActivity extends Activity {
 			}
 		});
 	}
+	
+
+	
+	
 	public void DisplayToast(String str) {
 		Toast.makeText(this, str, Toast.LENGTH_SHORT).show();
 	}

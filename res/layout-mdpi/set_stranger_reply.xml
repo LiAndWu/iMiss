@@ -25,7 +25,7 @@
             android:textStyle="bold" >
 
         </Button>
-
+
         <TextView
             android:id="@+id/neverCallTextView"
             android:layout_width="wrap_content"
@@ -34,8 +34,9 @@
             android:gravity="center"
             android:text="@string/stranger_reply"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:textSize="24dip"
+            android:textSize="22dip"
             android:textStyle="bold" >
+
         </TextView>
 
         <Button
