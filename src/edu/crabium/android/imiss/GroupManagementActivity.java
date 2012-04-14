@@ -100,6 +100,7 @@ public class GroupManagementActivity extends Activity {
 	
 	@Override
 	public void onResume(){
+		super.onResume();
 		getGroups(SetReplyDisplay);
 		adapter.notifyDataSetChanged();
 	}
