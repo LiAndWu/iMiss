@@ -17,14 +17,14 @@ public class IMissService extends Service{
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
 	@Override
 	public void onCreate() {
 		TelephonyManager tm = (TelephonyManager) this.getSystemService(Context.TELEPHONY_SERVICE);
 		IMissPhoneStateListener myPhoneCallListener = new IMissPhoneStateListener();
 		SettingProvider sp = SettingProvider.getInstance();
 		tm.listen(myPhoneCallListener,PhoneStateListener.LISTEN_CALL_STATE); 
-		
+
 		//Install functions
 		myPhoneCallListener.Callback(IMissPhoneStateListener.CALLED, "tag", new SendSMS());
 	}
