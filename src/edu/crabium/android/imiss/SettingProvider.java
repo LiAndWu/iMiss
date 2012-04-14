@@ -25,7 +25,7 @@ public class SettingProvider{
 	private static final SettingProvider INSTANCE  = new SettingProvider();
 	
 	private SettingProvider(){
-		createTables();
+		//
 	};
 	
 	private SQLiteDatabase openDatabase(){
@@ -63,7 +63,7 @@ public class SettingProvider{
 		DB.setVersion(VERSION);
 		DB.close();
 		
-		// Set default replies for strangers and friends
+	/*	// Set default replies for strangers and friends
 		if(getSetting(ContactsReply).trim().equals(""))
 			addSetting(ContactsReply, "我的主人暂时不能接听电话，不过我知道你是他的朋友，Have a nice day！！");
 		if(getSetting(StrangerReply).trim().equals(""))
@@ -74,26 +74,24 @@ public class SettingProvider{
 			addGroup("朋友", "你爹在忙");
 			addGroup("家人", "爹我在忙");
 		}
-		/*
-		 错误代码，getResources()需要Context, Activity继承自Context，普通类如何调用XML资源？
-		// Set default replies for strangers and friends
-		String contactsReplyContentString = getResources().getString(R.string.contacts_reply_content);
+	*/	
+		String contactsReplyContentString = context.getResources().getString(R.string.contacts_reply_content);
 		if(getSetting(ContactsReply).trim().equals(""))
 			addSetting(ContactsReply, contactsReplyContentString);
-		String strangerReplyContentString = getResources().getString(R.string.stranger_reply_cotent);
+		String strangerReplyContentString = context.getResources().getString(R.string.stranger_reply_cotent);
 		if(getSetting(StrangerReply).trim().equals(""))
 			addSetting(StrangerReply, strangerReplyContentString);
 
 		// Set default groups and messages
-		String friendsString = getResources().getString(R.string.friends);
-		String friendsReplyContentString = getResources().getString(R.string.friends_reply_content);
-		String familyString = getResources().getString(R.string.family);
-		String familyReplyContentString = getResources().getString(R.string.family_reply_content);
+		String friendsString = context.getResources().getString(R.string.friends);
+		String friendsReplyContentString = context.getResources().getString(R.string.friends_reply_content);
+		String familyString = context.getResources().getString(R.string.family);
+		String familyReplyContentString = context.getResources().getString(R.string.family_reply_content);
+
 		if(getGroups().size() == 0){
 			addGroup(friendsString, friendsReplyContentString);
 			addGroup(familyString, familyReplyContentString);
 		}
-		 */
 		// Create setting and set to true if setting is not in database
 		for(String swc : switches){
 			if(getSetting(swc).trim().equals("")){
@@ -143,6 +141,7 @@ public class SettingProvider{
 	 */
 	public void setContext(Context context){
 		this.context = context;
+		createTables();
 	}
 	
 	/**

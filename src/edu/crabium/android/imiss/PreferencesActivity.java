@@ -12,7 +12,6 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class PreferencesActivity extends Activity {
-	private Button BackButton;
 	private ToggleButton serviceSwitchToggleButton, informSwitchToggleButton, strangerSwitchToggleButton;
 	private TextView serviceSwitchTextView, informSwitchTextView, strangerSwitchTextView;
 	private static String serviceSwitch = "service_switch";

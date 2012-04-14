@@ -36,7 +36,7 @@
             android:textSize="25dip"
             android:textStyle="bold" >
         </TextView>
-
+
         <Button
             android:id="@+id/store_button"
             android:layout_width="85dip"
@@ -65,7 +65,7 @@
         android:textSize="18dip"
         android:textStyle="bold">
     </EditText>
-
+
     <TextView
         android:id="@+id/contacts_reply_textview"
         android:layout_width="match_parent"

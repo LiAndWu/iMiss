@@ -12,7 +12,7 @@
         android:background="@drawable/bar"
         android:baselineAligned="false"
         android:weightSum="1" >
-
+
         <Button
             android:id="@+id/back_button"
             android:layout_width="85dip"

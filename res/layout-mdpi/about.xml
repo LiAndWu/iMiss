@@ -112,7 +112,7 @@
             android:src="@drawable/black_chevron" >
         </ImageView>
     </LinearLayout>
-
+
     <TextView
         android:id="@+id/about_textView"
         android:layout_width="match_parent"
