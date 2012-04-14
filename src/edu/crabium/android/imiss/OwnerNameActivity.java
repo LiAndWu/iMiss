@@ -16,7 +16,7 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 public class OwnerNameActivity extends Activity {
-	private Button StoreButton;
+	private Button storeButton;
 	private ToggleButton OwnerNameToggleButton;
 	private EditText OwnerEditText;
 	private TextView ToggleButtonTextView;
@@ -54,8 +54,8 @@ public class OwnerNameActivity extends Activity {
 		});
 		
 		
-		StoreButton = (Button)findViewById(R.id.store_button);
-		StoreButton.setOnClickListener(new Button.OnClickListener() {
+		storeButton = (Button)findViewById(R.id.store_button);
+		storeButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				OwnerEditText.setFocusable(false);
 				OwnerEditText.setFocusableInTouchMode(false);

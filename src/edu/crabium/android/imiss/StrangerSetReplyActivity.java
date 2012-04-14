@@ -40,8 +40,7 @@ public class StrangerSetReplyActivity extends Activity {
 		cancelButton = (Button)findViewById(R.id.cancel_button);
 		cancelButton.setOnClickListener(new Button.OnClickListener() {
 		public void onClick(View v) {
-			Intent intent = new Intent(StrangerSetReplyActivity.this, IMissActivity.class);
-			startActivity(intent);
+				StrangerSetReplyActivity.this.finish();
 			}
 		});
 		

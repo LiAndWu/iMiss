@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 public class EditReplyActivity extends Activity {
-	private Button SaveButton;
+	private Button saveButton;
 	private EditText TitleEditText, ContentEditText;
 	private Bundle bundle;
 	SettingProvider sp = SettingProvider.getInstance();
@@ -35,8 +35,8 @@ public class EditReplyActivity extends Activity {
 		String editReplyContentString = getResources().getString(R.string.edit_reply_content_hint);
 		ContentEditText.setHint(editReplyContentString);
 			
-		SaveButton = (Button)findViewById(R.id.store_button);
-		SaveButton.setOnClickListener(new Button.OnClickListener() {
+		saveButton = (Button)findViewById(R.id.store_button);
+		saveButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
 				if(TitleEditText.getText().toString().equals("")){
 					String editReplyNotEmptyString = getResources().getString(R.string.edit_reply_not_empty_hint);

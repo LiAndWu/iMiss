@@ -105,8 +105,7 @@ public class PreferencesActivity extends Activity {
 		backButton = (Button)findViewById(R.id.back_button);
 		backButton.setOnClickListener(new Button.OnClickListener() {
 			public void onClick(View v) {
-				Intent intent = new Intent(PreferencesActivity.this, IMissActivity.class);
-				startActivity(intent);
+				PreferencesActivity.this.finish();
 			}
 		});
 	}
