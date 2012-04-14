@@ -16,6 +16,7 @@ public class AboutActivity extends Activity {
 	int start, end;
 	private LinearLayout IntroduceButton, HelpButton;
 	private String aboutDescriptionString;
+	private Button backButton;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -37,6 +38,13 @@ public class AboutActivity extends Activity {
 			public void onClick(View v) {
 				Intent intent = new Intent(AboutActivity.this, HelpActivity.class);
 				startActivity(intent);
+			}
+		});
+		
+		backButton = (Button)findViewById(R.id.back_button);
+		backButton.setOnClickListener(new Button.OnClickListener() {
+		public void onClick(View v) {
+			AboutActivity.this.finish();
 			}
 		});
 		
